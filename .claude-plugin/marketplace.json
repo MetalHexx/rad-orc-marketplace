@@ -1,0 +1,16 @@
+{
+  "name": "rad-orc",
+  "owner": { "name": "MetalHexx", "url": "https://github.com/MetalHexx" },
+  "plugins": [
+    {
+      "name": "claude-plugin",
+      "source": {
+        "source": "github",
+        "repo": "MetalHexx/rad-orc-plugins",
+        "ref": "v0.0.0-bootstrap",
+        "path": "claude-plugin"
+      },
+      "description": "Rad Orchestration plugin for Claude Code."
+    }
+  ]
+}
