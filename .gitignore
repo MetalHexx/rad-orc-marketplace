@@ -61,6 +61,10 @@ web_modules/
 
 # Output of 'npm pack'
 *.tgz
+# ...except the plugin install payload, which IS the artifact (the UI runtime
+# is shipped as a gzipped tarball so node_modules/ and .next/ survive both
+# this .gitignore and `npm pack`'s hardcoded node_modules strip).
+!**/_install-source/ui.tgz
 
 # Yarn Integrity file
 .yarn-integrity
