@@ -19,7 +19,7 @@ Public artifact channel for the `rad-orc` plugin family — Claude Code, GitHub 
 **GitHub Copilot in VS Code**
 ```
 /plugin marketplace add MetalHexx/rad-orc-marketplace
-/plugin install rad-orc-vscode@rad-orc-marketplace
+/plugin install rad-orc-vs@rad-orc-marketplace
 ```
 
 ## Issues and source
