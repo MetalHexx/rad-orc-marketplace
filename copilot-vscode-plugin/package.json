@@ -10,9 +10,7 @@
     "skills/",
     "hooks/",
     "manifests/",
-    "orchestration.yml",
-    "templates/",
-    "ui/"
+    "_install-source/"
   ],
   "engines": {
     "node": ">=20"

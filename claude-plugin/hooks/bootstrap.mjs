@@ -223,11 +223,12 @@ async function runInstall(opts) {
     }
     const manifest = loadManifest(opts.pluginRoot, deliveringVersion);
     installManifestFiles(manifest, opts.pluginRoot, { radHome: opts.radHome });
-    const pluginUiDir = path7.join(opts.pluginRoot, "ui");
+    const pluginUiDir = path7.join(opts.pluginRoot, "_install-source/ui");
     if (fs6.existsSync(pluginUiDir)) {
       fs6.rmSync(paths.ui, { recursive: true, force: true });
       fs6.cpSync(pluginUiDir, paths.ui, { recursive: true });
     }
+    fs6.rmSync(path7.join(opts.pluginRoot, "_install-source"), { recursive: true, force: true });
     ij.harnesses[INSTALL_KEY] = buildClaudePluginEntry(deliveringVersion);
     writeInstallJson(paths.installJson, ij);
     const action = installedVersionBefore && sentinelPresent ? "upgrade-complete" : "fresh-install";
