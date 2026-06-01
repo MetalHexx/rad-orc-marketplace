@@ -24046,89 +24046,179 @@ init_errors2();
 init_paths();
 import { execFileSync as execFileSync3 } from "node:child_process";
 import path10 from "node:path";
-function makeDefaultExec(cwd) {
-  return (file, args) => execFileSync3(file, args, { encoding: "utf8", cwd });
-}
-function slugify(segment) {
-  return segment.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
-}
+
+// cli/src/lib/repo-identity.ts
+init_errors2();
 function normalizeRemote(raw) {
   let r = raw.trim().replace(/\.git$/, "");
   const sshMatch = r.match(/^git@([^:]+):(.+)$/);
-  if (sshMatch) {
-    r = `https://${sshMatch[1]}/${sshMatch[2]}`;
-  }
+  if (sshMatch) r = `https://${sshMatch[1]}/${sshMatch[2]}`;
   return r;
 }
-function repoAdd({ root, repoPath, exec: exec2 }) {
-  const actualExec = exec2 ?? makeDefaultExec(repoPath);
+function slugify(segment) {
+  return segment.replace(/([a-z0-9])([A-Z])/g, "$1-$2").replace(/([A-Z]+)([A-Z][a-z])/g, "$1-$2").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+}
+function deriveSlugFromRemote(remoteUrl) {
+  const seg = remoteUrl.split("/").filter(Boolean).pop() ?? "";
+  return slugify(seg);
+}
+function isInsideWorkTree(exec2) {
   try {
-    actualExec("git", ["rev-parse", "--git-dir"]);
+    return exec2("git", ["rev-parse", "--is-inside-work-tree"]).trim() === "true";
+  } catch {
+    return false;
+  }
+}
+function getToplevel(exec2) {
+  try {
+    const out = exec2("git", ["rev-parse", "--show-toplevel"]).trim();
+    return out || null;
+  } catch {
+    return null;
+  }
+}
+function getMainWorktreePath(exec2) {
+  try {
+    const out = exec2("git", ["worktree", "list", "--porcelain"]);
+    for (const line of out.split("\n")) {
+      const m = line.match(/^worktree\s+(.+)$/);
+      if (m) return m[1].trim();
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+function getRemotes(exec2) {
+  let out = "";
+  try {
+    out = exec2("git", ["remote", "-v"]);
+  } catch {
+    out = "";
+  }
+  const map3 = /* @__PURE__ */ new Map();
+  for (const line of out.split("\n").filter((l) => l.includes("(fetch)"))) {
+    const parts = line.split("	");
+    if (parts.length < 2) continue;
+    const name = parts[0].trim();
+    const url = parts[1].replace(/\s*\(fetch\)\s*$/, "").trim();
+    if (name) map3.set(name, normalizeRemote(url));
+  }
+  return map3;
+}
+function selectRemote(remotes) {
+  if (remotes.size === 0) throw new UserError("no remote configured for this repository");
+  if (remotes.size === 1) {
+    const [name, url] = remotes.entries().next().value;
+    return { name, url, others: [] };
+  }
+  if (remotes.has("origin")) {
+    const others = [...remotes.keys()].filter((n) => n !== "origin");
+    return { name: "origin", url: remotes.get("origin"), others };
+  }
+  throw new UserError('more than one remote found and none is named "origin" \u2014 cannot infer remote');
+}
+function getDefaultBranch(exec2, remoteName) {
+  try {
+    const symref = exec2("git", ["symbolic-ref", `refs/remotes/${remoteName}/HEAD`]);
+    const m = symref.trim().match(new RegExp(`refs/remotes/${remoteName}/(.+)$`));
+    if (m) return m[1];
+  } catch {
+  }
+  return "main";
+}
+function samePath(a, b) {
+  if (!a || !b) return false;
+  const norm = (p) => p.replace(/\\/g, "/").replace(/\/+$/, "").toLowerCase();
+  return norm(a) === norm(b);
+}
+
+// cli/src/commands/repo/add.ts
+function makeDefaultExec(cwd) {
+  return (file, args) => execFileSync3(file, args, { encoding: "utf8", cwd });
+}
+function repoAdd(opts) {
+  const { root, repoPath, name: nameOverride, description, dryRun } = opts;
+  const exec2 = opts.exec ?? makeDefaultExec(repoPath);
+  if (!dryRun && !description?.trim()) {
+    throw new UserError("a non-empty --description is required to register a repo");
+  }
+  try {
+    exec2("git", ["rev-parse", "--git-dir"]);
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);
     throw new UserError(`path is not a git repository: ${msg}`);
   }
-  let remotesOutput;
+  const remote = selectRemote(getRemotes(exec2));
+  const defaultBranch = getDefaultBranch(exec2, remote.name);
+  const currentToplevel = getToplevel(exec2);
+  const mainWorktreePath = getMainWorktreePath(exec2);
+  const canonicalPath = mainWorktreePath ?? currentToplevel ?? repoPath;
+  const isWorktree = Boolean(mainWorktreePath && currentToplevel && !samePath(mainWorktreePath, currentToplevel));
+  const isSubdir = Boolean(currentToplevel && !samePath(currentToplevel, repoPath));
+  let proposedName = nameOverride?.trim() || deriveSlugFromRemote(remote.url);
+  if (!proposedName) proposedName = slugify(path10.basename(canonicalPath));
+  const reg = readRegistry({ root });
+  let remoteAlreadyRegisteredAs = null;
+  for (const [slug, identity2] of Object.entries(reg.repos)) {
+    if (identity2.remote === remote.url) {
+      remoteAlreadyRegisteredAs = slug;
+      break;
+    }
+  }
+  const nameAvailable = isSlug(proposedName) && !(proposedName in reg.repos) && !(proposedName in reg.repoGroups);
+  if (dryRun) {
+    return {
+      dryRun: true,
+      wouldRegister: { path: canonicalPath, name: proposedName, remote: remote.url, default_branch: defaultBranch },
+      detection: {
+        providedPath: repoPath,
+        currentToplevel,
+        mainWorktreePath,
+        isWorktree,
+        isSubdir,
+        remoteName: remote.name,
+        otherRemotes: remote.others,
+        remoteAlreadyRegisteredAs,
+        nameAvailable
+      }
+    };
+  }
+  if (remoteAlreadyRegisteredAs && remoteAlreadyRegisteredAs !== proposedName) {
+    throw new UserError(
+      `this remote is already registered as '${remoteAlreadyRegisteredAs}' (${remote.url}); use that repo, or remove it before re-registering`
+    );
+  }
   try {
-    remotesOutput = actualExec("git", ["remote", "-v"]);
-  } catch {
-    remotesOutput = "";
-  }
-  const fetchLines = remotesOutput.split("\n").filter((l) => l.includes("(fetch)"));
-  const remoteMap = /* @__PURE__ */ new Map();
-  for (const line of fetchLines) {
-    const parts = line.split("	");
-    if (parts.length < 2) continue;
-    const name2 = parts[0].trim();
-    const urlWithTag = parts[1].trim();
-    const url = urlWithTag.replace(/\s*\(fetch\)\s*$/, "").trim();
-    remoteMap.set(name2, url);
-  }
-  if (remoteMap.size === 0) {
-    throw new UserError("no remote configured for this repository");
-  }
-  let chosenRemoteName;
-  let chosenRemoteUrl;
-  if (remoteMap.size === 1) {
-    const entry = remoteMap.entries().next().value;
-    chosenRemoteName = entry[0];
-    chosenRemoteUrl = entry[1];
-  } else if (remoteMap.has("origin")) {
-    chosenRemoteName = "origin";
-    chosenRemoteUrl = remoteMap.get("origin");
-  } else {
-    throw new UserError('more than one remote found and none is named "origin" \u2014 cannot infer remote');
-  }
-  const normalizedRemote = normalizeRemote(chosenRemoteUrl);
-  let defaultBranch = "main";
-  try {
-    const symref = actualExec("git", ["symbolic-ref", `refs/remotes/${chosenRemoteName}/HEAD`]);
-    const match = symref.trim().match(new RegExp(`refs/remotes/${chosenRemoteName}/(.+)$`));
-    if (match) defaultBranch = match[1];
-  } catch {
-  }
-  const lastSegment = path10.basename(repoPath);
-  const name = slugify(lastSegment);
-  try {
-    addRepo({ root, name, identity: { remote: normalizedRemote, default_branch: defaultBranch, description: "" }, localPath: repoPath });
+    addRepo({
+      root,
+      name: proposedName,
+      identity: { remote: remote.url, default_branch: defaultBranch, description: description.trim() },
+      localPath: canonicalPath
+    });
   } catch (e) {
-    const msg = e instanceof Error ? e.message : String(e);
-    throw new UserError(msg);
+    throw new UserError(e instanceof Error ? e.message : String(e));
   }
-  return { name, remote: normalizedRemote, default_branch: defaultBranch };
+  const result = { name: proposedName, remote: remote.url, default_branch: defaultBranch, path: canonicalPath };
+  if (!samePath(canonicalPath, repoPath)) result.resolvedFrom = repoPath;
+  return result;
 }
 var repoAddCommand = defineCommand({
   name: "repo-add",
-  description: "Register a local git repository in the repo registry, inferring identity from the git directory",
+  description: "Register a local git repository, resolving to its canonical main clone",
   args: {
-    path: { description: "Absolute path to the local git repository to register", required: true }
+    path: { description: "Absolute path to a local git repository (worktree or subdirectory is resolved to the main clone)", required: true }
   },
-  flags: {},
-  handler: async ({ args }) => {
+  flags: {
+    name: { description: "Override the auto-derived repo slug (lowercase-kebab; defaults to the remote repo name)", type: "string" },
+    description: { description: "What this repo is and why an agent would look here (required unless --dry-run)", type: "string" },
+    "dry-run": { description: "Report the resolved path, slug, and detection without writing to the registry" }
+  },
+  handler: async ({ args, flags }) => {
     const repoPath = args.path;
     if (!repoPath) throw new UserError("--path is required");
     const root = userDataPaths().root;
-    return repoAdd({ root, repoPath });
+    return repoAdd({ root, repoPath, name: flags.name, description: flags.description, dryRun: Boolean(flags["dry-run"]) });
   }
 });
 
@@ -24137,7 +24227,11 @@ init_command();
 init_errors2();
 init_paths();
 import fs9 from "node:fs";
-function repoBind({ root, name, repoPath }) {
+import { execFileSync as execFileSync4 } from "node:child_process";
+function makeDefaultExec2(cwd) {
+  return (file, args) => execFileSync4(file, args, { encoding: "utf8", cwd });
+}
+function repoBind({ root, name, repoPath, exec: exec2 }) {
   if (!fs9.existsSync(repoPath) || !fs9.statSync(repoPath).isDirectory()) {
     throw new UserError(`path is not a directory: ${repoPath}`);
   }
@@ -24145,16 +24239,35 @@ function repoBind({ root, name, repoPath }) {
   if (!(name in reg.repos)) {
     throw new UserError(`repo '${name}' is not registered in the repo registry`);
   }
-  reg.localPaths[name] = repoPath;
+  const warnings = [];
+  let boundPath = repoPath;
+  const actualExec = exec2 ?? makeDefaultExec2(repoPath);
+  if (isInsideWorkTree(actualExec)) {
+    const mainWorktree = getMainWorktreePath(actualExec);
+    if (mainWorktree && !samePath(mainWorktree, repoPath)) {
+      boundPath = mainWorktree;
+      warnings.push(`resolved worktree to its main clone: ${mainWorktree}`);
+    }
+    const remotes = getRemotes(actualExec);
+    const registeredRemote = reg.repos[name].remote;
+    if (remotes.size > 0 && ![...remotes.values()].includes(registeredRemote)) {
+      warnings.push(`path remote does not match '${name}' identity (${registeredRemote})`);
+    }
+  } else {
+    warnings.push("path is not a git working tree");
+  }
+  reg.localPaths[name] = boundPath;
   writeLocal({ root, localPaths: reg.localPaths });
-  return { name, repoPath };
+  const result = { name, repoPath: boundPath, warnings };
+  if (!samePath(boundPath, repoPath)) result.resolvedFrom = repoPath;
+  return result;
 }
 var repoBindCommand = defineCommand({
   name: "repo-bind",
   description: "Bind a registered repo name to a local directory path",
   args: {
     name: { description: "Registered repo name to bind", required: true },
-    path: { description: "Absolute path to the local directory for this repo", required: true }
+    path: { description: "Absolute path to the local directory for this repo (a worktree is resolved to its main clone)", required: true }
   },
   flags: {},
   handler: async ({ args }) => {
@@ -24180,7 +24293,10 @@ function repoEdit({ root, name, description, remote, defaultBranch }) {
   if (description === void 0 && remote === void 0 && defaultBranch === void 0) {
     throw new UserError("no editable field flag supplied");
   }
-  if (description !== void 0) identity2.description = description;
+  if (description !== void 0 && !description.trim()) {
+    throw new UserError("--description cannot be empty");
+  }
+  if (description !== void 0) identity2.description = description.trim();
   if (remote !== void 0) identity2.remote = remote;
   if (defaultBranch !== void 0) identity2.default_branch = defaultBranch;
   writeIdentity({ root, repos: reg.repos, repoGroups: reg.repoGroups });
@@ -24311,7 +24427,7 @@ init_command();
 import fs10 from "node:fs";
 import os4 from "node:os";
 import path11 from "node:path";
-import { execFileSync as execFileSync4 } from "node:child_process";
+import { execFileSync as execFileSync5 } from "node:child_process";
 function deriveRemoteUrl(raw) {
   if (!raw) return "";
   const ssh = raw.match(/^git@github\.com:(.+?)(?:\.git)?$/);
@@ -24345,7 +24461,7 @@ function isSourceControlInitialized(state) {
   return !!sc && typeof sc === "object" && !Array.isArray(sc) && typeof sc.auto_commit === "string" && sc.auto_commit !== "" && typeof sc.auto_pr === "string" && sc.auto_pr !== "";
 }
 function projectContext(opts = {}) {
-  const exec2 = opts.exec ?? ((f, a, o) => execFileSync4(f, a, { ...o, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }));
+  const exec2 = opts.exec ?? ((f, a, o) => execFileSync5(f, a, { ...o, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }));
   const repoRootRaw = String(exec2("git", ["rev-parse", "--show-toplevel"])).trim();
   const repoRoot = path11.resolve(repoRootRaw);
   const repoName = path11.basename(repoRoot);
@@ -24430,7 +24546,7 @@ init_command();
 init_errors2();
 import fs11 from "node:fs";
 import path12 from "node:path";
-import { execFileSync as execFileSync5 } from "node:child_process";
+import { execFileSync as execFileSync6 } from "node:child_process";
 function readState(projectDir) {
   const statePath = path12.join(projectDir, "state.json");
   if (!fs11.existsSync(statePath)) return null;
@@ -24473,7 +24589,7 @@ function summarize(name, state, active) {
   };
 }
 function projectFind(opts) {
-  const exec2 = opts.exec ?? ((f, a, o) => execFileSync5(f, a, { ...o, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }));
+  const exec2 = opts.exec ?? ((f, a, o) => execFileSync6(f, a, { ...o, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }));
   if (!fs11.existsSync(opts.projectsBasePath)) return { basePathExists: false, projects: [] };
   const active = activeWorktrees(opts.repoRoot, exec2);
   if (opts.projectName) {
@@ -24514,7 +24630,7 @@ var projectFindCommand = defineCommand({
 init_command();
 init_errors2();
 import path13 from "node:path";
-import { execFileSync as execFileSync6 } from "node:child_process";
+import { execFileSync as execFileSync7 } from "node:child_process";
 function deriveRemoteUrl2(raw) {
   if (!raw) return "";
   const ssh = raw.match(/^git@github\.com:(.+?)(?:\.git)?$/);
@@ -24530,7 +24646,7 @@ function classify(stderr) {
   return "unknown";
 }
 function worktreeCreate(opts) {
-  const exec2 = opts.exec ?? ((f, a, o) => execFileSync6(f, a, { ...o, stdio: ["ignore", "pipe", "pipe"] }));
+  const exec2 = opts.exec ?? ((f, a, o) => execFileSync7(f, a, { ...o, stdio: ["ignore", "pipe", "pipe"] }));
   try {
     exec2(
       "git",
@@ -25438,7 +25554,10 @@ var pipelineSignalCommand = defineCommand({
 init_command();
 init_errors2();
 init_paths();
-function groupCreate({ root, name, members, description = "" }) {
+function groupCreate({ root, name, members, description }) {
+  if (!description?.trim()) {
+    throw new UserError("a non-empty --description is required to create a repo-group");
+  }
   const reg = readRegistry({ root });
   try {
     assertUniqueName(reg, name);
@@ -25451,7 +25570,7 @@ function groupCreate({ root, name, members, description = "" }) {
     }
   }
   try {
-    createGroup({ root, name, members, description });
+    createGroup({ root, name, members, description: description.trim() });
   } catch (e) {
     throw new UserError(e instanceof Error ? e.message : String(e));
   }
@@ -25465,7 +25584,7 @@ var groupCreateCommand = defineCommand({
     members: { description: "Comma-separated list of registered repo names to include", required: true }
   },
   flags: {
-    description: { description: "Optional description for the repo-group", type: "string" }
+    description: { description: "What this repo-group scopes and why an agent would use it (required)", type: "string" }
   },
   handler: async ({ args, flags }) => {
     if (!args.name) throw new UserError("--name is required");
@@ -25684,13 +25803,13 @@ function renderPreamble({ root }) {
   const repoNames = Object.keys(reg.repos);
   const groupNames = Object.keys(reg.repoGroups);
   if (repoNames.length === 0) {
-    return "[rad-orc session-start] At the start of your first reply, briefly tell the user that Rad Orc is live but no repositories are registered yet, so you cannot work across their repos until at least one is added. Offer to help them register their first repo with /rad-repo (and walk them through it if they accept). Keep it short, then continue with their request.";
+    return "[rad-orc session-start] At the start of your first reply, briefly tell the user that Rad Orc is live but no repositories are registered yet \u2014 so you have no map of the code beyond the current directory and cannot yet reason across their repos. Offer to help them register their first repo with /rad-repo (and walk them through it if they accept). Keep it short, then continue with their request.";
   }
   const resolved = repoNames.map((name) => resolveRepoPath(reg, name));
   const unboundCount = resolved.filter((r) => !r.bound).length;
   const lines = [];
   lines.push(
-    "[rad-orc session-start] At the start of your first reply, give the user a brief, friendly summary of their registered Rad Orc repos below (in your own words, a couple of lines), then mention /rad-repo to manage them. Continue with their request after."
+    "[rad-orc session-start] At the start of your first reply, give the user a brief, friendly summary of their registered Rad Orc repos below (in your own words, a couple of lines). Your work may reach beyond the current directory \u2014 these are the repos you can explore; reach for /rad-repo to inspect, scope a task across, or manage them. Continue with their request after."
   );
   lines.push("");
   lines.push(`Repos (${repoNames.length} total, ${unboundCount} unbound):`);
