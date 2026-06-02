@@ -50,11 +50,11 @@ var require_error = __commonJS({
        * @param {string} code an id string representing the error
        * @param {string} message human-readable description of the error
        */
-      constructor(exitCode, code, message) {
+      constructor(exitCode, code2, message) {
         super(message);
         Error.captureStackTrace(this, this.constructor);
         this.name = this.constructor.name;
-        this.code = code;
+        this.code = code2;
         this.exitCode = exitCode;
         this.nestedError = void 0;
       }
@@ -1648,9 +1648,9 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * @return never
        * @private
        */
-      _exit(exitCode, code, message) {
+      _exit(exitCode, code2, message) {
         if (this._exitCallback) {
-          this._exitCallback(new CommanderError2(exitCode, code, message));
+          this._exitCallback(new CommanderError2(exitCode, code2, message));
         }
         process5.exit(exitCode);
       }
@@ -2288,14 +2288,14 @@ Expecting one of '${allowedValues.join("', '")}'`);
           });
         }
         const exitCallback = this._exitCallback;
-        proc.on("close", (code) => {
-          code = code ?? 1;
+        proc.on("close", (code2) => {
+          code2 = code2 ?? 1;
           if (!exitCallback) {
-            process5.exit(code);
+            process5.exit(code2);
           } else {
             exitCallback(
               new CommanderError2(
-                code,
+                code2,
                 "commander.executeSubCommandAsync",
                 "(close)"
               )
@@ -2802,8 +2802,8 @@ Expecting one of '${allowedValues.join("', '")}'`);
         }
         const config = errorOptions || {};
         const exitCode = config.exitCode || 1;
-        const code = config.code || "commander.error";
-        this._exit(exitCode, code, message);
+        const code2 = config.code || "commander.error";
+        this._exit(exitCode, code2, message);
       }
       /**
        * Apply any option related environment variables, if option does
@@ -4378,7 +4378,7 @@ var init_main = __esm({
         return 0;
       return void 0;
     };
-    wrapAnsiCode = (code) => `${ESC}${ANSI_CSI}${code}${ANSI_SGR_TERMINATOR}`;
+    wrapAnsiCode = (code2) => `${ESC}${ANSI_CSI}${code2}${ANSI_SGR_TERMINATOR}`;
     wrapAnsiHyperlink = (url) => `${ESC}${ANSI_ESCAPE_LINK}${url}${ANSI_ESCAPE_BELL}`;
     wrapWord = (rows, word, columns) => {
       const characters = word[Symbol.iterator]();
@@ -4521,8 +4521,8 @@ var init_main = __esm({
           const groupsResult = GROUP_REGEX.exec(preString);
           const groups = groupsResult?.groups;
           if (groups?.code !== void 0) {
-            const code = Number.parseFloat(groups.code);
-            escapeCode = code === END_CODE ? void 0 : code;
+            const code2 = Number.parseFloat(groups.code);
+            escapeCode = code2 === END_CODE ? void 0 : code2;
           } else if (groups?.uri !== void 0) {
             escapeUrl = groups.uri.length === 0 ? void 0 : groups.uri;
           }
@@ -4858,17 +4858,17 @@ var init_mjs = __esm({
           list.splice(i, 1);
         }
       }
-      emit(ev, code, signal) {
+      emit(ev, code2, signal) {
         if (this.emitted[ev]) {
           return false;
         }
         this.emitted[ev] = true;
         let ret = false;
         for (const fn of this.listeners[ev]) {
-          ret = fn(code, signal) === true || ret;
+          ret = fn(code2, signal) === true || ret;
         }
         if (ev === "exit") {
-          ret = this.emit("afterExit", code, signal) || ret;
+          ret = this.emit("afterExit", code2, signal) || ret;
         }
         return ret;
       }
@@ -4968,8 +4968,8 @@ var init_mjs = __esm({
         this.#process.emit = (ev, ...a) => {
           return this.#processEmit(ev, ...a);
         };
-        this.#process.reallyExit = (code) => {
-          return this.#processReallyExit(code);
+        this.#process.reallyExit = (code2) => {
+          return this.#processReallyExit(code2);
         };
       }
       unload() {
@@ -4991,11 +4991,11 @@ var init_mjs = __esm({
         this.#process.reallyExit = this.#originalProcessReallyExit;
         this.#emitter.count -= 1;
       }
-      #processReallyExit(code) {
+      #processReallyExit(code2) {
         if (!processOk(this.#process)) {
           return 0;
         }
-        this.#process.exitCode = code || 0;
+        this.#process.exitCode = code2 || 0;
         this.#emitter.emit("exit", this.#process.exitCode, null);
         return this.#originalProcessReallyExit.call(this.#process, this.#process.exitCode);
       }
@@ -5205,8 +5205,8 @@ function createPrompt(view) {
       signal.addEventListener("abort", abort);
       cleanups.add(() => signal.removeEventListener("abort", abort));
     }
-    cleanups.add(onExit((code, signal2) => {
-      reject(new ExitPromptError(`User force closed the prompt with ${code} ${signal2}`));
+    cleanups.add(onExit((code2, signal2) => {
+      reject(new ExitPromptError(`User force closed the prompt with ${code2} ${signal2}`));
     }));
     const sigint = () => reject(new ExitPromptError(`User force closed the prompt with SIGINT`));
     rl.on("SIGINT", sigint);
@@ -5778,24 +5778,24 @@ function assembleStyles() {
       enumerable: false
     },
     ansi256ToAnsi: {
-      value(code) {
-        if (code < 8) {
-          return 30 + code;
+      value(code2) {
+        if (code2 < 8) {
+          return 30 + code2;
         }
-        if (code < 16) {
-          return 90 + (code - 8);
+        if (code2 < 16) {
+          return 90 + (code2 - 8);
         }
         let red;
         let green;
         let blue;
-        if (code >= 232) {
-          red = ((code - 232) * 10 + 8) / 255;
+        if (code2 >= 232) {
+          red = ((code2 - 232) * 10 + 8) / 255;
           green = red;
           blue = red;
         } else {
-          code -= 16;
-          const remainder = code % 36;
-          red = Math.floor(code / 36) / 5;
+          code2 -= 16;
+          const remainder = code2 % 36;
+          red = Math.floor(code2 / 36) / 5;
           green = Math.floor(remainder / 6) / 5;
           blue = remainder % 6 / 5;
         }
@@ -5826,8 +5826,8 @@ var ANSI_BACKGROUND_OFFSET, wrapAnsi16, wrapAnsi256, wrapAnsi16m, styles, modifi
 var init_ansi_styles = __esm({
   "cli/node_modules/chalk/source/vendor/ansi-styles/index.js"() {
     ANSI_BACKGROUND_OFFSET = 10;
-    wrapAnsi16 = (offset = 0) => (code) => `\x1B[${code + offset}m`;
-    wrapAnsi256 = (offset = 0) => (code) => `\x1B[${38 + offset};5;${code}m`;
+    wrapAnsi16 = (offset = 0) => (code2) => `\x1B[${code2 + offset}m`;
+    wrapAnsi256 = (offset = 0) => (code2) => `\x1B[${38 + offset};5;${code2}m`;
     wrapAnsi16m = (offset = 0) => (red, green, blue) => `\x1B[${38 + offset};2;${red};${green};${blue}m`;
     styles = {
       modifier: {
@@ -7153,11 +7153,11 @@ function resolveYamlMerge(data) {
 }
 function resolveYamlBinary(data) {
   if (data === null) return false;
-  var code, idx, bitlen = 0, max = data.length, map3 = BASE64_MAP;
+  var code2, idx, bitlen = 0, max = data.length, map3 = BASE64_MAP;
   for (idx = 0; idx < max; idx++) {
-    code = map3.indexOf(data.charAt(idx));
-    if (code > 64) continue;
-    if (code < 0) return false;
+    code2 = map3.indexOf(data.charAt(idx));
+    if (code2 > 64) continue;
+    if (code2 < 0) return false;
     bitlen += 6;
   }
   return bitlen % 8 === 0;
@@ -12072,9 +12072,9 @@ var require_code = __commonJS({
     };
     exports.Name = Name;
     var _Code = class extends _CodeOrName {
-      constructor(code) {
+      constructor(code2) {
         super();
-        this._items = typeof code === "string" ? [code] : code;
+        this._items = typeof code2 === "string" ? [code2] : code2;
       }
       toString() {
         return this.str;
@@ -12101,13 +12101,13 @@ var require_code = __commonJS({
     exports._Code = _Code;
     exports.nil = new _Code("");
     function _(strs, ...args) {
-      const code = [strs[0]];
+      const code2 = [strs[0]];
       let i = 0;
       while (i < args.length) {
-        addCodeArg(code, args[i]);
-        code.push(strs[++i]);
+        addCodeArg(code2, args[i]);
+        code2.push(strs[++i]);
       }
-      return new _Code(code);
+      return new _Code(code2);
     }
     exports._ = _;
     var plus = new _Code("+");
@@ -12123,13 +12123,13 @@ var require_code = __commonJS({
       return new _Code(expr);
     }
     exports.str = str3;
-    function addCodeArg(code, arg) {
+    function addCodeArg(code2, arg) {
       if (arg instanceof _Code)
-        code.push(...arg._items);
+        code2.push(...arg._items);
       else if (arg instanceof Name)
-        code.push(arg);
+        code2.push(arg);
       else
-        code.push(interpolate(arg));
+        code2.push(interpolate(arg));
     }
     exports.addCodeArg = addCodeArg;
     function optimize(expr) {
@@ -12313,7 +12313,7 @@ var require_scope = __commonJS({
         }, usedValues, getCode);
       }
       _reduceValues(values, valueCode, usedValues = {}, getCode) {
-        let code = code_1.nil;
+        let code2 = code_1.nil;
         for (const prefix in values) {
           const vs = values[prefix];
           if (!vs)
@@ -12326,16 +12326,16 @@ var require_scope = __commonJS({
             let c = valueCode(name);
             if (c) {
               const def = this.opts.es5 ? exports.varKinds.var : exports.varKinds.const;
-              code = (0, code_1._)`${code}${def} ${name} = ${c};${this.opts._n}`;
+              code2 = (0, code_1._)`${code2}${def} ${name} = ${c};${this.opts._n}`;
             } else if (c = getCode === null || getCode === void 0 ? void 0 : getCode(name)) {
-              code = (0, code_1._)`${code}${c}${this.opts._n}`;
+              code2 = (0, code_1._)`${code2}${c}${this.opts._n}`;
             } else {
               throw new ValueError(name);
             }
             nameSet.set(name, UsedValueState.Completed);
           });
         }
-        return code;
+        return code2;
       }
     };
     exports.ValueScope = ValueScope;
@@ -12495,9 +12495,9 @@ var require_codegen = __commonJS({
       }
     };
     var AnyCode = class extends Node {
-      constructor(code) {
+      constructor(code2) {
         super();
-        this.code = code;
+        this.code = code2;
       }
       render({ _n }) {
         return `${this.code};` + _n;
@@ -12519,7 +12519,7 @@ var require_codegen = __commonJS({
         this.nodes = nodes;
       }
       render(opts) {
-        return this.nodes.reduce((code, n) => code + n.render(opts), "");
+        return this.nodes.reduce((code2, n) => code2 + n.render(opts), "");
       }
       optimizeNodes() {
         const { nodes } = this;
@@ -12567,10 +12567,10 @@ var require_codegen = __commonJS({
         this.condition = condition;
       }
       render(opts) {
-        let code = `if(${this.condition})` + super.render(opts);
+        let code2 = `if(${this.condition})` + super.render(opts);
         if (this.else)
-          code += "else " + this.else.render(opts);
-        return code;
+          code2 += "else " + this.else.render(opts);
+        return code2;
       }
       optimizeNodes() {
         super.optimizeNodes();
@@ -12691,12 +12691,12 @@ var require_codegen = __commonJS({
     Return.kind = "return";
     var Try = class extends BlockNode {
       render(opts) {
-        let code = "try" + super.render(opts);
+        let code2 = "try" + super.render(opts);
         if (this.catch)
-          code += this.catch.render(opts);
+          code2 += this.catch.render(opts);
         if (this.finally)
-          code += this.finally.render(opts);
-        return code;
+          code2 += this.finally.render(opts);
+        return code2;
       }
       optimizeNodes() {
         var _a, _b;
@@ -12813,18 +12813,18 @@ var require_codegen = __commonJS({
       }
       // returns code for object literal for the passed argument list of key-value pairs
       object(...keyValues) {
-        const code = ["{"];
+        const code2 = ["{"];
         for (const [key, value] of keyValues) {
-          if (code.length > 1)
-            code.push(",");
-          code.push(key);
+          if (code2.length > 1)
+            code2.push(",");
+          code2.push(key);
           if (key !== value || this.opts.es5) {
-            code.push(":");
-            (0, code_1.addCodeArg)(code, value);
+            code2.push(":");
+            (0, code_1.addCodeArg)(code2, value);
           }
         }
-        code.push("}");
-        return new code_1._Code(code);
+        code2.push("}");
+        return new code_1._Code(code2);
       }
       // `if` clause (or statement if `thenBody` and, optionally, `elseBody` are passed)
       if(condition, thenBody, elseBody) {
@@ -15124,22 +15124,22 @@ var require_utils = __commonJS({
     var isPathCharacter = RegExp.prototype.test.bind(/^[\da-z\-._~!$&'()*+,;=:@/]$/iu);
     function stringArrayToHexStripped(input) {
       let acc = "";
-      let code = 0;
+      let code2 = 0;
       let i = 0;
       for (i = 0; i < input.length; i++) {
-        code = input[i].charCodeAt(0);
-        if (code === 48) {
+        code2 = input[i].charCodeAt(0);
+        if (code2 === 48) {
           continue;
         }
-        if (!(code >= 48 && code <= 57 || code >= 65 && code <= 70 || code >= 97 && code <= 102)) {
+        if (!(code2 >= 48 && code2 <= 57 || code2 >= 65 && code2 <= 70 || code2 >= 97 && code2 <= 102)) {
           return "";
         }
         acc += input[i];
         break;
       }
       for (i += 1; i < input.length; i++) {
-        code = input[i].charCodeAt(0);
-        if (!(code >= 48 && code <= 57 || code >= 65 && code <= 70 || code >= 97 && code <= 102)) {
+        code2 = input[i].charCodeAt(0);
+        if (!(code2 >= 48 && code2 <= 57 || code2 >= 65 && code2 <= 70 || code2 >= 97 && code2 <= 102)) {
           return "";
         }
         acc += input[i];
@@ -18158,8 +18158,8 @@ var require_format = __commonJS({
             }
           }
           function getFormat(fmtDef) {
-            const code = fmtDef instanceof RegExp ? (0, codegen_1.regexpCode)(fmtDef) : opts.code.formats ? (0, codegen_1._)`${opts.code.formats}${(0, codegen_1.getProperty)(schema3)}` : void 0;
-            const fmt = gen.scopeValue("formats", { key: schema3, ref: fmtDef, code });
+            const code2 = fmtDef instanceof RegExp ? (0, codegen_1.regexpCode)(fmtDef) : opts.code.formats ? (0, codegen_1._)`${opts.code.formats}${(0, codegen_1.getProperty)(schema3)}` : void 0;
+            const fmt = gen.scopeValue("formats", { key: schema3, ref: fmtDef, code: code2 });
             if (typeof fmtDef == "object" && !(fmtDef instanceof RegExp)) {
               return [fmtDef.type || "string", fmtDef.validate, (0, codegen_1._)`${fmt}.validate`];
             }
@@ -21068,11 +21068,11 @@ var merge2 = new type2("tag:yaml.org,2002:merge", {
 var BASE64_MAP2 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=\n\r";
 function resolveYamlBinary2(data) {
   if (data === null) return false;
-  var code, idx, bitlen = 0, max = data.length, map3 = BASE64_MAP2;
+  var code2, idx, bitlen = 0, max = data.length, map3 = BASE64_MAP2;
   for (idx = 0; idx < max; idx++) {
-    code = map3.indexOf(data.charAt(idx));
-    if (code > 64) continue;
-    if (code < 0) return false;
+    code2 = map3.indexOf(data.charAt(idx));
+    if (code2 > 64) continue;
+    if (code2 < 0) return false;
     bitlen += 6;
   }
   return bitlen % 8 === 0;
@@ -24980,8 +24980,8 @@ function parseMasterPlan(masterPlanPath2) {
   try {
     raw = fs12.readFileSync(masterPlanPath2, "utf-8");
   } catch (err) {
-    const code = err?.code;
-    if (code === "ENOENT") {
+    const code2 = err?.code;
+    if (code2 === "ENOENT") {
       throw new ParseError({
         line: 1,
         expected: "Master Plan file at " + masterPlanPath2,
@@ -25230,8 +25230,8 @@ function moveContentsTo(srcDir, destDir) {
     try {
       fs12.renameSync(srcPath, destPath);
     } catch (err) {
-      const code = err?.code;
-      if (code === "EXDEV" || code === "EPERM" || code === "ENOTEMPTY") {
+      const code2 = err?.code;
+      if (code2 === "EXDEV" || code2 === "EPERM" || code2 === "ENOTEMPTY") {
         fs12.cpSync(srcPath, destPath, { recursive: true });
         fs12.rmSync(srcPath, { recursive: true, force: true });
       } else {
@@ -25798,33 +25798,49 @@ init_command();
 init_paths();
 
 // cli/src/commands/session-context/render.ts
+var DELIVERY_PREFIX = "[rad-orc session-start] Begin your first reply by giving the user this message, then continue with their request:\n\n";
+var code = (slug) => `\`${slug}\``;
+function slugList(slugs) {
+  return slugs.map(code).join(", ");
+}
+function andList(slugs) {
+  const coded = slugs.map(code);
+  if (coded.length <= 1) return coded.join("");
+  if (coded.length === 2) return `${coded[0]} and ${coded[1]}`;
+  return `${coded.slice(0, -1).join(", ")}, and ${coded[coded.length - 1]}`;
+}
 function renderPreamble({ root }) {
   const reg = readRegistry({ root });
   const repoNames = Object.keys(reg.repos);
   const groupNames = Object.keys(reg.repoGroups);
   if (repoNames.length === 0) {
-    return "[rad-orc session-start] At the start of your first reply, briefly tell the user that Rad Orc is live but no repositories are registered yet \u2014 so you have no map of the code beyond the current directory and cannot yet reason across their repos. Offer to help them register their first repo with /rad-repo (and walk them through it if they accept). Keep it short, then continue with their request.";
+    const body = "**Rad Orc is ready!** Right now I can only see the folder we're in \u2014 there aren't any repositories registered yet, so I don't yet have a map of your other repos or a way to plan and make changes across them. Want to register your first one? Just say **`/rad-repo`** and I'll walk you through it.";
+    return DELIVERY_PREFIX + body;
   }
   const resolved = repoNames.map((name) => resolveRepoPath(reg, name));
-  const unboundCount = resolved.filter((r) => !r.bound).length;
-  const lines = [];
-  lines.push(
-    "[rad-orc session-start] At the start of your first reply, give the user a brief, friendly summary of their registered Rad Orc repos below (in your own words, a couple of lines). Your work may reach beyond the current directory \u2014 these are the repos you can explore; reach for /rad-repo to inspect, scope a task across, or manage them. Continue with their request after."
-  );
-  lines.push("");
-  lines.push(`Repos (${repoNames.length} total, ${unboundCount} unbound):`);
-  for (const r of resolved) {
-    lines.push(r.bound ? `  ${r.name}` : `  ${r.name}  [unbound]`);
-  }
+  const unbound = resolved.filter((r) => !r.bound);
+  const repoNoun = repoNames.length === 1 ? "repository" : "repositories";
+  let lead = `**Rad Orc is ready \u2014 your repo map is loaded.** You've got **${repoNames.length} ${repoNoun}** \u2014 ${slugList(repoNames)}`;
   if (groupNames.length > 0) {
-    lines.push(`Repo-groups (${groupNames.length}):`);
-    for (const groupName of groupNames) {
-      const grp = reg.repoGroups[groupName];
-      const memberList = grp.members.length > 0 ? grp.members.join(", ") : "(empty)";
-      lines.push(`  ${groupName}: ${memberList}`);
-    }
+    const groupNoun = groupNames.length === 1 ? "repo-group" : "repo-groups";
+    lead += ` \u2014 and **${groupNames.length} ${groupNoun}**: ${slugList(groupNames)}.`;
+  } else {
+    lead += ".";
   }
-  return lines.join("\n");
+  const reach = " These are the repos I can reach beyond the current folder and reason across as we work.";
+  let closing;
+  if (unbound.length === 0) {
+    closing = " Say **`/rad-repo`** anytime to review or update your repos.";
+  } else if (unbound.length === 1) {
+    closing = `
+
+One thing to sort out: ${andList(unbound.map((r) => r.name))} isn't bound to a local folder on this machine yet, so I can't open its code until it is. Say **\`/rad-repo\`** and I'll help you point it at the right clone.`;
+  } else {
+    closing = `
+
+One thing to sort out: ${andList(unbound.map((r) => r.name))} aren't bound to local folders on this machine yet, so I can't open their code until they are. Say **\`/rad-repo\`** and I'll help you point them at the right clones.`;
+  }
+  return DELIVERY_PREFIX + lead + reach + closing;
 }
 
 // cli/src/commands/session-context/index.ts
@@ -25847,8 +25863,8 @@ function buildProgram(version) {
     await runCommand(doctorCommand, { argv, env: process.env, isTTY: Boolean(process.stdin.isTTY), stderr: process.stderr });
   });
   program3.command("where [name]").description(WHERE_DESCRIPTION).addHelpText("after", "\n" + whereHelpText()).action(async (name) => {
-    const code = await runWhere({ name, stdout: process.stdout, stderr: process.stderr, env: process.env });
-    process.exit(code);
+    const code2 = await runWhere({ name, stdout: process.stdout, stderr: process.stderr, env: process.env });
+    process.exit(code2);
   });
   program3.command("session-context").description(sessionContextCommand.description).allowUnknownOption().allowExcessArguments(true).action(async () => {
     const argv = process.argv.slice(3);
