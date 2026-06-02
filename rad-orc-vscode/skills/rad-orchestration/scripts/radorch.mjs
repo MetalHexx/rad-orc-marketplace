@@ -23165,6 +23165,29 @@ function deleteGroup({ root, name }) {
   delete reg.repoGroups[name];
   writeIdentity({ root, repos: reg.repos, repoGroups: reg.repoGroups });
 }
+function editRepo({ root, name, description, remote, defaultBranch }) {
+  const reg = readRegistry({ root });
+  const identity2 = reg.repos[name];
+  if (!identity2) throw new Error(`repo '${name}' does not exist`);
+  if (description !== void 0) identity2.description = description;
+  if (remote !== void 0) identity2.remote = remote;
+  if (defaultBranch !== void 0) identity2.default_branch = defaultBranch;
+  writeIdentity({ root, repos: reg.repos, repoGroups: reg.repoGroups });
+  return identity2;
+}
+function bindRepo({ root, name, localPath }) {
+  const reg = readRegistry({ root });
+  if (!(name in reg.repos)) throw new Error(`repo '${name}' does not exist`);
+  reg.localPaths[name] = localPath;
+  writeLocal({ root, localPaths: reg.localPaths });
+}
+function editGroup({ root, name, description }) {
+  const reg = readRegistry({ root });
+  const grp = reg.repoGroups[name];
+  if (!grp) throw new Error(`group '${name}' does not exist`);
+  grp.description = description;
+  writeIdentity({ root, repos: reg.repos, repoGroups: reg.repoGroups });
+}
 
 // cli/src/commands/doctor/checks.ts
 var pkg2 = { version: getCliVersion() };
@@ -24256,8 +24279,7 @@ function repoBind({ root, name, repoPath, exec: exec2 }) {
   } else {
     warnings.push("path is not a git working tree");
   }
-  reg.localPaths[name] = boundPath;
-  writeLocal({ root, localPaths: reg.localPaths });
+  bindRepo({ root, name, localPath: boundPath });
   const result = { name, repoPath: boundPath, warnings };
   if (!samePath(boundPath, repoPath)) result.resolvedFrom = repoPath;
   return result;
@@ -24286,8 +24308,7 @@ init_errors2();
 init_paths();
 function repoEdit({ root, name, description, remote, defaultBranch }) {
   const reg = readRegistry({ root });
-  const identity2 = reg.repos[name];
-  if (!identity2) {
+  if (!reg.repos[name]) {
     throw new UserError(`repo '${name}' is not registered`);
   }
   if (description === void 0 && remote === void 0 && defaultBranch === void 0) {
@@ -24296,11 +24317,14 @@ function repoEdit({ root, name, description, remote, defaultBranch }) {
   if (description !== void 0 && !description.trim()) {
     throw new UserError("--description cannot be empty");
   }
-  if (description !== void 0) identity2.description = description.trim();
-  if (remote !== void 0) identity2.remote = remote;
-  if (defaultBranch !== void 0) identity2.default_branch = defaultBranch;
-  writeIdentity({ root, repos: reg.repos, repoGroups: reg.repoGroups });
-  return { name, description: identity2.description, remote: identity2.remote, default_branch: identity2.default_branch };
+  const updated = editRepo({
+    root,
+    name,
+    description: description !== void 0 ? description.trim() : void 0,
+    remote,
+    defaultBranch
+  });
+  return { name, description: updated.description, remote: updated.remote, default_branch: updated.default_branch };
 }
 var repoEditCommand = defineCommand({
   name: "repo-edit",
@@ -25595,6 +25619,41 @@ var groupCreateCommand = defineCommand({
   }
 });
 
+// cli/src/commands/repo-group/edit.ts
+init_command();
+init_errors2();
+init_paths();
+function groupEdit({ root, name, description }) {
+  const reg = readRegistry({ root });
+  if (!reg.repoGroups[name]) {
+    throw new UserError(`'${name}' is not a registered repo-group`);
+  }
+  if (description === void 0) {
+    throw new UserError("no editable field flag supplied");
+  }
+  if (!description.trim()) {
+    throw new UserError("--description cannot be empty");
+  }
+  const trimmed = description.trim();
+  editGroup({ root, name, description: trimmed });
+  return { name, description: trimmed };
+}
+var groupEditCommand = defineCommand({
+  name: "repo-group-edit",
+  description: "Edit a repo-group's description",
+  args: {
+    name: { description: "Name of the repo-group to edit", required: true }
+  },
+  flags: {
+    description: { description: "New description (the scoping rationale; cannot be blank)", type: "string" }
+  },
+  handler: async ({ args, flags }) => {
+    if (!args.name) throw new UserError("--name is required");
+    const root = userDataPaths().root;
+    return groupEdit({ root, name: args.name, description: flags.description });
+  }
+});
+
 // cli/src/commands/repo-group/members.ts
 init_command();
 init_errors2();
@@ -25941,6 +26000,10 @@ function buildProgram(version) {
   repoGroup.command("show").description(groupShowCommand.description).helpOption(false).allowUnknownOption().allowExcessArguments(true).action(async () => {
     const argv = process.argv.slice(4);
     await runCommand(groupShowCommand, { argv, env: process.env, isTTY: Boolean(process.stdin.isTTY), stderr: process.stderr });
+  });
+  repoGroup.command("edit").description(groupEditCommand.description).helpOption(false).allowUnknownOption().allowExcessArguments(true).action(async () => {
+    const argv = process.argv.slice(4);
+    await runCommand(groupEditCommand, { argv, env: process.env, isTTY: Boolean(process.stdin.isTTY), stderr: process.stderr });
   });
   const project = program3.command("project").description("Project state read operations");
   project.command("context").description(projectContextCommand.description).helpOption(false).allowUnknownOption().allowExcessArguments(true).action(async () => {
