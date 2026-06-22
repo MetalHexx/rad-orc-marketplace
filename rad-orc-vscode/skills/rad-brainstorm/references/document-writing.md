@@ -13,7 +13,7 @@ This is a **goals document**, not a design document or implementation plan. Capt
 
 ## File Mechanics
 
-- **Path**: `~/.radorc/projects/{PROJECT-NAME}/{PROJECT-NAME}-BRAINSTORMING.md`
+- **Path**: `~/.radorc/projects/{PROJECT-NAME}/{PROJECT-NAME}-BRAINSTORMING.md` — same for **every** kind, side-projects included. A side-project's `~/.radorc/side-projects/<name>/` holds only its code repo (provisioned later at execution); this skill never writes there.
 - **Folder creation**: Create `~/.radorc/projects/{PROJECT-NAME}/` if it doesn't exist. Do NOT create subfolders (`phases/`, `tasks/`, `reports/`) — the Orchestrator handles that during project initialization.
 - **Template**: Use [../templates/BRAINSTORMING.md](../templates/BRAINSTORMING.md) as the structural skeleton.
 - **Project name**: Always `SCREAMING-CASE` (e.g., `MY-NEW-FEATURE`).
@@ -27,6 +27,10 @@ This is a **goals document**, not a design document or implementation plan. Capt
 **Honest scope**: The "Out of Scope" section is as important as "In Scope." Be specific about what this project will NOT do. Vague scoping leads to scope creep downstream.
 
 **Actionable summary**: The Summary section is the single most important paragraph. It should be clear enough that someone unfamiliar with the conversation could understand what this project is about and begin planning from it. This is the primary handoff to downstream processes.
+
+## Repo Targets
+
+The `## Repo Targets (proposed)` section is **structurally mandatory** — every BRAINSTORMING.md carries it, populated with registry repo names confirmed with the user during the conversation. It is never one of the sections the *Flexibility* guidance below allows skipping. Use the `/rad-repo` skill to help a user register a repository if you sense one is missing before the brainstorm is finalized; never invent an unregistered name, work with the user.
 
 ## Link Generated Visuals
 
@@ -55,6 +59,7 @@ Before considering the document final, verify:
 - [ ] Related projects are linked (if applicable — see `project-memory.md`)
 - [ ] Generated visuals / wireframes are linked in **Visual Artifacts** (if any were produced)
 - [ ] Series context is included (if applicable — see `project-series.md`)
+- [ ] Repo Targets (proposed) section is present with a confirmed working repo set
 
 ## Flexibility
 

@@ -43,6 +43,30 @@ created: "{ISO-DATE}"
 
 {What problem are we solving? What pain points exist? What opportunity are we exploring? 2-4 sentences.}
 
+## Repo Targets (proposed)
+
+<!--
+  Mandatory. Every brainstorm carries a proposed working repo set.
+  Repos are registry names (see /rad-repo). The (proposed) qualifier marks
+  this as a working hypothesis the planner may refine downstream.
+
+  project-type:
+    standard    — touches one or more registered repos (the common case)
+    side-project — touches no registered repo. Repo-group is null and
+                   "Repos involved" lists the project's own name only.
+                   Docs (incl. this file) go to ~/.radorc/projects/<name>/ like
+                   every project; only the CODE repo lands in
+                   ~/.radorc/side-projects/<name>/ (provisioned at execution).
+-->
+
+**project-type**: `{standard | side-project}`
+**Repos involved**: `{repo-a}`, `{repo-b}`
+**Repo-Group** (if applicable): `{repo-group}`
+**Rationale**: {Why each repo is in the set — what part of the work lands where.}
+
+*Note: planner may refine this set during requirements / master-plan work based
+on what surfaces in scoping.*
+
 ## Validated Goals
 
 {Only goals discussed and agreed upon. Each goal has a description, rationale, and key considerations.}
@@ -88,10 +112,10 @@ created: "{ISO-DATE}"
 
 - {Technical, timeline, resource, or other constraints that shape the solution}
 
+<!--
+  Optional. You should try to align with the user if you have 
+  open questions rather than scribing them silently.
+-->
 ## Open Questions
 
 - {Unresolved questions for downstream processes to investigate}
-
-## Summary
-
-{2-3 sentences capturing the converged project concept. Should be clear enough for someone unfamiliar with the conversation to understand the project and begin planning from this alone.}

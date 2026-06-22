@@ -40,9 +40,9 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 
-// cli/node_modules/commander/lib/error.js
+// node_modules/commander/lib/error.js
 var require_error = __commonJS({
-  "cli/node_modules/commander/lib/error.js"(exports) {
+  "node_modules/commander/lib/error.js"(exports) {
     var CommanderError2 = class extends Error {
       /**
        * Constructs the CommanderError class
@@ -75,9 +75,9 @@ var require_error = __commonJS({
   }
 });
 
-// cli/node_modules/commander/lib/argument.js
+// node_modules/commander/lib/argument.js
 var require_argument = __commonJS({
-  "cli/node_modules/commander/lib/argument.js"(exports) {
+  "node_modules/commander/lib/argument.js"(exports) {
     var { InvalidArgumentError: InvalidArgumentError2 } = require_error();
     var Argument2 = class {
       /**
@@ -203,9 +203,9 @@ var require_argument = __commonJS({
   }
 });
 
-// cli/node_modules/commander/lib/help.js
+// node_modules/commander/lib/help.js
 var require_help = __commonJS({
-  "cli/node_modules/commander/lib/help.js"(exports) {
+  "node_modules/commander/lib/help.js"(exports) {
     var { humanReadableArgName } = require_argument();
     var Help2 = class {
       constructor() {
@@ -636,8 +636,8 @@ var require_help = __commonJS({
        * @param {string} str
        * @returns {number}
        */
-      displayWidth(str3) {
-        return stripColor(str3).length;
+      displayWidth(str) {
+        return stripColor(str).length;
       }
       /**
        * Style the title for displaying in the help. Called with 'Usage:', 'Options:', etc.
@@ -645,11 +645,11 @@ var require_help = __commonJS({
        * @param {string} str
        * @returns {string}
        */
-      styleTitle(str3) {
-        return str3;
+      styleTitle(str) {
+        return str;
       }
-      styleUsage(str3) {
-        return str3.split(" ").map((word) => {
+      styleUsage(str) {
+        return str.split(" ").map((word) => {
           if (word === "[options]") return this.styleOptionText(word);
           if (word === "[command]") return this.styleSubcommandText(word);
           if (word[0] === "[" || word[0] === "<")
@@ -657,46 +657,46 @@ var require_help = __commonJS({
           return this.styleCommandText(word);
         }).join(" ");
       }
-      styleCommandDescription(str3) {
-        return this.styleDescriptionText(str3);
+      styleCommandDescription(str) {
+        return this.styleDescriptionText(str);
       }
-      styleOptionDescription(str3) {
-        return this.styleDescriptionText(str3);
+      styleOptionDescription(str) {
+        return this.styleDescriptionText(str);
       }
-      styleSubcommandDescription(str3) {
-        return this.styleDescriptionText(str3);
+      styleSubcommandDescription(str) {
+        return this.styleDescriptionText(str);
       }
-      styleArgumentDescription(str3) {
-        return this.styleDescriptionText(str3);
+      styleArgumentDescription(str) {
+        return this.styleDescriptionText(str);
       }
-      styleDescriptionText(str3) {
-        return str3;
+      styleDescriptionText(str) {
+        return str;
       }
-      styleOptionTerm(str3) {
-        return this.styleOptionText(str3);
+      styleOptionTerm(str) {
+        return this.styleOptionText(str);
       }
-      styleSubcommandTerm(str3) {
-        return str3.split(" ").map((word) => {
+      styleSubcommandTerm(str) {
+        return str.split(" ").map((word) => {
           if (word === "[options]") return this.styleOptionText(word);
           if (word[0] === "[" || word[0] === "<")
             return this.styleArgumentText(word);
           return this.styleSubcommandText(word);
         }).join(" ");
       }
-      styleArgumentTerm(str3) {
-        return this.styleArgumentText(str3);
+      styleArgumentTerm(str) {
+        return this.styleArgumentText(str);
       }
-      styleOptionText(str3) {
-        return str3;
+      styleOptionText(str) {
+        return str;
       }
-      styleArgumentText(str3) {
-        return str3;
+      styleArgumentText(str) {
+        return str;
       }
-      styleSubcommandText(str3) {
-        return str3;
+      styleSubcommandText(str) {
+        return str;
       }
-      styleCommandText(str3) {
-        return str3;
+      styleCommandText(str) {
+        return str;
       }
       /**
        * Calculate the pad width from the maximum term length.
@@ -719,8 +719,8 @@ var require_help = __commonJS({
        * @param {string} str
        * @returns {boolean}
        */
-      preformatted(str3) {
-        return /\n[^\S\r\n]/.test(str3);
+      preformatted(str) {
+        return /\n[^\S\r\n]/.test(str);
       }
       /**
        * Format the "item", which consists of a term and description. Pad the term and wrap the description, indenting the following lines.
@@ -766,9 +766,9 @@ ${itemIndentStr}`);
        * @param {number} width
        * @returns {string}
        */
-      boxWrap(str3, width) {
-        if (width < this.minWidthToWrap) return str3;
-        const rawLines = str3.split(/\r\n|\n/);
+      boxWrap(str, width) {
+        if (width < this.minWidthToWrap) return str;
+        const rawLines = str.split(/\r\n|\n/);
         const chunkPattern = /[\s]*[^\s]+/g;
         const wrappedLines = [];
         rawLines.forEach((line) => {
@@ -796,18 +796,18 @@ ${itemIndentStr}`);
         return wrappedLines.join("\n");
       }
     };
-    function stripColor(str3) {
+    function stripColor(str) {
       const sgrPattern = /\x1b\[\d*(;\d*)*m/g;
-      return str3.replace(sgrPattern, "");
+      return str.replace(sgrPattern, "");
     }
     exports.Help = Help2;
     exports.stripColor = stripColor;
   }
 });
 
-// cli/node_modules/commander/lib/option.js
+// node_modules/commander/lib/option.js
 var require_option = __commonJS({
-  "cli/node_modules/commander/lib/option.js"(exports) {
+  "node_modules/commander/lib/option.js"(exports) {
     var { InvalidArgumentError: InvalidArgumentError2 } = require_error();
     var Option2 = class {
       /**
@@ -1069,9 +1069,9 @@ var require_option = __commonJS({
         return option.negate === (negativeValue === value);
       }
     };
-    function camelcase(str3) {
-      return str3.split("-").reduce((str4, word) => {
-        return str4 + word[0].toUpperCase() + word.slice(1);
+    function camelcase(str) {
+      return str.split("-").reduce((str2, word) => {
+        return str2 + word[0].toUpperCase() + word.slice(1);
       });
     }
     function splitOptionFlags(flags) {
@@ -1118,9 +1118,9 @@ var require_option = __commonJS({
   }
 });
 
-// cli/node_modules/commander/lib/suggestSimilar.js
+// node_modules/commander/lib/suggestSimilar.js
 var require_suggestSimilar = __commonJS({
-  "cli/node_modules/commander/lib/suggestSimilar.js"(exports) {
+  "node_modules/commander/lib/suggestSimilar.js"(exports) {
     var maxDistance = 3;
     function editDistance(a, b) {
       if (Math.abs(a.length - b.length) > maxDistance)
@@ -1198,13 +1198,13 @@ var require_suggestSimilar = __commonJS({
   }
 });
 
-// cli/node_modules/commander/lib/command.js
+// node_modules/commander/lib/command.js
 var require_command = __commonJS({
-  "cli/node_modules/commander/lib/command.js"(exports) {
+  "node_modules/commander/lib/command.js"(exports) {
     var EventEmitter = __require("node:events").EventEmitter;
     var childProcess = __require("node:child_process");
-    var path23 = __require("node:path");
-    var fs19 = __require("node:fs");
+    var path30 = __require("node:path");
+    var fs25 = __require("node:fs");
     var process5 = __require("node:process");
     var { Argument: Argument2, humanReadableArgName } = require_argument();
     var { CommanderError: CommanderError2 } = require_error();
@@ -1252,14 +1252,14 @@ var require_command = __commonJS({
         this._showSuggestionAfterError = true;
         this._savedState = null;
         this._outputConfiguration = {
-          writeOut: (str3) => process5.stdout.write(str3),
-          writeErr: (str3) => process5.stderr.write(str3),
-          outputError: (str3, write) => write(str3),
+          writeOut: (str) => process5.stdout.write(str),
+          writeErr: (str) => process5.stderr.write(str),
+          outputError: (str, write) => write(str),
           getOutHelpWidth: () => process5.stdout.isTTY ? process5.stdout.columns : void 0,
           getErrHelpWidth: () => process5.stderr.isTTY ? process5.stderr.columns : void 0,
           getOutHasColors: () => useColor() ?? (process5.stdout.isTTY && process5.stdout.hasColors?.()),
           getErrHasColors: () => useColor() ?? (process5.stderr.isTTY && process5.stderr.hasColors?.()),
-          stripColor: (str3) => stripColor(str3)
+          stripColor: (str) => stripColor(str)
         };
         this._hidden = false;
         this._helpOption = void 0;
@@ -2198,7 +2198,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * @param {string} subcommandName
        */
       _checkForMissingExecutable(executableFile, executableDir, subcommandName) {
-        if (fs19.existsSync(executableFile)) return;
+        if (fs25.existsSync(executableFile)) return;
         const executableDirMessage = executableDir ? `searched for local subcommand relative to directory '${executableDir}'` : "no directory for search for local subcommand, use .executableDir() to supply a custom directory";
         const executableMissing = `'${executableFile}' does not exist
  - if '${subcommandName}' is not meant to be an executable command, remove description parameter from '.command()' and use '.description()' instead
@@ -2216,11 +2216,11 @@ Expecting one of '${allowedValues.join("', '")}'`);
         let launchWithNode = false;
         const sourceExt = [".js", ".ts", ".tsx", ".mjs", ".cjs"];
         function findFile(baseDir, baseName) {
-          const localBin = path23.resolve(baseDir, baseName);
-          if (fs19.existsSync(localBin)) return localBin;
-          if (sourceExt.includes(path23.extname(baseName))) return void 0;
+          const localBin = path30.resolve(baseDir, baseName);
+          if (fs25.existsSync(localBin)) return localBin;
+          if (sourceExt.includes(path30.extname(baseName))) return void 0;
           const foundExt = sourceExt.find(
-            (ext) => fs19.existsSync(`${localBin}${ext}`)
+            (ext) => fs25.existsSync(`${localBin}${ext}`)
           );
           if (foundExt) return `${localBin}${foundExt}`;
           return void 0;
@@ -2232,21 +2232,21 @@ Expecting one of '${allowedValues.join("', '")}'`);
         if (this._scriptPath) {
           let resolvedScriptPath;
           try {
-            resolvedScriptPath = fs19.realpathSync(this._scriptPath);
+            resolvedScriptPath = fs25.realpathSync(this._scriptPath);
           } catch {
             resolvedScriptPath = this._scriptPath;
           }
-          executableDir = path23.resolve(
-            path23.dirname(resolvedScriptPath),
+          executableDir = path30.resolve(
+            path30.dirname(resolvedScriptPath),
             executableDir
           );
         }
         if (executableDir) {
           let localFile = findFile(executableDir, executableFile);
           if (!localFile && !subcommand._executableFile && this._scriptPath) {
-            const legacyName = path23.basename(
+            const legacyName = path30.basename(
               this._scriptPath,
-              path23.extname(this._scriptPath)
+              path30.extname(this._scriptPath)
             );
             if (legacyName !== this._name) {
               localFile = findFile(
@@ -2257,7 +2257,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
           }
           executableFile = localFile || executableFile;
         }
-        launchWithNode = sourceExt.includes(path23.extname(executableFile));
+        launchWithNode = sourceExt.includes(path30.extname(executableFile));
         let proc;
         if (process5.platform !== "win32") {
           if (launchWithNode) {
@@ -2983,18 +2983,18 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * @param {string} [description]
        * @return {(this | string | undefined)} `this` command for chaining, or version string if no arguments
        */
-      version(str3, flags, description) {
-        if (str3 === void 0) return this._version;
-        this._version = str3;
+      version(str, flags, description) {
+        if (str === void 0) return this._version;
+        this._version = str;
         flags = flags || "-V, --version";
         description = description || "output the version number";
         const versionOption = this.createOption(flags, description);
         this._versionOptionName = versionOption.attributeName();
         this._registerOption(versionOption);
         this.on("option:" + versionOption.name(), () => {
-          this._outputConfiguration.writeOut(`${str3}
+          this._outputConfiguration.writeOut(`${str}
 `);
-          this._exit(0, "commander.version", str3);
+          this._exit(0, "commander.version", str);
         });
         return this;
       }
@@ -3005,10 +3005,10 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * @param {object} [argsDescription]
        * @return {(string|Command)}
        */
-      description(str3, argsDescription) {
-        if (str3 === void 0 && argsDescription === void 0)
+      description(str, argsDescription) {
+        if (str === void 0 && argsDescription === void 0)
           return this._description;
-        this._description = str3;
+        this._description = str;
         if (argsDescription) {
           this._argsDescription = argsDescription;
         }
@@ -3020,9 +3020,9 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * @param {string} [str]
        * @return {(string|Command)}
        */
-      summary(str3) {
-        if (str3 === void 0) return this._summary;
-        this._summary = str3;
+      summary(str) {
+        if (str === void 0) return this._summary;
+        this._summary = str;
         return this;
       }
       /**
@@ -3070,8 +3070,8 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * @param {string} [str]
        * @return {(string|Command)}
        */
-      usage(str3) {
-        if (str3 === void 0) {
+      usage(str) {
+        if (str === void 0) {
           if (this._usage) return this._usage;
           const args = this.registeredArguments.map((arg) => {
             return humanReadableArgName(arg);
@@ -3082,7 +3082,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
             this.registeredArguments.length ? args : []
           ).join(" ");
         }
-        this._usage = str3;
+        this._usage = str;
         return this;
       }
       /**
@@ -3091,9 +3091,9 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * @param {string} [str]
        * @return {(string|Command)}
        */
-      name(str3) {
-        if (str3 === void 0) return this._name;
-        this._name = str3;
+      name(str) {
+        if (str === void 0) return this._name;
+        this._name = str;
         return this;
       }
       /**
@@ -3172,7 +3172,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * @return {Command}
        */
       nameFromFilename(filename) {
-        this._name = path23.basename(filename, path23.extname(filename));
+        this._name = path30.basename(filename, path30.extname(filename));
         return this;
       }
       /**
@@ -3186,9 +3186,9 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * @param {string} [path]
        * @return {(string|null|Command)}
        */
-      executableDir(path24) {
-        if (path24 === void 0) return this._executableDir;
-        this._executableDir = path24;
+      executableDir(path31) {
+        if (path31 === void 0) return this._executableDir;
+        this._executableDir = path31;
         return this;
       }
       /**
@@ -3227,17 +3227,17 @@ Expecting one of '${allowedValues.join("', '")}'`);
         let hasColors;
         let helpWidth;
         if (error) {
-          baseWrite = (str3) => this._outputConfiguration.writeErr(str3);
+          baseWrite = (str) => this._outputConfiguration.writeErr(str);
           hasColors = this._outputConfiguration.getErrHasColors();
           helpWidth = this._outputConfiguration.getErrHelpWidth();
         } else {
-          baseWrite = (str3) => this._outputConfiguration.writeOut(str3);
+          baseWrite = (str) => this._outputConfiguration.writeOut(str);
           hasColors = this._outputConfiguration.getOutHasColors();
           helpWidth = this._outputConfiguration.getOutHelpWidth();
         }
-        const write = (str3) => {
-          if (!hasColors) str3 = this._outputConfiguration.stripColor(str3);
-          return baseWrite(str3);
+        const write = (str) => {
+          if (!hasColors) str = this._outputConfiguration.stripColor(str);
+          return baseWrite(str);
         };
         return { error, write, hasColors, helpWidth };
       }
@@ -3444,9 +3444,9 @@ Expecting one of '${allowedValues.join("', '")}'`);
   }
 });
 
-// cli/node_modules/commander/index.js
+// node_modules/commander/index.js
 var require_commander = __commonJS({
-  "cli/node_modules/commander/index.js"(exports) {
+  "node_modules/commander/index.js"(exports) {
     var { Argument: Argument2 } = require_argument();
     var { Command: Command2 } = require_command();
     var { CommanderError: CommanderError2, InvalidArgumentError: InvalidArgumentError2 } = require_error();
@@ -3466,10 +3466,10 @@ var require_commander = __commonJS({
   }
 });
 
-// cli/node_modules/commander/esm.mjs
+// node_modules/commander/esm.mjs
 var import_index, program, createCommand, createArgument, createOption, CommanderError, InvalidArgumentError, InvalidOptionArgumentError, Command, Argument, Option, Help;
 var init_esm = __esm({
-  "cli/node_modules/commander/esm.mjs"() {
+  "node_modules/commander/esm.mjs"() {
     import_index = __toESM(require_commander(), 1);
     ({
       program,
@@ -3490,21 +3490,32 @@ var init_esm = __esm({
   }
 });
 
-// cli/node_modules/@inquirer/core/dist/lib/key.js
-var isUpKey, isDownKey, isBackspaceKey, isTabKey, isNumberKey, isEnterKey;
+// node_modules/@inquirer/core/dist/lib/key.js
+function isKeybinding(value) {
+  return keybindingLookup.has(value);
+}
+function getDefaultKeybindings() {
+  const env2 = process.env["INQUIRER_KEYBINDINGS"];
+  if (!env2)
+    return [];
+  return Array.from(new Set(env2.toLowerCase().split(/[\s,]+/).filter(isKeybinding)));
+}
+var keybindings, keybindingLookup, isUpKey, isDownKey, isBackspaceKey, isTabKey, isNumberKey, isEnterKey;
 var init_key = __esm({
-  "cli/node_modules/@inquirer/core/dist/lib/key.js"() {
-    isUpKey = (key, keybindings = []) => (
+  "node_modules/@inquirer/core/dist/lib/key.js"() {
+    keybindings = ["emacs", "vim"];
+    keybindingLookup = new Set(keybindings);
+    isUpKey = (key, keybindings2 = []) => (
       // The up key
       key.name === "up" || // Vim keybinding: hjkl keys map to left/down/up/right
-      keybindings.includes("vim") && key.name === "k" || // Emacs keybinding: Ctrl+P means "previous" in Emacs navigation conventions
-      keybindings.includes("emacs") && key.ctrl && key.name === "p"
+      keybindings2.includes("vim") && key.name === "k" || // Emacs keybinding: Ctrl+P means "previous" in Emacs navigation conventions
+      keybindings2.includes("emacs") && key.ctrl && key.name === "p"
     );
-    isDownKey = (key, keybindings = []) => (
+    isDownKey = (key, keybindings2 = []) => (
       // The down key
       key.name === "down" || // Vim keybinding: hjkl keys map to left/down/up/right
-      keybindings.includes("vim") && key.name === "j" || // Emacs keybinding: Ctrl+N means "next" in Emacs navigation conventions
-      keybindings.includes("emacs") && key.ctrl && key.name === "n"
+      keybindings2.includes("vim") && key.name === "j" || // Emacs keybinding: Ctrl+N means "next" in Emacs navigation conventions
+      keybindings2.includes("emacs") && key.ctrl && key.name === "n"
     );
     isBackspaceKey = (key) => key.name === "backspace";
     isTabKey = (key) => key.name === "tab";
@@ -3513,10 +3524,10 @@ var init_key = __esm({
   }
 });
 
-// cli/node_modules/@inquirer/core/dist/lib/errors.js
+// node_modules/@inquirer/core/dist/lib/errors.js
 var AbortPromptError, CancelPromptError, ExitPromptError, HookError, ValidationError;
 var init_errors = __esm({
-  "cli/node_modules/@inquirer/core/dist/lib/errors.js"() {
+  "node_modules/@inquirer/core/dist/lib/errors.js"() {
     AbortPromptError = class extends Error {
       name = "AbortPromptError";
       message = "Prompt was aborted";
@@ -3541,7 +3552,7 @@ var init_errors = __esm({
   }
 });
 
-// cli/node_modules/@inquirer/core/dist/lib/hook-engine.js
+// node_modules/@inquirer/core/dist/lib/hook-engine.js
 import { AsyncLocalStorage, AsyncResource } from "node:async_hooks";
 function createStore(rl) {
   const store = {
@@ -3616,7 +3627,7 @@ function handleChange() {
 }
 var hookStorage, effectScheduler;
 var init_hook_engine = __esm({
-  "cli/node_modules/@inquirer/core/dist/lib/hook-engine.js"() {
+  "node_modules/@inquirer/core/dist/lib/hook-engine.js"() {
     init_errors();
     hookStorage = new AsyncLocalStorage();
     effectScheduler = {
@@ -3653,7 +3664,7 @@ var init_hook_engine = __esm({
   }
 });
 
-// cli/node_modules/@inquirer/core/dist/lib/use-state.js
+// node_modules/@inquirer/core/dist/lib/use-state.js
 import { AsyncResource as AsyncResource2 } from "node:async_hooks";
 function isFactory(value) {
   return typeof value === "function";
@@ -3675,12 +3686,12 @@ function useState(defaultValue) {
   });
 }
 var init_use_state = __esm({
-  "cli/node_modules/@inquirer/core/dist/lib/use-state.js"() {
+  "node_modules/@inquirer/core/dist/lib/use-state.js"() {
     init_hook_engine();
   }
 });
 
-// cli/node_modules/@inquirer/core/dist/lib/use-effect.js
+// node_modules/@inquirer/core/dist/lib/use-effect.js
 function useEffect(cb, depArray) {
   withPointer((pointer) => {
     const oldDeps = pointer.get();
@@ -3692,12 +3703,12 @@ function useEffect(cb, depArray) {
   });
 }
 var init_use_effect = __esm({
-  "cli/node_modules/@inquirer/core/dist/lib/use-effect.js"() {
+  "node_modules/@inquirer/core/dist/lib/use-effect.js"() {
     init_hook_engine();
   }
 });
 
-// cli/node_modules/@inquirer/figures/dist/index.js
+// node_modules/@inquirer/figures/dist/index.js
 import process2 from "node:process";
 function isUnicodeSupported() {
   if (!process2.platform.startsWith("win")) {
@@ -3711,7 +3722,7 @@ function isUnicodeSupported() {
 }
 var common, specialMainSymbols, specialFallbackSymbols, mainSymbols, fallbackSymbols, shouldUseMain, figures, dist_default, replacements;
 var init_dist = __esm({
-  "cli/node_modules/@inquirer/figures/dist/index.js"() {
+  "node_modules/@inquirer/figures/dist/index.js"() {
     common = {
       circleQuestionMark: "(?)",
       questionMarkPrefix: "(?)",
@@ -3995,12 +4006,19 @@ var init_dist = __esm({
   }
 });
 
-// cli/node_modules/@inquirer/core/dist/lib/theme.js
+// node_modules/@inquirer/core/dist/lib/theme.js
 import { styleText } from "node:util";
+function getDefaultTheme() {
+  return {
+    ...defaultTheme,
+    keybindings: getDefaultKeybindings()
+  };
+}
 var defaultTheme;
 var init_theme = __esm({
-  "cli/node_modules/@inquirer/core/dist/lib/theme.js"() {
+  "node_modules/@inquirer/core/dist/lib/theme.js"() {
     init_dist();
+    init_key();
     defaultTheme = {
       prefix: {
         idle: styleText("blue", "?"),
@@ -4010,6 +4028,7 @@ var init_theme = __esm({
         interval: 80,
         frames: ["\u280B", "\u2819", "\u2839", "\u2838", "\u283C", "\u2834", "\u2826", "\u2827", "\u2807", "\u280F"].map((frame) => styleText("yellow", frame))
       },
+      keybindings: [],
       style: {
         answer: (text) => styleText("cyan", text),
         message: (text) => styleText("bold", text),
@@ -4023,7 +4042,7 @@ var init_theme = __esm({
   }
 });
 
-// cli/node_modules/@inquirer/core/dist/lib/make-theme.js
+// node_modules/@inquirer/core/dist/lib/make-theme.js
 function isPlainObject(value) {
   if (typeof value !== "object" || value === null)
     return false;
@@ -4045,18 +4064,18 @@ function deepMerge(...objects) {
 }
 function makeTheme(...themes) {
   const themesToMerge = [
-    defaultTheme,
+    getDefaultTheme(),
     ...themes.filter((theme) => theme != null)
   ];
   return deepMerge(...themesToMerge);
 }
 var init_make_theme = __esm({
-  "cli/node_modules/@inquirer/core/dist/lib/make-theme.js"() {
+  "node_modules/@inquirer/core/dist/lib/make-theme.js"() {
     init_theme();
   }
 });
 
-// cli/node_modules/@inquirer/core/dist/lib/use-prefix.js
+// node_modules/@inquirer/core/dist/lib/use-prefix.js
 function usePrefix({ status = "idle", theme }) {
   const [showLoader, setShowLoader] = useState(false);
   const [tick, setTick] = useState(0);
@@ -4087,14 +4106,14 @@ function usePrefix({ status = "idle", theme }) {
   return typeof prefix === "string" ? prefix : prefix[iconName] ?? prefix["idle"];
 }
 var init_use_prefix = __esm({
-  "cli/node_modules/@inquirer/core/dist/lib/use-prefix.js"() {
+  "node_modules/@inquirer/core/dist/lib/use-prefix.js"() {
     init_use_state();
     init_use_effect();
     init_make_theme();
   }
 });
 
-// cli/node_modules/@inquirer/core/dist/lib/use-memo.js
+// node_modules/@inquirer/core/dist/lib/use-memo.js
 function useMemo(fn, dependencies) {
   return withPointer((pointer) => {
     const prev = pointer.get();
@@ -4107,22 +4126,22 @@ function useMemo(fn, dependencies) {
   });
 }
 var init_use_memo = __esm({
-  "cli/node_modules/@inquirer/core/dist/lib/use-memo.js"() {
+  "node_modules/@inquirer/core/dist/lib/use-memo.js"() {
     init_hook_engine();
   }
 });
 
-// cli/node_modules/@inquirer/core/dist/lib/use-ref.js
+// node_modules/@inquirer/core/dist/lib/use-ref.js
 function useRef(val) {
   return useState({ current: val })[0];
 }
 var init_use_ref = __esm({
-  "cli/node_modules/@inquirer/core/dist/lib/use-ref.js"() {
+  "node_modules/@inquirer/core/dist/lib/use-ref.js"() {
     init_use_state();
   }
 });
 
-// cli/node_modules/@inquirer/core/dist/lib/use-keypress.js
+// node_modules/@inquirer/core/dist/lib/use-keypress.js
 function useKeypress(userHandler) {
   const signal = useRef(userHandler);
   signal.current = userHandler;
@@ -4141,16 +4160,16 @@ function useKeypress(userHandler) {
   }, []);
 }
 var init_use_keypress = __esm({
-  "cli/node_modules/@inquirer/core/dist/lib/use-keypress.js"() {
+  "node_modules/@inquirer/core/dist/lib/use-keypress.js"() {
     init_use_ref();
     init_use_effect();
     init_hook_engine();
   }
 });
 
-// cli/node_modules/cli-width/index.js
+// node_modules/cli-width/index.js
 var require_cli_width = __commonJS({
-  "cli/node_modules/cli-width/index.js"(exports, module) {
+  "node_modules/cli-width/index.js"(exports, module) {
     "use strict";
     module.exports = cliWidth2;
     function normalizeOpts(options) {
@@ -4191,10 +4210,10 @@ var require_cli_width = __commonJS({
   }
 });
 
-// cli/node_modules/fast-string-truncated-width/dist/utils.js
+// node_modules/fast-string-truncated-width/dist/utils.js
 var getCodePointsLength, isFullWidth, isWideNotCJKTNotEmoji;
 var init_utils = __esm({
-  "cli/node_modules/fast-string-truncated-width/dist/utils.js"() {
+  "node_modules/fast-string-truncated-width/dist/utils.js"() {
     getCodePointsLength = /* @__PURE__ */ (() => {
       const SURROGATE_PAIR_RE = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g;
       return (input) => {
@@ -4215,10 +4234,10 @@ var init_utils = __esm({
   }
 });
 
-// cli/node_modules/fast-string-truncated-width/dist/index.js
+// node_modules/fast-string-truncated-width/dist/index.js
 var ANSI_RE, CONTROL_RE, CJKT_WIDE_RE, TAB_RE, EMOJI_RE, LATIN_RE, MODIFIER_RE, NO_TRUNCATION, getStringTruncatedWidth, dist_default2;
 var init_dist2 = __esm({
-  "cli/node_modules/fast-string-truncated-width/dist/index.js"() {
+  "node_modules/fast-string-truncated-width/dist/index.js"() {
     init_utils();
     ANSI_RE = /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]|\u001b\]8;[^;]*;.*?(?:\u0007|\u001b\u005c)/y;
     CONTROL_RE = /[\x00-\x08\x0A-\x1F\x7F-\x9F]{1,1000}/y;
@@ -4319,10 +4338,10 @@ var init_dist2 = __esm({
   }
 });
 
-// cli/node_modules/fast-string-width/dist/index.js
+// node_modules/fast-string-width/dist/index.js
 var NO_TRUNCATION2, fastStringWidth, dist_default3;
 var init_dist3 = __esm({
-  "cli/node_modules/fast-string-width/dist/index.js"() {
+  "node_modules/fast-string-width/dist/index.js"() {
     init_dist2();
     NO_TRUNCATION2 = {
       limit: Infinity,
@@ -4336,13 +4355,13 @@ var init_dist3 = __esm({
   }
 });
 
-// cli/node_modules/fast-wrap-ansi/lib/main.js
+// node_modules/fast-wrap-ansi/lib/main.js
 function wrapAnsi(string, columns, options) {
   return String(string).normalize().split(CRLF_OR_LF).map((line) => exec(line, columns, options)).join("\n");
 }
 var ESC, CSI, END_CODE, ANSI_ESCAPE_BELL, ANSI_CSI, ANSI_OSC, ANSI_SGR_TERMINATOR, ANSI_ESCAPE_LINK, GROUP_REGEX, getClosingCode, wrapAnsiCode, wrapAnsiHyperlink, wrapWord, stringVisibleTrimSpacesRight, exec, CRLF_OR_LF;
 var init_main = __esm({
-  "cli/node_modules/fast-wrap-ansi/lib/main.js"() {
+  "node_modules/fast-wrap-ansi/lib/main.js"() {
     init_dist3();
     ESC = "\x1B";
     CSI = "\x9B";
@@ -4550,23 +4569,23 @@ var init_main = __esm({
   }
 });
 
-// cli/node_modules/@inquirer/core/dist/lib/utils.js
+// node_modules/@inquirer/core/dist/lib/utils.js
 function breakLines(content, width) {
-  return content.split("\n").flatMap((line) => wrapAnsi(line, width, { trim: false, hard: true }).split("\n").map((str3) => str3.trimEnd())).join("\n");
+  return content.split("\n").flatMap((line) => wrapAnsi(line, width, { trim: false, wordWrap: false }).split("\n").map((str) => str.trimEnd())).join("\n");
 }
 function readlineWidth() {
   return (0, import_cli_width.default)({ defaultWidth: 80, output: readline().output });
 }
 var import_cli_width;
 var init_utils2 = __esm({
-  "cli/node_modules/@inquirer/core/dist/lib/utils.js"() {
+  "node_modules/@inquirer/core/dist/lib/utils.js"() {
     import_cli_width = __toESM(require_cli_width(), 1);
     init_main();
     init_hook_engine();
   }
 });
 
-// cli/node_modules/@inquirer/core/dist/lib/pagination/use-pagination.js
+// node_modules/@inquirer/core/dist/lib/pagination/use-pagination.js
 function usePointerPosition({ active, renderedItems, pageSize, loop }) {
   const state = useRef({
     lastPointer: active,
@@ -4655,15 +4674,15 @@ function usePagination({ items, active, renderItem, pageSize, loop = true }) {
   return pageBuffer.filter((line) => typeof line === "string").join("\n");
 }
 var init_use_pagination = __esm({
-  "cli/node_modules/@inquirer/core/dist/lib/pagination/use-pagination.js"() {
+  "node_modules/@inquirer/core/dist/lib/pagination/use-pagination.js"() {
     init_use_ref();
     init_utils2();
   }
 });
 
-// cli/node_modules/mute-stream/lib/index.js
+// node_modules/mute-stream/lib/index.js
 var require_lib = __commonJS({
-  "cli/node_modules/mute-stream/lib/index.js"(exports, module) {
+  "node_modules/mute-stream/lib/index.js"(exports, module) {
     var Stream = __require("stream");
     var MuteStream2 = class extends Stream {
       #isTTY = null;
@@ -4783,10 +4802,10 @@ var require_lib = __commonJS({
   }
 });
 
-// cli/node_modules/signal-exit/dist/mjs/signals.js
+// node_modules/signal-exit/dist/mjs/signals.js
 var signals;
 var init_signals = __esm({
-  "cli/node_modules/signal-exit/dist/mjs/signals.js"() {
+  "node_modules/signal-exit/dist/mjs/signals.js"() {
     signals = [];
     signals.push("SIGHUP", "SIGINT", "SIGTERM");
     if (process.platform !== "win32") {
@@ -4812,10 +4831,10 @@ var init_signals = __esm({
   }
 });
 
-// cli/node_modules/signal-exit/dist/mjs/index.js
+// node_modules/signal-exit/dist/mjs/index.js
 var processOk, kExitEmitter, global, ObjectDefineProperty, Emitter, SignalExitBase, signalExitWrap, SignalExitFallback, SignalExit, process3, onExit, load, unload;
 var init_mjs = __esm({
-  "cli/node_modules/signal-exit/dist/mjs/index.js"() {
+  "node_modules/signal-exit/dist/mjs/index.js"() {
     init_signals();
     processOk = (process5) => !!process5 && typeof process5 === "object" && typeof process5.removeListener === "function" && typeof process5.emit === "function" && typeof process5.reallyExit === "function" && typeof process5.listeners === "function" && typeof process5.kill === "function" && typeof process5.pid === "number" && typeof process5.on === "function";
     kExitEmitter = Symbol.for("signal-exit emitter");
@@ -5051,10 +5070,10 @@ var init_mjs = __esm({
   }
 });
 
-// cli/node_modules/@inquirer/ansi/dist/index.js
+// node_modules/@inquirer/ansi/dist/index.js
 var ESC2, cursorLeft, cursorHide, cursorShow, cursorUp, cursorDown, cursorTo, eraseLine, eraseLines;
 var init_dist4 = __esm({
-  "cli/node_modules/@inquirer/ansi/dist/index.js"() {
+  "node_modules/@inquirer/ansi/dist/index.js"() {
     ESC2 = "\x1B[";
     cursorLeft = ESC2 + "G";
     cursorHide = ESC2 + "?25l";
@@ -5072,11 +5091,11 @@ var init_dist4 = __esm({
   }
 });
 
-// cli/node_modules/@inquirer/core/dist/lib/screen-manager.js
+// node_modules/@inquirer/core/dist/lib/screen-manager.js
 import { stripVTControlCharacters } from "node:util";
 var height, lastLine, ScreenManager;
 var init_screen_manager = __esm({
-  "cli/node_modules/@inquirer/core/dist/lib/screen-manager.js"() {
+  "node_modules/@inquirer/core/dist/lib/screen-manager.js"() {
     init_utils2();
     init_dist4();
     height = (content) => content.split("\n").length;
@@ -5132,6 +5151,7 @@ var init_screen_manager = __esm({
         this.rl.setPrompt("");
         let output = cursorDown(this.extraLinesUnderPrompt);
         output += clearContent ? eraseLines(this.height) : "\n";
+        output += cursorLeft;
         output += cursorShow;
         this.write(output);
         this.rl.close();
@@ -5140,10 +5160,10 @@ var init_screen_manager = __esm({
   }
 });
 
-// cli/node_modules/@inquirer/core/dist/lib/promise-polyfill.js
+// node_modules/@inquirer/core/dist/lib/promise-polyfill.js
 var PromisePolyfill;
 var init_promise_polyfill = __esm({
-  "cli/node_modules/@inquirer/core/dist/lib/promise-polyfill.js"() {
+  "node_modules/@inquirer/core/dist/lib/promise-polyfill.js"() {
     PromisePolyfill = class extends Promise {
       // Available starting from Node 22
       // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/withResolvers
@@ -5160,12 +5180,12 @@ var init_promise_polyfill = __esm({
   }
 });
 
-// cli/node_modules/@inquirer/core/dist/lib/create-prompt.js
+// node_modules/@inquirer/core/dist/lib/create-prompt.js
 import * as readline2 from "node:readline";
 import { AsyncResource as AsyncResource3 } from "node:async_hooks";
 import path from "node:path";
 function getCallSites() {
-  const _prepareStackTrace = Error.prepareStackTrace;
+  const savedPrepareStackTrace = Error.prepareStackTrace;
   let result = [];
   try {
     Error.prepareStackTrace = (_, callSites) => {
@@ -5177,7 +5197,7 @@ function getCallSites() {
   } catch {
     return result;
   }
-  Error.prepareStackTrace = _prepareStackTrace;
+  Error.prepareStackTrace = savedPrepareStackTrace;
   return result;
 }
 function createPrompt(view) {
@@ -5274,7 +5294,7 @@ function createPrompt(view) {
 }
 var import_mute_stream, nativeSetImmediate;
 var init_create_prompt = __esm({
-  "cli/node_modules/@inquirer/core/dist/lib/create-prompt.js"() {
+  "node_modules/@inquirer/core/dist/lib/create-prompt.js"() {
     import_mute_stream = __toESM(require_lib(), 1);
     init_mjs();
     init_screen_manager();
@@ -5285,11 +5305,11 @@ var init_create_prompt = __esm({
   }
 });
 
-// cli/node_modules/@inquirer/core/dist/lib/Separator.js
+// node_modules/@inquirer/core/dist/lib/Separator.js
 import { styleText as styleText2 } from "node:util";
 var Separator;
 var init_Separator = __esm({
-  "cli/node_modules/@inquirer/core/dist/lib/Separator.js"() {
+  "node_modules/@inquirer/core/dist/lib/Separator.js"() {
     init_dist();
     Separator = class {
       separator = styleText2("dim", Array.from({ length: 15 }).join(dist_default.line));
@@ -5306,9 +5326,9 @@ var init_Separator = __esm({
   }
 });
 
-// cli/node_modules/@inquirer/core/dist/index.js
+// node_modules/@inquirer/core/dist/index.js
 var init_dist5 = __esm({
-  "cli/node_modules/@inquirer/core/dist/index.js"() {
+  "node_modules/@inquirer/core/dist/index.js"() {
     init_key();
     init_errors();
     init_use_prefix();
@@ -5324,7 +5344,7 @@ var init_dist5 = __esm({
   }
 });
 
-// cli/node_modules/@inquirer/confirm/dist/index.js
+// node_modules/@inquirer/confirm/dist/index.js
 function getBooleanValue(value, defaultValue) {
   let answer = defaultValue !== false;
   if (/^(y|yes)/i.test(value))
@@ -5338,7 +5358,7 @@ function boolToString(value) {
 }
 var dist_default4;
 var init_dist6 = __esm({
-  "cli/node_modules/@inquirer/confirm/dist/index.js"() {
+  "node_modules/@inquirer/confirm/dist/index.js"() {
     init_dist5();
     dist_default4 = createPrompt((config, done) => {
       const { transformer = boolToString } = config;
@@ -5376,10 +5396,10 @@ var init_dist6 = __esm({
   }
 });
 
-// cli/node_modules/@inquirer/input/dist/index.js
+// node_modules/@inquirer/input/dist/index.js
 var inputTheme, dist_default5;
 var init_dist7 = __esm({
-  "cli/node_modules/@inquirer/input/dist/index.js"() {
+  "node_modules/@inquirer/input/dist/index.js"() {
     init_dist5();
     inputTheme = {
       validationFailureMode: "keep"
@@ -5467,7 +5487,7 @@ var init_dist7 = __esm({
   }
 });
 
-// cli/node_modules/@inquirer/select/dist/index.js
+// node_modules/@inquirer/select/dist/index.js
 import { styleText as styleText3 } from "node:util";
 function isSelectable(item) {
   return !Separator.isSeparator(item) && !item.disabled;
@@ -5503,7 +5523,7 @@ function normalizeChoices(choices) {
 }
 var selectTheme, dist_default6;
 var init_dist8 = __esm({
-  "cli/node_modules/@inquirer/select/dist/index.js"() {
+  "node_modules/@inquirer/select/dist/index.js"() {
     init_dist5();
     init_dist4();
     init_dist();
@@ -5515,17 +5535,16 @@ var init_dist8 = __esm({
         keysHelpTip: (keys) => keys.map(([key, action]) => `${styleText3("bold", key)} ${styleText3("dim", action)}`).join(styleText3("dim", " \u2022 "))
       },
       i18n: { disabledError: "This option is disabled and cannot be selected." },
-      indexMode: "hidden",
-      keybindings: []
+      indexMode: "hidden"
     };
     dist_default6 = createPrompt((config, done) => {
       const { loop = true, pageSize = 7 } = config;
       const theme = makeTheme(selectTheme, config.theme);
-      const { keybindings } = theme;
+      const { keybindings: keybindings2 } = theme;
       const [status, setStatus] = useState("idle");
       const prefix = usePrefix({ status, theme });
       const searchTimeoutRef = useRef();
-      const searchEnabled = !keybindings.includes("vim");
+      const searchEnabled = !keybindings2.includes("vim");
       const items = useMemo(() => normalizeChoices(config.choices), [config.choices]);
       const bounds = useMemo(() => {
         const first = items.findIndex(isNavigable);
@@ -5558,10 +5577,10 @@ var init_dist8 = __esm({
             setStatus("done");
             done(selectedChoice.value);
           }
-        } else if (isUpKey(key, keybindings) || isDownKey(key, keybindings)) {
+        } else if (isUpKey(key, keybindings2) || isDownKey(key, keybindings2)) {
           rl.clearLine(0);
-          if (loop || isUpKey(key, keybindings) && active !== bounds.first || isDownKey(key, keybindings) && active !== bounds.last) {
-            const offset = isUpKey(key, keybindings) ? -1 : 1;
+          if (loop || isUpKey(key, keybindings2) && active !== bounds.first || isDownKey(key, keybindings2) && active !== bounds.last) {
+            const offset = isUpKey(key, keybindings2) ? -1 : 1;
             let next = active;
             do {
               next = (next + offset + items.length) % items.length;
@@ -5648,9 +5667,9 @@ var init_dist8 = __esm({
   }
 });
 
-// cli/node_modules/@inquirer/prompts/dist/index.js
+// node_modules/@inquirer/prompts/dist/index.js
 var init_dist9 = __esm({
-  "cli/node_modules/@inquirer/prompts/dist/index.js"() {
+  "node_modules/@inquirer/prompts/dist/index.js"() {
     init_dist6();
     init_dist7();
     init_dist8();
@@ -5707,7 +5726,7 @@ var init_prompter = __esm({
   }
 });
 
-// cli/node_modules/chalk/source/vendor/ansi-styles/index.js
+// node_modules/chalk/source/vendor/ansi-styles/index.js
 function assembleStyles() {
   const codes = /* @__PURE__ */ new Map();
   for (const [groupName, group] of Object.entries(styles)) {
@@ -5824,7 +5843,7 @@ function assembleStyles() {
 }
 var ANSI_BACKGROUND_OFFSET, wrapAnsi16, wrapAnsi256, wrapAnsi16m, styles, modifierNames, foregroundColorNames, backgroundColorNames, colorNames, ansiStyles, ansi_styles_default;
 var init_ansi_styles = __esm({
-  "cli/node_modules/chalk/source/vendor/ansi-styles/index.js"() {
+  "node_modules/chalk/source/vendor/ansi-styles/index.js"() {
     ANSI_BACKGROUND_OFFSET = 10;
     wrapAnsi16 = (offset = 0) => (code2) => `\x1B[${code2 + offset}m`;
     wrapAnsi256 = (offset = 0) => (code2) => `\x1B[${38 + offset};5;${code2}m`;
@@ -5898,7 +5917,7 @@ var init_ansi_styles = __esm({
   }
 });
 
-// cli/node_modules/chalk/source/vendor/supports-color/index.js
+// node_modules/chalk/source/vendor/supports-color/index.js
 import process4 from "node:process";
 import os from "node:os";
 import tty from "node:tty";
@@ -6019,7 +6038,7 @@ function createSupportsColor(stream, options = {}) {
 }
 var env, flagForceColor, supportsColor, supports_color_default;
 var init_supports_color = __esm({
-  "cli/node_modules/chalk/source/vendor/supports-color/index.js"() {
+  "node_modules/chalk/source/vendor/supports-color/index.js"() {
     ({ env } = process4);
     if (hasFlag("no-color") || hasFlag("no-colors") || hasFlag("color=false") || hasFlag("color=never")) {
       flagForceColor = 0;
@@ -6034,7 +6053,7 @@ var init_supports_color = __esm({
   }
 });
 
-// cli/node_modules/chalk/source/utilities.js
+// node_modules/chalk/source/utilities.js
 function stringReplaceAll(string, substring, replacer) {
   let index = string.indexOf(substring);
   if (index === -1) {
@@ -6064,17 +6083,17 @@ function stringEncaseCRLFWithFirstIndex(string, prefix, postfix, index) {
   return returnValue;
 }
 var init_utilities = __esm({
-  "cli/node_modules/chalk/source/utilities.js"() {
+  "node_modules/chalk/source/utilities.js"() {
   }
 });
 
-// cli/node_modules/chalk/source/index.js
+// node_modules/chalk/source/index.js
 function createChalk(options) {
   return chalkFactory(options);
 }
 var stdoutColor, stderrColor, GENERATOR, STYLER, IS_EMPTY, levelMapping, styles2, applyOptions, Chalk, chalkFactory, getModelAnsi, usedModels, proto, createStyler, createBuilder, applyStyle, chalk, chalkStderr;
 var init_source = __esm({
-  "cli/node_modules/chalk/source/index.js"() {
+  "node_modules/chalk/source/index.js"() {
     init_ansi_styles();
     init_supports_color();
     init_utilities();
@@ -6124,20 +6143,20 @@ var init_source = __esm({
         return builder;
       }
     };
-    getModelAnsi = (model, level, type3, ...arguments_) => {
+    getModelAnsi = (model, level, type, ...arguments_) => {
       if (model === "rgb") {
         if (level === "ansi16m") {
-          return ansi_styles_default[type3].ansi16m(...arguments_);
+          return ansi_styles_default[type].ansi16m(...arguments_);
         }
         if (level === "ansi256") {
-          return ansi_styles_default[type3].ansi256(ansi_styles_default.rgbToAnsi256(...arguments_));
+          return ansi_styles_default[type].ansi256(ansi_styles_default.rgbToAnsi256(...arguments_));
         }
-        return ansi_styles_default[type3].ansi(ansi_styles_default.rgbToAnsi(...arguments_));
+        return ansi_styles_default[type].ansi(ansi_styles_default.rgbToAnsi(...arguments_));
       }
       if (model === "hex") {
-        return getModelAnsi("rgb", level, type3, ...ansi_styles_default.hexToRgb(...arguments_));
+        return getModelAnsi("rgb", level, type, ...ansi_styles_default.hexToRgb(...arguments_));
       }
-      return ansi_styles_default[type3][model](...arguments_);
+      return ansi_styles_default[type][model](...arguments_);
     };
     usedModels = ["rgb", "hex", "ansi256"];
     for (const model of usedModels) {
@@ -6423,6 +6442,7 @@ function userDataPaths() {
     ui: path3.join(root, "ui"),
     templates: path3.join(root, "templates"),
     projects: path3.join(root, "projects"),
+    sideProjects: path3.join(root, SIDE_PROJECTS_DIRNAME),
     logs: path3.join(root, "logs"),
     runtime: path3.join(root, "runtime"),
     bootstrapLock: path3.join(root, "runtime", "bootstrap.lock"),
@@ -6433,24 +6453,26 @@ function resolveInstallRoot() {
   return path3.join(os2.homedir(), ".radorc");
 }
 function installPaths(root) {
-  const join6 = path3.join;
+  const join8 = path3.join;
   return {
     root,
-    installJson: join6(root, "install.json"),
-    gitignore: join6(root, ".gitignore"),
-    projectsDir: join6(root, "projects"),
-    worktreesDir: join6(root, "worktrees"),
-    logsDir: join6(root, "logs"),
-    cliLog: join6(root, "logs", "cli.log"),
-    harnessesDir: join6(root, "runtime", "harnesses"),
-    runtimeDir: join6(root, "runtime"),
-    uiPidFile: join6(root, "runtime", "ui.pid"),
-    uiLog: join6(root, "logs", "ui.log")
+    installJson: join8(root, "install.json"),
+    gitignore: join8(root, ".gitignore"),
+    projectsDir: join8(root, "projects"),
+    worktreesDir: join8(root, "worktrees"),
+    logsDir: join8(root, "logs"),
+    cliLog: join8(root, "logs", "cli.log"),
+    harnessesDir: join8(root, "runtime", "harnesses"),
+    runtimeDir: join8(root, "runtime"),
+    uiPidFile: join8(root, "runtime", "ui.pid"),
+    uiLog: join8(root, "logs", "ui.log")
   };
 }
+var SIDE_PROJECTS_DIRNAME;
 var init_paths = __esm({
   "cli/src/lib/paths.ts"() {
     "use strict";
+    SIDE_PROJECTS_DIRNAME = "side-projects";
   }
 });
 
@@ -6732,5320 +6754,2385 @@ var init_command = __esm({
   }
 });
 
-// cli/node_modules/js-yaml/dist/js-yaml.mjs
-function isNothing(subject) {
-  return typeof subject === "undefined" || subject === null;
-}
-function isObject(subject) {
-  return typeof subject === "object" && subject !== null;
-}
-function toArray(sequence) {
-  if (Array.isArray(sequence)) return sequence;
-  else if (isNothing(sequence)) return [];
-  return [sequence];
-}
-function extend(target, source) {
-  var index, length, key, sourceKeys;
-  if (source) {
-    sourceKeys = Object.keys(source);
-    for (index = 0, length = sourceKeys.length; index < length; index += 1) {
-      key = sourceKeys[index];
-      target[key] = source[key];
-    }
-  }
-  return target;
-}
-function repeat(string, count) {
-  var result = "", cycle;
-  for (cycle = 0; cycle < count; cycle += 1) {
-    result += string;
-  }
-  return result;
-}
-function isNegativeZero(number) {
-  return number === 0 && Number.NEGATIVE_INFINITY === 1 / number;
-}
-function formatError(exception3, compact) {
-  var where = "", message = exception3.reason || "(unknown reason)";
-  if (!exception3.mark) return message;
-  if (exception3.mark.name) {
-    where += 'in "' + exception3.mark.name + '" ';
-  }
-  where += "(" + (exception3.mark.line + 1) + ":" + (exception3.mark.column + 1) + ")";
-  if (!compact && exception3.mark.snippet) {
-    where += "\n\n" + exception3.mark.snippet;
-  }
-  return message + " " + where;
-}
-function YAMLException$1(reason, mark) {
-  Error.call(this);
-  this.name = "YAMLException";
-  this.reason = reason;
-  this.mark = mark;
-  this.message = formatError(this, false);
-  if (Error.captureStackTrace) {
-    Error.captureStackTrace(this, this.constructor);
-  } else {
-    this.stack = new Error().stack || "";
-  }
-}
-function getLine(buffer, lineStart, lineEnd, position, maxLineLength) {
-  var head = "";
-  var tail = "";
-  var maxHalfLength = Math.floor(maxLineLength / 2) - 1;
-  if (position - lineStart > maxHalfLength) {
-    head = " ... ";
-    lineStart = position - maxHalfLength + head.length;
-  }
-  if (lineEnd - position > maxHalfLength) {
-    tail = " ...";
-    lineEnd = position + maxHalfLength - tail.length;
-  }
-  return {
-    str: head + buffer.slice(lineStart, lineEnd).replace(/\t/g, "\u2192") + tail,
-    pos: position - lineStart + head.length
-    // relative position
-  };
-}
-function padStart(string, max) {
-  return common2.repeat(" ", max - string.length) + string;
-}
-function makeSnippet(mark, options) {
-  options = Object.create(options || null);
-  if (!mark.buffer) return null;
-  if (!options.maxLength) options.maxLength = 79;
-  if (typeof options.indent !== "number") options.indent = 1;
-  if (typeof options.linesBefore !== "number") options.linesBefore = 3;
-  if (typeof options.linesAfter !== "number") options.linesAfter = 2;
-  var re = /\r?\n|\r|\0/g;
-  var lineStarts = [0];
-  var lineEnds = [];
-  var match;
-  var foundLineNo = -1;
-  while (match = re.exec(mark.buffer)) {
-    lineEnds.push(match.index);
-    lineStarts.push(match.index + match[0].length);
-    if (mark.position <= match.index && foundLineNo < 0) {
-      foundLineNo = lineStarts.length - 2;
-    }
-  }
-  if (foundLineNo < 0) foundLineNo = lineStarts.length - 1;
-  var result = "", i, line;
-  var lineNoLength = Math.min(mark.line + options.linesAfter, lineEnds.length).toString().length;
-  var maxLineLength = options.maxLength - (options.indent + lineNoLength + 3);
-  for (i = 1; i <= options.linesBefore; i++) {
-    if (foundLineNo - i < 0) break;
-    line = getLine(
-      mark.buffer,
-      lineStarts[foundLineNo - i],
-      lineEnds[foundLineNo - i],
-      mark.position - (lineStarts[foundLineNo] - lineStarts[foundLineNo - i]),
-      maxLineLength
-    );
-    result = common2.repeat(" ", options.indent) + padStart((mark.line - i + 1).toString(), lineNoLength) + " | " + line.str + "\n" + result;
-  }
-  line = getLine(mark.buffer, lineStarts[foundLineNo], lineEnds[foundLineNo], mark.position, maxLineLength);
-  result += common2.repeat(" ", options.indent) + padStart((mark.line + 1).toString(), lineNoLength) + " | " + line.str + "\n";
-  result += common2.repeat("-", options.indent + lineNoLength + 3 + line.pos) + "^\n";
-  for (i = 1; i <= options.linesAfter; i++) {
-    if (foundLineNo + i >= lineEnds.length) break;
-    line = getLine(
-      mark.buffer,
-      lineStarts[foundLineNo + i],
-      lineEnds[foundLineNo + i],
-      mark.position - (lineStarts[foundLineNo] - lineStarts[foundLineNo + i]),
-      maxLineLength
-    );
-    result += common2.repeat(" ", options.indent) + padStart((mark.line + i + 1).toString(), lineNoLength) + " | " + line.str + "\n";
-  }
-  return result.replace(/\n$/, "");
-}
-function compileStyleAliases(map3) {
-  var result = {};
-  if (map3 !== null) {
-    Object.keys(map3).forEach(function(style) {
-      map3[style].forEach(function(alias) {
-        result[String(alias)] = style;
-      });
-    });
-  }
-  return result;
-}
-function Type$1(tag, options) {
-  options = options || {};
-  Object.keys(options).forEach(function(name) {
-    if (TYPE_CONSTRUCTOR_OPTIONS.indexOf(name) === -1) {
-      throw new exception('Unknown option "' + name + '" is met in definition of "' + tag + '" YAML type.');
-    }
-  });
-  this.options = options;
-  this.tag = tag;
-  this.kind = options["kind"] || null;
-  this.resolve = options["resolve"] || function() {
-    return true;
-  };
-  this.construct = options["construct"] || function(data) {
-    return data;
-  };
-  this.instanceOf = options["instanceOf"] || null;
-  this.predicate = options["predicate"] || null;
-  this.represent = options["represent"] || null;
-  this.representName = options["representName"] || null;
-  this.defaultStyle = options["defaultStyle"] || null;
-  this.multi = options["multi"] || false;
-  this.styleAliases = compileStyleAliases(options["styleAliases"] || null);
-  if (YAML_NODE_KINDS.indexOf(this.kind) === -1) {
-    throw new exception('Unknown kind "' + this.kind + '" is specified for "' + tag + '" YAML type.');
-  }
-}
-function compileList(schema3, name) {
-  var result = [];
-  schema3[name].forEach(function(currentType) {
-    var newIndex = result.length;
-    result.forEach(function(previousType, previousIndex) {
-      if (previousType.tag === currentType.tag && previousType.kind === currentType.kind && previousType.multi === currentType.multi) {
-        newIndex = previousIndex;
-      }
-    });
-    result[newIndex] = currentType;
-  });
-  return result;
-}
-function compileMap() {
-  var result = {
-    scalar: {},
-    sequence: {},
-    mapping: {},
-    fallback: {},
-    multi: {
-      scalar: [],
-      sequence: [],
-      mapping: [],
-      fallback: []
-    }
-  }, index, length;
-  function collectType(type3) {
-    if (type3.multi) {
-      result.multi[type3.kind].push(type3);
-      result.multi["fallback"].push(type3);
-    } else {
-      result[type3.kind][type3.tag] = result["fallback"][type3.tag] = type3;
-    }
-  }
-  for (index = 0, length = arguments.length; index < length; index += 1) {
-    arguments[index].forEach(collectType);
-  }
-  return result;
-}
-function Schema$1(definition) {
-  return this.extend(definition);
-}
-function resolveYamlNull(data) {
-  if (data === null) return true;
-  var max = data.length;
-  return max === 1 && data === "~" || max === 4 && (data === "null" || data === "Null" || data === "NULL");
-}
-function constructYamlNull() {
-  return null;
-}
-function isNull(object) {
-  return object === null;
-}
-function resolveYamlBoolean(data) {
-  if (data === null) return false;
-  var max = data.length;
-  return max === 4 && (data === "true" || data === "True" || data === "TRUE") || max === 5 && (data === "false" || data === "False" || data === "FALSE");
-}
-function constructYamlBoolean(data) {
-  return data === "true" || data === "True" || data === "TRUE";
-}
-function isBoolean(object) {
-  return Object.prototype.toString.call(object) === "[object Boolean]";
-}
-function isHexCode(c) {
-  return 48 <= c && c <= 57 || 65 <= c && c <= 70 || 97 <= c && c <= 102;
-}
-function isOctCode(c) {
-  return 48 <= c && c <= 55;
-}
-function isDecCode(c) {
-  return 48 <= c && c <= 57;
-}
-function resolveYamlInteger(data) {
-  if (data === null) return false;
-  var max = data.length, index = 0, hasDigits = false, ch;
-  if (!max) return false;
-  ch = data[index];
-  if (ch === "-" || ch === "+") {
-    ch = data[++index];
-  }
-  if (ch === "0") {
-    if (index + 1 === max) return true;
-    ch = data[++index];
-    if (ch === "b") {
-      index++;
-      for (; index < max; index++) {
-        ch = data[index];
-        if (ch === "_") continue;
-        if (ch !== "0" && ch !== "1") return false;
-        hasDigits = true;
-      }
-      return hasDigits && ch !== "_";
-    }
-    if (ch === "x") {
-      index++;
-      for (; index < max; index++) {
-        ch = data[index];
-        if (ch === "_") continue;
-        if (!isHexCode(data.charCodeAt(index))) return false;
-        hasDigits = true;
-      }
-      return hasDigits && ch !== "_";
-    }
-    if (ch === "o") {
-      index++;
-      for (; index < max; index++) {
-        ch = data[index];
-        if (ch === "_") continue;
-        if (!isOctCode(data.charCodeAt(index))) return false;
-        hasDigits = true;
-      }
-      return hasDigits && ch !== "_";
-    }
-  }
-  if (ch === "_") return false;
-  for (; index < max; index++) {
-    ch = data[index];
-    if (ch === "_") continue;
-    if (!isDecCode(data.charCodeAt(index))) {
-      return false;
-    }
-    hasDigits = true;
-  }
-  if (!hasDigits || ch === "_") return false;
-  return true;
-}
-function constructYamlInteger(data) {
-  var value = data, sign = 1, ch;
-  if (value.indexOf("_") !== -1) {
-    value = value.replace(/_/g, "");
-  }
-  ch = value[0];
-  if (ch === "-" || ch === "+") {
-    if (ch === "-") sign = -1;
-    value = value.slice(1);
-    ch = value[0];
-  }
-  if (value === "0") return 0;
-  if (ch === "0") {
-    if (value[1] === "b") return sign * parseInt(value.slice(2), 2);
-    if (value[1] === "x") return sign * parseInt(value.slice(2), 16);
-    if (value[1] === "o") return sign * parseInt(value.slice(2), 8);
-  }
-  return sign * parseInt(value, 10);
-}
-function isInteger(object) {
-  return Object.prototype.toString.call(object) === "[object Number]" && (object % 1 === 0 && !common2.isNegativeZero(object));
-}
-function resolveYamlFloat(data) {
-  if (data === null) return false;
-  if (!YAML_FLOAT_PATTERN.test(data) || // Quick hack to not allow integers end with `_`
-  // Probably should update regexp & check speed
-  data[data.length - 1] === "_") {
-    return false;
-  }
-  return true;
-}
-function constructYamlFloat(data) {
-  var value, sign;
-  value = data.replace(/_/g, "").toLowerCase();
-  sign = value[0] === "-" ? -1 : 1;
-  if ("+-".indexOf(value[0]) >= 0) {
-    value = value.slice(1);
-  }
-  if (value === ".inf") {
-    return sign === 1 ? Number.POSITIVE_INFINITY : Number.NEGATIVE_INFINITY;
-  } else if (value === ".nan") {
-    return NaN;
-  }
-  return sign * parseFloat(value, 10);
-}
-function representYamlFloat(object, style) {
-  var res;
-  if (isNaN(object)) {
-    switch (style) {
-      case "lowercase":
-        return ".nan";
-      case "uppercase":
-        return ".NAN";
-      case "camelcase":
-        return ".NaN";
-    }
-  } else if (Number.POSITIVE_INFINITY === object) {
-    switch (style) {
-      case "lowercase":
-        return ".inf";
-      case "uppercase":
-        return ".INF";
-      case "camelcase":
-        return ".Inf";
-    }
-  } else if (Number.NEGATIVE_INFINITY === object) {
-    switch (style) {
-      case "lowercase":
-        return "-.inf";
-      case "uppercase":
-        return "-.INF";
-      case "camelcase":
-        return "-.Inf";
-    }
-  } else if (common2.isNegativeZero(object)) {
-    return "-0.0";
-  }
-  res = object.toString(10);
-  return SCIENTIFIC_WITHOUT_DOT.test(res) ? res.replace("e", ".e") : res;
-}
-function isFloat(object) {
-  return Object.prototype.toString.call(object) === "[object Number]" && (object % 1 !== 0 || common2.isNegativeZero(object));
-}
-function resolveYamlTimestamp(data) {
-  if (data === null) return false;
-  if (YAML_DATE_REGEXP.exec(data) !== null) return true;
-  if (YAML_TIMESTAMP_REGEXP.exec(data) !== null) return true;
-  return false;
-}
-function constructYamlTimestamp(data) {
-  var match, year, month, day, hour, minute, second, fraction = 0, delta = null, tz_hour, tz_minute, date;
-  match = YAML_DATE_REGEXP.exec(data);
-  if (match === null) match = YAML_TIMESTAMP_REGEXP.exec(data);
-  if (match === null) throw new Error("Date resolve error");
-  year = +match[1];
-  month = +match[2] - 1;
-  day = +match[3];
-  if (!match[4]) {
-    return new Date(Date.UTC(year, month, day));
-  }
-  hour = +match[4];
-  minute = +match[5];
-  second = +match[6];
-  if (match[7]) {
-    fraction = match[7].slice(0, 3);
-    while (fraction.length < 3) {
-      fraction += "0";
-    }
-    fraction = +fraction;
-  }
-  if (match[9]) {
-    tz_hour = +match[10];
-    tz_minute = +(match[11] || 0);
-    delta = (tz_hour * 60 + tz_minute) * 6e4;
-    if (match[9] === "-") delta = -delta;
-  }
-  date = new Date(Date.UTC(year, month, day, hour, minute, second, fraction));
-  if (delta) date.setTime(date.getTime() - delta);
-  return date;
-}
-function representYamlTimestamp(object) {
-  return object.toISOString();
-}
-function resolveYamlMerge(data) {
-  return data === "<<" || data === null;
-}
-function resolveYamlBinary(data) {
-  if (data === null) return false;
-  var code2, idx, bitlen = 0, max = data.length, map3 = BASE64_MAP;
-  for (idx = 0; idx < max; idx++) {
-    code2 = map3.indexOf(data.charAt(idx));
-    if (code2 > 64) continue;
-    if (code2 < 0) return false;
-    bitlen += 6;
-  }
-  return bitlen % 8 === 0;
-}
-function constructYamlBinary(data) {
-  var idx, tailbits, input = data.replace(/[\r\n=]/g, ""), max = input.length, map3 = BASE64_MAP, bits = 0, result = [];
-  for (idx = 0; idx < max; idx++) {
-    if (idx % 4 === 0 && idx) {
-      result.push(bits >> 16 & 255);
-      result.push(bits >> 8 & 255);
-      result.push(bits & 255);
-    }
-    bits = bits << 6 | map3.indexOf(input.charAt(idx));
-  }
-  tailbits = max % 4 * 6;
-  if (tailbits === 0) {
-    result.push(bits >> 16 & 255);
-    result.push(bits >> 8 & 255);
-    result.push(bits & 255);
-  } else if (tailbits === 18) {
-    result.push(bits >> 10 & 255);
-    result.push(bits >> 2 & 255);
-  } else if (tailbits === 12) {
-    result.push(bits >> 4 & 255);
-  }
-  return new Uint8Array(result);
-}
-function representYamlBinary(object) {
-  var result = "", bits = 0, idx, tail, max = object.length, map3 = BASE64_MAP;
-  for (idx = 0; idx < max; idx++) {
-    if (idx % 3 === 0 && idx) {
-      result += map3[bits >> 18 & 63];
-      result += map3[bits >> 12 & 63];
-      result += map3[bits >> 6 & 63];
-      result += map3[bits & 63];
-    }
-    bits = (bits << 8) + object[idx];
-  }
-  tail = max % 3;
-  if (tail === 0) {
-    result += map3[bits >> 18 & 63];
-    result += map3[bits >> 12 & 63];
-    result += map3[bits >> 6 & 63];
-    result += map3[bits & 63];
-  } else if (tail === 2) {
-    result += map3[bits >> 10 & 63];
-    result += map3[bits >> 4 & 63];
-    result += map3[bits << 2 & 63];
-    result += map3[64];
-  } else if (tail === 1) {
-    result += map3[bits >> 2 & 63];
-    result += map3[bits << 4 & 63];
-    result += map3[64];
-    result += map3[64];
-  }
-  return result;
-}
-function isBinary(obj) {
-  return Object.prototype.toString.call(obj) === "[object Uint8Array]";
-}
-function resolveYamlOmap(data) {
-  if (data === null) return true;
-  var objectKeys = [], index, length, pair, pairKey, pairHasKey, object = data;
-  for (index = 0, length = object.length; index < length; index += 1) {
-    pair = object[index];
-    pairHasKey = false;
-    if (_toString$2.call(pair) !== "[object Object]") return false;
-    for (pairKey in pair) {
-      if (_hasOwnProperty$3.call(pair, pairKey)) {
-        if (!pairHasKey) pairHasKey = true;
-        else return false;
-      }
-    }
-    if (!pairHasKey) return false;
-    if (objectKeys.indexOf(pairKey) === -1) objectKeys.push(pairKey);
-    else return false;
-  }
-  return true;
-}
-function constructYamlOmap(data) {
-  return data !== null ? data : [];
-}
-function resolveYamlPairs(data) {
-  if (data === null) return true;
-  var index, length, pair, keys, result, object = data;
-  result = new Array(object.length);
-  for (index = 0, length = object.length; index < length; index += 1) {
-    pair = object[index];
-    if (_toString$1.call(pair) !== "[object Object]") return false;
-    keys = Object.keys(pair);
-    if (keys.length !== 1) return false;
-    result[index] = [keys[0], pair[keys[0]]];
-  }
-  return true;
-}
-function constructYamlPairs(data) {
-  if (data === null) return [];
-  var index, length, pair, keys, result, object = data;
-  result = new Array(object.length);
-  for (index = 0, length = object.length; index < length; index += 1) {
-    pair = object[index];
-    keys = Object.keys(pair);
-    result[index] = [keys[0], pair[keys[0]]];
-  }
-  return result;
-}
-function resolveYamlSet(data) {
-  if (data === null) return true;
-  var key, object = data;
-  for (key in object) {
-    if (_hasOwnProperty$2.call(object, key)) {
-      if (object[key] !== null) return false;
-    }
-  }
-  return true;
-}
-function constructYamlSet(data) {
-  return data !== null ? data : {};
-}
-function _class(obj) {
-  return Object.prototype.toString.call(obj);
-}
-function is_EOL(c) {
-  return c === 10 || c === 13;
-}
-function is_WHITE_SPACE(c) {
-  return c === 9 || c === 32;
-}
-function is_WS_OR_EOL(c) {
-  return c === 9 || c === 32 || c === 10 || c === 13;
-}
-function is_FLOW_INDICATOR(c) {
-  return c === 44 || c === 91 || c === 93 || c === 123 || c === 125;
-}
-function fromHexCode(c) {
-  var lc;
-  if (48 <= c && c <= 57) {
-    return c - 48;
-  }
-  lc = c | 32;
-  if (97 <= lc && lc <= 102) {
-    return lc - 97 + 10;
-  }
-  return -1;
-}
-function escapedHexLen(c) {
-  if (c === 120) {
-    return 2;
-  }
-  if (c === 117) {
-    return 4;
-  }
-  if (c === 85) {
-    return 8;
-  }
-  return 0;
-}
-function fromDecimalCode(c) {
-  if (48 <= c && c <= 57) {
-    return c - 48;
-  }
-  return -1;
-}
-function simpleEscapeSequence(c) {
-  return c === 48 ? "\0" : c === 97 ? "\x07" : c === 98 ? "\b" : c === 116 ? "	" : c === 9 ? "	" : c === 110 ? "\n" : c === 118 ? "\v" : c === 102 ? "\f" : c === 114 ? "\r" : c === 101 ? "\x1B" : c === 32 ? " " : c === 34 ? '"' : c === 47 ? "/" : c === 92 ? "\\" : c === 78 ? "\x85" : c === 95 ? "\xA0" : c === 76 ? "\u2028" : c === 80 ? "\u2029" : "";
-}
-function charFromCodepoint(c) {
-  if (c <= 65535) {
-    return String.fromCharCode(c);
-  }
-  return String.fromCharCode(
-    (c - 65536 >> 10) + 55296,
-    (c - 65536 & 1023) + 56320
-  );
-}
-function setProperty(object, key, value) {
-  if (key === "__proto__") {
-    Object.defineProperty(object, key, {
-      configurable: true,
-      enumerable: true,
-      writable: true,
-      value
-    });
-  } else {
-    object[key] = value;
-  }
-}
-function State$1(input, options) {
-  this.input = input;
-  this.filename = options["filename"] || null;
-  this.schema = options["schema"] || _default;
-  this.onWarning = options["onWarning"] || null;
-  this.legacy = options["legacy"] || false;
-  this.json = options["json"] || false;
-  this.listener = options["listener"] || null;
-  this.implicitTypes = this.schema.compiledImplicit;
-  this.typeMap = this.schema.compiledTypeMap;
-  this.length = input.length;
-  this.position = 0;
-  this.line = 0;
-  this.lineStart = 0;
-  this.lineIndent = 0;
-  this.firstTabInLine = -1;
-  this.documents = [];
-}
-function generateError(state, message) {
-  var mark = {
-    name: state.filename,
-    buffer: state.input.slice(0, -1),
-    // omit trailing \0
-    position: state.position,
-    line: state.line,
-    column: state.position - state.lineStart
-  };
-  mark.snippet = snippet(mark);
-  return new exception(message, mark);
-}
-function throwError(state, message) {
-  throw generateError(state, message);
-}
-function throwWarning(state, message) {
-  if (state.onWarning) {
-    state.onWarning.call(null, generateError(state, message));
-  }
-}
-function captureSegment(state, start, end, checkJson) {
-  var _position, _length, _character, _result;
-  if (start < end) {
-    _result = state.input.slice(start, end);
-    if (checkJson) {
-      for (_position = 0, _length = _result.length; _position < _length; _position += 1) {
-        _character = _result.charCodeAt(_position);
-        if (!(_character === 9 || 32 <= _character && _character <= 1114111)) {
-          throwError(state, "expected valid JSON character");
-        }
-      }
-    } else if (PATTERN_NON_PRINTABLE.test(_result)) {
-      throwError(state, "the stream contains non-printable characters");
-    }
-    state.result += _result;
-  }
-}
-function mergeMappings(state, destination, source, overridableKeys) {
-  var sourceKeys, key, index, quantity;
-  if (!common2.isObject(source)) {
-    throwError(state, "cannot merge mappings; the provided source object is unacceptable");
-  }
-  sourceKeys = Object.keys(source);
-  for (index = 0, quantity = sourceKeys.length; index < quantity; index += 1) {
-    key = sourceKeys[index];
-    if (!_hasOwnProperty$1.call(destination, key)) {
-      setProperty(destination, key, source[key]);
-      overridableKeys[key] = true;
-    }
-  }
-}
-function storeMappingPair(state, _result, overridableKeys, keyTag, keyNode, valueNode, startLine, startLineStart, startPos) {
-  var index, quantity;
-  if (Array.isArray(keyNode)) {
-    keyNode = Array.prototype.slice.call(keyNode);
-    for (index = 0, quantity = keyNode.length; index < quantity; index += 1) {
-      if (Array.isArray(keyNode[index])) {
-        throwError(state, "nested arrays are not supported inside keys");
-      }
-      if (typeof keyNode === "object" && _class(keyNode[index]) === "[object Object]") {
-        keyNode[index] = "[object Object]";
-      }
-    }
-  }
-  if (typeof keyNode === "object" && _class(keyNode) === "[object Object]") {
-    keyNode = "[object Object]";
-  }
-  keyNode = String(keyNode);
-  if (_result === null) {
-    _result = {};
-  }
-  if (keyTag === "tag:yaml.org,2002:merge") {
-    if (Array.isArray(valueNode)) {
-      for (index = 0, quantity = valueNode.length; index < quantity; index += 1) {
-        mergeMappings(state, _result, valueNode[index], overridableKeys);
-      }
-    } else {
-      mergeMappings(state, _result, valueNode, overridableKeys);
-    }
-  } else {
-    if (!state.json && !_hasOwnProperty$1.call(overridableKeys, keyNode) && _hasOwnProperty$1.call(_result, keyNode)) {
-      state.line = startLine || state.line;
-      state.lineStart = startLineStart || state.lineStart;
-      state.position = startPos || state.position;
-      throwError(state, "duplicated mapping key");
-    }
-    setProperty(_result, keyNode, valueNode);
-    delete overridableKeys[keyNode];
-  }
-  return _result;
-}
-function readLineBreak(state) {
-  var ch;
-  ch = state.input.charCodeAt(state.position);
-  if (ch === 10) {
-    state.position++;
-  } else if (ch === 13) {
-    state.position++;
-    if (state.input.charCodeAt(state.position) === 10) {
-      state.position++;
-    }
-  } else {
-    throwError(state, "a line break is expected");
-  }
-  state.line += 1;
-  state.lineStart = state.position;
-  state.firstTabInLine = -1;
-}
-function skipSeparationSpace(state, allowComments, checkIndent) {
-  var lineBreaks = 0, ch = state.input.charCodeAt(state.position);
-  while (ch !== 0) {
-    while (is_WHITE_SPACE(ch)) {
-      if (ch === 9 && state.firstTabInLine === -1) {
-        state.firstTabInLine = state.position;
-      }
-      ch = state.input.charCodeAt(++state.position);
-    }
-    if (allowComments && ch === 35) {
-      do {
-        ch = state.input.charCodeAt(++state.position);
-      } while (ch !== 10 && ch !== 13 && ch !== 0);
-    }
-    if (is_EOL(ch)) {
-      readLineBreak(state);
-      ch = state.input.charCodeAt(state.position);
-      lineBreaks++;
-      state.lineIndent = 0;
-      while (ch === 32) {
-        state.lineIndent++;
-        ch = state.input.charCodeAt(++state.position);
-      }
-    } else {
-      break;
-    }
-  }
-  if (checkIndent !== -1 && lineBreaks !== 0 && state.lineIndent < checkIndent) {
-    throwWarning(state, "deficient indentation");
-  }
-  return lineBreaks;
-}
-function testDocumentSeparator(state) {
-  var _position = state.position, ch;
-  ch = state.input.charCodeAt(_position);
-  if ((ch === 45 || ch === 46) && ch === state.input.charCodeAt(_position + 1) && ch === state.input.charCodeAt(_position + 2)) {
-    _position += 3;
-    ch = state.input.charCodeAt(_position);
-    if (ch === 0 || is_WS_OR_EOL(ch)) {
-      return true;
-    }
-  }
-  return false;
-}
-function writeFoldedLines(state, count) {
-  if (count === 1) {
-    state.result += " ";
-  } else if (count > 1) {
-    state.result += common2.repeat("\n", count - 1);
-  }
-}
-function readPlainScalar(state, nodeIndent, withinFlowCollection) {
-  var preceding, following, captureStart, captureEnd, hasPendingContent, _line, _lineStart, _lineIndent, _kind = state.kind, _result = state.result, ch;
-  ch = state.input.charCodeAt(state.position);
-  if (is_WS_OR_EOL(ch) || is_FLOW_INDICATOR(ch) || ch === 35 || ch === 38 || ch === 42 || ch === 33 || ch === 124 || ch === 62 || ch === 39 || ch === 34 || ch === 37 || ch === 64 || ch === 96) {
-    return false;
-  }
-  if (ch === 63 || ch === 45) {
-    following = state.input.charCodeAt(state.position + 1);
-    if (is_WS_OR_EOL(following) || withinFlowCollection && is_FLOW_INDICATOR(following)) {
-      return false;
-    }
-  }
-  state.kind = "scalar";
-  state.result = "";
-  captureStart = captureEnd = state.position;
-  hasPendingContent = false;
-  while (ch !== 0) {
-    if (ch === 58) {
-      following = state.input.charCodeAt(state.position + 1);
-      if (is_WS_OR_EOL(following) || withinFlowCollection && is_FLOW_INDICATOR(following)) {
-        break;
-      }
-    } else if (ch === 35) {
-      preceding = state.input.charCodeAt(state.position - 1);
-      if (is_WS_OR_EOL(preceding)) {
-        break;
-      }
-    } else if (state.position === state.lineStart && testDocumentSeparator(state) || withinFlowCollection && is_FLOW_INDICATOR(ch)) {
-      break;
-    } else if (is_EOL(ch)) {
-      _line = state.line;
-      _lineStart = state.lineStart;
-      _lineIndent = state.lineIndent;
-      skipSeparationSpace(state, false, -1);
-      if (state.lineIndent >= nodeIndent) {
-        hasPendingContent = true;
-        ch = state.input.charCodeAt(state.position);
-        continue;
-      } else {
-        state.position = captureEnd;
-        state.line = _line;
-        state.lineStart = _lineStart;
-        state.lineIndent = _lineIndent;
-        break;
-      }
-    }
-    if (hasPendingContent) {
-      captureSegment(state, captureStart, captureEnd, false);
-      writeFoldedLines(state, state.line - _line);
-      captureStart = captureEnd = state.position;
-      hasPendingContent = false;
-    }
-    if (!is_WHITE_SPACE(ch)) {
-      captureEnd = state.position + 1;
-    }
-    ch = state.input.charCodeAt(++state.position);
-  }
-  captureSegment(state, captureStart, captureEnd, false);
-  if (state.result) {
-    return true;
-  }
-  state.kind = _kind;
-  state.result = _result;
-  return false;
-}
-function readSingleQuotedScalar(state, nodeIndent) {
-  var ch, captureStart, captureEnd;
-  ch = state.input.charCodeAt(state.position);
-  if (ch !== 39) {
-    return false;
-  }
-  state.kind = "scalar";
-  state.result = "";
-  state.position++;
-  captureStart = captureEnd = state.position;
-  while ((ch = state.input.charCodeAt(state.position)) !== 0) {
-    if (ch === 39) {
-      captureSegment(state, captureStart, state.position, true);
-      ch = state.input.charCodeAt(++state.position);
-      if (ch === 39) {
-        captureStart = state.position;
-        state.position++;
-        captureEnd = state.position;
-      } else {
-        return true;
-      }
-    } else if (is_EOL(ch)) {
-      captureSegment(state, captureStart, captureEnd, true);
-      writeFoldedLines(state, skipSeparationSpace(state, false, nodeIndent));
-      captureStart = captureEnd = state.position;
-    } else if (state.position === state.lineStart && testDocumentSeparator(state)) {
-      throwError(state, "unexpected end of the document within a single quoted scalar");
-    } else {
-      state.position++;
-      captureEnd = state.position;
-    }
-  }
-  throwError(state, "unexpected end of the stream within a single quoted scalar");
-}
-function readDoubleQuotedScalar(state, nodeIndent) {
-  var captureStart, captureEnd, hexLength, hexResult, tmp, ch;
-  ch = state.input.charCodeAt(state.position);
-  if (ch !== 34) {
-    return false;
-  }
-  state.kind = "scalar";
-  state.result = "";
-  state.position++;
-  captureStart = captureEnd = state.position;
-  while ((ch = state.input.charCodeAt(state.position)) !== 0) {
-    if (ch === 34) {
-      captureSegment(state, captureStart, state.position, true);
-      state.position++;
-      return true;
-    } else if (ch === 92) {
-      captureSegment(state, captureStart, state.position, true);
-      ch = state.input.charCodeAt(++state.position);
-      if (is_EOL(ch)) {
-        skipSeparationSpace(state, false, nodeIndent);
-      } else if (ch < 256 && simpleEscapeCheck[ch]) {
-        state.result += simpleEscapeMap[ch];
-        state.position++;
-      } else if ((tmp = escapedHexLen(ch)) > 0) {
-        hexLength = tmp;
-        hexResult = 0;
-        for (; hexLength > 0; hexLength--) {
-          ch = state.input.charCodeAt(++state.position);
-          if ((tmp = fromHexCode(ch)) >= 0) {
-            hexResult = (hexResult << 4) + tmp;
-          } else {
-            throwError(state, "expected hexadecimal character");
-          }
-        }
-        state.result += charFromCodepoint(hexResult);
-        state.position++;
-      } else {
-        throwError(state, "unknown escape sequence");
-      }
-      captureStart = captureEnd = state.position;
-    } else if (is_EOL(ch)) {
-      captureSegment(state, captureStart, captureEnd, true);
-      writeFoldedLines(state, skipSeparationSpace(state, false, nodeIndent));
-      captureStart = captureEnd = state.position;
-    } else if (state.position === state.lineStart && testDocumentSeparator(state)) {
-      throwError(state, "unexpected end of the document within a double quoted scalar");
-    } else {
-      state.position++;
-      captureEnd = state.position;
-    }
-  }
-  throwError(state, "unexpected end of the stream within a double quoted scalar");
-}
-function readFlowCollection(state, nodeIndent) {
-  var readNext = true, _line, _lineStart, _pos, _tag = state.tag, _result, _anchor = state.anchor, following, terminator, isPair, isExplicitPair, isMapping, overridableKeys = /* @__PURE__ */ Object.create(null), keyNode, keyTag, valueNode, ch;
-  ch = state.input.charCodeAt(state.position);
-  if (ch === 91) {
-    terminator = 93;
-    isMapping = false;
-    _result = [];
-  } else if (ch === 123) {
-    terminator = 125;
-    isMapping = true;
-    _result = {};
-  } else {
-    return false;
-  }
-  if (state.anchor !== null) {
-    state.anchorMap[state.anchor] = _result;
-  }
-  ch = state.input.charCodeAt(++state.position);
-  while (ch !== 0) {
-    skipSeparationSpace(state, true, nodeIndent);
-    ch = state.input.charCodeAt(state.position);
-    if (ch === terminator) {
-      state.position++;
-      state.tag = _tag;
-      state.anchor = _anchor;
-      state.kind = isMapping ? "mapping" : "sequence";
-      state.result = _result;
-      return true;
-    } else if (!readNext) {
-      throwError(state, "missed comma between flow collection entries");
-    } else if (ch === 44) {
-      throwError(state, "expected the node content, but found ','");
-    }
-    keyTag = keyNode = valueNode = null;
-    isPair = isExplicitPair = false;
-    if (ch === 63) {
-      following = state.input.charCodeAt(state.position + 1);
-      if (is_WS_OR_EOL(following)) {
-        isPair = isExplicitPair = true;
-        state.position++;
-        skipSeparationSpace(state, true, nodeIndent);
-      }
-    }
-    _line = state.line;
-    _lineStart = state.lineStart;
-    _pos = state.position;
-    composeNode(state, nodeIndent, CONTEXT_FLOW_IN, false, true);
-    keyTag = state.tag;
-    keyNode = state.result;
-    skipSeparationSpace(state, true, nodeIndent);
-    ch = state.input.charCodeAt(state.position);
-    if ((isExplicitPair || state.line === _line) && ch === 58) {
-      isPair = true;
-      ch = state.input.charCodeAt(++state.position);
-      skipSeparationSpace(state, true, nodeIndent);
-      composeNode(state, nodeIndent, CONTEXT_FLOW_IN, false, true);
-      valueNode = state.result;
-    }
-    if (isMapping) {
-      storeMappingPair(state, _result, overridableKeys, keyTag, keyNode, valueNode, _line, _lineStart, _pos);
-    } else if (isPair) {
-      _result.push(storeMappingPair(state, null, overridableKeys, keyTag, keyNode, valueNode, _line, _lineStart, _pos));
-    } else {
-      _result.push(keyNode);
-    }
-    skipSeparationSpace(state, true, nodeIndent);
-    ch = state.input.charCodeAt(state.position);
-    if (ch === 44) {
-      readNext = true;
-      ch = state.input.charCodeAt(++state.position);
-    } else {
-      readNext = false;
-    }
-  }
-  throwError(state, "unexpected end of the stream within a flow collection");
-}
-function readBlockScalar(state, nodeIndent) {
-  var captureStart, folding, chomping = CHOMPING_CLIP, didReadContent = false, detectedIndent = false, textIndent = nodeIndent, emptyLines = 0, atMoreIndented = false, tmp, ch;
-  ch = state.input.charCodeAt(state.position);
-  if (ch === 124) {
-    folding = false;
-  } else if (ch === 62) {
-    folding = true;
-  } else {
-    return false;
-  }
-  state.kind = "scalar";
-  state.result = "";
-  while (ch !== 0) {
-    ch = state.input.charCodeAt(++state.position);
-    if (ch === 43 || ch === 45) {
-      if (CHOMPING_CLIP === chomping) {
-        chomping = ch === 43 ? CHOMPING_KEEP : CHOMPING_STRIP;
-      } else {
-        throwError(state, "repeat of a chomping mode identifier");
-      }
-    } else if ((tmp = fromDecimalCode(ch)) >= 0) {
-      if (tmp === 0) {
-        throwError(state, "bad explicit indentation width of a block scalar; it cannot be less than one");
-      } else if (!detectedIndent) {
-        textIndent = nodeIndent + tmp - 1;
-        detectedIndent = true;
-      } else {
-        throwError(state, "repeat of an indentation width identifier");
-      }
-    } else {
-      break;
-    }
-  }
-  if (is_WHITE_SPACE(ch)) {
-    do {
-      ch = state.input.charCodeAt(++state.position);
-    } while (is_WHITE_SPACE(ch));
-    if (ch === 35) {
-      do {
-        ch = state.input.charCodeAt(++state.position);
-      } while (!is_EOL(ch) && ch !== 0);
-    }
-  }
-  while (ch !== 0) {
-    readLineBreak(state);
-    state.lineIndent = 0;
-    ch = state.input.charCodeAt(state.position);
-    while ((!detectedIndent || state.lineIndent < textIndent) && ch === 32) {
-      state.lineIndent++;
-      ch = state.input.charCodeAt(++state.position);
-    }
-    if (!detectedIndent && state.lineIndent > textIndent) {
-      textIndent = state.lineIndent;
-    }
-    if (is_EOL(ch)) {
-      emptyLines++;
-      continue;
-    }
-    if (state.lineIndent < textIndent) {
-      if (chomping === CHOMPING_KEEP) {
-        state.result += common2.repeat("\n", didReadContent ? 1 + emptyLines : emptyLines);
-      } else if (chomping === CHOMPING_CLIP) {
-        if (didReadContent) {
-          state.result += "\n";
-        }
-      }
-      break;
-    }
-    if (folding) {
-      if (is_WHITE_SPACE(ch)) {
-        atMoreIndented = true;
-        state.result += common2.repeat("\n", didReadContent ? 1 + emptyLines : emptyLines);
-      } else if (atMoreIndented) {
-        atMoreIndented = false;
-        state.result += common2.repeat("\n", emptyLines + 1);
-      } else if (emptyLines === 0) {
-        if (didReadContent) {
-          state.result += " ";
-        }
-      } else {
-        state.result += common2.repeat("\n", emptyLines);
-      }
-    } else {
-      state.result += common2.repeat("\n", didReadContent ? 1 + emptyLines : emptyLines);
-    }
-    didReadContent = true;
-    detectedIndent = true;
-    emptyLines = 0;
-    captureStart = state.position;
-    while (!is_EOL(ch) && ch !== 0) {
-      ch = state.input.charCodeAt(++state.position);
-    }
-    captureSegment(state, captureStart, state.position, false);
-  }
-  return true;
-}
-function readBlockSequence(state, nodeIndent) {
-  var _line, _tag = state.tag, _anchor = state.anchor, _result = [], following, detected = false, ch;
-  if (state.firstTabInLine !== -1) return false;
-  if (state.anchor !== null) {
-    state.anchorMap[state.anchor] = _result;
-  }
-  ch = state.input.charCodeAt(state.position);
-  while (ch !== 0) {
-    if (state.firstTabInLine !== -1) {
-      state.position = state.firstTabInLine;
-      throwError(state, "tab characters must not be used in indentation");
-    }
-    if (ch !== 45) {
-      break;
-    }
-    following = state.input.charCodeAt(state.position + 1);
-    if (!is_WS_OR_EOL(following)) {
-      break;
-    }
-    detected = true;
-    state.position++;
-    if (skipSeparationSpace(state, true, -1)) {
-      if (state.lineIndent <= nodeIndent) {
-        _result.push(null);
-        ch = state.input.charCodeAt(state.position);
-        continue;
-      }
-    }
-    _line = state.line;
-    composeNode(state, nodeIndent, CONTEXT_BLOCK_IN, false, true);
-    _result.push(state.result);
-    skipSeparationSpace(state, true, -1);
-    ch = state.input.charCodeAt(state.position);
-    if ((state.line === _line || state.lineIndent > nodeIndent) && ch !== 0) {
-      throwError(state, "bad indentation of a sequence entry");
-    } else if (state.lineIndent < nodeIndent) {
-      break;
-    }
-  }
-  if (detected) {
-    state.tag = _tag;
-    state.anchor = _anchor;
-    state.kind = "sequence";
-    state.result = _result;
-    return true;
-  }
-  return false;
-}
-function readBlockMapping(state, nodeIndent, flowIndent) {
-  var following, allowCompact, _line, _keyLine, _keyLineStart, _keyPos, _tag = state.tag, _anchor = state.anchor, _result = {}, overridableKeys = /* @__PURE__ */ Object.create(null), keyTag = null, keyNode = null, valueNode = null, atExplicitKey = false, detected = false, ch;
-  if (state.firstTabInLine !== -1) return false;
-  if (state.anchor !== null) {
-    state.anchorMap[state.anchor] = _result;
-  }
-  ch = state.input.charCodeAt(state.position);
-  while (ch !== 0) {
-    if (!atExplicitKey && state.firstTabInLine !== -1) {
-      state.position = state.firstTabInLine;
-      throwError(state, "tab characters must not be used in indentation");
-    }
-    following = state.input.charCodeAt(state.position + 1);
-    _line = state.line;
-    if ((ch === 63 || ch === 58) && is_WS_OR_EOL(following)) {
-      if (ch === 63) {
-        if (atExplicitKey) {
-          storeMappingPair(state, _result, overridableKeys, keyTag, keyNode, null, _keyLine, _keyLineStart, _keyPos);
-          keyTag = keyNode = valueNode = null;
-        }
-        detected = true;
-        atExplicitKey = true;
-        allowCompact = true;
-      } else if (atExplicitKey) {
-        atExplicitKey = false;
-        allowCompact = true;
-      } else {
-        throwError(state, "incomplete explicit mapping pair; a key node is missed; or followed by a non-tabulated empty line");
-      }
-      state.position += 1;
-      ch = following;
-    } else {
-      _keyLine = state.line;
-      _keyLineStart = state.lineStart;
-      _keyPos = state.position;
-      if (!composeNode(state, flowIndent, CONTEXT_FLOW_OUT, false, true)) {
-        break;
-      }
-      if (state.line === _line) {
-        ch = state.input.charCodeAt(state.position);
-        while (is_WHITE_SPACE(ch)) {
-          ch = state.input.charCodeAt(++state.position);
-        }
-        if (ch === 58) {
-          ch = state.input.charCodeAt(++state.position);
-          if (!is_WS_OR_EOL(ch)) {
-            throwError(state, "a whitespace character is expected after the key-value separator within a block mapping");
-          }
-          if (atExplicitKey) {
-            storeMappingPair(state, _result, overridableKeys, keyTag, keyNode, null, _keyLine, _keyLineStart, _keyPos);
-            keyTag = keyNode = valueNode = null;
-          }
-          detected = true;
-          atExplicitKey = false;
-          allowCompact = false;
-          keyTag = state.tag;
-          keyNode = state.result;
-        } else if (detected) {
-          throwError(state, "can not read an implicit mapping pair; a colon is missed");
-        } else {
-          state.tag = _tag;
-          state.anchor = _anchor;
-          return true;
-        }
-      } else if (detected) {
-        throwError(state, "can not read a block mapping entry; a multiline key may not be an implicit key");
-      } else {
-        state.tag = _tag;
-        state.anchor = _anchor;
-        return true;
-      }
-    }
-    if (state.line === _line || state.lineIndent > nodeIndent) {
-      if (atExplicitKey) {
-        _keyLine = state.line;
-        _keyLineStart = state.lineStart;
-        _keyPos = state.position;
-      }
-      if (composeNode(state, nodeIndent, CONTEXT_BLOCK_OUT, true, allowCompact)) {
-        if (atExplicitKey) {
-          keyNode = state.result;
-        } else {
-          valueNode = state.result;
-        }
-      }
-      if (!atExplicitKey) {
-        storeMappingPair(state, _result, overridableKeys, keyTag, keyNode, valueNode, _keyLine, _keyLineStart, _keyPos);
-        keyTag = keyNode = valueNode = null;
-      }
-      skipSeparationSpace(state, true, -1);
-      ch = state.input.charCodeAt(state.position);
-    }
-    if ((state.line === _line || state.lineIndent > nodeIndent) && ch !== 0) {
-      throwError(state, "bad indentation of a mapping entry");
-    } else if (state.lineIndent < nodeIndent) {
-      break;
-    }
-  }
-  if (atExplicitKey) {
-    storeMappingPair(state, _result, overridableKeys, keyTag, keyNode, null, _keyLine, _keyLineStart, _keyPos);
-  }
-  if (detected) {
-    state.tag = _tag;
-    state.anchor = _anchor;
-    state.kind = "mapping";
-    state.result = _result;
-  }
-  return detected;
-}
-function readTagProperty(state) {
-  var _position, isVerbatim = false, isNamed = false, tagHandle, tagName, ch;
-  ch = state.input.charCodeAt(state.position);
-  if (ch !== 33) return false;
-  if (state.tag !== null) {
-    throwError(state, "duplication of a tag property");
-  }
-  ch = state.input.charCodeAt(++state.position);
-  if (ch === 60) {
-    isVerbatim = true;
-    ch = state.input.charCodeAt(++state.position);
-  } else if (ch === 33) {
-    isNamed = true;
-    tagHandle = "!!";
-    ch = state.input.charCodeAt(++state.position);
-  } else {
-    tagHandle = "!";
-  }
-  _position = state.position;
-  if (isVerbatim) {
-    do {
-      ch = state.input.charCodeAt(++state.position);
-    } while (ch !== 0 && ch !== 62);
-    if (state.position < state.length) {
-      tagName = state.input.slice(_position, state.position);
-      ch = state.input.charCodeAt(++state.position);
-    } else {
-      throwError(state, "unexpected end of the stream within a verbatim tag");
-    }
-  } else {
-    while (ch !== 0 && !is_WS_OR_EOL(ch)) {
-      if (ch === 33) {
-        if (!isNamed) {
-          tagHandle = state.input.slice(_position - 1, state.position + 1);
-          if (!PATTERN_TAG_HANDLE.test(tagHandle)) {
-            throwError(state, "named tag handle cannot contain such characters");
-          }
-          isNamed = true;
-          _position = state.position + 1;
-        } else {
-          throwError(state, "tag suffix cannot contain exclamation marks");
-        }
-      }
-      ch = state.input.charCodeAt(++state.position);
-    }
-    tagName = state.input.slice(_position, state.position);
-    if (PATTERN_FLOW_INDICATORS.test(tagName)) {
-      throwError(state, "tag suffix cannot contain flow indicator characters");
-    }
-  }
-  if (tagName && !PATTERN_TAG_URI.test(tagName)) {
-    throwError(state, "tag name cannot contain such characters: " + tagName);
-  }
-  try {
-    tagName = decodeURIComponent(tagName);
-  } catch (err) {
-    throwError(state, "tag name is malformed: " + tagName);
-  }
-  if (isVerbatim) {
-    state.tag = tagName;
-  } else if (_hasOwnProperty$1.call(state.tagMap, tagHandle)) {
-    state.tag = state.tagMap[tagHandle] + tagName;
-  } else if (tagHandle === "!") {
-    state.tag = "!" + tagName;
-  } else if (tagHandle === "!!") {
-    state.tag = "tag:yaml.org,2002:" + tagName;
-  } else {
-    throwError(state, 'undeclared tag handle "' + tagHandle + '"');
-  }
-  return true;
-}
-function readAnchorProperty(state) {
-  var _position, ch;
-  ch = state.input.charCodeAt(state.position);
-  if (ch !== 38) return false;
-  if (state.anchor !== null) {
-    throwError(state, "duplication of an anchor property");
-  }
-  ch = state.input.charCodeAt(++state.position);
-  _position = state.position;
-  while (ch !== 0 && !is_WS_OR_EOL(ch) && !is_FLOW_INDICATOR(ch)) {
-    ch = state.input.charCodeAt(++state.position);
-  }
-  if (state.position === _position) {
-    throwError(state, "name of an anchor node must contain at least one character");
-  }
-  state.anchor = state.input.slice(_position, state.position);
-  return true;
-}
-function readAlias(state) {
-  var _position, alias, ch;
-  ch = state.input.charCodeAt(state.position);
-  if (ch !== 42) return false;
-  ch = state.input.charCodeAt(++state.position);
-  _position = state.position;
-  while (ch !== 0 && !is_WS_OR_EOL(ch) && !is_FLOW_INDICATOR(ch)) {
-    ch = state.input.charCodeAt(++state.position);
-  }
-  if (state.position === _position) {
-    throwError(state, "name of an alias node must contain at least one character");
-  }
-  alias = state.input.slice(_position, state.position);
-  if (!_hasOwnProperty$1.call(state.anchorMap, alias)) {
-    throwError(state, 'unidentified alias "' + alias + '"');
-  }
-  state.result = state.anchorMap[alias];
-  skipSeparationSpace(state, true, -1);
-  return true;
-}
-function composeNode(state, parentIndent, nodeContext, allowToSeek, allowCompact) {
-  var allowBlockStyles, allowBlockScalars, allowBlockCollections, indentStatus = 1, atNewLine = false, hasContent = false, typeIndex, typeQuantity, typeList, type3, flowIndent, blockIndent;
-  if (state.listener !== null) {
-    state.listener("open", state);
-  }
-  state.tag = null;
-  state.anchor = null;
-  state.kind = null;
-  state.result = null;
-  allowBlockStyles = allowBlockScalars = allowBlockCollections = CONTEXT_BLOCK_OUT === nodeContext || CONTEXT_BLOCK_IN === nodeContext;
-  if (allowToSeek) {
-    if (skipSeparationSpace(state, true, -1)) {
-      atNewLine = true;
-      if (state.lineIndent > parentIndent) {
-        indentStatus = 1;
-      } else if (state.lineIndent === parentIndent) {
-        indentStatus = 0;
-      } else if (state.lineIndent < parentIndent) {
-        indentStatus = -1;
-      }
-    }
-  }
-  if (indentStatus === 1) {
-    while (readTagProperty(state) || readAnchorProperty(state)) {
-      if (skipSeparationSpace(state, true, -1)) {
-        atNewLine = true;
-        allowBlockCollections = allowBlockStyles;
-        if (state.lineIndent > parentIndent) {
-          indentStatus = 1;
-        } else if (state.lineIndent === parentIndent) {
-          indentStatus = 0;
-        } else if (state.lineIndent < parentIndent) {
-          indentStatus = -1;
-        }
-      } else {
-        allowBlockCollections = false;
-      }
-    }
-  }
-  if (allowBlockCollections) {
-    allowBlockCollections = atNewLine || allowCompact;
-  }
-  if (indentStatus === 1 || CONTEXT_BLOCK_OUT === nodeContext) {
-    if (CONTEXT_FLOW_IN === nodeContext || CONTEXT_FLOW_OUT === nodeContext) {
-      flowIndent = parentIndent;
-    } else {
-      flowIndent = parentIndent + 1;
-    }
-    blockIndent = state.position - state.lineStart;
-    if (indentStatus === 1) {
-      if (allowBlockCollections && (readBlockSequence(state, blockIndent) || readBlockMapping(state, blockIndent, flowIndent)) || readFlowCollection(state, flowIndent)) {
-        hasContent = true;
-      } else {
-        if (allowBlockScalars && readBlockScalar(state, flowIndent) || readSingleQuotedScalar(state, flowIndent) || readDoubleQuotedScalar(state, flowIndent)) {
-          hasContent = true;
-        } else if (readAlias(state)) {
-          hasContent = true;
-          if (state.tag !== null || state.anchor !== null) {
-            throwError(state, "alias node should not have any properties");
-          }
-        } else if (readPlainScalar(state, flowIndent, CONTEXT_FLOW_IN === nodeContext)) {
-          hasContent = true;
-          if (state.tag === null) {
-            state.tag = "?";
-          }
-        }
-        if (state.anchor !== null) {
-          state.anchorMap[state.anchor] = state.result;
-        }
-      }
-    } else if (indentStatus === 0) {
-      hasContent = allowBlockCollections && readBlockSequence(state, blockIndent);
-    }
-  }
-  if (state.tag === null) {
-    if (state.anchor !== null) {
-      state.anchorMap[state.anchor] = state.result;
-    }
-  } else if (state.tag === "?") {
-    if (state.result !== null && state.kind !== "scalar") {
-      throwError(state, 'unacceptable node kind for !<?> tag; it should be "scalar", not "' + state.kind + '"');
-    }
-    for (typeIndex = 0, typeQuantity = state.implicitTypes.length; typeIndex < typeQuantity; typeIndex += 1) {
-      type3 = state.implicitTypes[typeIndex];
-      if (type3.resolve(state.result)) {
-        state.result = type3.construct(state.result);
-        state.tag = type3.tag;
-        if (state.anchor !== null) {
-          state.anchorMap[state.anchor] = state.result;
-        }
-        break;
-      }
-    }
-  } else if (state.tag !== "!") {
-    if (_hasOwnProperty$1.call(state.typeMap[state.kind || "fallback"], state.tag)) {
-      type3 = state.typeMap[state.kind || "fallback"][state.tag];
-    } else {
-      type3 = null;
-      typeList = state.typeMap.multi[state.kind || "fallback"];
-      for (typeIndex = 0, typeQuantity = typeList.length; typeIndex < typeQuantity; typeIndex += 1) {
-        if (state.tag.slice(0, typeList[typeIndex].tag.length) === typeList[typeIndex].tag) {
-          type3 = typeList[typeIndex];
-          break;
-        }
-      }
-    }
-    if (!type3) {
-      throwError(state, "unknown tag !<" + state.tag + ">");
-    }
-    if (state.result !== null && type3.kind !== state.kind) {
-      throwError(state, "unacceptable node kind for !<" + state.tag + '> tag; it should be "' + type3.kind + '", not "' + state.kind + '"');
-    }
-    if (!type3.resolve(state.result, state.tag)) {
-      throwError(state, "cannot resolve a node with !<" + state.tag + "> explicit tag");
-    } else {
-      state.result = type3.construct(state.result, state.tag);
-      if (state.anchor !== null) {
-        state.anchorMap[state.anchor] = state.result;
-      }
-    }
-  }
-  if (state.listener !== null) {
-    state.listener("close", state);
-  }
-  return state.tag !== null || state.anchor !== null || hasContent;
-}
-function readDocument(state) {
-  var documentStart = state.position, _position, directiveName, directiveArgs, hasDirectives = false, ch;
-  state.version = null;
-  state.checkLineBreaks = state.legacy;
-  state.tagMap = /* @__PURE__ */ Object.create(null);
-  state.anchorMap = /* @__PURE__ */ Object.create(null);
-  while ((ch = state.input.charCodeAt(state.position)) !== 0) {
-    skipSeparationSpace(state, true, -1);
-    ch = state.input.charCodeAt(state.position);
-    if (state.lineIndent > 0 || ch !== 37) {
-      break;
-    }
-    hasDirectives = true;
-    ch = state.input.charCodeAt(++state.position);
-    _position = state.position;
-    while (ch !== 0 && !is_WS_OR_EOL(ch)) {
-      ch = state.input.charCodeAt(++state.position);
-    }
-    directiveName = state.input.slice(_position, state.position);
-    directiveArgs = [];
-    if (directiveName.length < 1) {
-      throwError(state, "directive name must not be less than one character in length");
-    }
-    while (ch !== 0) {
-      while (is_WHITE_SPACE(ch)) {
-        ch = state.input.charCodeAt(++state.position);
-      }
-      if (ch === 35) {
-        do {
-          ch = state.input.charCodeAt(++state.position);
-        } while (ch !== 0 && !is_EOL(ch));
-        break;
-      }
-      if (is_EOL(ch)) break;
-      _position = state.position;
-      while (ch !== 0 && !is_WS_OR_EOL(ch)) {
-        ch = state.input.charCodeAt(++state.position);
-      }
-      directiveArgs.push(state.input.slice(_position, state.position));
-    }
-    if (ch !== 0) readLineBreak(state);
-    if (_hasOwnProperty$1.call(directiveHandlers, directiveName)) {
-      directiveHandlers[directiveName](state, directiveName, directiveArgs);
-    } else {
-      throwWarning(state, 'unknown document directive "' + directiveName + '"');
-    }
-  }
-  skipSeparationSpace(state, true, -1);
-  if (state.lineIndent === 0 && state.input.charCodeAt(state.position) === 45 && state.input.charCodeAt(state.position + 1) === 45 && state.input.charCodeAt(state.position + 2) === 45) {
-    state.position += 3;
-    skipSeparationSpace(state, true, -1);
-  } else if (hasDirectives) {
-    throwError(state, "directives end mark is expected");
-  }
-  composeNode(state, state.lineIndent - 1, CONTEXT_BLOCK_OUT, false, true);
-  skipSeparationSpace(state, true, -1);
-  if (state.checkLineBreaks && PATTERN_NON_ASCII_LINE_BREAKS.test(state.input.slice(documentStart, state.position))) {
-    throwWarning(state, "non-ASCII line breaks are interpreted as content");
-  }
-  state.documents.push(state.result);
-  if (state.position === state.lineStart && testDocumentSeparator(state)) {
-    if (state.input.charCodeAt(state.position) === 46) {
-      state.position += 3;
-      skipSeparationSpace(state, true, -1);
-    }
-    return;
-  }
-  if (state.position < state.length - 1) {
-    throwError(state, "end of the stream or a document separator is expected");
-  } else {
-    return;
-  }
-}
-function loadDocuments(input, options) {
-  input = String(input);
-  options = options || {};
-  if (input.length !== 0) {
-    if (input.charCodeAt(input.length - 1) !== 10 && input.charCodeAt(input.length - 1) !== 13) {
-      input += "\n";
-    }
-    if (input.charCodeAt(0) === 65279) {
-      input = input.slice(1);
-    }
-  }
-  var state = new State$1(input, options);
-  var nullpos = input.indexOf("\0");
-  if (nullpos !== -1) {
-    state.position = nullpos;
-    throwError(state, "null byte is not allowed in input");
-  }
-  state.input += "\0";
-  while (state.input.charCodeAt(state.position) === 32) {
-    state.lineIndent += 1;
-    state.position += 1;
-  }
-  while (state.position < state.length - 1) {
-    readDocument(state);
-  }
-  return state.documents;
-}
-function loadAll$1(input, iterator, options) {
-  if (iterator !== null && typeof iterator === "object" && typeof options === "undefined") {
-    options = iterator;
-    iterator = null;
-  }
-  var documents = loadDocuments(input, options);
-  if (typeof iterator !== "function") {
-    return documents;
-  }
-  for (var index = 0, length = documents.length; index < length; index += 1) {
-    iterator(documents[index]);
-  }
-}
-function load$1(input, options) {
-  var documents = loadDocuments(input, options);
-  if (documents.length === 0) {
-    return void 0;
-  } else if (documents.length === 1) {
-    return documents[0];
-  }
-  throw new exception("expected a single document in the stream, but found more");
-}
-function compileStyleMap(schema3, map3) {
-  var result, keys, index, length, tag, style, type3;
-  if (map3 === null) return {};
-  result = {};
-  keys = Object.keys(map3);
-  for (index = 0, length = keys.length; index < length; index += 1) {
-    tag = keys[index];
-    style = String(map3[tag]);
-    if (tag.slice(0, 2) === "!!") {
-      tag = "tag:yaml.org,2002:" + tag.slice(2);
-    }
-    type3 = schema3.compiledTypeMap["fallback"][tag];
-    if (type3 && _hasOwnProperty.call(type3.styleAliases, style)) {
-      style = type3.styleAliases[style];
-    }
-    result[tag] = style;
-  }
-  return result;
-}
-function encodeHex(character) {
-  var string, handle, length;
-  string = character.toString(16).toUpperCase();
-  if (character <= 255) {
-    handle = "x";
-    length = 2;
-  } else if (character <= 65535) {
-    handle = "u";
-    length = 4;
-  } else if (character <= 4294967295) {
-    handle = "U";
-    length = 8;
-  } else {
-    throw new exception("code point within a string may not be greater than 0xFFFFFFFF");
-  }
-  return "\\" + handle + common2.repeat("0", length - string.length) + string;
-}
-function State(options) {
-  this.schema = options["schema"] || _default;
-  this.indent = Math.max(1, options["indent"] || 2);
-  this.noArrayIndent = options["noArrayIndent"] || false;
-  this.skipInvalid = options["skipInvalid"] || false;
-  this.flowLevel = common2.isNothing(options["flowLevel"]) ? -1 : options["flowLevel"];
-  this.styleMap = compileStyleMap(this.schema, options["styles"] || null);
-  this.sortKeys = options["sortKeys"] || false;
-  this.lineWidth = options["lineWidth"] || 80;
-  this.noRefs = options["noRefs"] || false;
-  this.noCompatMode = options["noCompatMode"] || false;
-  this.condenseFlow = options["condenseFlow"] || false;
-  this.quotingType = options["quotingType"] === '"' ? QUOTING_TYPE_DOUBLE : QUOTING_TYPE_SINGLE;
-  this.forceQuotes = options["forceQuotes"] || false;
-  this.replacer = typeof options["replacer"] === "function" ? options["replacer"] : null;
-  this.implicitTypes = this.schema.compiledImplicit;
-  this.explicitTypes = this.schema.compiledExplicit;
-  this.tag = null;
-  this.result = "";
-  this.duplicates = [];
-  this.usedDuplicates = null;
-}
-function indentString(string, spaces) {
-  var ind = common2.repeat(" ", spaces), position = 0, next = -1, result = "", line, length = string.length;
-  while (position < length) {
-    next = string.indexOf("\n", position);
-    if (next === -1) {
-      line = string.slice(position);
-      position = length;
-    } else {
-      line = string.slice(position, next + 1);
-      position = next + 1;
-    }
-    if (line.length && line !== "\n") result += ind;
-    result += line;
-  }
-  return result;
-}
-function generateNextLine(state, level) {
-  return "\n" + common2.repeat(" ", state.indent * level);
-}
-function testImplicitResolving(state, str3) {
-  var index, length, type3;
-  for (index = 0, length = state.implicitTypes.length; index < length; index += 1) {
-    type3 = state.implicitTypes[index];
-    if (type3.resolve(str3)) {
-      return true;
-    }
-  }
-  return false;
-}
-function isWhitespace(c) {
-  return c === CHAR_SPACE || c === CHAR_TAB;
-}
-function isPrintable(c) {
-  return 32 <= c && c <= 126 || 161 <= c && c <= 55295 && c !== 8232 && c !== 8233 || 57344 <= c && c <= 65533 && c !== CHAR_BOM || 65536 <= c && c <= 1114111;
-}
-function isNsCharOrWhitespace(c) {
-  return isPrintable(c) && c !== CHAR_BOM && c !== CHAR_CARRIAGE_RETURN && c !== CHAR_LINE_FEED;
-}
-function isPlainSafe(c, prev, inblock) {
-  var cIsNsCharOrWhitespace = isNsCharOrWhitespace(c);
-  var cIsNsChar = cIsNsCharOrWhitespace && !isWhitespace(c);
-  return (
-    // ns-plain-safe
-    (inblock ? (
-      // c = flow-in
-      cIsNsCharOrWhitespace
-    ) : cIsNsCharOrWhitespace && c !== CHAR_COMMA && c !== CHAR_LEFT_SQUARE_BRACKET && c !== CHAR_RIGHT_SQUARE_BRACKET && c !== CHAR_LEFT_CURLY_BRACKET && c !== CHAR_RIGHT_CURLY_BRACKET) && c !== CHAR_SHARP && !(prev === CHAR_COLON && !cIsNsChar) || isNsCharOrWhitespace(prev) && !isWhitespace(prev) && c === CHAR_SHARP || prev === CHAR_COLON && cIsNsChar
-  );
-}
-function isPlainSafeFirst(c) {
-  return isPrintable(c) && c !== CHAR_BOM && !isWhitespace(c) && c !== CHAR_MINUS && c !== CHAR_QUESTION && c !== CHAR_COLON && c !== CHAR_COMMA && c !== CHAR_LEFT_SQUARE_BRACKET && c !== CHAR_RIGHT_SQUARE_BRACKET && c !== CHAR_LEFT_CURLY_BRACKET && c !== CHAR_RIGHT_CURLY_BRACKET && c !== CHAR_SHARP && c !== CHAR_AMPERSAND && c !== CHAR_ASTERISK && c !== CHAR_EXCLAMATION && c !== CHAR_VERTICAL_LINE && c !== CHAR_EQUALS && c !== CHAR_GREATER_THAN && c !== CHAR_SINGLE_QUOTE && c !== CHAR_DOUBLE_QUOTE && c !== CHAR_PERCENT && c !== CHAR_COMMERCIAL_AT && c !== CHAR_GRAVE_ACCENT;
-}
-function isPlainSafeLast(c) {
-  return !isWhitespace(c) && c !== CHAR_COLON;
-}
-function codePointAt(string, pos) {
-  var first = string.charCodeAt(pos), second;
-  if (first >= 55296 && first <= 56319 && pos + 1 < string.length) {
-    second = string.charCodeAt(pos + 1);
-    if (second >= 56320 && second <= 57343) {
-      return (first - 55296) * 1024 + second - 56320 + 65536;
-    }
-  }
-  return first;
-}
-function needIndentIndicator(string) {
-  var leadingSpaceRe = /^\n* /;
-  return leadingSpaceRe.test(string);
-}
-function chooseScalarStyle(string, singleLineOnly, indentPerLevel, lineWidth, testAmbiguousType, quotingType, forceQuotes, inblock) {
-  var i;
-  var char = 0;
-  var prevChar = null;
-  var hasLineBreak = false;
-  var hasFoldableLine = false;
-  var shouldTrackWidth = lineWidth !== -1;
-  var previousLineBreak = -1;
-  var plain = isPlainSafeFirst(codePointAt(string, 0)) && isPlainSafeLast(codePointAt(string, string.length - 1));
-  if (singleLineOnly || forceQuotes) {
-    for (i = 0; i < string.length; char >= 65536 ? i += 2 : i++) {
-      char = codePointAt(string, i);
-      if (!isPrintable(char)) {
-        return STYLE_DOUBLE;
-      }
-      plain = plain && isPlainSafe(char, prevChar, inblock);
-      prevChar = char;
-    }
-  } else {
-    for (i = 0; i < string.length; char >= 65536 ? i += 2 : i++) {
-      char = codePointAt(string, i);
-      if (char === CHAR_LINE_FEED) {
-        hasLineBreak = true;
-        if (shouldTrackWidth) {
-          hasFoldableLine = hasFoldableLine || // Foldable line = too long, and not more-indented.
-          i - previousLineBreak - 1 > lineWidth && string[previousLineBreak + 1] !== " ";
-          previousLineBreak = i;
-        }
-      } else if (!isPrintable(char)) {
-        return STYLE_DOUBLE;
-      }
-      plain = plain && isPlainSafe(char, prevChar, inblock);
-      prevChar = char;
-    }
-    hasFoldableLine = hasFoldableLine || shouldTrackWidth && (i - previousLineBreak - 1 > lineWidth && string[previousLineBreak + 1] !== " ");
-  }
-  if (!hasLineBreak && !hasFoldableLine) {
-    if (plain && !forceQuotes && !testAmbiguousType(string)) {
-      return STYLE_PLAIN;
-    }
-    return quotingType === QUOTING_TYPE_DOUBLE ? STYLE_DOUBLE : STYLE_SINGLE;
-  }
-  if (indentPerLevel > 9 && needIndentIndicator(string)) {
-    return STYLE_DOUBLE;
-  }
-  if (!forceQuotes) {
-    return hasFoldableLine ? STYLE_FOLDED : STYLE_LITERAL;
-  }
-  return quotingType === QUOTING_TYPE_DOUBLE ? STYLE_DOUBLE : STYLE_SINGLE;
-}
-function writeScalar(state, string, level, iskey, inblock) {
-  state.dump = function() {
-    if (string.length === 0) {
-      return state.quotingType === QUOTING_TYPE_DOUBLE ? '""' : "''";
-    }
-    if (!state.noCompatMode) {
-      if (DEPRECATED_BOOLEANS_SYNTAX.indexOf(string) !== -1 || DEPRECATED_BASE60_SYNTAX.test(string)) {
-        return state.quotingType === QUOTING_TYPE_DOUBLE ? '"' + string + '"' : "'" + string + "'";
-      }
-    }
-    var indent = state.indent * Math.max(1, level);
-    var lineWidth = state.lineWidth === -1 ? -1 : Math.max(Math.min(state.lineWidth, 40), state.lineWidth - indent);
-    var singleLineOnly = iskey || state.flowLevel > -1 && level >= state.flowLevel;
-    function testAmbiguity(string2) {
-      return testImplicitResolving(state, string2);
-    }
-    switch (chooseScalarStyle(
-      string,
-      singleLineOnly,
-      state.indent,
-      lineWidth,
-      testAmbiguity,
-      state.quotingType,
-      state.forceQuotes && !iskey,
-      inblock
-    )) {
-      case STYLE_PLAIN:
-        return string;
-      case STYLE_SINGLE:
-        return "'" + string.replace(/'/g, "''") + "'";
-      case STYLE_LITERAL:
-        return "|" + blockHeader(string, state.indent) + dropEndingNewline(indentString(string, indent));
-      case STYLE_FOLDED:
-        return ">" + blockHeader(string, state.indent) + dropEndingNewline(indentString(foldString(string, lineWidth), indent));
-      case STYLE_DOUBLE:
-        return '"' + escapeString(string) + '"';
-      default:
-        throw new exception("impossible error: invalid scalar style");
-    }
-  }();
-}
-function blockHeader(string, indentPerLevel) {
-  var indentIndicator = needIndentIndicator(string) ? String(indentPerLevel) : "";
-  var clip = string[string.length - 1] === "\n";
-  var keep = clip && (string[string.length - 2] === "\n" || string === "\n");
-  var chomp = keep ? "+" : clip ? "" : "-";
-  return indentIndicator + chomp + "\n";
-}
-function dropEndingNewline(string) {
-  return string[string.length - 1] === "\n" ? string.slice(0, -1) : string;
-}
-function foldString(string, width) {
-  var lineRe = /(\n+)([^\n]*)/g;
-  var result = function() {
-    var nextLF = string.indexOf("\n");
-    nextLF = nextLF !== -1 ? nextLF : string.length;
-    lineRe.lastIndex = nextLF;
-    return foldLine(string.slice(0, nextLF), width);
-  }();
-  var prevMoreIndented = string[0] === "\n" || string[0] === " ";
-  var moreIndented;
-  var match;
-  while (match = lineRe.exec(string)) {
-    var prefix = match[1], line = match[2];
-    moreIndented = line[0] === " ";
-    result += prefix + (!prevMoreIndented && !moreIndented && line !== "" ? "\n" : "") + foldLine(line, width);
-    prevMoreIndented = moreIndented;
-  }
-  return result;
-}
-function foldLine(line, width) {
-  if (line === "" || line[0] === " ") return line;
-  var breakRe = / [^ ]/g;
-  var match;
-  var start = 0, end, curr = 0, next = 0;
-  var result = "";
-  while (match = breakRe.exec(line)) {
-    next = match.index;
-    if (next - start > width) {
-      end = curr > start ? curr : next;
-      result += "\n" + line.slice(start, end);
-      start = end + 1;
-    }
-    curr = next;
-  }
-  result += "\n";
-  if (line.length - start > width && curr > start) {
-    result += line.slice(start, curr) + "\n" + line.slice(curr + 1);
-  } else {
-    result += line.slice(start);
-  }
-  return result.slice(1);
-}
-function escapeString(string) {
-  var result = "";
-  var char = 0;
-  var escapeSeq;
-  for (var i = 0; i < string.length; char >= 65536 ? i += 2 : i++) {
-    char = codePointAt(string, i);
-    escapeSeq = ESCAPE_SEQUENCES[char];
-    if (!escapeSeq && isPrintable(char)) {
-      result += string[i];
-      if (char >= 65536) result += string[i + 1];
-    } else {
-      result += escapeSeq || encodeHex(char);
-    }
-  }
-  return result;
-}
-function writeFlowSequence(state, level, object) {
-  var _result = "", _tag = state.tag, index, length, value;
-  for (index = 0, length = object.length; index < length; index += 1) {
-    value = object[index];
-    if (state.replacer) {
-      value = state.replacer.call(object, String(index), value);
-    }
-    if (writeNode(state, level, value, false, false) || typeof value === "undefined" && writeNode(state, level, null, false, false)) {
-      if (_result !== "") _result += "," + (!state.condenseFlow ? " " : "");
-      _result += state.dump;
-    }
-  }
-  state.tag = _tag;
-  state.dump = "[" + _result + "]";
-}
-function writeBlockSequence(state, level, object, compact) {
-  var _result = "", _tag = state.tag, index, length, value;
-  for (index = 0, length = object.length; index < length; index += 1) {
-    value = object[index];
-    if (state.replacer) {
-      value = state.replacer.call(object, String(index), value);
-    }
-    if (writeNode(state, level + 1, value, true, true, false, true) || typeof value === "undefined" && writeNode(state, level + 1, null, true, true, false, true)) {
-      if (!compact || _result !== "") {
-        _result += generateNextLine(state, level);
-      }
-      if (state.dump && CHAR_LINE_FEED === state.dump.charCodeAt(0)) {
-        _result += "-";
-      } else {
-        _result += "- ";
-      }
-      _result += state.dump;
-    }
-  }
-  state.tag = _tag;
-  state.dump = _result || "[]";
-}
-function writeFlowMapping(state, level, object) {
-  var _result = "", _tag = state.tag, objectKeyList = Object.keys(object), index, length, objectKey, objectValue, pairBuffer;
-  for (index = 0, length = objectKeyList.length; index < length; index += 1) {
-    pairBuffer = "";
-    if (_result !== "") pairBuffer += ", ";
-    if (state.condenseFlow) pairBuffer += '"';
-    objectKey = objectKeyList[index];
-    objectValue = object[objectKey];
-    if (state.replacer) {
-      objectValue = state.replacer.call(object, objectKey, objectValue);
-    }
-    if (!writeNode(state, level, objectKey, false, false)) {
-      continue;
-    }
-    if (state.dump.length > 1024) pairBuffer += "? ";
-    pairBuffer += state.dump + (state.condenseFlow ? '"' : "") + ":" + (state.condenseFlow ? "" : " ");
-    if (!writeNode(state, level, objectValue, false, false)) {
-      continue;
-    }
-    pairBuffer += state.dump;
-    _result += pairBuffer;
-  }
-  state.tag = _tag;
-  state.dump = "{" + _result + "}";
-}
-function writeBlockMapping(state, level, object, compact) {
-  var _result = "", _tag = state.tag, objectKeyList = Object.keys(object), index, length, objectKey, objectValue, explicitPair, pairBuffer;
-  if (state.sortKeys === true) {
-    objectKeyList.sort();
-  } else if (typeof state.sortKeys === "function") {
-    objectKeyList.sort(state.sortKeys);
-  } else if (state.sortKeys) {
-    throw new exception("sortKeys must be a boolean or a function");
-  }
-  for (index = 0, length = objectKeyList.length; index < length; index += 1) {
-    pairBuffer = "";
-    if (!compact || _result !== "") {
-      pairBuffer += generateNextLine(state, level);
-    }
-    objectKey = objectKeyList[index];
-    objectValue = object[objectKey];
-    if (state.replacer) {
-      objectValue = state.replacer.call(object, objectKey, objectValue);
-    }
-    if (!writeNode(state, level + 1, objectKey, true, true, true)) {
-      continue;
-    }
-    explicitPair = state.tag !== null && state.tag !== "?" || state.dump && state.dump.length > 1024;
-    if (explicitPair) {
-      if (state.dump && CHAR_LINE_FEED === state.dump.charCodeAt(0)) {
-        pairBuffer += "?";
-      } else {
-        pairBuffer += "? ";
-      }
-    }
-    pairBuffer += state.dump;
-    if (explicitPair) {
-      pairBuffer += generateNextLine(state, level);
-    }
-    if (!writeNode(state, level + 1, objectValue, true, explicitPair)) {
-      continue;
-    }
-    if (state.dump && CHAR_LINE_FEED === state.dump.charCodeAt(0)) {
-      pairBuffer += ":";
-    } else {
-      pairBuffer += ": ";
-    }
-    pairBuffer += state.dump;
-    _result += pairBuffer;
-  }
-  state.tag = _tag;
-  state.dump = _result || "{}";
-}
-function detectType(state, object, explicit) {
-  var _result, typeList, index, length, type3, style;
-  typeList = explicit ? state.explicitTypes : state.implicitTypes;
-  for (index = 0, length = typeList.length; index < length; index += 1) {
-    type3 = typeList[index];
-    if ((type3.instanceOf || type3.predicate) && (!type3.instanceOf || typeof object === "object" && object instanceof type3.instanceOf) && (!type3.predicate || type3.predicate(object))) {
-      if (explicit) {
-        if (type3.multi && type3.representName) {
-          state.tag = type3.representName(object);
-        } else {
-          state.tag = type3.tag;
-        }
-      } else {
-        state.tag = "?";
-      }
-      if (type3.represent) {
-        style = state.styleMap[type3.tag] || type3.defaultStyle;
-        if (_toString.call(type3.represent) === "[object Function]") {
-          _result = type3.represent(object, style);
-        } else if (_hasOwnProperty.call(type3.represent, style)) {
-          _result = type3.represent[style](object, style);
-        } else {
-          throw new exception("!<" + type3.tag + '> tag resolver accepts not "' + style + '" style');
-        }
-        state.dump = _result;
-      }
-      return true;
-    }
-  }
-  return false;
-}
-function writeNode(state, level, object, block, compact, iskey, isblockseq) {
-  state.tag = null;
-  state.dump = object;
-  if (!detectType(state, object, false)) {
-    detectType(state, object, true);
-  }
-  var type3 = _toString.call(state.dump);
-  var inblock = block;
-  var tagStr;
-  if (block) {
-    block = state.flowLevel < 0 || state.flowLevel > level;
-  }
-  var objectOrArray = type3 === "[object Object]" || type3 === "[object Array]", duplicateIndex, duplicate;
-  if (objectOrArray) {
-    duplicateIndex = state.duplicates.indexOf(object);
-    duplicate = duplicateIndex !== -1;
-  }
-  if (state.tag !== null && state.tag !== "?" || duplicate || state.indent !== 2 && level > 0) {
-    compact = false;
-  }
-  if (duplicate && state.usedDuplicates[duplicateIndex]) {
-    state.dump = "*ref_" + duplicateIndex;
-  } else {
-    if (objectOrArray && duplicate && !state.usedDuplicates[duplicateIndex]) {
-      state.usedDuplicates[duplicateIndex] = true;
-    }
-    if (type3 === "[object Object]") {
-      if (block && Object.keys(state.dump).length !== 0) {
-        writeBlockMapping(state, level, state.dump, compact);
-        if (duplicate) {
-          state.dump = "&ref_" + duplicateIndex + state.dump;
-        }
-      } else {
-        writeFlowMapping(state, level, state.dump);
-        if (duplicate) {
-          state.dump = "&ref_" + duplicateIndex + " " + state.dump;
-        }
-      }
-    } else if (type3 === "[object Array]") {
-      if (block && state.dump.length !== 0) {
-        if (state.noArrayIndent && !isblockseq && level > 0) {
-          writeBlockSequence(state, level - 1, state.dump, compact);
-        } else {
-          writeBlockSequence(state, level, state.dump, compact);
-        }
-        if (duplicate) {
-          state.dump = "&ref_" + duplicateIndex + state.dump;
-        }
-      } else {
-        writeFlowSequence(state, level, state.dump);
-        if (duplicate) {
-          state.dump = "&ref_" + duplicateIndex + " " + state.dump;
-        }
-      }
-    } else if (type3 === "[object String]") {
-      if (state.tag !== "?") {
-        writeScalar(state, state.dump, level, iskey, inblock);
-      }
-    } else if (type3 === "[object Undefined]") {
-      return false;
-    } else {
-      if (state.skipInvalid) return false;
-      throw new exception("unacceptable kind of an object to dump " + type3);
-    }
-    if (state.tag !== null && state.tag !== "?") {
-      tagStr = encodeURI(
-        state.tag[0] === "!" ? state.tag.slice(1) : state.tag
-      ).replace(/!/g, "%21");
-      if (state.tag[0] === "!") {
-        tagStr = "!" + tagStr;
-      } else if (tagStr.slice(0, 18) === "tag:yaml.org,2002:") {
-        tagStr = "!!" + tagStr.slice(18);
-      } else {
-        tagStr = "!<" + tagStr + ">";
-      }
-      state.dump = tagStr + " " + state.dump;
-    }
-  }
-  return true;
-}
-function getDuplicateReferences(object, state) {
-  var objects = [], duplicatesIndexes = [], index, length;
-  inspectNode(object, objects, duplicatesIndexes);
-  for (index = 0, length = duplicatesIndexes.length; index < length; index += 1) {
-    state.duplicates.push(objects[duplicatesIndexes[index]]);
-  }
-  state.usedDuplicates = new Array(length);
-}
-function inspectNode(object, objects, duplicatesIndexes) {
-  var objectKeyList, index, length;
-  if (object !== null && typeof object === "object") {
-    index = objects.indexOf(object);
-    if (index !== -1) {
-      if (duplicatesIndexes.indexOf(index) === -1) {
-        duplicatesIndexes.push(index);
-      }
-    } else {
-      objects.push(object);
-      if (Array.isArray(object)) {
-        for (index = 0, length = object.length; index < length; index += 1) {
-          inspectNode(object[index], objects, duplicatesIndexes);
-        }
-      } else {
-        objectKeyList = Object.keys(object);
-        for (index = 0, length = objectKeyList.length; index < length; index += 1) {
-          inspectNode(object[objectKeyList[index]], objects, duplicatesIndexes);
-        }
-      }
-    }
-  }
-}
-function dump$1(input, options) {
-  options = options || {};
-  var state = new State(options);
-  if (!state.noRefs) getDuplicateReferences(input, state);
-  var value = input;
-  if (state.replacer) {
-    value = state.replacer.call({ "": value }, "", value);
-  }
-  if (writeNode(state, 0, value, true, true)) return state.dump + "\n";
-  return "";
-}
-function renamed(from, to) {
-  return function() {
-    throw new Error("Function yaml." + from + " is removed in js-yaml 4. Use yaml." + to + " instead, which is now safe by default.");
-  };
-}
-var isNothing_1, isObject_1, toArray_1, repeat_1, isNegativeZero_1, extend_1, common2, exception, snippet, TYPE_CONSTRUCTOR_OPTIONS, YAML_NODE_KINDS, type, schema, str, seq, map, failsafe, _null, bool, int, YAML_FLOAT_PATTERN, SCIENTIFIC_WITHOUT_DOT, float, json, core, YAML_DATE_REGEXP, YAML_TIMESTAMP_REGEXP, timestamp, merge, BASE64_MAP, binary, _hasOwnProperty$3, _toString$2, omap, _toString$1, pairs, _hasOwnProperty$2, set, _default, _hasOwnProperty$1, CONTEXT_FLOW_IN, CONTEXT_FLOW_OUT, CONTEXT_BLOCK_IN, CONTEXT_BLOCK_OUT, CHOMPING_CLIP, CHOMPING_STRIP, CHOMPING_KEEP, PATTERN_NON_PRINTABLE, PATTERN_NON_ASCII_LINE_BREAKS, PATTERN_FLOW_INDICATORS, PATTERN_TAG_HANDLE, PATTERN_TAG_URI, simpleEscapeCheck, simpleEscapeMap, i, directiveHandlers, loadAll_1, load_1, loader, _toString, _hasOwnProperty, CHAR_BOM, CHAR_TAB, CHAR_LINE_FEED, CHAR_CARRIAGE_RETURN, CHAR_SPACE, CHAR_EXCLAMATION, CHAR_DOUBLE_QUOTE, CHAR_SHARP, CHAR_PERCENT, CHAR_AMPERSAND, CHAR_SINGLE_QUOTE, CHAR_ASTERISK, CHAR_COMMA, CHAR_MINUS, CHAR_COLON, CHAR_EQUALS, CHAR_GREATER_THAN, CHAR_QUESTION, CHAR_COMMERCIAL_AT, CHAR_LEFT_SQUARE_BRACKET, CHAR_RIGHT_SQUARE_BRACKET, CHAR_GRAVE_ACCENT, CHAR_LEFT_CURLY_BRACKET, CHAR_VERTICAL_LINE, CHAR_RIGHT_CURLY_BRACKET, ESCAPE_SEQUENCES, DEPRECATED_BOOLEANS_SYNTAX, DEPRECATED_BASE60_SYNTAX, QUOTING_TYPE_SINGLE, QUOTING_TYPE_DOUBLE, STYLE_PLAIN, STYLE_SINGLE, STYLE_LITERAL, STYLE_FOLDED, STYLE_DOUBLE, dump_1, dumper, Type, Schema, FAILSAFE_SCHEMA, JSON_SCHEMA, CORE_SCHEMA, DEFAULT_SCHEMA, load2, loadAll, dump, YAMLException, types, safeLoad, safeLoadAll, safeDump, jsYaml;
+// node_modules/js-yaml/dist/js-yaml.mjs
+var __create2, __defProp2, __getOwnPropDesc2, __getOwnPropNames2, __getProtoOf2, __hasOwnProp2, __commonJSMin, __copyProps2, __toESM2, require_common, require_exception, require_snippet, require_type, require_schema, require_str, require_seq, require_map, require_failsafe, require_null, require_bool, require_int, require_float, require_json, require_core, require_timestamp, require_merge, require_binary, require_omap, require_pairs, require_set, require_default, require_loader, require_dumper, import_js_yaml, Type, Schema, FAILSAFE_SCHEMA, JSON_SCHEMA, CORE_SCHEMA, DEFAULT_SCHEMA, load2, loadAll, dump, YAMLException, types, safeLoad, safeLoadAll, safeDump, index_vite_proxy_tmp_default;
 var init_js_yaml = __esm({
-  "cli/node_modules/js-yaml/dist/js-yaml.mjs"() {
-    isNothing_1 = isNothing;
-    isObject_1 = isObject;
-    toArray_1 = toArray;
-    repeat_1 = repeat;
-    isNegativeZero_1 = isNegativeZero;
-    extend_1 = extend;
-    common2 = {
-      isNothing: isNothing_1,
-      isObject: isObject_1,
-      toArray: toArray_1,
-      repeat: repeat_1,
-      isNegativeZero: isNegativeZero_1,
-      extend: extend_1
-    };
-    YAMLException$1.prototype = Object.create(Error.prototype);
-    YAMLException$1.prototype.constructor = YAMLException$1;
-    YAMLException$1.prototype.toString = function toString(compact) {
-      return this.name + ": " + formatError(this, compact);
-    };
-    exception = YAMLException$1;
-    snippet = makeSnippet;
-    TYPE_CONSTRUCTOR_OPTIONS = [
-      "kind",
-      "multi",
-      "resolve",
-      "construct",
-      "instanceOf",
-      "predicate",
-      "represent",
-      "representName",
-      "defaultStyle",
-      "styleAliases"
-    ];
-    YAML_NODE_KINDS = [
-      "scalar",
-      "sequence",
-      "mapping"
-    ];
-    type = Type$1;
-    Schema$1.prototype.extend = function extend2(definition) {
-      var implicit = [];
-      var explicit = [];
-      if (definition instanceof type) {
-        explicit.push(definition);
-      } else if (Array.isArray(definition)) {
-        explicit = explicit.concat(definition);
-      } else if (definition && (Array.isArray(definition.implicit) || Array.isArray(definition.explicit))) {
-        if (definition.implicit) implicit = implicit.concat(definition.implicit);
-        if (definition.explicit) explicit = explicit.concat(definition.explicit);
-      } else {
-        throw new exception("Schema.extend argument should be a Type, [ Type ], or a schema definition ({ implicit: [...], explicit: [...] })");
+  "node_modules/js-yaml/dist/js-yaml.mjs"() {
+    __create2 = Object.create;
+    __defProp2 = Object.defineProperty;
+    __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
+    __getOwnPropNames2 = Object.getOwnPropertyNames;
+    __getProtoOf2 = Object.getPrototypeOf;
+    __hasOwnProp2 = Object.prototype.hasOwnProperty;
+    __commonJSMin = (cb, mod) => () => (mod || (cb((mod = { exports: {} }).exports, mod), cb = null), mod.exports);
+    __copyProps2 = (to, from, except, desc) => {
+      if (from && typeof from === "object" || typeof from === "function") for (var keys = __getOwnPropNames2(from), i = 0, n = keys.length, key; i < n; i++) {
+        key = keys[i];
+        if (!__hasOwnProp2.call(to, key) && key !== except) __defProp2(to, key, {
+          get: ((k) => from[k]).bind(null, key),
+          enumerable: !(desc = __getOwnPropDesc2(from, key)) || desc.enumerable
+        });
       }
-      implicit.forEach(function(type$1) {
-        if (!(type$1 instanceof type)) {
-          throw new exception("Specified list of YAML types (or a single Type object) contains a non-Type object.");
-        }
-        if (type$1.loadKind && type$1.loadKind !== "scalar") {
-          throw new exception("There is a non-scalar type in the implicit list of a schema. Implicit resolving of such types is not supported.");
-        }
-        if (type$1.multi) {
-          throw new exception("There is a multi type in the implicit list of a schema. Multi tags can only be listed as explicit.");
-        }
-      });
-      explicit.forEach(function(type$1) {
-        if (!(type$1 instanceof type)) {
-          throw new exception("Specified list of YAML types (or a single Type object) contains a non-Type object.");
-        }
-      });
-      var result = Object.create(Schema$1.prototype);
-      result.implicit = (this.implicit || []).concat(implicit);
-      result.explicit = (this.explicit || []).concat(explicit);
-      result.compiledImplicit = compileList(result, "implicit");
-      result.compiledExplicit = compileList(result, "explicit");
-      result.compiledTypeMap = compileMap(result.compiledImplicit, result.compiledExplicit);
-      return result;
+      return to;
     };
-    schema = Schema$1;
-    str = new type("tag:yaml.org,2002:str", {
-      kind: "scalar",
-      construct: function(data) {
-        return data !== null ? data : "";
+    __toESM2 = (mod, isNodeMode, target) => (target = mod != null ? __create2(__getProtoOf2(mod)) : {}, __copyProps2(isNodeMode || !mod || !mod.__esModule ? __defProp2(target, "default", {
+      value: mod,
+      enumerable: true
+    }) : target, mod));
+    require_common = /* @__PURE__ */ __commonJSMin((exports, module) => {
+      function isNothing(subject) {
+        return typeof subject === "undefined" || subject === null;
       }
+      function isObject(subject) {
+        return typeof subject === "object" && subject !== null;
+      }
+      function toArray(sequence) {
+        if (Array.isArray(sequence)) return sequence;
+        else if (isNothing(sequence)) return [];
+        return [sequence];
+      }
+      function extend(target, source) {
+        if (source) {
+          const sourceKeys = Object.keys(source);
+          for (let index = 0, length = sourceKeys.length; index < length; index += 1) {
+            const key = sourceKeys[index];
+            target[key] = source[key];
+          }
+        }
+        return target;
+      }
+      function repeat(string, count) {
+        let result = "";
+        for (let cycle = 0; cycle < count; cycle += 1) result += string;
+        return result;
+      }
+      function isNegativeZero(number) {
+        return number === 0 && Number.NEGATIVE_INFINITY === 1 / number;
+      }
+      module.exports.isNothing = isNothing;
+      module.exports.isObject = isObject;
+      module.exports.toArray = toArray;
+      module.exports.repeat = repeat;
+      module.exports.isNegativeZero = isNegativeZero;
+      module.exports.extend = extend;
     });
-    seq = new type("tag:yaml.org,2002:seq", {
-      kind: "sequence",
-      construct: function(data) {
+    require_exception = /* @__PURE__ */ __commonJSMin((exports, module) => {
+      function formatError(exception, compact) {
+        let where = "";
+        const message = exception.reason || "(unknown reason)";
+        if (!exception.mark) return message;
+        if (exception.mark.name) where += 'in "' + exception.mark.name + '" ';
+        where += "(" + (exception.mark.line + 1) + ":" + (exception.mark.column + 1) + ")";
+        if (!compact && exception.mark.snippet) where += "\n\n" + exception.mark.snippet;
+        return message + " " + where;
+      }
+      function YAMLException2(reason, mark) {
+        Error.call(this);
+        this.name = "YAMLException";
+        this.reason = reason;
+        this.mark = mark;
+        this.message = formatError(this, false);
+        if (Error.captureStackTrace) Error.captureStackTrace(this, this.constructor);
+        else this.stack = (/* @__PURE__ */ new Error()).stack || "";
+      }
+      YAMLException2.prototype = Object.create(Error.prototype);
+      YAMLException2.prototype.constructor = YAMLException2;
+      YAMLException2.prototype.toString = function toString(compact) {
+        return this.name + ": " + formatError(this, compact);
+      };
+      module.exports = YAMLException2;
+    });
+    require_snippet = /* @__PURE__ */ __commonJSMin((exports, module) => {
+      var common2 = require_common();
+      function getLine(buffer, lineStart, lineEnd, position, maxLineLength) {
+        let head = "";
+        let tail = "";
+        const maxHalfLength = Math.floor(maxLineLength / 2) - 1;
+        if (position - lineStart > maxHalfLength) {
+          head = " ... ";
+          lineStart = position - maxHalfLength + head.length;
+        }
+        if (lineEnd - position > maxHalfLength) {
+          tail = " ...";
+          lineEnd = position + maxHalfLength - tail.length;
+        }
+        return {
+          str: head + buffer.slice(lineStart, lineEnd).replace(/\t/g, "\u2192") + tail,
+          pos: position - lineStart + head.length
+        };
+      }
+      function padStart(string, max) {
+        return common2.repeat(" ", max - string.length) + string;
+      }
+      function makeSnippet(mark, options) {
+        options = Object.create(options || null);
+        if (!mark.buffer) return null;
+        if (!options.maxLength) options.maxLength = 79;
+        if (typeof options.indent !== "number") options.indent = 1;
+        if (typeof options.linesBefore !== "number") options.linesBefore = 3;
+        if (typeof options.linesAfter !== "number") options.linesAfter = 2;
+        const re = /\r?\n|\r|\0/g;
+        const lineStarts = [0];
+        const lineEnds = [];
+        let match;
+        let foundLineNo = -1;
+        while (match = re.exec(mark.buffer)) {
+          lineEnds.push(match.index);
+          lineStarts.push(match.index + match[0].length);
+          if (mark.position <= match.index && foundLineNo < 0) foundLineNo = lineStarts.length - 2;
+        }
+        if (foundLineNo < 0) foundLineNo = lineStarts.length - 1;
+        let result = "";
+        const lineNoLength = Math.min(mark.line + options.linesAfter, lineEnds.length).toString().length;
+        const maxLineLength = options.maxLength - (options.indent + lineNoLength + 3);
+        for (let i = 1; i <= options.linesBefore; i++) {
+          if (foundLineNo - i < 0) break;
+          const line2 = getLine(mark.buffer, lineStarts[foundLineNo - i], lineEnds[foundLineNo - i], mark.position - (lineStarts[foundLineNo] - lineStarts[foundLineNo - i]), maxLineLength);
+          result = common2.repeat(" ", options.indent) + padStart((mark.line - i + 1).toString(), lineNoLength) + " | " + line2.str + "\n" + result;
+        }
+        const line = getLine(mark.buffer, lineStarts[foundLineNo], lineEnds[foundLineNo], mark.position, maxLineLength);
+        result += common2.repeat(" ", options.indent) + padStart((mark.line + 1).toString(), lineNoLength) + " | " + line.str + "\n";
+        result += common2.repeat("-", options.indent + lineNoLength + 3 + line.pos) + "^\n";
+        for (let i = 1; i <= options.linesAfter; i++) {
+          if (foundLineNo + i >= lineEnds.length) break;
+          const line2 = getLine(mark.buffer, lineStarts[foundLineNo + i], lineEnds[foundLineNo + i], mark.position - (lineStarts[foundLineNo] - lineStarts[foundLineNo + i]), maxLineLength);
+          result += common2.repeat(" ", options.indent) + padStart((mark.line + i + 1).toString(), lineNoLength) + " | " + line2.str + "\n";
+        }
+        return result.replace(/\n$/, "");
+      }
+      module.exports = makeSnippet;
+    });
+    require_type = /* @__PURE__ */ __commonJSMin((exports, module) => {
+      var YAMLException2 = require_exception();
+      var TYPE_CONSTRUCTOR_OPTIONS = [
+        "kind",
+        "multi",
+        "resolve",
+        "construct",
+        "instanceOf",
+        "predicate",
+        "represent",
+        "representName",
+        "defaultStyle",
+        "styleAliases"
+      ];
+      var YAML_NODE_KINDS = [
+        "scalar",
+        "sequence",
+        "mapping"
+      ];
+      function compileStyleAliases(map) {
+        const result = {};
+        if (map !== null) Object.keys(map).forEach(function(style) {
+          map[style].forEach(function(alias) {
+            result[String(alias)] = style;
+          });
+        });
+        return result;
+      }
+      function Type2(tag, options) {
+        options = options || {};
+        Object.keys(options).forEach(function(name) {
+          if (TYPE_CONSTRUCTOR_OPTIONS.indexOf(name) === -1) throw new YAMLException2('Unknown option "' + name + '" is met in definition of "' + tag + '" YAML type.');
+        });
+        this.options = options;
+        this.tag = tag;
+        this.kind = options["kind"] || null;
+        this.resolve = options["resolve"] || function() {
+          return true;
+        };
+        this.construct = options["construct"] || function(data) {
+          return data;
+        };
+        this.instanceOf = options["instanceOf"] || null;
+        this.predicate = options["predicate"] || null;
+        this.represent = options["represent"] || null;
+        this.representName = options["representName"] || null;
+        this.defaultStyle = options["defaultStyle"] || null;
+        this.multi = options["multi"] || false;
+        this.styleAliases = compileStyleAliases(options["styleAliases"] || null);
+        if (YAML_NODE_KINDS.indexOf(this.kind) === -1) throw new YAMLException2('Unknown kind "' + this.kind + '" is specified for "' + tag + '" YAML type.');
+      }
+      module.exports = Type2;
+    });
+    require_schema = /* @__PURE__ */ __commonJSMin((exports, module) => {
+      var YAMLException2 = require_exception();
+      var Type2 = require_type();
+      function compileList(schema, name) {
+        const result = [];
+        schema[name].forEach(function(currentType) {
+          let newIndex = result.length;
+          result.forEach(function(previousType, previousIndex) {
+            if (previousType.tag === currentType.tag && previousType.kind === currentType.kind && previousType.multi === currentType.multi) newIndex = previousIndex;
+          });
+          result[newIndex] = currentType;
+        });
+        return result;
+      }
+      function compileMap() {
+        const result = {
+          scalar: {},
+          sequence: {},
+          mapping: {},
+          fallback: {},
+          multi: {
+            scalar: [],
+            sequence: [],
+            mapping: [],
+            fallback: []
+          }
+        };
+        function collectType(type) {
+          if (type.multi) {
+            result.multi[type.kind].push(type);
+            result.multi["fallback"].push(type);
+          } else result[type.kind][type.tag] = result["fallback"][type.tag] = type;
+        }
+        for (let index = 0, length = arguments.length; index < length; index += 1) arguments[index].forEach(collectType);
+        return result;
+      }
+      function Schema2(definition) {
+        return this.extend(definition);
+      }
+      Schema2.prototype.extend = function extend(definition) {
+        let implicit = [];
+        let explicit = [];
+        if (definition instanceof Type2) explicit.push(definition);
+        else if (Array.isArray(definition)) explicit = explicit.concat(definition);
+        else if (definition && (Array.isArray(definition.implicit) || Array.isArray(definition.explicit))) {
+          if (definition.implicit) implicit = implicit.concat(definition.implicit);
+          if (definition.explicit) explicit = explicit.concat(definition.explicit);
+        } else throw new YAMLException2("Schema.extend argument should be a Type, [ Type ], or a schema definition ({ implicit: [...], explicit: [...] })");
+        implicit.forEach(function(type) {
+          if (!(type instanceof Type2)) throw new YAMLException2("Specified list of YAML types (or a single Type object) contains a non-Type object.");
+          if (type.loadKind && type.loadKind !== "scalar") throw new YAMLException2("There is a non-scalar type in the implicit list of a schema. Implicit resolving of such types is not supported.");
+          if (type.multi) throw new YAMLException2("There is a multi type in the implicit list of a schema. Multi tags can only be listed as explicit.");
+        });
+        explicit.forEach(function(type) {
+          if (!(type instanceof Type2)) throw new YAMLException2("Specified list of YAML types (or a single Type object) contains a non-Type object.");
+        });
+        const result = Object.create(Schema2.prototype);
+        result.implicit = (this.implicit || []).concat(implicit);
+        result.explicit = (this.explicit || []).concat(explicit);
+        result.compiledImplicit = compileList(result, "implicit");
+        result.compiledExplicit = compileList(result, "explicit");
+        result.compiledTypeMap = compileMap(result.compiledImplicit, result.compiledExplicit);
+        return result;
+      };
+      module.exports = Schema2;
+    });
+    require_str = /* @__PURE__ */ __commonJSMin((exports, module) => {
+      module.exports = new (require_type())("tag:yaml.org,2002:str", {
+        kind: "scalar",
+        construct: function(data) {
+          return data !== null ? data : "";
+        }
+      });
+    });
+    require_seq = /* @__PURE__ */ __commonJSMin((exports, module) => {
+      module.exports = new (require_type())("tag:yaml.org,2002:seq", {
+        kind: "sequence",
+        construct: function(data) {
+          return data !== null ? data : [];
+        }
+      });
+    });
+    require_map = /* @__PURE__ */ __commonJSMin((exports, module) => {
+      module.exports = new (require_type())("tag:yaml.org,2002:map", {
+        kind: "mapping",
+        construct: function(data) {
+          return data !== null ? data : {};
+        }
+      });
+    });
+    require_failsafe = /* @__PURE__ */ __commonJSMin((exports, module) => {
+      module.exports = new (require_schema())({ explicit: [
+        require_str(),
+        require_seq(),
+        require_map()
+      ] });
+    });
+    require_null = /* @__PURE__ */ __commonJSMin((exports, module) => {
+      var Type2 = require_type();
+      function resolveYamlNull(data) {
+        if (data === null) return true;
+        const max = data.length;
+        return max === 1 && data === "~" || max === 4 && (data === "null" || data === "Null" || data === "NULL");
+      }
+      function constructYamlNull() {
+        return null;
+      }
+      function isNull(object) {
+        return object === null;
+      }
+      module.exports = new Type2("tag:yaml.org,2002:null", {
+        kind: "scalar",
+        resolve: resolveYamlNull,
+        construct: constructYamlNull,
+        predicate: isNull,
+        represent: {
+          canonical: function() {
+            return "~";
+          },
+          lowercase: function() {
+            return "null";
+          },
+          uppercase: function() {
+            return "NULL";
+          },
+          camelcase: function() {
+            return "Null";
+          },
+          empty: function() {
+            return "";
+          }
+        },
+        defaultStyle: "lowercase"
+      });
+    });
+    require_bool = /* @__PURE__ */ __commonJSMin((exports, module) => {
+      var Type2 = require_type();
+      function resolveYamlBoolean(data) {
+        if (data === null) return false;
+        const max = data.length;
+        return max === 4 && (data === "true" || data === "True" || data === "TRUE") || max === 5 && (data === "false" || data === "False" || data === "FALSE");
+      }
+      function constructYamlBoolean(data) {
+        return data === "true" || data === "True" || data === "TRUE";
+      }
+      function isBoolean(object) {
+        return Object.prototype.toString.call(object) === "[object Boolean]";
+      }
+      module.exports = new Type2("tag:yaml.org,2002:bool", {
+        kind: "scalar",
+        resolve: resolveYamlBoolean,
+        construct: constructYamlBoolean,
+        predicate: isBoolean,
+        represent: {
+          lowercase: function(object) {
+            return object ? "true" : "false";
+          },
+          uppercase: function(object) {
+            return object ? "TRUE" : "FALSE";
+          },
+          camelcase: function(object) {
+            return object ? "True" : "False";
+          }
+        },
+        defaultStyle: "lowercase"
+      });
+    });
+    require_int = /* @__PURE__ */ __commonJSMin((exports, module) => {
+      var common2 = require_common();
+      var Type2 = require_type();
+      function isHexCode(c) {
+        return c >= 48 && c <= 57 || c >= 65 && c <= 70 || c >= 97 && c <= 102;
+      }
+      function isOctCode(c) {
+        return c >= 48 && c <= 55;
+      }
+      function isDecCode(c) {
+        return c >= 48 && c <= 57;
+      }
+      function resolveYamlInteger(data) {
+        if (data === null) return false;
+        const max = data.length;
+        let index = 0;
+        let hasDigits = false;
+        if (!max) return false;
+        let ch = data[index];
+        if (ch === "-" || ch === "+") ch = data[++index];
+        if (ch === "0") {
+          if (index + 1 === max) return true;
+          ch = data[++index];
+          if (ch === "b") {
+            index++;
+            for (; index < max; index++) {
+              ch = data[index];
+              if (ch !== "0" && ch !== "1") return false;
+              hasDigits = true;
+            }
+            return hasDigits && Number.isFinite(parseYamlInteger(data));
+          }
+          if (ch === "x") {
+            index++;
+            for (; index < max; index++) {
+              if (!isHexCode(data.charCodeAt(index))) return false;
+              hasDigits = true;
+            }
+            return hasDigits && Number.isFinite(parseYamlInteger(data));
+          }
+          if (ch === "o") {
+            index++;
+            for (; index < max; index++) {
+              if (!isOctCode(data.charCodeAt(index))) return false;
+              hasDigits = true;
+            }
+            return hasDigits && Number.isFinite(parseYamlInteger(data));
+          }
+        }
+        for (; index < max; index++) {
+          if (!isDecCode(data.charCodeAt(index))) return false;
+          hasDigits = true;
+        }
+        if (!hasDigits) return false;
+        return Number.isFinite(parseYamlInteger(data));
+      }
+      function parseYamlInteger(data) {
+        let value = data;
+        let sign = 1;
+        let ch = value[0];
+        if (ch === "-" || ch === "+") {
+          if (ch === "-") sign = -1;
+          value = value.slice(1);
+          ch = value[0];
+        }
+        if (value === "0") return 0;
+        if (ch === "0") {
+          if (value[1] === "b") return sign * parseInt(value.slice(2), 2);
+          if (value[1] === "x") return sign * parseInt(value.slice(2), 16);
+          if (value[1] === "o") return sign * parseInt(value.slice(2), 8);
+        }
+        return sign * parseInt(value, 10);
+      }
+      function constructYamlInteger(data) {
+        return parseYamlInteger(data);
+      }
+      function isInteger(object) {
+        return Object.prototype.toString.call(object) === "[object Number]" && object % 1 === 0 && !common2.isNegativeZero(object);
+      }
+      module.exports = new Type2("tag:yaml.org,2002:int", {
+        kind: "scalar",
+        resolve: resolveYamlInteger,
+        construct: constructYamlInteger,
+        predicate: isInteger,
+        represent: {
+          binary: function(obj) {
+            return obj >= 0 ? "0b" + obj.toString(2) : "-0b" + obj.toString(2).slice(1);
+          },
+          octal: function(obj) {
+            return obj >= 0 ? "0o" + obj.toString(8) : "-0o" + obj.toString(8).slice(1);
+          },
+          decimal: function(obj) {
+            return obj.toString(10);
+          },
+          hexadecimal: function(obj) {
+            return obj >= 0 ? "0x" + obj.toString(16).toUpperCase() : "-0x" + obj.toString(16).toUpperCase().slice(1);
+          }
+        },
+        defaultStyle: "decimal",
+        styleAliases: {
+          binary: [2, "bin"],
+          octal: [8, "oct"],
+          decimal: [10, "dec"],
+          hexadecimal: [16, "hex"]
+        }
+      });
+    });
+    require_float = /* @__PURE__ */ __commonJSMin((exports, module) => {
+      var common2 = require_common();
+      var Type2 = require_type();
+      var YAML_FLOAT_PATTERN = /* @__PURE__ */ new RegExp("^(?:[-+]?(?:[0-9]+)(?:\\.[0-9]*)?(?:[eE][-+]?[0-9]+)?|\\.[0-9]+(?:[eE][-+]?[0-9]+)?|[-+]?\\.(?:inf|Inf|INF)|\\.(?:nan|NaN|NAN))$");
+      var YAML_FLOAT_SPECIAL_PATTERN = /* @__PURE__ */ new RegExp("^(?:[-+]?\\.(?:inf|Inf|INF)|\\.(?:nan|NaN|NAN))$");
+      function resolveYamlFloat(data) {
+        if (data === null) return false;
+        if (!YAML_FLOAT_PATTERN.test(data)) return false;
+        if (Number.isFinite(parseFloat(data, 10))) return true;
+        return YAML_FLOAT_SPECIAL_PATTERN.test(data);
+      }
+      function constructYamlFloat(data) {
+        let value = data.toLowerCase();
+        const sign = value[0] === "-" ? -1 : 1;
+        if ("+-".indexOf(value[0]) >= 0) value = value.slice(1);
+        if (value === ".inf") return sign === 1 ? Number.POSITIVE_INFINITY : Number.NEGATIVE_INFINITY;
+        else if (value === ".nan") return NaN;
+        return sign * parseFloat(value, 10);
+      }
+      var SCIENTIFIC_WITHOUT_DOT = /^[-+]?[0-9]+e/;
+      function representYamlFloat(object, style) {
+        if (isNaN(object)) switch (style) {
+          case "lowercase":
+            return ".nan";
+          case "uppercase":
+            return ".NAN";
+          case "camelcase":
+            return ".NaN";
+        }
+        else if (Number.POSITIVE_INFINITY === object) switch (style) {
+          case "lowercase":
+            return ".inf";
+          case "uppercase":
+            return ".INF";
+          case "camelcase":
+            return ".Inf";
+        }
+        else if (Number.NEGATIVE_INFINITY === object) switch (style) {
+          case "lowercase":
+            return "-.inf";
+          case "uppercase":
+            return "-.INF";
+          case "camelcase":
+            return "-.Inf";
+        }
+        else if (common2.isNegativeZero(object)) return "-0.0";
+        const res = object.toString(10);
+        return SCIENTIFIC_WITHOUT_DOT.test(res) ? res.replace("e", ".e") : res;
+      }
+      function isFloat(object) {
+        return Object.prototype.toString.call(object) === "[object Number]" && (object % 1 !== 0 || common2.isNegativeZero(object));
+      }
+      module.exports = new Type2("tag:yaml.org,2002:float", {
+        kind: "scalar",
+        resolve: resolveYamlFloat,
+        construct: constructYamlFloat,
+        predicate: isFloat,
+        represent: representYamlFloat,
+        defaultStyle: "lowercase"
+      });
+    });
+    require_json = /* @__PURE__ */ __commonJSMin((exports, module) => {
+      module.exports = require_failsafe().extend({ implicit: [
+        require_null(),
+        require_bool(),
+        require_int(),
+        require_float()
+      ] });
+    });
+    require_core = /* @__PURE__ */ __commonJSMin((exports, module) => {
+      module.exports = require_json();
+    });
+    require_timestamp = /* @__PURE__ */ __commonJSMin((exports, module) => {
+      var Type2 = require_type();
+      var YAML_DATE_REGEXP = /* @__PURE__ */ new RegExp("^([0-9][0-9][0-9][0-9])-([0-9][0-9])-([0-9][0-9])$");
+      var YAML_TIMESTAMP_REGEXP = /* @__PURE__ */ new RegExp("^([0-9][0-9][0-9][0-9])-([0-9][0-9]?)-([0-9][0-9]?)(?:[Tt]|[ \\t]+)([0-9][0-9]?):([0-9][0-9]):([0-9][0-9])(?:\\.([0-9]*))?(?:[ \\t]*(Z|([-+])([0-9][0-9]?)(?::([0-9][0-9]))?))?$");
+      function resolveYamlTimestamp(data) {
+        if (data === null) return false;
+        if (YAML_DATE_REGEXP.exec(data) !== null) return true;
+        if (YAML_TIMESTAMP_REGEXP.exec(data) !== null) return true;
+        return false;
+      }
+      function constructYamlTimestamp(data) {
+        let fraction = 0;
+        let delta = null;
+        let match = YAML_DATE_REGEXP.exec(data);
+        if (match === null) match = YAML_TIMESTAMP_REGEXP.exec(data);
+        if (match === null) throw new Error("Date resolve error");
+        const year = +match[1];
+        const month = +match[2] - 1;
+        const day = +match[3];
+        if (!match[4]) return new Date(Date.UTC(year, month, day));
+        const hour = +match[4];
+        const minute = +match[5];
+        const second = +match[6];
+        if (match[7]) {
+          fraction = match[7].slice(0, 3);
+          while (fraction.length < 3) fraction += "0";
+          fraction = +fraction;
+        }
+        if (match[9]) {
+          const tzHour = +match[10];
+          const tzMinute = +(match[11] || 0);
+          delta = (tzHour * 60 + tzMinute) * 6e4;
+          if (match[9] === "-") delta = -delta;
+        }
+        const date = new Date(Date.UTC(year, month, day, hour, minute, second, fraction));
+        if (delta) date.setTime(date.getTime() - delta);
+        return date;
+      }
+      function representYamlTimestamp(object) {
+        return object.toISOString();
+      }
+      module.exports = new Type2("tag:yaml.org,2002:timestamp", {
+        kind: "scalar",
+        resolve: resolveYamlTimestamp,
+        construct: constructYamlTimestamp,
+        instanceOf: Date,
+        represent: representYamlTimestamp
+      });
+    });
+    require_merge = /* @__PURE__ */ __commonJSMin((exports, module) => {
+      var Type2 = require_type();
+      function resolveYamlMerge(data) {
+        return data === "<<" || data === null;
+      }
+      module.exports = new Type2("tag:yaml.org,2002:merge", {
+        kind: "scalar",
+        resolve: resolveYamlMerge
+      });
+    });
+    require_binary = /* @__PURE__ */ __commonJSMin((exports, module) => {
+      var Type2 = require_type();
+      var BASE64_MAP = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=\n\r";
+      function resolveYamlBinary(data) {
+        if (data === null) return false;
+        let bitlen = 0;
+        const max = data.length;
+        const map = BASE64_MAP;
+        for (let idx = 0; idx < max; idx++) {
+          const code2 = map.indexOf(data.charAt(idx));
+          if (code2 > 64) continue;
+          if (code2 < 0) return false;
+          bitlen += 6;
+        }
+        return bitlen % 8 === 0;
+      }
+      function constructYamlBinary(data) {
+        const input = data.replace(/[\r\n=]/g, "");
+        const max = input.length;
+        const map = BASE64_MAP;
+        let bits = 0;
+        const result = [];
+        for (let idx = 0; idx < max; idx++) {
+          if (idx % 4 === 0 && idx) {
+            result.push(bits >> 16 & 255);
+            result.push(bits >> 8 & 255);
+            result.push(bits & 255);
+          }
+          bits = bits << 6 | map.indexOf(input.charAt(idx));
+        }
+        const tailbits = max % 4 * 6;
+        if (tailbits === 0) {
+          result.push(bits >> 16 & 255);
+          result.push(bits >> 8 & 255);
+          result.push(bits & 255);
+        } else if (tailbits === 18) {
+          result.push(bits >> 10 & 255);
+          result.push(bits >> 2 & 255);
+        } else if (tailbits === 12) result.push(bits >> 4 & 255);
+        return new Uint8Array(result);
+      }
+      function representYamlBinary(object) {
+        let result = "";
+        let bits = 0;
+        const max = object.length;
+        const map = BASE64_MAP;
+        for (let idx = 0; idx < max; idx++) {
+          if (idx % 3 === 0 && idx) {
+            result += map[bits >> 18 & 63];
+            result += map[bits >> 12 & 63];
+            result += map[bits >> 6 & 63];
+            result += map[bits & 63];
+          }
+          bits = (bits << 8) + object[idx];
+        }
+        const tail = max % 3;
+        if (tail === 0) {
+          result += map[bits >> 18 & 63];
+          result += map[bits >> 12 & 63];
+          result += map[bits >> 6 & 63];
+          result += map[bits & 63];
+        } else if (tail === 2) {
+          result += map[bits >> 10 & 63];
+          result += map[bits >> 4 & 63];
+          result += map[bits << 2 & 63];
+          result += map[64];
+        } else if (tail === 1) {
+          result += map[bits >> 2 & 63];
+          result += map[bits << 4 & 63];
+          result += map[64];
+          result += map[64];
+        }
+        return result;
+      }
+      function isBinary(obj) {
+        return Object.prototype.toString.call(obj) === "[object Uint8Array]";
+      }
+      module.exports = new Type2("tag:yaml.org,2002:binary", {
+        kind: "scalar",
+        resolve: resolveYamlBinary,
+        construct: constructYamlBinary,
+        predicate: isBinary,
+        represent: representYamlBinary
+      });
+    });
+    require_omap = /* @__PURE__ */ __commonJSMin((exports, module) => {
+      var Type2 = require_type();
+      var _hasOwnProperty = Object.prototype.hasOwnProperty;
+      var _toString = Object.prototype.toString;
+      function resolveYamlOmap(data) {
+        if (data === null) return true;
+        const objectKeys = [];
+        const object = data;
+        for (let index = 0, length = object.length; index < length; index += 1) {
+          const pair = object[index];
+          let pairHasKey = false;
+          if (_toString.call(pair) !== "[object Object]") return false;
+          let pairKey;
+          for (pairKey in pair) if (_hasOwnProperty.call(pair, pairKey)) if (!pairHasKey) pairHasKey = true;
+          else return false;
+          if (!pairHasKey) return false;
+          if (objectKeys.indexOf(pairKey) === -1) objectKeys.push(pairKey);
+          else return false;
+        }
+        return true;
+      }
+      function constructYamlOmap(data) {
         return data !== null ? data : [];
       }
+      module.exports = new Type2("tag:yaml.org,2002:omap", {
+        kind: "sequence",
+        resolve: resolveYamlOmap,
+        construct: constructYamlOmap
+      });
     });
-    map = new type("tag:yaml.org,2002:map", {
-      kind: "mapping",
-      construct: function(data) {
+    require_pairs = /* @__PURE__ */ __commonJSMin((exports, module) => {
+      var Type2 = require_type();
+      var _toString = Object.prototype.toString;
+      function resolveYamlPairs(data) {
+        if (data === null) return true;
+        const object = data;
+        const result = new Array(object.length);
+        for (let index = 0, length = object.length; index < length; index += 1) {
+          const pair = object[index];
+          if (_toString.call(pair) !== "[object Object]") return false;
+          const keys = Object.keys(pair);
+          if (keys.length !== 1) return false;
+          result[index] = [keys[0], pair[keys[0]]];
+        }
+        return true;
+      }
+      function constructYamlPairs(data) {
+        if (data === null) return [];
+        const object = data;
+        const result = new Array(object.length);
+        for (let index = 0, length = object.length; index < length; index += 1) {
+          const pair = object[index];
+          const keys = Object.keys(pair);
+          result[index] = [keys[0], pair[keys[0]]];
+        }
+        return result;
+      }
+      module.exports = new Type2("tag:yaml.org,2002:pairs", {
+        kind: "sequence",
+        resolve: resolveYamlPairs,
+        construct: constructYamlPairs
+      });
+    });
+    require_set = /* @__PURE__ */ __commonJSMin((exports, module) => {
+      var Type2 = require_type();
+      var _hasOwnProperty = Object.prototype.hasOwnProperty;
+      function resolveYamlSet(data) {
+        if (data === null) return true;
+        const object = data;
+        for (const key in object) if (_hasOwnProperty.call(object, key)) {
+          if (object[key] !== null) return false;
+        }
+        return true;
+      }
+      function constructYamlSet(data) {
         return data !== null ? data : {};
       }
-    });
-    failsafe = new schema({
-      explicit: [
-        str,
-        seq,
-        map
-      ]
-    });
-    _null = new type("tag:yaml.org,2002:null", {
-      kind: "scalar",
-      resolve: resolveYamlNull,
-      construct: constructYamlNull,
-      predicate: isNull,
-      represent: {
-        canonical: function() {
-          return "~";
-        },
-        lowercase: function() {
-          return "null";
-        },
-        uppercase: function() {
-          return "NULL";
-        },
-        camelcase: function() {
-          return "Null";
-        },
-        empty: function() {
-          return "";
-        }
-      },
-      defaultStyle: "lowercase"
-    });
-    bool = new type("tag:yaml.org,2002:bool", {
-      kind: "scalar",
-      resolve: resolveYamlBoolean,
-      construct: constructYamlBoolean,
-      predicate: isBoolean,
-      represent: {
-        lowercase: function(object) {
-          return object ? "true" : "false";
-        },
-        uppercase: function(object) {
-          return object ? "TRUE" : "FALSE";
-        },
-        camelcase: function(object) {
-          return object ? "True" : "False";
-        }
-      },
-      defaultStyle: "lowercase"
-    });
-    int = new type("tag:yaml.org,2002:int", {
-      kind: "scalar",
-      resolve: resolveYamlInteger,
-      construct: constructYamlInteger,
-      predicate: isInteger,
-      represent: {
-        binary: function(obj) {
-          return obj >= 0 ? "0b" + obj.toString(2) : "-0b" + obj.toString(2).slice(1);
-        },
-        octal: function(obj) {
-          return obj >= 0 ? "0o" + obj.toString(8) : "-0o" + obj.toString(8).slice(1);
-        },
-        decimal: function(obj) {
-          return obj.toString(10);
-        },
-        /* eslint-disable max-len */
-        hexadecimal: function(obj) {
-          return obj >= 0 ? "0x" + obj.toString(16).toUpperCase() : "-0x" + obj.toString(16).toUpperCase().slice(1);
-        }
-      },
-      defaultStyle: "decimal",
-      styleAliases: {
-        binary: [2, "bin"],
-        octal: [8, "oct"],
-        decimal: [10, "dec"],
-        hexadecimal: [16, "hex"]
-      }
-    });
-    YAML_FLOAT_PATTERN = new RegExp(
-      // 2.5e4, 2.5 and integers
-      "^(?:[-+]?(?:[0-9][0-9_]*)(?:\\.[0-9_]*)?(?:[eE][-+]?[0-9]+)?|\\.[0-9_]+(?:[eE][-+]?[0-9]+)?|[-+]?\\.(?:inf|Inf|INF)|\\.(?:nan|NaN|NAN))$"
-    );
-    SCIENTIFIC_WITHOUT_DOT = /^[-+]?[0-9]+e/;
-    float = new type("tag:yaml.org,2002:float", {
-      kind: "scalar",
-      resolve: resolveYamlFloat,
-      construct: constructYamlFloat,
-      predicate: isFloat,
-      represent: representYamlFloat,
-      defaultStyle: "lowercase"
-    });
-    json = failsafe.extend({
-      implicit: [
-        _null,
-        bool,
-        int,
-        float
-      ]
-    });
-    core = json;
-    YAML_DATE_REGEXP = new RegExp(
-      "^([0-9][0-9][0-9][0-9])-([0-9][0-9])-([0-9][0-9])$"
-    );
-    YAML_TIMESTAMP_REGEXP = new RegExp(
-      "^([0-9][0-9][0-9][0-9])-([0-9][0-9]?)-([0-9][0-9]?)(?:[Tt]|[ \\t]+)([0-9][0-9]?):([0-9][0-9]):([0-9][0-9])(?:\\.([0-9]*))?(?:[ \\t]*(Z|([-+])([0-9][0-9]?)(?::([0-9][0-9]))?))?$"
-    );
-    timestamp = new type("tag:yaml.org,2002:timestamp", {
-      kind: "scalar",
-      resolve: resolveYamlTimestamp,
-      construct: constructYamlTimestamp,
-      instanceOf: Date,
-      represent: representYamlTimestamp
-    });
-    merge = new type("tag:yaml.org,2002:merge", {
-      kind: "scalar",
-      resolve: resolveYamlMerge
-    });
-    BASE64_MAP = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=\n\r";
-    binary = new type("tag:yaml.org,2002:binary", {
-      kind: "scalar",
-      resolve: resolveYamlBinary,
-      construct: constructYamlBinary,
-      predicate: isBinary,
-      represent: representYamlBinary
-    });
-    _hasOwnProperty$3 = Object.prototype.hasOwnProperty;
-    _toString$2 = Object.prototype.toString;
-    omap = new type("tag:yaml.org,2002:omap", {
-      kind: "sequence",
-      resolve: resolveYamlOmap,
-      construct: constructYamlOmap
-    });
-    _toString$1 = Object.prototype.toString;
-    pairs = new type("tag:yaml.org,2002:pairs", {
-      kind: "sequence",
-      resolve: resolveYamlPairs,
-      construct: constructYamlPairs
-    });
-    _hasOwnProperty$2 = Object.prototype.hasOwnProperty;
-    set = new type("tag:yaml.org,2002:set", {
-      kind: "mapping",
-      resolve: resolveYamlSet,
-      construct: constructYamlSet
-    });
-    _default = core.extend({
-      implicit: [
-        timestamp,
-        merge
-      ],
-      explicit: [
-        binary,
-        omap,
-        pairs,
-        set
-      ]
-    });
-    _hasOwnProperty$1 = Object.prototype.hasOwnProperty;
-    CONTEXT_FLOW_IN = 1;
-    CONTEXT_FLOW_OUT = 2;
-    CONTEXT_BLOCK_IN = 3;
-    CONTEXT_BLOCK_OUT = 4;
-    CHOMPING_CLIP = 1;
-    CHOMPING_STRIP = 2;
-    CHOMPING_KEEP = 3;
-    PATTERN_NON_PRINTABLE = /[\x00-\x08\x0B\x0C\x0E-\x1F\x7F-\x84\x86-\x9F\uFFFE\uFFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF]/;
-    PATTERN_NON_ASCII_LINE_BREAKS = /[\x85\u2028\u2029]/;
-    PATTERN_FLOW_INDICATORS = /[,\[\]\{\}]/;
-    PATTERN_TAG_HANDLE = /^(?:!|!!|![a-z\-]+!)$/i;
-    PATTERN_TAG_URI = /^(?:!|[^,\[\]\{\}])(?:%[0-9a-f]{2}|[0-9a-z\-#;\/\?:@&=\+\$,_\.!~\*'\(\)\[\]])*$/i;
-    simpleEscapeCheck = new Array(256);
-    simpleEscapeMap = new Array(256);
-    for (i = 0; i < 256; i++) {
-      simpleEscapeCheck[i] = simpleEscapeSequence(i) ? 1 : 0;
-      simpleEscapeMap[i] = simpleEscapeSequence(i);
-    }
-    directiveHandlers = {
-      YAML: function handleYamlDirective(state, name, args) {
-        var match, major, minor;
-        if (state.version !== null) {
-          throwError(state, "duplication of %YAML directive");
-        }
-        if (args.length !== 1) {
-          throwError(state, "YAML directive accepts exactly one argument");
-        }
-        match = /^([0-9]+)\.([0-9]+)$/.exec(args[0]);
-        if (match === null) {
-          throwError(state, "ill-formed argument of the YAML directive");
-        }
-        major = parseInt(match[1], 10);
-        minor = parseInt(match[2], 10);
-        if (major !== 1) {
-          throwError(state, "unacceptable YAML version of the document");
-        }
-        state.version = args[0];
-        state.checkLineBreaks = minor < 2;
-        if (minor !== 1 && minor !== 2) {
-          throwWarning(state, "unsupported YAML version of the document");
-        }
-      },
-      TAG: function handleTagDirective(state, name, args) {
-        var handle, prefix;
-        if (args.length !== 2) {
-          throwError(state, "TAG directive accepts exactly two arguments");
-        }
-        handle = args[0];
-        prefix = args[1];
-        if (!PATTERN_TAG_HANDLE.test(handle)) {
-          throwError(state, "ill-formed tag handle (first argument) of the TAG directive");
-        }
-        if (_hasOwnProperty$1.call(state.tagMap, handle)) {
-          throwError(state, 'there is a previously declared suffix for "' + handle + '" tag handle');
-        }
-        if (!PATTERN_TAG_URI.test(prefix)) {
-          throwError(state, "ill-formed tag prefix (second argument) of the TAG directive");
-        }
-        try {
-          prefix = decodeURIComponent(prefix);
-        } catch (err) {
-          throwError(state, "tag prefix is malformed: " + prefix);
-        }
-        state.tagMap[handle] = prefix;
-      }
-    };
-    loadAll_1 = loadAll$1;
-    load_1 = load$1;
-    loader = {
-      loadAll: loadAll_1,
-      load: load_1
-    };
-    _toString = Object.prototype.toString;
-    _hasOwnProperty = Object.prototype.hasOwnProperty;
-    CHAR_BOM = 65279;
-    CHAR_TAB = 9;
-    CHAR_LINE_FEED = 10;
-    CHAR_CARRIAGE_RETURN = 13;
-    CHAR_SPACE = 32;
-    CHAR_EXCLAMATION = 33;
-    CHAR_DOUBLE_QUOTE = 34;
-    CHAR_SHARP = 35;
-    CHAR_PERCENT = 37;
-    CHAR_AMPERSAND = 38;
-    CHAR_SINGLE_QUOTE = 39;
-    CHAR_ASTERISK = 42;
-    CHAR_COMMA = 44;
-    CHAR_MINUS = 45;
-    CHAR_COLON = 58;
-    CHAR_EQUALS = 61;
-    CHAR_GREATER_THAN = 62;
-    CHAR_QUESTION = 63;
-    CHAR_COMMERCIAL_AT = 64;
-    CHAR_LEFT_SQUARE_BRACKET = 91;
-    CHAR_RIGHT_SQUARE_BRACKET = 93;
-    CHAR_GRAVE_ACCENT = 96;
-    CHAR_LEFT_CURLY_BRACKET = 123;
-    CHAR_VERTICAL_LINE = 124;
-    CHAR_RIGHT_CURLY_BRACKET = 125;
-    ESCAPE_SEQUENCES = {};
-    ESCAPE_SEQUENCES[0] = "\\0";
-    ESCAPE_SEQUENCES[7] = "\\a";
-    ESCAPE_SEQUENCES[8] = "\\b";
-    ESCAPE_SEQUENCES[9] = "\\t";
-    ESCAPE_SEQUENCES[10] = "\\n";
-    ESCAPE_SEQUENCES[11] = "\\v";
-    ESCAPE_SEQUENCES[12] = "\\f";
-    ESCAPE_SEQUENCES[13] = "\\r";
-    ESCAPE_SEQUENCES[27] = "\\e";
-    ESCAPE_SEQUENCES[34] = '\\"';
-    ESCAPE_SEQUENCES[92] = "\\\\";
-    ESCAPE_SEQUENCES[133] = "\\N";
-    ESCAPE_SEQUENCES[160] = "\\_";
-    ESCAPE_SEQUENCES[8232] = "\\L";
-    ESCAPE_SEQUENCES[8233] = "\\P";
-    DEPRECATED_BOOLEANS_SYNTAX = [
-      "y",
-      "Y",
-      "yes",
-      "Yes",
-      "YES",
-      "on",
-      "On",
-      "ON",
-      "n",
-      "N",
-      "no",
-      "No",
-      "NO",
-      "off",
-      "Off",
-      "OFF"
-    ];
-    DEPRECATED_BASE60_SYNTAX = /^[-+]?[0-9_]+(?::[0-9_]+)+(?:\.[0-9_]*)?$/;
-    QUOTING_TYPE_SINGLE = 1;
-    QUOTING_TYPE_DOUBLE = 2;
-    STYLE_PLAIN = 1;
-    STYLE_SINGLE = 2;
-    STYLE_LITERAL = 3;
-    STYLE_FOLDED = 4;
-    STYLE_DOUBLE = 5;
-    dump_1 = dump$1;
-    dumper = {
-      dump: dump_1
-    };
-    Type = type;
-    Schema = schema;
-    FAILSAFE_SCHEMA = failsafe;
-    JSON_SCHEMA = json;
-    CORE_SCHEMA = core;
-    DEFAULT_SCHEMA = _default;
-    load2 = loader.load;
-    loadAll = loader.loadAll;
-    dump = dumper.dump;
-    YAMLException = exception;
-    types = {
-      binary,
-      float,
-      map,
-      null: _null,
-      pairs,
-      set,
-      timestamp,
-      bool,
-      int,
-      merge,
-      omap,
-      seq,
-      str
-    };
-    safeLoad = renamed("safeLoad", "load");
-    safeLoadAll = renamed("safeLoadAll", "loadAll");
-    safeDump = renamed("safeDump", "dump");
-    jsYaml = {
-      Type,
-      Schema,
-      FAILSAFE_SCHEMA,
-      JSON_SCHEMA,
-      CORE_SCHEMA,
-      DEFAULT_SCHEMA,
-      load: load2,
-      loadAll,
-      dump,
-      YAMLException,
-      types,
-      safeLoad,
-      safeLoadAll,
-      safeDump
-    };
-  }
-});
-
-// cli/src/lib/skill-manifest.ts
-import { readdirSync as readdirSync2, readFileSync as readFileSync2 } from "node:fs";
-import path16 from "node:path";
-function* walkSkillFiles(root) {
-  const stack = [root];
-  while (stack.length) {
-    const dir = stack.pop();
-    let entries;
-    try {
-      entries = readdirSync2(dir, { withFileTypes: true });
-    } catch {
-      continue;
-    }
-    for (const e of entries) {
-      if (e.isDirectory()) {
-        if (EXCLUDED_DIRS.has(e.name)) continue;
-        stack.push(path16.join(dir, e.name));
-      } else if (e.isFile() && e.name === "SKILL.md") {
-        yield path16.join(dir, e.name);
-      }
-    }
-  }
-}
-function parseFrontmatter(text) {
-  if (!text.startsWith("---")) return { error: "no frontmatter block" };
-  const end = text.indexOf("\n---", 3);
-  if (end === -1) return { error: "frontmatter not terminated" };
-  const raw = text.slice(3, end);
-  const fm = {};
-  for (const rawLine of raw.split(/\r?\n/)) {
-    const line = rawLine.replace(/\s+$/, "");
-    if (!line || line.startsWith("#")) continue;
-    const m = line.match(/^([a-zA-Z_][a-zA-Z0-9_-]*)\s*:\s*(.*)$/);
-    if (!m) return { error: `malformed line: ${line}` };
-    const rawValue = m[2].trim();
-    const wasQuoted = rawValue.length >= 2 && (rawValue.startsWith('"') && rawValue.endsWith('"') || rawValue.startsWith("'") && rawValue.endsWith("'"));
-    let value;
-    if (wasQuoted) value = rawValue.slice(1, -1);
-    else if (rawValue === "true") value = true;
-    else if (rawValue === "false") value = false;
-    else value = rawValue;
-    fm[m[1]] = value;
-  }
-  return { frontmatter: fm };
-}
-function buildSkillManifest(opts) {
-  const warn = opts.warn ?? ((msg) => process.stderr.write(msg + "\n"));
-  const out = [];
-  for (const file of walkSkillFiles(opts.repoRoot)) {
-    let text;
-    try {
-      text = readFileSync2(file, "utf8");
-    } catch (err) {
-      warn(`warn: ${file}: ${err.message}`);
-      continue;
-    }
-    const parsed = parseFrontmatter(text);
-    if (parsed.error) {
-      warn(`warn: ${file}: ${parsed.error}`);
-      continue;
-    }
-    const fm = parsed.frontmatter;
-    const name = fm["name"];
-    const description = fm["description"];
-    if (typeof name !== "string" || !name) {
-      warn(`warn: ${file}: missing name`);
-      continue;
-    }
-    if (typeof description !== "string" || !description) {
-      warn(`warn: ${file}: missing description`);
-      continue;
-    }
-    if (name.startsWith("rad-")) continue;
-    if (fm["disable-model-invocation"] === true) continue;
-    out.push({ name, description, path: path16.resolve(file) });
-  }
-  out.sort((a, b) => a.name.localeCompare(b.name));
-  return out;
-}
-var EXCLUDED_DIRS;
-var init_skill_manifest = __esm({
-  "cli/src/lib/skill-manifest.ts"() {
-    "use strict";
-    EXCLUDED_DIRS = /* @__PURE__ */ new Set([
-      "node_modules",
-      ".git",
-      "dist",
-      "build",
-      "out",
-      "coverage",
-      "prompt-tests"
-    ]);
-  }
-});
-
-// cli/src/lib/pipeline-engine/constants.ts
-var NODE_KINDS, NODE_STATUSES, GRAPH_STATUSES, CONDITION_OPERATORS, NEXT_ACTIONS, EVENTS, OUT_OF_BAND_EVENTS, REVIEW_VERDICTS, VALID_VERDICTS, ALLOWED_NODE_TRANSITIONS;
-var init_constants = __esm({
-  "cli/src/lib/pipeline-engine/constants.ts"() {
-    "use strict";
-    NODE_KINDS = Object.freeze({
-      STEP: "step",
-      GATE: "gate",
-      FOR_EACH_PHASE: "for_each_phase",
-      FOR_EACH_TASK: "for_each_task",
-      CONDITIONAL: "conditional",
-      PARALLEL: "parallel"
-    });
-    NODE_STATUSES = Object.freeze({
-      NOT_STARTED: "not_started",
-      IN_PROGRESS: "in_progress",
-      COMPLETED: "completed",
-      FAILED: "failed",
-      HALTED: "halted",
-      SKIPPED: "skipped"
-    });
-    GRAPH_STATUSES = Object.freeze({
-      NOT_STARTED: "not_started",
-      IN_PROGRESS: "in_progress",
-      COMPLETED: "completed",
-      HALTED: "halted"
-    });
-    CONDITION_OPERATORS = Object.freeze({
-      EQ: "eq",
-      NEQ: "neq",
-      IN: "in",
-      NOT_IN: "not_in",
-      TRUTHY: "truthy",
-      FALSY: "falsy"
-    });
-    NEXT_ACTIONS = Object.freeze({
-      // Planning agent spawns
-      SPAWN_REQUIREMENTS: "spawn_requirements",
-      SPAWN_MASTER_PLAN: "spawn_master_plan",
-      // Planning scripts
-      EXPLODE_MASTER_PLAN: "explode_master_plan",
-      // Human gates
-      REQUEST_PLAN_APPROVAL: "request_plan_approval",
-      GATE_TASK: "gate_task",
-      GATE_PHASE: "gate_phase",
-      ASK_GATE_MODE: "ask_gate_mode",
-      REQUEST_FINAL_APPROVAL: "request_final_approval",
-      // Execution agent spawns
-      EXECUTE_TASK: "execute_task",
-      SPAWN_CODE_REVIEWER: "spawn_code_reviewer",
-      SPAWN_PHASE_REVIEWER: "spawn_phase_reviewer",
-      SPAWN_FINAL_REVIEWER: "spawn_final_reviewer",
-      // Source control
-      INVOKE_SOURCE_CONTROL_COMMIT: "invoke_source_control_commit",
-      INVOKE_SOURCE_CONTROL_PR: "invoke_source_control_pr",
-      // Terminal states
-      DISPLAY_HALTED: "display_halted",
-      DISPLAY_COMPLETE: "display_complete"
-    });
-    EVENTS = Object.freeze({
-      // ── Planning step events ──────────────────────────────────────────────
-      REQUIREMENTS_COMPLETED: "requirements_completed",
-      MASTER_PLAN_COMPLETED: "master_plan_completed",
-      EXPLOSION_COMPLETED: "explosion_completed",
-      EXPLOSION_FAILED: "explosion_failed",
-      // ── Gate approved events ──────────────────────────────────────────────
-      PLAN_APPROVED: "plan_approved",
-      TASK_GATE_APPROVED: "task_gate_approved",
-      PHASE_GATE_APPROVED: "phase_gate_approved",
-      FINAL_APPROVED: "final_approved",
-      // ── Task execution events ─────────────────────────────────────────────
-      TASK_COMPLETED: "task_completed",
-      CODE_REVIEW_COMPLETED: "code_review_completed",
-      // ── Phase review events ───────────────────────────────────────────────
-      PHASE_REVIEW_COMPLETED: "phase_review_completed",
-      // ── Final review events ───────────────────────────────────────────────
-      FINAL_REVIEW_COMPLETED: "final_review_completed",
-      // ── Source control events ─────────────────────────────────────────────
-      COMMIT_COMPLETED: "commit_completed",
-      PR_REQUESTED: "pr_requested",
-      PR_CREATED: "pr_created",
-      // ── Out-of-band events ────────────────────────────────────────────────
-      PLAN_REJECTED: "plan_rejected",
-      GATE_REJECTED: "gate_rejected",
-      FINAL_REJECTED: "final_rejected",
-      HALT: "halt",
-      GATE_MODE_SET: "gate_mode_set",
-      SOURCE_CONTROL_INIT: "source_control_init"
-    });
-    OUT_OF_BAND_EVENTS = /* @__PURE__ */ new Set([
-      "plan_rejected",
-      "gate_rejected",
-      "final_rejected",
-      "halt",
-      "gate_mode_set",
-      "source_control_init",
-      // Parse-failure recovery loop: step-level `failed` events are not template-indexed
-      // by buildEventIndex, so routing `explosion_failed` requires the out-of-band path.
-      "explosion_failed"
-    ]);
-    REVIEW_VERDICTS = Object.freeze({
-      APPROVED: "approved",
-      CHANGES_REQUESTED: "changes_requested",
-      REJECTED: "rejected"
-    });
-    VALID_VERDICTS = new Set(Object.values(REVIEW_VERDICTS));
-    ALLOWED_NODE_TRANSITIONS = /* @__PURE__ */ new Map([
-      ["not_started", /* @__PURE__ */ new Set(["in_progress", "skipped", "completed"])],
-      ["in_progress", /* @__PURE__ */ new Set(["completed", "failed", "halted"])],
-      ["completed", /* @__PURE__ */ new Set(["not_started", "in_progress"])],
-      ["failed", /* @__PURE__ */ new Set(["in_progress"])],
-      ["halted", /* @__PURE__ */ new Set([])],
-      ["skipped", /* @__PURE__ */ new Set([])]
-    ]);
-  }
-});
-
-// cli/src/lib/pipeline-engine/template-validator.ts
-function makeError(subtype, templateId, message, detail) {
-  return {
-    type: "template_validation_error",
-    subtype,
-    template_id: templateId,
-    message,
-    detail
-  };
-}
-function validateScope(nodes, templateId, errors, warnings) {
-  const scopeIds = new Set(nodes.map((n) => n.id));
-  for (const node of nodes) {
-    if (!VALID_KINDS.includes(node.kind)) {
-      errors.push(makeError(
-        "invalid_kind",
-        templateId,
-        `Template validation failed: invalid node kind.
-  Node '${node.id}' has kind: '${node.kind}'
-  Valid kinds: step, gate, for_each_phase, for_each_task, conditional, parallel
-  Fix: change the kind to one of the valid values above.`,
-        { node_id: node.id, invalid_kind: node.kind, valid_kinds: [...VALID_KINDS] }
-      ));
-    }
-  }
-  for (const node of nodes) {
-    for (const ref of node.depends_on ?? []) {
-      if (!scopeIds.has(ref)) {
-        errors.push(makeError(
-          "dangling_ref",
-          templateId,
-          `Template validation failed: dangling node reference.
-  Node '${node.id}' depends on '${ref}', which is not defined in this scope.
-  Fix: add a node with id '${ref}', or remove it from ${node.id}.depends_on.`,
-          { node_id: node.id, missing_ref: ref }
-        ));
-      }
-    }
-  }
-  const inDegree = /* @__PURE__ */ new Map();
-  const adjacency = /* @__PURE__ */ new Map();
-  for (const node of nodes) {
-    inDegree.set(node.id, 0);
-    adjacency.set(node.id, []);
-  }
-  for (const node of nodes) {
-    const deps = (node.depends_on ?? []).filter((dep) => scopeIds.has(dep));
-    inDegree.set(node.id, deps.length);
-    for (const dep of deps) {
-      adjacency.get(dep).push(node.id);
-    }
-  }
-  const queue = [];
-  for (const [id, deg] of inDegree) {
-    if (deg === 0) queue.push(id);
-  }
-  let processed = 0;
-  while (queue.length > 0) {
-    const nodeId = queue.shift();
-    processed++;
-    for (const dependent of adjacency.get(nodeId)) {
-      const newDeg = inDegree.get(dependent) - 1;
-      inDegree.set(dependent, newDeg);
-      if (newDeg === 0) queue.push(dependent);
-    }
-  }
-  if (processed < nodes.length) {
-    const cycleNodes = nodes.filter((n) => inDegree.get(n.id) > 0).map((n) => n.id);
-    const nodeList = cycleNodes.join(", ");
-    errors.push(makeError(
-      "cycle_detected",
-      templateId,
-      `Template validation failed: cycle detected in node dependencies.
-  Nodes in cycle: ${nodeList}
-  Fix: break the cycle by removing a depends_on reference.`,
-      { cycle_nodes: cycleNodes }
-    ));
-  }
-  const referencedIds = /* @__PURE__ */ new Set();
-  for (const node of nodes) {
-    for (const ref of node.depends_on ?? []) {
-      referencedIds.add(ref);
-    }
-  }
-  for (const node of nodes) {
-    const deps = node.depends_on ?? [];
-    if (deps.length > 0 && !referencedIds.has(node.id)) {
-      errors.push(makeError(
-        "unreachable_node",
-        templateId,
-        `Template validation failed: unreachable node.
-  Node '${node.id}' has no incoming depends_on references and is not a root node.
-  Fix: add '${node.id}' to another node's depends_on, or remove it from the template.`,
-        { node_id: node.id }
-      ));
-    }
-  }
-  for (const node of nodes) {
-    if (node.kind === "for_each_phase" || node.kind === "for_each_task") {
-      validateScope(node.body, templateId, errors, warnings);
-    } else if (node.kind === "conditional") {
-      validateScope(node.branches.true, templateId, errors, warnings);
-      validateScope(node.branches.false, templateId, errors, warnings);
-    } else if (node.kind === "parallel") {
-      validateScope(node.children, templateId, errors, warnings);
-    }
-  }
-}
-function validateTemplate(template, templateId) {
-  if (template.template.status === "deprecated") {
-    return { valid: true, errors: [], warnings: [] };
-  }
-  const errors = [];
-  const warnings = [];
-  if (template.template.id !== templateId) {
-    warnings.push(makeError(
-      "id_mismatch",
-      templateId,
-      `Template validation warning: template id mismatch.
-  Expected: '${templateId}', found: '${template.template.id}'
-  This is a warning \u2014 the template will still load.`,
-      { expected_id: templateId, actual_id: template.template.id }
-    ));
-  }
-  validateScope(template.nodes, templateId, errors, warnings);
-  return {
-    valid: errors.length === 0,
-    errors,
-    warnings
-  };
-}
-var VALID_KINDS;
-var init_template_validator = __esm({
-  "cli/src/lib/pipeline-engine/template-validator.ts"() {
-    "use strict";
-    init_constants();
-    VALID_KINDS = Object.values(NODE_KINDS);
-  }
-});
-
-// cli/src/lib/pipeline-engine/template-loader.ts
-import * as fs13 from "node:fs";
-import * as path17 from "node:path";
-function buildEventIndex(nodes, parentPath) {
-  const index = /* @__PURE__ */ new Map();
-  for (const node of nodes) {
-    const templatePath = parentPath === "" ? node.id : `${parentPath}.${node.id}`;
-    if (node.kind === "step") {
-      const completedEvent = node.events.completed;
-      if (index.has(completedEvent)) {
-        throw new Error(`Duplicate event name in template: ${completedEvent}`);
-      }
-      index.set(completedEvent, { nodeDef: node, eventPhase: "completed", templatePath });
-      const startedEvent = node.events.started;
-      if (startedEvent !== void 0) {
-        if (index.has(startedEvent)) {
-          throw new Error(`Duplicate event name in template: ${startedEvent}`);
-        }
-        index.set(startedEvent, { nodeDef: node, eventPhase: "completed", templatePath });
-      }
-    } else if (node.kind === "gate") {
-      const approvedEvent = node.approved_event;
-      if (index.has(approvedEvent)) {
-        throw new Error(`Duplicate event name in template: ${approvedEvent}`);
-      }
-      index.set(approvedEvent, { nodeDef: node, eventPhase: "approved", templatePath });
-    } else if (node.kind === "for_each_phase") {
-      const childIndex = buildEventIndex(node.body, `${templatePath}.body`);
-      for (const [eventName, entry] of childIndex) {
-        if (index.has(eventName)) {
-          throw new Error(`Duplicate event name in template: ${eventName}`);
-        }
-        index.set(eventName, entry);
-      }
-    } else if (node.kind === "for_each_task") {
-      const childIndex = buildEventIndex(node.body, `${templatePath}.body`);
-      for (const [eventName, entry] of childIndex) {
-        if (index.has(eventName)) {
-          throw new Error(`Duplicate event name in template: ${eventName}`);
-        }
-        index.set(eventName, entry);
-      }
-    } else if (node.kind === "conditional") {
-      const trueIndex = buildEventIndex(node.branches.true, `${templatePath}.branches.true`);
-      for (const [eventName, entry] of trueIndex) {
-        if (index.has(eventName)) {
-          throw new Error(`Duplicate event name in template: ${eventName}`);
-        }
-        index.set(eventName, entry);
-      }
-      const falseIndex = buildEventIndex(node.branches.false, `${templatePath}.branches.false`);
-      for (const [eventName, entry] of falseIndex) {
-        if (index.has(eventName)) {
-          throw new Error(`Duplicate event name in template: ${eventName}`);
-        }
-        index.set(eventName, entry);
-      }
-    } else if (node.kind === "parallel") {
-      const childIndex = buildEventIndex(node.children, `${templatePath}.children`);
-      for (const [eventName, entry] of childIndex) {
-        if (index.has(eventName)) {
-          throw new Error(`Duplicate event name in template: ${eventName}`);
-        }
-        index.set(eventName, entry);
-      }
-    } else {
-      const _exhaustive = node;
-      throw new Error(`Unexpected node kind in template: ${_exhaustive.kind}`);
-    }
-  }
-  return index;
-}
-function loadTemplate(templatePath) {
-  let raw;
-  try {
-    raw = fs13.readFileSync(templatePath, "utf-8");
-  } catch (err) {
-    if (err !== null && typeof err === "object" && err.code === "ENOENT") {
-      throw new Error(`Template file not found: ${templatePath}`);
-    }
-    throw err;
-  }
-  let parsed;
-  try {
-    parsed = load2(raw);
-  } catch (err) {
-    const message = err instanceof Error ? err.message : String(err);
-    throw new Error(`Invalid YAML in template: ${templatePath}: ${message}`);
-  }
-  if (parsed === null || typeof parsed !== "object") {
-    throw new Error("Malformed template: missing template");
-  }
-  const obj = parsed;
-  if (!obj["template"] || typeof obj["template"] !== "object") {
-    throw new Error("Malformed template: missing template");
-  }
-  const header = obj["template"];
-  if (!header["id"] || typeof header["id"] !== "string") {
-    throw new Error("Malformed template: missing template.id");
-  }
-  if (!header["version"] || typeof header["version"] !== "string") {
-    throw new Error("Malformed template: missing template.version");
-  }
-  if (!header["description"] || typeof header["description"] !== "string") {
-    throw new Error("Malformed template: missing template.description");
-  }
-  if (!obj["nodes"] || !Array.isArray(obj["nodes"]) || obj["nodes"].length === 0) {
-    throw new Error("Malformed template: missing nodes");
-  }
-  const template = parsed;
-  const eventIndex = buildEventIndex(template.nodes, "");
-  const templateId = path17.basename(templatePath, ".yml");
-  const validationResult = validateTemplate(template, templateId);
-  const throwableErrors = validationResult.errors.filter(
-    (e) => e.subtype !== "unreachable_node"
-  );
-  if (throwableErrors.length > 0) {
-    const messages = throwableErrors.map((e) => e.message).join("\n");
-    throw new Error(`Template validation failed for '${templateId}':
-${messages}`);
-  }
-  return { template, eventIndex };
-}
-var init_template_loader = __esm({
-  "cli/src/lib/pipeline-engine/template-loader.ts"() {
-    "use strict";
-    init_js_yaml();
-    init_template_validator();
-  }
-});
-
-// cli/src/lib/pipeline-engine/template-resolver.ts
-import * as fs14 from "node:fs";
-import * as path18 from "node:path";
-function resolveTemplateName(state, cliTemplateName, config, projectDir, templatesDir) {
-  let templateName;
-  let source;
-  if (state !== null && state.graph.template_id) {
-    templateName = state.graph.template_id;
-    source = "state";
-  } else if (cliTemplateName !== void 0 && cliTemplateName !== "") {
-    templateName = cliTemplateName;
-    source = "cli";
-  } else if (config.default_template !== "" && config.default_template !== "ask") {
-    const raw = config.default_template;
-    templateName = CONFIG_SENTINEL_REMAP[raw] ?? raw;
-    source = "config";
-  } else {
-    templateName = "extra-high";
-    source = "default";
-  }
-  const { path: templatePath, isProjectLocal } = resolveTemplatePath(templateName, projectDir, templatesDir);
-  return { templateName, templatePath, source, isProjectLocal };
-}
-function resolveTemplatePath(templateName, projectDir, templatesDir) {
-  const projectLocalPath = path18.join(projectDir, "template.yml");
-  if (fs14.existsSync(projectLocalPath)) {
-    return { path: path18.resolve(projectLocalPath), isProjectLocal: true };
-  }
-  return { path: path18.join(templatesDir, templateName + ".yml"), isProjectLocal: false };
-}
-function snapshotTemplate(globalTemplatePath, projectDir) {
-  fs14.mkdirSync(projectDir, { recursive: true });
-  fs14.copyFileSync(globalTemplatePath, path18.join(projectDir, "template.yml"));
-}
-var CONFIG_SENTINEL_REMAP;
-var init_template_resolver = __esm({
-  "cli/src/lib/pipeline-engine/template-resolver.ts"() {
-    "use strict";
-    CONFIG_SENTINEL_REMAP = {
-      default: "extra-high",
-      quick: "low",
-      full: "extra-high"
-    };
-  }
-});
-
-// cli/src/lib/pipeline-engine/frontmatter-validators.ts
-function coerceNull(value) {
-  if (value === "null" || value === "undefined") return null;
-  return value;
-}
-function getValidationRules(event) {
-  return VALIDATION_RULES[event] ?? [];
-}
-function validateFrontmatter(event, frontmatter, _docPath) {
-  const rules = getValidationRules(event);
-  for (const rule of rules) {
-    if (rule.when !== void 0 && !rule.when(frontmatter)) {
-      continue;
-    }
-    let value = frontmatter[rule.field];
-    if (rule.field === "verdict") {
-      value = coerceNull(value);
-    }
-    if (rule.mustBeAbsent) {
-      if (value !== void 0 && value !== null) {
-        return {
-          error: `Invalid value: ${rule.field} must be ${rule.expected}`,
-          event,
-          field: rule.field
-        };
-      }
-      continue;
-    }
-    if (value === void 0 || value === null) {
-      return { error: "Missing required field", event, field: rule.field };
-    }
-    if (rule.field === "tasks") {
-      if (!Array.isArray(value)) {
-        return { error: "Invalid value: tasks must be an array", event, field: rule.field };
-      }
-      if (value.length === 0) {
-        return { error: "Invalid value: tasks must be a non-empty array", event, field: rule.field };
-      }
-    } else if (!rule.validate(value)) {
-      return {
-        error: `Invalid value: ${rule.field} must be ${rule.expected}`,
-        event,
-        field: rule.field
-      };
-    }
-  }
-  return null;
-}
-var VALIDATION_RULES;
-var init_frontmatter_validators = __esm({
-  "cli/src/lib/pipeline-engine/frontmatter-validators.ts"() {
-    "use strict";
-    VALIDATION_RULES = {
-      requirements_completed: [
-        {
-          field: "requirement_count",
-          validate: (v) => typeof v === "number" && Number.isInteger(v) && v > 0,
-          expected: "a positive integer"
-        }
-      ],
-      plan_approved: [
-        {
-          field: "total_phases",
-          validate: (v) => typeof v === "number" && Number.isInteger(v) && v > 0,
-          expected: "a positive integer"
-        },
-        {
-          field: "total_tasks",
-          validate: (v) => typeof v === "number" && Number.isInteger(v) && v > 0,
-          expected: "a positive integer"
-        }
-      ],
-      // Retained post-Iter 7: event no longer fires, but the phase-plan document
-      // contract is still live (explosion-script-authored; consumed downstream).
-      // Keeps the rule shape as a schema reference for the existing doc format.
-      phase_plan_created: [
-        {
-          field: "tasks",
-          validate: (v) => Array.isArray(v) && v.length > 0,
-          expected: "a non-empty array"
-        }
-      ],
-      // Iter 10 — conditional orchestrator-mediation contract. `verdict` is the
-      // reviewer's raw verdict; when it is `changes_requested`, the orchestrator's
-      // mediation addendum MUST supply `orchestrator_mediated`, `effective_outcome`,
-      // and (iff effective_outcome is `changes_requested`) `corrective_handoff_path`.
-      // When verdict is `approved` or `rejected`, all three mediation fields must
-      // be absent. See ok-write-the-plan-vast-thacker.md for the contract rationale.
-      code_review_completed: [
-        {
-          field: "verdict",
-          // Validate the raw verdict is exactly one of the three allowed values —
-          // no trimming, no case normalization. A typo or stray whitespace
-          // (e.g., "approved ") would otherwise slip past the conditional
-          // mediation rules (which gate on exact-string match of
-          // 'changes_requested') and surface as a later runtime halt from the
-          // mutation's unknown-verdict branch instead of a structured frontmatter
-          // error. Fail early here with a clear field-specific message so the
-          // operator can fix the frontmatter and re-signal the event.
-          validate: (v) => typeof v === "string" && (v === "approved" || v === "changes_requested" || v === "rejected"),
-          expected: "one of 'approved', 'changes_requested', 'rejected'"
-        },
-        // verdict === 'changes_requested' branch — mediation fields required
-        {
-          field: "orchestrator_mediated",
-          validate: (v) => v === true,
-          expected: "true (orchestrator mediation required for changes_requested verdicts)",
-          when: (fm) => fm.verdict === "changes_requested"
-        },
-        {
-          field: "effective_outcome",
-          validate: (v) => v === "approved" || v === "changes_requested",
-          expected: "'approved' or 'changes_requested'",
-          when: (fm) => fm.verdict === "changes_requested"
-        },
-        // When effective_outcome is changes_requested, corrective_handoff_path is
-        // OPTIONAL. Absence is the orchestrator's budget-exhausted halt signal —
-        // the mutation reads effective_outcome=changes_requested + no handoff path
-        // as "orchestrator declined to author a handoff because budget is blown"
-        // and converts it into a clean pipeline halt. When supplied, the path must
-        // be a non-empty string (whitespace-only is rejected).
-        {
-          field: "corrective_handoff_path",
-          validate: (v) => typeof v === "string" && v.trim().length > 0,
-          expected: "a non-empty string when supplied",
-          when: (fm) => fm.verdict === "changes_requested" && fm.effective_outcome === "changes_requested" && fm.corrective_handoff_path !== void 0 && fm.corrective_handoff_path !== null
-        },
-        {
-          field: "corrective_handoff_path",
-          validate: () => true,
-          expected: "absent (must be omitted when effective_outcome is approved)",
-          when: (fm) => fm.verdict === "changes_requested" && fm.effective_outcome === "approved",
-          mustBeAbsent: true
-        },
-        // verdict ∈ {'approved','rejected'} branch — mediation fields must be absent
-        {
-          field: "orchestrator_mediated",
-          validate: () => true,
-          expected: "absent (only permitted on changes_requested verdicts)",
-          when: (fm) => fm.verdict === "approved" || fm.verdict === "rejected",
-          mustBeAbsent: true
-        },
-        {
-          field: "effective_outcome",
-          validate: () => true,
-          expected: "absent (only permitted on changes_requested verdicts)",
-          when: (fm) => fm.verdict === "approved" || fm.verdict === "rejected",
-          mustBeAbsent: true
-        },
-        {
-          field: "corrective_handoff_path",
-          validate: () => true,
-          expected: "absent (only permitted on changes_requested verdicts)",
-          when: (fm) => fm.verdict === "approved" || fm.verdict === "rejected",
-          mustBeAbsent: true
-        }
-      ],
-      // Iter 11 — conditional orchestrator-mediation contract (parallels iter-10
-      // code_review_completed). `verdict` is the reviewer's raw verdict; when it is
-      // `changes_requested`, the orchestrator's mediation addendum MUST supply
-      // `orchestrator_mediated`, `effective_outcome`, and (iff effective_outcome is
-      // `changes_requested`) `corrective_handoff_path`. When verdict is `approved`
-      // or `rejected`, all three mediation fields must be absent. The mutation
-      // layer is `mutations.ts` PHASE_REVIEW_COMPLETED; the operator-facing write
-      // surface + judgment rubric lives in
-      // `harness-files/skills/rad-orchestration/references/corrective-playbook.md`
-      // (Phase-Scope Mediation section).
-      phase_review_completed: [
-        {
-          field: "verdict",
-          // Validate the raw verdict is exactly one of the three allowed values —
-          // no trimming, no case normalization. A typo or stray whitespace
-          // (e.g., "approved ") would otherwise slip past the conditional
-          // mediation rules (which gate on exact-string match of
-          // 'changes_requested') and surface as a later runtime halt from the
-          // mutation's unknown-verdict branch instead of a structured frontmatter
-          // error. Fail early here with a clear field-specific message so the
-          // operator can fix the frontmatter and re-signal the event.
-          validate: (v) => typeof v === "string" && (v === "approved" || v === "changes_requested" || v === "rejected"),
-          expected: "one of 'approved', 'changes_requested', 'rejected'"
-        },
-        {
-          field: "exit_criteria_met",
-          validate: (v) => v !== void 0 && v !== null,
-          expected: "a defined value"
-        },
-        // verdict === 'changes_requested' branch — mediation fields required
-        {
-          field: "orchestrator_mediated",
-          validate: (v) => v === true,
-          expected: "true (orchestrator mediation required for changes_requested verdicts)",
-          when: (fm) => fm.verdict === "changes_requested"
-        },
-        {
-          field: "effective_outcome",
-          validate: (v) => v === "approved" || v === "changes_requested",
-          expected: "'approved' or 'changes_requested'",
-          when: (fm) => fm.verdict === "changes_requested"
-        },
-        // When effective_outcome is changes_requested, corrective_handoff_path is
-        // OPTIONAL. Absence is the orchestrator's budget-exhausted halt signal —
-        // the mutation reads effective_outcome=changes_requested + no handoff path
-        // as "orchestrator declined to author a handoff because budget is blown"
-        // and converts it into a clean pipeline halt. When supplied, the path must
-        // be a non-empty string (whitespace-only is rejected).
-        {
-          field: "corrective_handoff_path",
-          validate: (v) => typeof v === "string" && v.trim().length > 0,
-          expected: "a non-empty string when supplied",
-          when: (fm) => fm.verdict === "changes_requested" && fm.effective_outcome === "changes_requested" && fm.corrective_handoff_path !== void 0 && fm.corrective_handoff_path !== null
-        },
-        {
-          field: "corrective_handoff_path",
-          validate: () => true,
-          expected: "absent (must be omitted when effective_outcome is approved)",
-          when: (fm) => fm.verdict === "changes_requested" && fm.effective_outcome === "approved",
-          mustBeAbsent: true
-        },
-        // verdict ∈ {'approved','rejected'} branch — mediation fields must be absent
-        {
-          field: "orchestrator_mediated",
-          validate: () => true,
-          expected: "absent (only permitted on changes_requested verdicts)",
-          when: (fm) => fm.verdict === "approved" || fm.verdict === "rejected",
-          mustBeAbsent: true
-        },
-        {
-          field: "effective_outcome",
-          validate: () => true,
-          expected: "absent (only permitted on changes_requested verdicts)",
-          when: (fm) => fm.verdict === "approved" || fm.verdict === "rejected",
-          mustBeAbsent: true
-        },
-        {
-          field: "corrective_handoff_path",
-          validate: () => true,
-          expected: "absent (only permitted on changes_requested verdicts)",
-          when: (fm) => fm.verdict === "approved" || fm.verdict === "rejected",
-          mustBeAbsent: true
-        }
-      ],
-      // Iter 12 — final_review_completed verdict enum check. Final-review
-      // corrective cycles are out of scope (final review is strict-verdict-only;
-      // no orchestrator mediation is wired for it). The validator enforces that
-      // the reviewer always supplies a valid verdict; mediation fields
-      // (`orchestrator_mediated`, `effective_outcome`, `corrective_handoff_path`)
-      // are not checked here because they are not part of the final-review
-      // contract. A future iteration that wires final-review mediation can extend
-      // this rule set with conditional mediation-field rules parallel to the
-      // iter-10 code_review_completed + iter-11 phase_review_completed shape.
-      final_review_completed: [
-        {
-          field: "verdict",
-          validate: (v) => typeof v === "string" && (v === "approved" || v === "changes_requested" || v === "rejected"),
-          expected: "one of 'approved', 'changes_requested', 'rejected'"
-        }
-      ]
-    };
-  }
-});
-
-// cli/src/lib/pipeline-engine/pre-reads.ts
-import { join as join3, isAbsolute } from "node:path";
-function extractMasterPlanDocPath(state) {
-  if (typeof state !== "object" || state === null) return void 0;
-  const s = state;
-  if (typeof s.graph !== "object" || s.graph === null) return void 0;
-  const g = s.graph;
-  if (typeof g.nodes !== "object" || g.nodes === null) return void 0;
-  const n = g.nodes;
-  if (typeof n.master_plan !== "object" || n.master_plan === null) return void 0;
-  const mp = n.master_plan;
-  return typeof mp.doc_path === "string" ? mp.doc_path : void 0;
-}
-function preRead(event, context, readDocument5, projectDir, state, entry) {
-  if (event === "plan_approved" && (!context.doc_path || context.doc_path.trim() === "")) {
-    const derived = extractMasterPlanDocPath(state);
-    if (!derived) {
-      return {
-        context,
-        error: {
-          message: "Cannot derive master plan path: graph.nodes.master_plan.doc_path is not set",
-          event: "plan_approved",
-          field: "doc_path"
-        }
-      };
-    }
-    context = { ...context, doc_path: isAbsolute(derived) ? derived : join3(projectDir, derived) };
-  }
-  if (event === "plan_approved" && context.doc_path) {
-    const resolvedPath2 = isAbsolute(context.doc_path) ? context.doc_path : join3(projectDir, context.doc_path);
-    const doc2 = readDocument5(resolvedPath2);
-    if (doc2 === null) {
-      return {
-        context,
-        error: {
-          message: `Pre-read failed: document not found or unreadable: ${resolvedPath2}`,
-          event,
-          field: "doc_path"
-        }
-      };
-    }
-    const enrichedContext2 = { ...doc2.frontmatter, ...context };
-    const validationError2 = validateFrontmatter(event, enrichedContext2, resolvedPath2);
-    if (validationError2) {
-      return {
-        context: enrichedContext2,
-        error: {
-          message: validationError2.error,
-          event: validationError2.event,
-          field: validationError2.field
-        }
-      };
-    }
-    context = enrichedContext2;
-  }
-  if (entry.eventPhase === "approved") {
-    return { context };
-  }
-  const { nodeDef } = entry;
-  if (nodeDef.kind !== "step" || !nodeDef.doc_output_field) {
-    return { context };
-  }
-  if (!context.doc_path || context.doc_path.trim() === "") {
-    return {
-      context,
-      error: {
-        message: "Pre-read failed: missing required field 'doc_path' in event context",
-        event,
-        field: "doc_path"
-      }
-    };
-  }
-  const resolvedPath = isAbsolute(context.doc_path) ? context.doc_path : join3(projectDir, context.doc_path);
-  const doc = readDocument5(resolvedPath);
-  if (doc === null) {
-    return {
-      context,
-      error: {
-        message: `Pre-read failed: document not found or unreadable: ${resolvedPath}`,
-        event,
-        field: "doc_path"
-      }
-    };
-  }
-  const enrichedContext = { ...doc.frontmatter, ...context };
-  const validationError = validateFrontmatter(event, enrichedContext, resolvedPath);
-  if (validationError) {
-    return {
-      context: enrichedContext,
-      error: {
-        message: validationError.error,
-        event: validationError.event,
-        field: validationError.field
-      }
-    };
-  }
-  return { context: enrichedContext };
-}
-var init_pre_reads = __esm({
-  "cli/src/lib/pipeline-engine/pre-reads.ts"() {
-    "use strict";
-    init_frontmatter_validators();
-  }
-});
-
-// cli/src/lib/pipeline-engine/scaffold.ts
-function scaffoldNodeState(nodeDef) {
-  switch (nodeDef.kind) {
-    case "step":
-      return { kind: "step", status: NODE_STATUSES.NOT_STARTED, doc_path: null, retries: 0 };
-    case "gate":
-      return { kind: "gate", status: NODE_STATUSES.NOT_STARTED, gate_active: false };
-    case "conditional":
-      return { kind: "conditional", status: NODE_STATUSES.NOT_STARTED, branch_taken: null };
-    case "parallel": {
-      const pDef = nodeDef;
-      const nodes = {};
-      for (const child of pDef.children) {
-        nodes[child.id] = scaffoldNodeState(child);
-      }
-      return { kind: "parallel", status: NODE_STATUSES.NOT_STARTED, nodes };
-    }
-    case "for_each_phase":
-      return { kind: "for_each_phase", status: NODE_STATUSES.NOT_STARTED, iterations: [] };
-    case "for_each_task":
-      return { kind: "for_each_task", status: NODE_STATUSES.NOT_STARTED, iterations: [] };
-    default: {
-      const _exhaustive = nodeDef;
-      throw new Error(`Unexpected node kind: ${_exhaustive.kind}`);
-    }
-  }
-}
-var init_scaffold = __esm({
-  "cli/src/lib/pipeline-engine/scaffold.ts"() {
-    "use strict";
-    init_constants();
-  }
-});
-
-// cli/src/lib/pipeline-engine/context-enrichment.ts
-function buildRepositorySkillsBlock(state) {
-  const repoRoot = state.pipeline.source_control?.worktree_path ?? process.cwd();
-  let arr;
-  try {
-    arr = buildSkillManifest({ repoRoot });
-  } catch (err) {
-    console.warn(
-      `context-enrichment: buildSkillManifest failed (${err.message}); emitting empty repository_skills_block`
-    );
-    return "";
-  }
-  if (!Array.isArray(arr) || arr.length === 0) return "";
-  const json3 = JSON.stringify(arr, null, 2);
-  return `
-
-## Repository Skills Available
-
-${json3}
-
-Entries above are a catalog. Read a listed path **only when** its description matches the work you are about to plan \u2014 skip the rest to avoid token waste. Any \`SKILL.md\` you encounter outside this catalog (e.g., via Grep/Glob) was filtered on purpose; do not Read it.
-`;
-}
-function formatPhaseId(phaseNumber) {
-  return `P${String(phaseNumber).padStart(2, "0")}`;
-}
-function formatTaskId(phaseNumber, taskNumber) {
-  return `${formatPhaseId(phaseNumber)}-T${String(taskNumber).padStart(2, "0")}`;
-}
-function resolveActivePhaseIndex(state) {
-  const phaseLoop = state.graph.nodes["phase_loop"];
-  if (!phaseLoop?.iterations?.length) return 1;
-  const matches = phaseLoop.iterations.filter((it) => it.status === "in_progress");
-  if (matches.length > 1) {
-    throw new Error(
-      `Ambiguous phase resolution: ${matches.length} phases are in_progress simultaneously. Pass --phase <N> to specify explicitly.`
-    );
-  }
-  if (matches.length === 1) return matches[0].index + 1;
-  const notStarted = phaseLoop.iterations.find((it) => it.status === "not_started");
-  if (notStarted) return notStarted.index + 1;
-  return 1;
-}
-function resolveActiveTaskIndex(state, phaseIndex) {
-  const phaseLoop = state.graph.nodes["phase_loop"];
-  if (!phaseLoop?.iterations?.length) return 1;
-  const phaseIteration = phaseLoop.iterations[phaseIndex - 1];
-  if (!phaseIteration?.nodes) return 1;
-  const taskLoop = phaseIteration.nodes["task_loop"];
-  if (!taskLoop?.iterations?.length) return 1;
-  const matches = taskLoop.iterations.filter((it) => it.status === "in_progress");
-  if (matches.length > 1) {
-    throw new Error(
-      `Ambiguous task resolution: ${matches.length} tasks are in_progress simultaneously in phase ${phaseIndex}. Pass --task <N> to specify explicitly.`
-    );
-  }
-  if (matches.length === 1) return matches[0].index + 1;
-  const notStarted = taskLoop.iterations.find((it) => it.status === "not_started");
-  if (notStarted) return notStarted.index + 1;
-  return 1;
-}
-function enrichActionContext(input) {
-  const { action, walkerContext, state } = input;
-  if (action in PLANNING_SPAWN_STEPS) {
-    const repository_skills_block = buildRepositorySkillsBlock(state);
-    const base = {
-      ...walkerContext,
-      step: PLANNING_SPAWN_STEPS[action],
-      repository_skills_block
-    };
-    if (action === "spawn_master_plan") {
-      return {
-        ...base,
-        limits: {
-          max_phases: input.config.limits.max_phases,
-          max_tasks_per_phase: input.config.limits.max_tasks_per_phase
-        }
-      };
-    }
-    return base;
-  }
-  if (PHASE_LEVEL_ACTIONS.has(action)) {
-    const phaseNumber = resolveActivePhaseIndex(state);
-    const phase_id = formatPhaseId(phaseNumber);
-    const base = { ...walkerContext, phase_number: phaseNumber, phase_id };
-    if (action === "spawn_phase_reviewer") {
-      const phaseLoop = state.graph.nodes["phase_loop"];
-      const phaseIter = phaseLoop?.iterations[phaseNumber - 1];
-      const taskLoop = phaseIter?.nodes["task_loop"];
-      const taskIters = taskLoop?.iterations ?? [];
-      const firstTask = taskIters[0];
-      const lastTask = taskIters[taskIters.length - 1];
-      const phase_first_sha = firstTask?.commit_hash ?? null;
-      const lastTaskFinalCorrective = lastTask?.corrective_tasks.slice().reverse().find((ct) => ct.commit_hash != null);
-      const phase_head_sha = lastTaskFinalCorrective?.commit_hash ?? lastTask?.commit_hash ?? null;
-      const correctiveFields = phaseIter && phaseIter.corrective_tasks.length > 0 ? { is_correction: true, corrective_index: phaseIter.corrective_tasks.length } : {};
-      return { ...base, phase_first_sha, phase_head_sha, ...correctiveFields };
-    }
-    return base;
-  }
-  if (TASK_LEVEL_ACTIONS.has(action)) {
-    const phaseNumber = resolveActivePhaseIndex(state);
-    const taskNumber = resolveActiveTaskIndex(state, phaseNumber);
-    const phase_id = formatPhaseId(phaseNumber);
-    const task_id = formatTaskId(phaseNumber, taskNumber);
-    const base = {
-      ...walkerContext,
-      phase_number: phaseNumber,
-      phase_id,
-      task_number: taskNumber,
-      task_id
-    };
-    const phaseLoopForSentinel = state.graph.nodes["phase_loop"];
-    const phaseIterForSentinel = phaseLoopForSentinel?.iterations[phaseNumber - 1];
-    const phaseCorrectives = phaseIterForSentinel?.corrective_tasks ?? [];
-    const phaseCorrectiveActive = phaseCorrectives.length > 0 && (phaseCorrectives[phaseCorrectives.length - 1].status === "not_started" || phaseCorrectives[phaseCorrectives.length - 1].status === "in_progress");
-    if (phaseCorrectiveActive) {
-      base.task_number = null;
-      base.task_id = `${phase_id}-PHASE`;
-    }
-    if (action === "execute_task") {
-      const phaseLoop = state.graph.nodes["phase_loop"];
-      const phaseIter = phaseLoop?.iterations[phaseNumber - 1];
-      const phaseCTs = phaseIter?.corrective_tasks ?? [];
-      const activePhaseCorrective = phaseCTs.length > 0 ? phaseCTs[phaseCTs.length - 1] : void 0;
-      if (activePhaseCorrective && (activePhaseCorrective.status === "not_started" || activePhaseCorrective.status === "in_progress")) {
-        const phaseCorrectiveDoc = activePhaseCorrective.doc_path;
-        if (typeof phaseCorrectiveDoc === "string" && phaseCorrectiveDoc.trim().length > 0) {
-          return { ...base, handoff_doc: phaseCorrectiveDoc };
-        }
-      }
-      const taskLoop = phaseIter?.nodes["task_loop"];
-      const taskIter = taskLoop?.iterations[taskNumber - 1];
-      const correctives = taskIter?.corrective_tasks ?? [];
-      const activeCorrective = correctives.length > 0 ? correctives[correctives.length - 1] : void 0;
-      if (activeCorrective && (activeCorrective.status === "not_started" || activeCorrective.status === "in_progress")) {
-        const correctiveDoc = activeCorrective.doc_path;
-        if (typeof correctiveDoc === "string" && correctiveDoc.trim().length > 0) {
-          return { ...base, handoff_doc: correctiveDoc };
-        }
-      }
-      const handoff_doc = taskIter?.doc_path ?? "";
-      return { ...base, handoff_doc };
-    }
-    if (action === "spawn_code_reviewer") {
-      const phaseLoop = state.graph.nodes["phase_loop"];
-      const phaseIter = phaseLoop?.iterations[phaseNumber - 1];
-      const phaseCTs = phaseIter?.corrective_tasks ?? [];
-      const activePhaseCorrective = phaseCTs.slice().reverse().find(
-        (ct) => ct.status === "in_progress" || ct.status === "not_started"
-      );
-      if (activePhaseCorrective) {
-        const head_sha2 = activePhaseCorrective.commit_hash ?? null;
-        return {
-          ...base,
-          head_sha: head_sha2,
-          is_correction: true,
-          corrective_index: activePhaseCorrective.index
-        };
-      }
-      const taskLoop = phaseIter?.nodes["task_loop"];
-      const taskIter = taskLoop?.iterations[taskNumber - 1];
-      const correctives = taskIter?.corrective_tasks ?? [];
-      const activeCorrective = correctives.slice().reverse().find(
-        (ct) => ct.status === "in_progress" || ct.status === "not_started"
-      );
-      const head_sha = activeCorrective ? activeCorrective.commit_hash ?? null : taskIter?.commit_hash ?? null;
-      const correctiveFields = activeCorrective ? { is_correction: true, corrective_index: activeCorrective.index } : {};
-      return { ...base, head_sha, ...correctiveFields };
-    }
-    return base;
-  }
-  if (action === "invoke_source_control_commit") {
-    const phaseNumber = resolveActivePhaseIndex(state);
-    const taskNumber = resolveActiveTaskIndex(state, phaseNumber);
-    return {
-      ...walkerContext,
-      phase_number: phaseNumber,
-      phase_id: formatPhaseId(phaseNumber),
-      task_number: taskNumber,
-      task_id: formatTaskId(phaseNumber, taskNumber),
-      branch: state.pipeline.source_control?.branch ?? "",
-      worktree_path: state.pipeline.source_control?.worktree_path ?? ""
-    };
-  }
-  if (action === "invoke_source_control_pr") {
-    return {
-      ...walkerContext,
-      branch: state.pipeline.source_control?.branch ?? "",
-      base_branch: state.pipeline.source_control?.base_branch ?? "",
-      worktree_path: state.pipeline.source_control?.worktree_path ?? ""
-    };
-  }
-  if (action === "request_final_approval") {
-    return {
-      ...walkerContext,
-      pr_url: state.pipeline.source_control?.pr_url ?? null
-    };
-  }
-  if (action === "spawn_final_reviewer") {
-    const phaseLoop = state.graph.nodes["phase_loop"];
-    const commits = [];
-    const phaseIterations = phaseLoop?.iterations ?? [];
-    for (const phaseIter of phaseIterations) {
-      const taskLoop = phaseIter.nodes["task_loop"];
-      const taskIterations = taskLoop?.iterations ?? [];
-      for (const taskIter of taskIterations) {
-        if (taskIter.commit_hash != null) commits.push(taskIter.commit_hash);
-        for (const ct of taskIter.corrective_tasks ?? []) {
-          if (ct.commit_hash != null) commits.push(ct.commit_hash);
-        }
-      }
-      for (const ct of phaseIter.corrective_tasks ?? []) {
-        if (ct.commit_hash != null) commits.push(ct.commit_hash);
-      }
-    }
-    const project_base_sha = commits.length > 0 ? commits[0] : null;
-    const project_head_sha = commits.length > 0 ? commits[commits.length - 1] : null;
-    return {
-      ...walkerContext,
-      project_base_sha,
-      project_head_sha
-    };
-  }
-  if (EMPTY_CONTEXT_ACTIONS.has(action)) {
-    return { ...walkerContext };
-  }
-  if (action === "display_halted") {
-    return {
-      ...walkerContext,
-      details: walkerContext.details ?? `Pipeline halted at node: ${state.graph.current_node_path ?? "unknown"}`
-    };
-  }
-  return { ...walkerContext };
-}
-var PLANNING_SPAWN_STEPS, PHASE_LEVEL_ACTIONS, TASK_LEVEL_ACTIONS, EMPTY_CONTEXT_ACTIONS;
-var init_context_enrichment = __esm({
-  "cli/src/lib/pipeline-engine/context-enrichment.ts"() {
-    "use strict";
-    init_skill_manifest();
-    PLANNING_SPAWN_STEPS = {
-      spawn_requirements: "requirements",
-      spawn_master_plan: "master_plan"
-    };
-    PHASE_LEVEL_ACTIONS = /* @__PURE__ */ new Set([
-      "spawn_phase_reviewer",
-      "gate_phase"
-    ]);
-    TASK_LEVEL_ACTIONS = /* @__PURE__ */ new Set([
-      "execute_task",
-      "spawn_code_reviewer",
-      "gate_task"
-    ]);
-    EMPTY_CONTEXT_ACTIONS = /* @__PURE__ */ new Set([
-      "request_plan_approval",
-      "ask_gate_mode",
-      "display_complete"
-    ]);
-  }
-});
-
-// cli/src/lib/pipeline-engine/mutations.ts
-function resolveNodeState(state, nodeId, scope, phase, task) {
-  if (scope === "top") {
-    return state.graph.nodes[nodeId];
-  }
-  if (phase === void 0) {
-    throw new Error(`resolveNodeState: scope is '${scope}' but phase is undefined`);
-  }
-  const phaseLoopNode = state.graph.nodes["phase_loop"];
-  if (phaseLoopNode.kind !== "for_each_phase") {
-    throw new Error(`Expected phase_loop to be a for_each_phase node, got ${phaseLoopNode.kind}`);
-  }
-  const phaseIteration = phaseLoopNode.iterations[phase - 1];
-  if (scope === "phase") {
-    return phaseIteration.nodes[nodeId];
-  }
-  if (phaseIteration.corrective_tasks.length > 0) {
-    const latest = phaseIteration.corrective_tasks[phaseIteration.corrective_tasks.length - 1];
-    if ((latest.status === "in_progress" || latest.status === "not_started") && nodeId in latest.nodes) {
-      return latest.nodes[nodeId];
-    }
-  }
-  const taskLoopNode = phaseIteration.nodes["task_loop"];
-  if (taskLoopNode.kind !== "for_each_task") {
-    throw new Error(`Expected task_loop to be a for_each_task node, got ${taskLoopNode.kind}`);
-  }
-  const taskIteration = taskLoopNode.iterations[(task ?? 1) - 1];
-  if (taskIteration.corrective_tasks.length > 0) {
-    const latest = taskIteration.corrective_tasks[taskIteration.corrective_tasks.length - 1];
-    if ((latest.status === "in_progress" || latest.status === "not_started") && nodeId in latest.nodes) {
-      return latest.nodes[nodeId];
-    }
-  }
-  return taskIteration.nodes[nodeId];
-}
-function resolvePhaseIteration(state, phase) {
-  const phaseLoopNode = state.graph.nodes["phase_loop"];
-  if (phaseLoopNode.kind !== "for_each_phase") {
-    throw new Error(`Expected phase_loop to be a for_each_phase node, got ${phaseLoopNode.kind}`);
-  }
-  return phaseLoopNode.iterations[phase - 1];
-}
-function resolveTaskIteration(state, phase, task) {
-  const phaseLoopNode = state.graph.nodes["phase_loop"];
-  if (phaseLoopNode.kind !== "for_each_phase") {
-    throw new Error(`Expected phase_loop to be a for_each_phase node, got ${phaseLoopNode.kind}`);
-  }
-  const phaseIteration = phaseLoopNode.iterations[phase - 1];
-  const taskLoopNode = phaseIteration.nodes["task_loop"];
-  if (taskLoopNode.kind !== "for_each_task") {
-    throw new Error(`Expected task_loop to be a for_each_task node, got ${taskLoopNode.kind}`);
-  }
-  return taskLoopNode.iterations[task - 1];
-}
-function findTaskLoopBodyDefs(template) {
-  for (const nodeDef of template.nodes) {
-    if (nodeDef.kind === "for_each_phase") {
-      for (const bodyNode of nodeDef.body) {
-        if (bodyNode.kind === "for_each_task") {
-          return bodyNode.body;
-        }
-      }
-    }
-  }
-  return [];
-}
-function resolveHostingIteration(state, phase, task) {
-  const phaseIter = resolvePhaseIteration(state, phase);
-  const phaseCTs = phaseIter.corrective_tasks;
-  if (phaseCTs.length > 0) {
-    const last = phaseCTs[phaseCTs.length - 1];
-    if ((last.status === "in_progress" || last.status === "not_started") && "code_review" in last.nodes) {
-      return { iteration: phaseIter, scope: "phase" };
-    }
-  }
-  return { iteration: resolveTaskIteration(state, phase, task), scope: "task" };
-}
-function normalizeOptionalUrl(raw) {
-  if (typeof raw !== "string") return null;
-  const trimmed = raw.trim();
-  return trimmed === "" ? null : trimmed;
-}
-function normalizeAutoSetting(field, raw) {
-  if (typeof raw !== "string") {
-    throw new Error(
-      `source_control_init: ${field} must be one of "always" | "yes" | "never" | "no", got ${raw === void 0 ? "undefined" : JSON.stringify(raw)}`
-    );
-  }
-  const v = raw.trim().toLowerCase();
-  if (v === "always" || v === "yes") return "always";
-  if (v === "never" || v === "no") return "never";
-  throw new Error(
-    `source_control_init: ${field} must be one of "always" | "yes" | "never" | "no", got ${JSON.stringify(raw)}`
-  );
-}
-function getMutation(event) {
-  return mutationRegistry.get(event);
-}
-var mutationRegistry, planningCompletedSteps, MAX_PARSE_RETRIES;
-var init_mutations = __esm({
-  "cli/src/lib/pipeline-engine/mutations.ts"() {
-    "use strict";
-    init_constants();
-    init_scaffold();
-    init_context_enrichment();
-    mutationRegistry = /* @__PURE__ */ new Map();
-    planningCompletedSteps = [
-      [EVENTS.REQUIREMENTS_COMPLETED, "requirements"],
-      [EVENTS.MASTER_PLAN_COMPLETED, "master_plan"]
-    ];
-    for (const [eventName, nodeId] of planningCompletedSteps) {
-      mutationRegistry.set(eventName, (state, context, _config, _template) => {
-        const cloned = structuredClone(state);
-        const mutations_applied = [];
-        const node = resolveNodeState(cloned, nodeId, "top");
-        node.status = "completed";
-        mutations_applied.push(`set ${nodeId}.status = completed`);
-        const docPath = context.doc_path ?? null;
-        node.doc_path = docPath;
-        mutations_applied.push(`set ${nodeId}.doc_path = ${docPath ?? "null"}`);
-        return { state: cloned, mutations_applied };
+      module.exports = new Type2("tag:yaml.org,2002:set", {
+        kind: "mapping",
+        resolve: resolveYamlSet,
+        construct: constructYamlSet
       });
-    }
-    mutationRegistry.set(EVENTS.EXPLOSION_COMPLETED, (state, _context, _config, _template) => {
-      const cloned = structuredClone(state);
-      const mutations_applied = [];
-      const node = resolveNodeState(cloned, "explode_master_plan", "top");
-      node.status = "completed";
-      mutations_applied.push("set explode_master_plan.status = completed");
-      node.doc_path = null;
-      mutations_applied.push("set explode_master_plan.doc_path = null");
-      const masterPlanNode = resolveNodeState(cloned, "master_plan", "top");
-      if (masterPlanNode.last_parse_error !== null && masterPlanNode.last_parse_error !== void 0) {
-        masterPlanNode.last_parse_error = null;
-        mutations_applied.push("cleared master_plan.last_parse_error");
-      }
-      masterPlanNode.parse_retry_count = 0;
-      mutations_applied.push("reset master_plan.parse_retry_count = 0");
-      return { state: cloned, mutations_applied };
     });
-    MAX_PARSE_RETRIES = 3;
-    mutationRegistry.set(EVENTS.EXPLOSION_FAILED, (state, context, _config, _template) => {
-      const cloned = structuredClone(state);
-      const mutations_applied = [];
-      const masterPlanNode = resolveNodeState(cloned, "master_plan", "top");
-      const explodeNode = resolveNodeState(cloned, "explode_master_plan", "top");
-      const parseError = context.parse_error;
-      if (!parseError || !Number.isInteger(parseError.line) || parseError.line < 1 || typeof parseError.expected !== "string" || typeof parseError.found !== "string" || typeof parseError.message !== "string") {
-        explodeNode.status = "failed";
-        explodeNode.doc_path = null;
-        cloned.graph.status = "halted";
-        cloned.pipeline.halt_reason = "Explosion dispatch error: explosion_failed received without a valid parse_error payload. This is a programmer error \u2014 the orchestrator or CLI wrapper must pass --parse-error with { line, expected, found, message }.";
-        mutations_applied.push("set explode_master_plan.status = failed (invalid dispatch)");
-        mutations_applied.push("set explode_master_plan.doc_path = null (invalid dispatch)");
-        mutations_applied.push("set graph.status = halted (dispatch error)");
-        mutations_applied.push("set pipeline.halt_reason (dispatch error)");
-        return { state: cloned, mutations_applied };
-      }
-      masterPlanNode.last_parse_error = parseError;
-      mutations_applied.push(
-        `set master_plan.last_parse_error = { line: ${parseError.line}, ... }`
-      );
-      const previousCount = masterPlanNode.parse_retry_count ?? 0;
-      const nextCount = previousCount + 1;
-      masterPlanNode.parse_retry_count = nextCount;
-      mutations_applied.push(`set master_plan.parse_retry_count = ${nextCount}`);
-      if (nextCount > MAX_PARSE_RETRIES) {
-        explodeNode.status = "failed";
-        mutations_applied.push(`set explode_master_plan.status = failed (parse retry cap ${MAX_PARSE_RETRIES} exceeded)`);
-        explodeNode.doc_path = null;
-        mutations_applied.push("set explode_master_plan.doc_path = null");
-        cloned.graph.status = "halted";
-        mutations_applied.push("set graph.status = halted");
-        const reasonMsg = parseError.message;
-        cloned.pipeline.halt_reason = `Explosion parser rejected planner output ${nextCount} times (cap=${MAX_PARSE_RETRIES}). Manual intervention required. Last error: ${reasonMsg}`;
-        mutations_applied.push(`set pipeline.halt_reason (parse retry cap exceeded)`);
-        return { state: cloned, mutations_applied };
-      }
-      explodeNode.status = "not_started";
-      explodeNode.doc_path = null;
-      mutations_applied.push("set explode_master_plan.status = not_started");
-      mutations_applied.push("set explode_master_plan.doc_path = null (recovery reset)");
-      masterPlanNode.status = "in_progress";
-      mutations_applied.push("set master_plan.status = in_progress (recovery re-spawn)");
-      return { state: cloned, mutations_applied };
-    });
-    mutationRegistry.set(EVENTS.PLAN_APPROVED, (state, _context, _config, _template) => {
-      const cloned = structuredClone(state);
-      const mutations_applied = [];
-      const node = resolveNodeState(cloned, "plan_approval_gate", "top");
-      node.status = "completed";
-      node.gate_active = true;
-      mutations_applied.push("set plan_approval_gate.status = completed");
-      mutations_applied.push("set plan_approval_gate.gate_active = true");
-      cloned.pipeline.current_tier = "execution";
-      mutations_applied.push("set pipeline.current_tier = execution");
-      return { state: cloned, mutations_applied };
-    });
-    mutationRegistry.set(EVENTS.TASK_GATE_APPROVED, (state, context, _config, _template) => {
-      const cloned = structuredClone(state);
-      const mutations_applied = [];
-      const node = resolveNodeState(cloned, "task_gate", "task", context.phase, context.task);
-      node.status = "completed";
-      node.gate_active = true;
-      mutations_applied.push("set task_gate.status = completed");
-      mutations_applied.push("set task_gate.gate_active = true");
-      return { state: cloned, mutations_applied };
-    });
-    mutationRegistry.set(EVENTS.PHASE_GATE_APPROVED, (state, context, _config, _template) => {
-      const cloned = structuredClone(state);
-      const mutations_applied = [];
-      const node = resolveNodeState(cloned, "phase_gate", "phase", context.phase);
-      node.status = "completed";
-      node.gate_active = true;
-      mutations_applied.push("set phase_gate.status = completed");
-      mutations_applied.push("set phase_gate.gate_active = true");
-      return { state: cloned, mutations_applied };
-    });
-    mutationRegistry.set(EVENTS.FINAL_APPROVED, (state, _context, _config, _template) => {
-      const cloned = structuredClone(state);
-      const mutations_applied = [];
-      const node = resolveNodeState(cloned, "final_approval_gate", "top");
-      node.status = "completed";
-      node.gate_active = true;
-      mutations_applied.push("set final_approval_gate.status = completed");
-      mutations_applied.push("set final_approval_gate.gate_active = true");
-      return { state: cloned, mutations_applied };
-    });
-    mutationRegistry.set(EVENTS.PHASE_REVIEW_COMPLETED, (state, context, config, template) => {
-      const cloned = structuredClone(state);
-      const mutations_applied = [];
-      let phase = context.phase;
-      if (phase === void 0) {
-        try {
-          phase = resolveActivePhaseIndex(cloned);
-        } catch (err) {
-          const detail = err instanceof Error ? err.message : String(err);
-          throw new Error(
-            `Cannot apply mutation for "phase_review_completed": failed to resolve the active phase from state.
-${detail}
-Pass --phase <N> to specify the phase explicitly.`
-          );
-        }
-      }
-      let node;
-      try {
-        node = resolveNodeState(cloned, "phase_review", "phase", phase);
-      } catch (err) {
-        const detail = err instanceof Error ? err.message : String(err);
-        throw new Error(
-          `Cannot apply mutation for "phase_review_completed": could not resolve phase_review for phase ${phase}.
-${detail}
-Pass --phase <N> to specify an existing phase explicitly.`
-        );
-      }
-      node.status = "completed";
-      mutations_applied.push("set phase_review.status = completed");
-      const docPath = context.doc_path ?? null;
-      node.doc_path = docPath;
-      mutations_applied.push(`set phase_review.doc_path = ${docPath ?? "null"}`);
-      const rawVerdict = context.verdict ?? null;
-      const effectiveOutcome = context.effective_outcome;
-      const correctiveHandoffPath = context.corrective_handoff_path;
-      const orchestratorMediated = context.orchestrator_mediated;
-      const mediationActive = rawVerdict === REVIEW_VERDICTS.CHANGES_REQUESTED && orchestratorMediated === true && effectiveOutcome !== void 0 && effectiveOutcome !== null;
-      const verdictForState = mediationActive ? effectiveOutcome : rawVerdict;
-      node.verdict = verdictForState;
-      mutations_applied.push(`set phase_review.verdict = ${verdictForState ?? "null"}`);
-      if (rawVerdict !== null && !VALID_VERDICTS.has(rawVerdict)) {
-        cloned.graph.status = "halted";
-        cloned.pipeline.halt_reason = `Unrecognized verdict '${rawVerdict}' in phase_review_completed`;
-        return {
-          state: cloned,
-          mutations_applied: [
-            ...mutations_applied,
-            `set graph.status = halted (unrecognized verdict '${rawVerdict}')`
-          ]
-        };
-      }
-      const routingVerdict = verdictForState;
-      if (routingVerdict === REVIEW_VERDICTS.CHANGES_REQUESTED) {
-        const iteration = resolvePhaseIteration(cloned, phase);
-        const correctiveCount = iteration.corrective_tasks.length;
-        const maxRetries = config.limits.max_retries_per_task;
-        const trimmedHandoffPath = typeof correctiveHandoffPath === "string" ? correctiveHandoffPath.trim() : "";
-        const hasHandoffPath = trimmedHandoffPath.length > 0;
-        if (!hasHandoffPath) {
-          iteration.status = "halted";
-          cloned.graph.status = "halted";
-          cloned.pipeline.halt_reason = `phase_review_completed: effective_outcome=changes_requested with no corrective_handoff_path. Possible causes: (1) budget exhausted (phase corrective_tasks.length=${correctiveCount}, max_retries_per_task=${maxRetries}) \u2014 this is the expected halt per the corrective-playbook; (2) orchestrator omitted the handoff path in error \u2014 check the review addendum.`;
-          mutations_applied.push("set phase_iteration.status = halted (effective_outcome=changes_requested, no handoff)");
-          mutations_applied.push("set graph.status = halted");
-          mutations_applied.push("set pipeline.halt_reason (budget-exhausted halt signal)");
-          return { state: cloned, mutations_applied };
-        }
-        if (correctiveCount >= maxRetries) {
-          iteration.status = "halted";
-          cloned.graph.status = "halted";
-          cloned.pipeline.halt_reason = `Retry budget exhausted for phase (max_retries_per_task=${maxRetries}) but a corrective_handoff_path was supplied. The orchestrator must not author a corrective handoff on exhaustion \u2014 this is a contract violation.`;
-          mutations_applied.push("set phase_iteration.status = halted (retry budget exhausted; handoff path supplied)");
-          mutations_applied.push("set graph.status = halted");
-          mutations_applied.push("set pipeline.halt_reason (budget exhausted with supplied handoff path)");
-          return { state: cloned, mutations_applied };
-        }
-        const bodyDefs = findTaskLoopBodyDefs(template);
-        if (bodyDefs.length === 0) {
-          throw new Error("findTaskLoopBodyDefs: no for_each_task body found in template");
-        }
-        const nodes = {};
-        for (const bodyDef of bodyDefs) {
-          nodes[bodyDef.id] = scaffoldNodeState(bodyDef);
-        }
-        const entry = {
-          index: correctiveCount + 1,
-          reason: context.reason ?? "Phase review requested changes",
-          injected_after: "phase_review",
-          status: "not_started",
-          nodes,
-          doc_path: trimmedHandoffPath,
-          commit_hash: null
-        };
-        iteration.corrective_tasks.push(entry);
-        mutations_applied.push(`injected phase corrective task ${entry.index} (changes_requested)`);
-        mutations_applied.push(`set phase_corrective_task[${entry.index}].doc_path = ${trimmedHandoffPath}`);
-        mutations_applied.push(`phase corrective_tasks.length = ${iteration.corrective_tasks.length}`);
-      } else if (routingVerdict === REVIEW_VERDICTS.REJECTED) {
-        const iteration = resolvePhaseIteration(cloned, phase);
-        iteration.status = "halted";
-        cloned.graph.status = "halted";
-        cloned.pipeline.halt_reason = `Phase review rejected: reviewer issued a 'rejected' verdict. Rejected verdicts halt the pipeline with no corrective cycle \u2014 no retry is attempted.`;
-        mutations_applied.push("set phase_iteration.status = halted (rejected verdict)");
-        mutations_applied.push("set graph.status = halted");
-        mutations_applied.push("set pipeline.halt_reason (reviewer rejected verdict)");
-      } else if (rawVerdict === REVIEW_VERDICTS.CHANGES_REQUESTED && routingVerdict !== REVIEW_VERDICTS.CHANGES_REQUESTED && routingVerdict !== REVIEW_VERDICTS.APPROVED) {
-        throw new Error(
-          "phase_review_completed: raw verdict=changes_requested without a valid effective_outcome. The orchestrator mediation contract was bypassed \u2014 ensure the review doc carries orchestrator_mediated=true and effective_outcome \u2208 {approved, changes_requested}."
-        );
-      }
-      return { state: cloned, mutations_applied };
-    });
-    mutationRegistry.set(EVENTS.TASK_COMPLETED, (state, context, _config, _template) => {
-      const cloned = structuredClone(state);
-      const mutations_applied = [];
-      let phase = context.phase;
-      if (phase === void 0) {
-        try {
-          phase = resolveActivePhaseIndex(cloned);
-        } catch {
-          throw new Error(
-            `Cannot apply mutation for "task_completed": no active phase could be resolved from state.
-Either no phase is currently in_progress, or multiple phases are in_progress simultaneously.
-Pass --phase <N> to specify the phase explicitly.`
-          );
-        }
-      }
-      let task = context.task;
-      if (task === void 0) {
-        try {
-          task = resolveActiveTaskIndex(cloned, phase);
-        } catch {
-          throw new Error(
-            `Cannot apply mutation for "task_completed": no active task could be resolved from state for phase ${phase}.
-Either no task is currently in_progress, or multiple tasks are in_progress simultaneously.
-Pass --task <N> to specify the task explicitly.`
-          );
-        }
-      }
-      try {
-        const node = resolveNodeState(cloned, "task_executor", "task", phase, task);
-        node.status = "completed";
-        mutations_applied.push("set task_executor.status = completed");
-      } catch {
-        if (context.phase === void 0) {
-          const phaseLoopNode = cloned.graph.nodes["phase_loop"];
-          const hasInProgressPhase = phaseLoopNode?.iterations?.some((it) => it.status === "in_progress");
-          if (hasInProgressPhase) {
-            throw new Error(
-              `Cannot apply mutation for "task_completed": no active task could be resolved from state for phase ${phase}.
-Either no task is currently in_progress, or multiple tasks are in_progress simultaneously.
-Pass --task <N> to specify the task explicitly.`
-            );
-          }
-          throw new Error(
-            `Cannot apply mutation for "task_completed": no active phase could be resolved from state.
-Either no phase is currently in_progress, or multiple phases are in_progress simultaneously.
-Pass --phase <N> to specify the phase explicitly.`
-          );
-        }
-        throw new Error(
-          `Cannot apply mutation for "task_completed": no active task could be resolved from state for phase ${phase}.
-Either no task is currently in_progress, or multiple tasks are in_progress simultaneously.
-Pass --task <N> to specify the task explicitly.`
-        );
-      }
-      return { state: cloned, mutations_applied };
-    });
-    mutationRegistry.set(EVENTS.CODE_REVIEW_COMPLETED, (state, context, config, template) => {
-      const cloned = structuredClone(state);
-      const mutations_applied = [];
-      let phase = context.phase;
-      if (phase === void 0) {
-        try {
-          phase = resolveActivePhaseIndex(cloned);
-        } catch {
-          throw new Error(
-            `Cannot apply mutation for "code_review_completed": no active phase could be resolved from state.
-Either no phase is currently in_progress, or multiple phases are in_progress simultaneously.
-Pass --phase <N> to specify the phase explicitly.`
-          );
-        }
-      }
-      let task = context.task;
-      if (task === void 0) {
-        try {
-          task = resolveActiveTaskIndex(cloned, phase);
-        } catch {
-          throw new Error(
-            `Cannot apply mutation for "code_review_completed": no active task could be resolved from state for phase ${phase}.
-Either no task is currently in_progress, or multiple tasks are in_progress simultaneously.
-Pass --task <N> to specify the task explicitly.`
-          );
-        }
-      }
-      let node;
-      try {
-        node = resolveNodeState(cloned, "code_review", "task", phase, task);
-      } catch {
-        throw new Error(
-          `Cannot apply mutation for "code_review_completed": failed to resolve code_review node for phase ${phase}, task ${task}.
-Either no task is currently in_progress, or multiple tasks are in_progress simultaneously.
-Pass --phase <N> and/or --task <N> to specify explicitly.`
-        );
-      }
-      node.status = "completed";
-      mutations_applied.push("set code_review.status = completed");
-      const docPath = context.doc_path ?? null;
-      node.doc_path = docPath;
-      mutations_applied.push(`set code_review.doc_path = ${docPath ?? "null"}`);
-      const rawVerdict = context.verdict ?? null;
-      const effectiveOutcome = context.effective_outcome;
-      const correctiveHandoffPath = context.corrective_handoff_path;
-      const orchestratorMediated = context.orchestrator_mediated;
-      const mediationActive = rawVerdict === REVIEW_VERDICTS.CHANGES_REQUESTED && orchestratorMediated === true && effectiveOutcome !== void 0 && effectiveOutcome !== null;
-      const verdictForState = mediationActive ? effectiveOutcome : rawVerdict;
-      node.verdict = verdictForState;
-      mutations_applied.push(`set code_review.verdict = ${verdictForState ?? "null"}`);
-      if (rawVerdict !== null && !VALID_VERDICTS.has(rawVerdict)) {
-        cloned.graph.status = "halted";
-        cloned.pipeline.halt_reason = `Unrecognized verdict '${rawVerdict}' in code_review_completed`;
-        return {
-          state: cloned,
-          mutations_applied: [
-            ...mutations_applied,
-            `set graph.status = halted (unrecognized verdict '${rawVerdict}')`
-          ]
-        };
-      }
-      const routingVerdict = verdictForState;
-      if (routingVerdict === REVIEW_VERDICTS.CHANGES_REQUESTED) {
-        const { iteration, scope } = resolveHostingIteration(cloned, phase, task);
-        const correctiveCount = iteration.corrective_tasks.length;
-        const maxRetries = config.limits.max_retries_per_task;
-        const trimmedHandoffPath = typeof correctiveHandoffPath === "string" ? correctiveHandoffPath.trim() : "";
-        const hasHandoffPath = trimmedHandoffPath.length > 0;
-        if (!hasHandoffPath) {
-          iteration.status = "halted";
-          cloned.graph.status = "halted";
-          cloned.pipeline.halt_reason = `code_review_completed: effective_outcome=changes_requested with no corrective_handoff_path. Possible causes: (1) budget exhausted (corrective_tasks.length=${correctiveCount}, max_retries_per_task=${maxRetries}, scope=${scope}) \u2014 this is the expected halt per the corrective-playbook; (2) orchestrator omitted the handoff path in error \u2014 check the review addendum.`;
-          mutations_applied.push(`set ${scope}_iteration.status = halted (effective_outcome=changes_requested, no handoff, scope=${scope})`);
-          mutations_applied.push("set graph.status = halted");
-          mutations_applied.push("set pipeline.halt_reason (budget-exhausted halt signal)");
-          return { state: cloned, mutations_applied };
-        }
-        if (correctiveCount >= maxRetries) {
-          iteration.status = "halted";
-          cloned.graph.status = "halted";
-          cloned.pipeline.halt_reason = `Retry budget exhausted for ${scope} (max_retries_per_task=${maxRetries}) but a corrective_handoff_path was supplied. The orchestrator must not author a corrective handoff on exhaustion \u2014 this is a contract violation.`;
-          mutations_applied.push(`set ${scope}_iteration.status = halted (retry budget exhausted; handoff path supplied, scope=${scope})`);
-          mutations_applied.push("set graph.status = halted");
-          mutations_applied.push("set pipeline.halt_reason (budget exhausted with supplied handoff path)");
-          return { state: cloned, mutations_applied };
-        }
-        const bodyDefs = findTaskLoopBodyDefs(template);
-        if (bodyDefs.length === 0) {
-          throw new Error("findTaskLoopBodyDefs: no for_each_task body found in template");
-        }
-        const nodes = {};
-        for (const bodyDef of bodyDefs) {
-          nodes[bodyDef.id] = scaffoldNodeState(bodyDef);
-        }
-        const entry = {
-          index: correctiveCount + 1,
-          reason: context.reason ?? "Code review requested changes",
-          injected_after: "code_review",
-          status: "not_started",
-          nodes,
-          doc_path: trimmedHandoffPath,
-          commit_hash: null
-        };
-        iteration.corrective_tasks.push(entry);
-        mutations_applied.push(`injected corrective task ${entry.index} (changes_requested, scope=${scope})`);
-        mutations_applied.push(`set corrective_task[${entry.index}].doc_path = ${trimmedHandoffPath}`);
-        mutations_applied.push(`corrective_tasks.length = ${iteration.corrective_tasks.length} (scope=${scope})`);
-      } else if (routingVerdict === REVIEW_VERDICTS.REJECTED) {
-        const { iteration, scope } = resolveHostingIteration(cloned, phase, task);
-        iteration.status = "halted";
-        cloned.graph.status = "halted";
-        cloned.pipeline.halt_reason = `Code review rejected (scope=${scope}): reviewer issued a 'rejected' verdict. Rejected verdicts halt the pipeline with no corrective cycle \u2014 no retry is attempted.`;
-        mutations_applied.push(`set ${scope === "phase" ? "phase_iteration" : "task_iteration"}.status = halted (rejected verdict, scope=${scope})`);
-        mutations_applied.push("set graph.status = halted");
-        mutations_applied.push("set pipeline.halt_reason (reviewer rejected verdict)");
-      } else if (rawVerdict === REVIEW_VERDICTS.CHANGES_REQUESTED && routingVerdict !== REVIEW_VERDICTS.CHANGES_REQUESTED && routingVerdict !== REVIEW_VERDICTS.APPROVED) {
-        throw new Error(
-          "code_review_completed: raw verdict=changes_requested without a valid effective_outcome. The orchestrator mediation contract was bypassed \u2014 ensure the review doc carries orchestrator_mediated=true and effective_outcome \u2208 {approved, changes_requested}."
-        );
-      }
-      return { state: cloned, mutations_applied };
-    });
-    mutationRegistry.set(EVENTS.FINAL_REVIEW_COMPLETED, (state, context, _config, _template) => {
-      const cloned = structuredClone(state);
-      const mutations_applied = [];
-      const node = resolveNodeState(cloned, "final_review", "top");
-      node.status = "completed";
-      mutations_applied.push("set final_review.status = completed");
-      const docPath = context.doc_path ?? null;
-      node.doc_path = docPath;
-      mutations_applied.push(`set final_review.doc_path = ${docPath ?? "null"}`);
-      const verdict = context.verdict ?? null;
-      node.verdict = verdict;
-      mutations_applied.push(`set final_review.verdict = ${verdict ?? "null"}`);
-      if (verdict !== null && !VALID_VERDICTS.has(verdict)) {
-        cloned.graph.status = "halted";
-        cloned.pipeline.halt_reason = `Unrecognized verdict '${verdict}' in final_review_completed`;
-        return {
-          state: cloned,
-          mutations_applied: [
-            ...mutations_applied,
-            `set graph.status = halted (unrecognized verdict '${verdict}')`
-          ]
-        };
-      }
-      if (verdict === REVIEW_VERDICTS.APPROVED) {
-        cloned.pipeline.current_tier = "review";
-        mutations_applied.push("set pipeline.current_tier = review");
-      }
-      return { state: cloned, mutations_applied };
-    });
-    mutationRegistry.set(EVENTS.COMMIT_COMPLETED, (state, context, _config, _template) => {
-      const cloned = structuredClone(state);
-      const mutations_applied = [];
-      let phase = context.phase;
-      if (phase === void 0) {
-        try {
-          phase = resolveActivePhaseIndex(cloned);
-        } catch {
-          throw new Error(
-            `Cannot apply mutation for "commit_completed": no active phase could be resolved from state.
-Either no phase is currently in_progress, or multiple phases are in_progress simultaneously.
-Pass --phase <N> to specify the phase explicitly.`
-          );
-        }
-      }
-      let task = context.task;
-      if (task === void 0) {
-        try {
-          task = resolveActiveTaskIndex(cloned, phase);
-        } catch {
-          throw new Error(
-            `Cannot apply mutation for "commit_completed": no active task could be resolved from state for phase ${phase}.
-Either no task is currently in_progress, or multiple tasks are in_progress simultaneously.
-Pass --task <N> to specify the task explicitly.`
-          );
-        }
-      }
-      try {
-        const node = resolveNodeState(cloned, "commit", "task", phase, task);
-        node.status = "completed";
-        mutations_applied.push("set commit.status = completed");
-        const commitHash = context.commit_hash ?? null;
-        const phaseIteration = resolvePhaseIteration(cloned, phase);
-        const activePhaseCorrective = phaseIteration.corrective_tasks.slice().reverse().find(
-          (ct) => ct.status === "in_progress" || ct.status === "not_started"
-        );
-        if (activePhaseCorrective) {
-          activePhaseCorrective.commit_hash = commitHash;
-          mutations_applied.push(`set phase_corrective_task[${activePhaseCorrective.index}].commit_hash = ${commitHash ?? "null"}`);
-          return { state: cloned, mutations_applied };
-        }
-        const taskIteration = resolveTaskIteration(cloned, phase, task);
-        const activeCorrective = taskIteration.corrective_tasks.slice().reverse().find(
-          (ct) => ct.status === "in_progress" || ct.status === "not_started"
-        );
-        if (activeCorrective) {
-          activeCorrective.commit_hash = commitHash;
-          mutations_applied.push(`set corrective_task[${activeCorrective.index}].commit_hash = ${commitHash ?? "null"}`);
-        } else {
-          taskIteration.commit_hash = commitHash;
-          mutations_applied.push(`set task_iteration[${taskIteration.index}].commit_hash = ${commitHash ?? "null"}`);
-        }
-        return { state: cloned, mutations_applied };
-      } catch {
-        if (context.phase === void 0) {
-          const phaseLoopNode = cloned.graph.nodes["phase_loop"];
-          const hasInProgressPhase = phaseLoopNode?.iterations?.some((it) => it.status === "in_progress");
-          if (hasInProgressPhase) {
-            throw new Error(
-              `Cannot apply mutation for "commit_completed": no active task could be resolved from state for phase ${phase}.
-Either no task is currently in_progress, or multiple tasks are in_progress simultaneously.
-Pass --task <N> to specify the task explicitly.`
-            );
-          }
-          throw new Error(
-            `Cannot apply mutation for "commit_completed": no active phase could be resolved from state.
-Either no phase is currently in_progress, or multiple phases are in_progress simultaneously.
-Pass --phase <N> to specify the phase explicitly.`
-          );
-        }
-        throw new Error(
-          `Cannot apply mutation for "commit_completed": no active task could be resolved from state for phase ${phase}.
-Either no task is currently in_progress, or multiple tasks are in_progress simultaneously.
-Pass --task <N> to specify the task explicitly.`
-        );
-      }
-    });
-    mutationRegistry.set(EVENTS.PR_REQUESTED, (state, _context, _config, _template) => {
-      const cloned = structuredClone(state);
-      const mutations_applied = [];
-      if (!cloned.graph.nodes["final_pr"]) {
-        cloned.graph.nodes["final_pr"] = scaffoldNodeState({
-          id: "final_pr",
-          kind: "step",
-          action: "invoke_source_control_pr",
-          events: { started: "pr_requested", completed: "pr_created" }
-        });
-        mutations_applied.push("scaffold final_pr (was not yet initialized)");
-      }
-      const node = resolveNodeState(cloned, "final_pr", "top");
-      node.status = "in_progress";
-      mutations_applied.push("set final_pr.status = in_progress");
-      return { state: cloned, mutations_applied };
-    });
-    mutationRegistry.set(EVENTS.PR_CREATED, (state, context, _config, _template) => {
-      const cloned = structuredClone(state);
-      const mutations_applied = [];
-      const node = resolveNodeState(cloned, "final_pr", "top");
-      node.status = "completed";
-      mutations_applied.push("set final_pr.status = completed");
-      if (context.pr_url !== void 0) {
-        if (!cloned.pipeline.source_control) {
-          throw new Error(
-            "pr_created: pipeline.source_control is null \u2014 cannot store pr_url. Source control must be initialized via source_control_init before PR creation."
-          );
-        }
-        cloned.pipeline.source_control.pr_url = context.pr_url ?? null;
-        mutations_applied.push(`set pipeline.source_control.pr_url = ${context.pr_url ?? "null"}`);
-      }
-      return { state: cloned, mutations_applied };
-    });
-    mutationRegistry.set(EVENTS.PLAN_REJECTED, (state, _context, _config, _template) => {
-      const cloned = structuredClone(state);
-      const mutations_applied = [];
-      const masterPlanNode = resolveNodeState(cloned, "master_plan", "top");
-      masterPlanNode.status = "not_started";
-      mutations_applied.push("set master_plan.status = not_started");
-      masterPlanNode.doc_path = null;
-      mutations_applied.push("set master_plan.doc_path = null");
-      const planGateNode = resolveNodeState(cloned, "plan_approval_gate", "top");
-      planGateNode.status = "not_started";
-      mutations_applied.push("set plan_approval_gate.status = not_started");
-      planGateNode.gate_active = false;
-      mutations_applied.push("set plan_approval_gate.gate_active = false");
-      const phaseLoopNode = cloned.graph.nodes["phase_loop"];
-      if (phaseLoopNode !== void 0) {
-        if (phaseLoopNode.kind !== "for_each_phase") {
-          throw new Error(`Expected phase_loop to be a for_each_phase node, got ${phaseLoopNode.kind}`);
-        }
-        phaseLoopNode.iterations = [];
-        mutations_applied.push("set phase_loop.iterations = []");
-      }
-      return { state: cloned, mutations_applied };
-    });
-    mutationRegistry.set(EVENTS.GATE_REJECTED, (state, context, _config, _template) => {
-      const cloned = structuredClone(state);
-      const mutations_applied = [];
-      cloned.pipeline.current_tier = "halted";
-      mutations_applied.push("set pipeline.current_tier = halted");
-      cloned.graph.status = "halted";
-      mutations_applied.push("set graph.status = halted");
-      const gateType = context.gate_type ?? "unknown";
-      const reason = context.reason || "No reason provided";
-      cloned.pipeline.halt_reason = `Gate rejected (${gateType}): ${reason}`;
-      mutations_applied.push(`set pipeline.halt_reason = Gate rejected (${gateType}): ${reason}`);
-      return { state: cloned, mutations_applied };
-    });
-    mutationRegistry.set(EVENTS.FINAL_REJECTED, (state, _context, _config, _template) => {
-      const cloned = structuredClone(state);
-      const mutations_applied = [];
-      const finalReviewNode = resolveNodeState(cloned, "final_review", "top");
-      finalReviewNode.status = "not_started";
-      mutations_applied.push("set final_review.status = not_started");
-      finalReviewNode.doc_path = null;
-      mutations_applied.push("set final_review.doc_path = null");
-      const finalGateNode = resolveNodeState(cloned, "final_approval_gate", "top");
-      finalGateNode.status = "not_started";
-      mutations_applied.push("set final_approval_gate.status = not_started");
-      finalGateNode.gate_active = false;
-      mutations_applied.push("set final_approval_gate.gate_active = false");
-      return { state: cloned, mutations_applied };
-    });
-    mutationRegistry.set(EVENTS.HALT, (state, context, _config, _template) => {
-      const cloned = structuredClone(state);
-      const mutations_applied = [];
-      cloned.pipeline.current_tier = "halted";
-      mutations_applied.push("set pipeline.current_tier = halted");
-      cloned.graph.status = "halted";
-      mutations_applied.push("set graph.status = halted");
-      const haltReason = context.reason ?? "Pipeline halted by operator";
-      cloned.pipeline.halt_reason = haltReason;
-      mutations_applied.push(`set pipeline.halt_reason = ${haltReason}`);
-      return { state: cloned, mutations_applied };
-    });
-    mutationRegistry.set(EVENTS.GATE_MODE_SET, (state, context, _config, _template) => {
-      const cloned = structuredClone(state);
-      const mode = context.gate_mode;
-      if (!mode || !["task", "phase", "autonomous"].includes(mode)) {
-        throw new Error(`Invalid gate mode '${mode}': expected task, phase, or autonomous`);
-      }
-      cloned.pipeline.gate_mode = mode;
-      return {
-        state: cloned,
-        mutations_applied: [`set pipeline.gate_mode = ${mode}`]
-      };
-    });
-    mutationRegistry.set(EVENTS.SOURCE_CONTROL_INIT, (state, context, _config, _template) => {
-      const branch = context.branch;
-      const baseBranch = context.base_branch;
-      if (!branch || !baseBranch) {
-        throw new Error("source_control_init requires --branch and --base-branch");
-      }
-      const autoCommit = normalizeAutoSetting("auto_commit", context.auto_commit);
-      const autoPr = normalizeAutoSetting("auto_pr", context.auto_pr);
-      const cloned = structuredClone(state);
-      cloned.pipeline.source_control = {
-        branch,
-        base_branch: baseBranch,
-        worktree_path: context.worktree_path?.trim() || ".",
-        auto_commit: autoCommit,
-        auto_pr: autoPr,
-        remote_url: normalizeOptionalUrl(context.remote_url),
-        compare_url: normalizeOptionalUrl(context.compare_url),
-        pr_url: null
-      };
-      return {
-        state: cloned,
-        mutations_applied: ["created pipeline.source_control"]
-      };
-    });
-  }
-});
-
-// cli/src/lib/pipeline-engine/condition-evaluator.ts
-function resolveDotPath(obj, path23) {
-  const segments = path23.split(".");
-  let current = obj;
-  for (let i = 0; i < segments.length; i++) {
-    if (current === void 0 || current === null) {
-      const blame = i === 0 ? "<root>" : segments[i - 1];
-      throw new Error(
-        `Cannot resolve path '${path23}': segment '${blame}' resolved to ${typeof current}`
-      );
-    }
-    current = current[segments[i]];
-  }
-  return current;
-}
-function evaluateCondition(condition, config, state) {
-  const hasConfigRef = condition.config_ref !== void 0;
-  const hasStateRef = condition.state_ref !== void 0;
-  if (hasConfigRef && hasStateRef) {
-    throw new Error(
-      "ConditionExpression must have exactly one of config_ref or state_ref, but both were present"
-    );
-  }
-  if (!hasConfigRef && !hasStateRef) {
-    throw new Error(
-      "ConditionExpression must have exactly one of config_ref or state_ref, but neither was present"
-    );
-  }
-  const resolved = hasConfigRef ? resolveDotPath(config, condition.config_ref) : resolveDotPath(state, condition.state_ref);
-  switch (condition.operator) {
-    case "eq":
-      return resolved === condition.value;
-    case "neq":
-      return resolved !== condition.value;
-    case "in": {
-      if (!Array.isArray(condition.value)) {
-        throw new Error("Operator 'in' requires value to be an array");
-      }
-      return condition.value.includes(resolved);
-    }
-    case "not_in": {
-      if (!Array.isArray(condition.value)) {
-        throw new Error("Operator 'not_in' requires value to be an array");
-      }
-      return !condition.value.includes(resolved);
-    }
-    case "truthy":
-      return Boolean(resolved);
-    case "falsy":
-      return !resolved;
-    default: {
-      const _exhaustive = condition.operator;
-      throw new Error(`Unknown operator: '${String(_exhaustive)}'`);
-    }
-  }
-}
-var init_condition_evaluator = __esm({
-  "cli/src/lib/pipeline-engine/condition-evaluator.ts"() {
-    "use strict";
-  }
-});
-
-// cli/src/lib/pipeline-engine/dag-walker.ts
-function resolveNodeStatePath(templatePath, _context) {
-  let result = templatePath;
-  if (_context.phase !== void 0) {
-    result = result.replaceAll("phase_loop.body.", `phase_loop[${_context.phase - 1}].`);
-  }
-  if (_context.task !== void 0) {
-    result = result.replaceAll("task_loop.body.", `task_loop[${_context.task - 1}].`);
-  }
-  return result;
-}
-function resolveConfigValue(dotPath, config) {
-  const segments = dotPath.split(".");
-  let current = config;
-  for (const segment of segments) {
-    if (current === null || current === void 0 || typeof current !== "object") {
-      return void 0;
-    }
-    current = current[segment];
-  }
-  return current;
-}
-function checkDependencies(dependsOn, nodes) {
-  if (!dependsOn || dependsOn.length === 0) {
-    return true;
-  }
-  return dependsOn.every((depId) => {
-    const depState = nodes[depId];
-    return depState !== void 0 && (depState.status === NODE_STATUSES.COMPLETED || depState.status === NODE_STATUSES.SKIPPED);
-  });
-}
-function resolveStateRef(ref, graphState) {
-  const path23 = ref.startsWith("$.") ? ref.slice(2) : ref;
-  const segments = path23.split(".");
-  let current = graphState;
-  for (const segment of segments) {
-    if (current === null || current === void 0 || typeof current !== "object") {
-      return void 0;
-    }
-    current = current[segment];
-  }
-  return current;
-}
-function resolveDocRefInScope(ref, graphState, currentIteration) {
-  if (ref === "$.current_phase.doc_path") {
-    return currentIteration?.doc_path ?? void 0;
-  }
-  return resolveStateRef(ref, graphState);
-}
-function walkForEachIterations(fepDef, fepState, config, state, readDocument5) {
-  for (const iteration of fepState.iterations) {
-    if (iteration.status === NODE_STATUSES.COMPLETED || iteration.status === NODE_STATUSES.SKIPPED) {
-      continue;
-    }
-    if (iteration.status === NODE_STATUSES.HALTED) {
-      return { action: NEXT_ACTIONS.DISPLAY_HALTED, context: { details: state.pipeline.halt_reason ?? "Pipeline is halted" } };
-    }
-    if (iteration.status === NODE_STATUSES.NOT_STARTED) {
-      iteration.status = NODE_STATUSES.IN_PROGRESS;
-    }
-    const orderedNodes = {};
-    for (const bodyDef of fepDef.body) {
-      orderedNodes[bodyDef.id] = iteration.nodes[bodyDef.id] ?? scaffoldNodeState(bodyDef);
-    }
-    for (const key of Object.keys(iteration.nodes)) {
-      if (!(key in orderedNodes)) {
-        orderedNodes[key] = iteration.nodes[key];
-      }
-    }
-    iteration.nodes = orderedNodes;
-    if (iteration.corrective_tasks.length > 0) {
-      const latestCorrective = iteration.corrective_tasks[iteration.corrective_tasks.length - 1];
-      if (latestCorrective.status === NODE_STATUSES.HALTED) {
-        return { action: NEXT_ACTIONS.DISPLAY_HALTED, context: { details: state.pipeline.halt_reason ?? "Pipeline is halted" } };
-      }
-      if (latestCorrective.status === NODE_STATUSES.COMPLETED) {
-        iteration.status = NODE_STATUSES.COMPLETED;
-        continue;
-      }
-      if (latestCorrective.status === NODE_STATUSES.NOT_STARTED) {
-        latestCorrective.status = NODE_STATUSES.IN_PROGRESS;
-      }
-      let correctiveBodyDefs;
-      if (fepDef.kind === "for_each_phase") {
-        const fetDef = fepDef.body.find((n) => n.kind === "for_each_task");
-        correctiveBodyDefs = fetDef ? fetDef.body : fepDef.body;
-      } else {
-        correctiveBodyDefs = fepDef.body;
-      }
-      const correctiveResult = walkNodes(correctiveBodyDefs, latestCorrective.nodes, config, state, readDocument5, iteration);
-      if (correctiveResult !== null) {
-        return correctiveResult;
-      }
-      const allCorrectiveDone = correctiveBodyDefs.every((bn) => {
-        const bnState = latestCorrective.nodes[bn.id];
-        return bnState !== void 0 && (bnState.status === NODE_STATUSES.COMPLETED || bnState.status === NODE_STATUSES.SKIPPED);
+    require_default = /* @__PURE__ */ __commonJSMin((exports, module) => {
+      module.exports = require_core().extend({
+        implicit: [require_timestamp(), require_merge()],
+        explicit: [
+          require_binary(),
+          require_omap(),
+          require_pairs(),
+          require_set()
+        ]
       });
-      if (allCorrectiveDone) {
-        latestCorrective.status = NODE_STATUSES.COMPLETED;
-        iteration.status = NODE_STATUSES.COMPLETED;
-        continue;
-      }
-      return null;
-    }
-    const bodyResult = walkNodes(fepDef.body, iteration.nodes, config, state, readDocument5, iteration);
-    if (bodyResult !== null) {
-      return bodyResult;
-    }
-    const allBodyDone = fepDef.body.every((bn) => {
-      const bnState = iteration.nodes[bn.id];
-      return bnState !== void 0 && (bnState.status === NODE_STATUSES.COMPLETED || bnState.status === NODE_STATUSES.SKIPPED);
     });
-    if (allBodyDone) {
-      iteration.status = NODE_STATUSES.COMPLETED;
-      continue;
-    }
-    return null;
-  }
-  return "all_completed";
-}
-function walkNodes(nodeDefs, nodes, config, state, readDocument5, currentIteration) {
-  for (const nodeDef of nodeDefs) {
-    const nodeState = nodes[nodeDef.id];
-    if (!nodeState) {
-      continue;
-    }
-    if (!checkDependencies(nodeDef.depends_on, nodes)) {
-      continue;
-    }
-    if (nodeState.status === NODE_STATUSES.HALTED) {
-      return { action: NEXT_ACTIONS.DISPLAY_HALTED, context: { details: state.pipeline.halt_reason ?? "Pipeline is halted" } };
-    }
-    if (nodeState.status === NODE_STATUSES.COMPLETED || nodeState.status === NODE_STATUSES.SKIPPED) {
-      continue;
-    }
-    if (nodeState.status === NODE_STATUSES.IN_PROGRESS) {
-      if (nodeDef.kind === "conditional") {
-        const condDef = nodeDef;
-        const condState = nodeState;
-        const branchKey = condState.branch_taken;
-        if (branchKey === null) {
-          return null;
+    require_loader = /* @__PURE__ */ __commonJSMin((exports, module) => {
+      var common2 = require_common();
+      var YAMLException2 = require_exception();
+      var makeSnippet = require_snippet();
+      var DEFAULT_SCHEMA2 = require_default();
+      var _hasOwnProperty = Object.prototype.hasOwnProperty;
+      var CONTEXT_FLOW_IN = 1;
+      var CONTEXT_FLOW_OUT = 2;
+      var CONTEXT_BLOCK_IN = 3;
+      var CONTEXT_BLOCK_OUT = 4;
+      var CHOMPING_CLIP = 1;
+      var CHOMPING_STRIP = 2;
+      var CHOMPING_KEEP = 3;
+      var PATTERN_NON_PRINTABLE = /[\x00-\x08\x0B\x0C\x0E-\x1F\x7F-\x84\x86-\x9F\uFFFE\uFFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF]/;
+      var PATTERN_NON_ASCII_LINE_BREAKS = /[\x85\u2028\u2029]/;
+      var PATTERN_FLOW_INDICATORS = /[,\[\]{}]/;
+      var PATTERN_TAG_HANDLE = /^(?:!|!!|![0-9A-Za-z-]+!)$/;
+      var PATTERN_TAG_URI = /^(?:!|[^,\[\]{}])(?:%[0-9a-f]{2}|[0-9a-z\-#;/?:@&=+$,_.!~*'()\[\]])*$/i;
+      function _class(obj) {
+        return Object.prototype.toString.call(obj);
+      }
+      function isEol(c) {
+        return c === 10 || c === 13;
+      }
+      function isWhiteSpace(c) {
+        return c === 9 || c === 32;
+      }
+      function isWsOrEol(c) {
+        return c === 9 || c === 32 || c === 10 || c === 13;
+      }
+      function isFlowIndicator(c) {
+        return c === 44 || c === 91 || c === 93 || c === 123 || c === 125;
+      }
+      function fromHexCode(c) {
+        if (c >= 48 && c <= 57) return c - 48;
+        const lc = c | 32;
+        if (lc >= 97 && lc <= 102) return lc - 97 + 10;
+        return -1;
+      }
+      function escapedHexLen(c) {
+        if (c === 120) return 2;
+        if (c === 117) return 4;
+        if (c === 85) return 8;
+        return 0;
+      }
+      function fromDecimalCode(c) {
+        if (c >= 48 && c <= 57) return c - 48;
+        return -1;
+      }
+      function simpleEscapeSequence(c) {
+        switch (c) {
+          case 48:
+            return "\0";
+          case 97:
+            return "\x07";
+          case 98:
+            return "\b";
+          case 116:
+            return "	";
+          case 9:
+            return "	";
+          case 110:
+            return "\n";
+          case 118:
+            return "\v";
+          case 102:
+            return "\f";
+          case 114:
+            return "\r";
+          case 101:
+            return "\x1B";
+          case 32:
+            return " ";
+          case 34:
+            return '"';
+          case 47:
+            return "/";
+          case 92:
+            return "\\";
+          case 78:
+            return "\x85";
+          case 95:
+            return "\xA0";
+          case 76:
+            return "\u2028";
+          case 80:
+            return "\u2029";
+          default:
+            return "";
         }
-        const branchNodes = condDef.branches[branchKey];
-        const allBranchDone = branchNodes.every((bn) => {
-          const bnState = nodes[bn.id];
-          return bnState !== void 0 && (bnState.status === NODE_STATUSES.COMPLETED || bnState.status === NODE_STATUSES.SKIPPED);
+      }
+      function charFromCodepoint(c) {
+        if (c <= 65535) return String.fromCharCode(c);
+        return String.fromCharCode((c - 65536 >> 10) + 55296, (c - 65536 & 1023) + 56320);
+      }
+      function setProperty(object, key, value) {
+        if (key === "__proto__") Object.defineProperty(object, key, {
+          configurable: true,
+          enumerable: true,
+          writable: true,
+          value
         });
-        if (allBranchDone) {
-          condState.status = NODE_STATUSES.COMPLETED;
-          continue;
-        }
-        return walkNodes(branchNodes, nodes, config, state, readDocument5, currentIteration);
+        else object[key] = value;
       }
-      if (nodeDef.kind === "parallel") {
-        const parallelDef = nodeDef;
-        const parallelState = nodeState;
-        const allChildrenDone = parallelDef.children.every((child) => {
-          const childState = parallelState.nodes[child.id];
-          return childState !== void 0 && (childState.status === NODE_STATUSES.COMPLETED || childState.status === NODE_STATUSES.SKIPPED);
-        });
-        if (allChildrenDone) {
-          parallelState.status = NODE_STATUSES.COMPLETED;
-          continue;
-        }
-        return walkNodes(parallelDef.children, parallelState.nodes, config, state, readDocument5, currentIteration);
+      var simpleEscapeCheck = new Array(256);
+      var simpleEscapeMap = new Array(256);
+      for (let i = 0; i < 256; i++) {
+        simpleEscapeCheck[i] = simpleEscapeSequence(i) ? 1 : 0;
+        simpleEscapeMap[i] = simpleEscapeSequence(i);
       }
-      if (nodeDef.kind === "for_each_phase") {
-        const fepDef = nodeDef;
-        const fepState = nodeState;
-        const iterResult = walkForEachIterations(fepDef, fepState, config, state, readDocument5);
-        if (iterResult === "all_completed") {
-          fepState.status = NODE_STATUSES.COMPLETED;
-          continue;
-        }
-        return iterResult;
+      function State(input, options) {
+        this.input = input;
+        this.filename = options["filename"] || null;
+        this.schema = options["schema"] || DEFAULT_SCHEMA2;
+        this.onWarning = options["onWarning"] || null;
+        this.legacy = options["legacy"] || false;
+        this.json = options["json"] || false;
+        this.listener = options["listener"] || null;
+        this.maxDepth = typeof options["maxDepth"] === "number" ? options["maxDepth"] : 100;
+        this.maxMergeSeqLength = typeof options["maxMergeSeqLength"] === "number" ? options["maxMergeSeqLength"] : 20;
+        this.implicitTypes = this.schema.compiledImplicit;
+        this.typeMap = this.schema.compiledTypeMap;
+        this.length = input.length;
+        this.position = 0;
+        this.line = 0;
+        this.lineStart = 0;
+        this.lineIndent = 0;
+        this.depth = 0;
+        this.firstTabInLine = -1;
+        this.documents = [];
+        this.anchorMapTransactions = [];
       }
-      if (nodeDef.kind === "for_each_task") {
-        const fetDef = nodeDef;
-        const fetState = nodeState;
-        const iterResult = walkForEachIterations(fetDef, fetState, config, state, readDocument5);
-        if (iterResult === "all_completed") {
-          fetState.status = NODE_STATUSES.COMPLETED;
-          continue;
-        }
-        return iterResult;
+      function generateError(state, message) {
+        const mark = {
+          name: state.filename,
+          buffer: state.input.slice(0, -1),
+          position: state.position,
+          line: state.line,
+          column: state.position - state.lineStart
+        };
+        mark.snippet = makeSnippet(mark);
+        return new YAMLException2(message, mark);
       }
-      if (nodeDef.kind === "step") {
-        const stepDef = nodeDef;
-        nodeState.status = NODE_STATUSES.IN_PROGRESS;
+      function throwError(state, message) {
+        throw generateError(state, message);
+      }
+      function throwWarning(state, message) {
+        if (state.onWarning) state.onWarning.call(null, generateError(state, message));
+      }
+      function storeAnchor(state, name, value) {
+        const transactions = state.anchorMapTransactions;
+        if (transactions.length !== 0) {
+          const transaction = transactions[transactions.length - 1];
+          if (!_hasOwnProperty.call(transaction, name)) transaction[name] = {
+            existed: _hasOwnProperty.call(state.anchorMap, name),
+            value: state.anchorMap[name]
+          };
+        }
+        state.anchorMap[name] = value;
+      }
+      function beginAnchorTransaction(state) {
+        state.anchorMapTransactions.push(/* @__PURE__ */ Object.create(null));
+      }
+      function commitAnchorTransaction(state) {
+        const transaction = state.anchorMapTransactions.pop();
+        const transactions = state.anchorMapTransactions;
+        if (transactions.length === 0) return;
+        const parent = transactions[transactions.length - 1];
+        const names = Object.keys(transaction);
+        for (let index = 0, length = names.length; index < length; index += 1) {
+          const name = names[index];
+          if (!_hasOwnProperty.call(parent, name)) parent[name] = transaction[name];
+        }
+      }
+      function rollbackAnchorTransaction(state) {
+        const transaction = state.anchorMapTransactions.pop();
+        const names = Object.keys(transaction);
+        for (let index = names.length - 1; index >= 0; index -= 1) {
+          const entry = transaction[names[index]];
+          if (entry.existed) state.anchorMap[names[index]] = entry.value;
+          else delete state.anchorMap[names[index]];
+        }
+      }
+      function snapshotState(state) {
         return {
-          action: stepDef.action,
-          context: stepDef.context ?? {}
+          position: state.position,
+          line: state.line,
+          lineStart: state.lineStart,
+          lineIndent: state.lineIndent,
+          firstTabInLine: state.firstTabInLine,
+          tag: state.tag,
+          anchor: state.anchor,
+          kind: state.kind,
+          result: state.result
         };
       }
-      if (nodeDef.kind === "gate") {
-        const gateDef = nodeDef;
-        return {
-          action: gateDef.action_if_needed,
-          context: {}
-        };
+      function restoreState(state, snapshot) {
+        state.position = snapshot.position;
+        state.line = snapshot.line;
+        state.lineStart = snapshot.lineStart;
+        state.lineIndent = snapshot.lineIndent;
+        state.firstTabInLine = snapshot.firstTabInLine;
+        state.tag = snapshot.tag;
+        state.anchor = snapshot.anchor;
+        state.kind = snapshot.kind;
+        state.result = snapshot.result;
       }
-      return null;
-    }
-    if (nodeState.status === NODE_STATUSES.NOT_STARTED) {
-      if (nodeDef.kind === "step") {
-        const stepDef = nodeDef;
-        nodeState.status = NODE_STATUSES.IN_PROGRESS;
-        return {
-          action: stepDef.action,
-          context: stepDef.context ?? {}
-        };
+      var directiveHandlers = {
+        YAML: function handleYamlDirective(state, name, args) {
+          if (state.version !== null) throwError(state, "duplication of %YAML directive");
+          if (args.length !== 1) throwError(state, "YAML directive accepts exactly one argument");
+          const match = /^([0-9]+)\.([0-9]+)$/.exec(args[0]);
+          if (match === null) throwError(state, "ill-formed argument of the YAML directive");
+          const major = parseInt(match[1], 10);
+          const minor = parseInt(match[2], 10);
+          if (major !== 1) throwError(state, "unacceptable YAML version of the document");
+          state.version = args[0];
+          state.checkLineBreaks = minor < 2;
+          if (minor !== 1 && minor !== 2) throwWarning(state, "unsupported YAML version of the document");
+        },
+        TAG: function handleTagDirective(state, name, args) {
+          let prefix;
+          if (args.length !== 2) throwError(state, "TAG directive accepts exactly two arguments");
+          const handle = args[0];
+          prefix = args[1];
+          if (!PATTERN_TAG_HANDLE.test(handle)) throwError(state, "ill-formed tag handle (first argument) of the TAG directive");
+          if (_hasOwnProperty.call(state.tagMap, handle)) throwError(state, 'there is a previously declared suffix for "' + handle + '" tag handle');
+          if (!PATTERN_TAG_URI.test(prefix)) throwError(state, "ill-formed tag prefix (second argument) of the TAG directive");
+          try {
+            prefix = decodeURIComponent(prefix);
+          } catch (err) {
+            throwError(state, "tag prefix is malformed: " + prefix);
+          }
+          state.tagMap[handle] = prefix;
+        }
+      };
+      function captureSegment(state, start, end, checkJson) {
+        if (start < end) {
+          const _result = state.input.slice(start, end);
+          if (checkJson) for (let _position = 0, _length = _result.length; _position < _length; _position += 1) {
+            const _character = _result.charCodeAt(_position);
+            if (!(_character === 9 || _character >= 32 && _character <= 1114111)) throwError(state, "expected valid JSON character");
+          }
+          else if (PATTERN_NON_PRINTABLE.test(_result)) throwError(state, "the stream contains non-printable characters");
+          state.result += _result;
+        }
       }
-      if (nodeDef.kind === "gate") {
-        const gateDef = nodeDef;
-        const gateState = nodeState;
-        const configValue = resolveConfigValue(gateDef.mode_ref, config);
-        if (typeof configValue === "boolean") {
-          if (!configValue) {
-            gateState.status = NODE_STATUSES.COMPLETED;
-            gateState.gate_active = false;
+      function mergeMappings(state, destination, source, overridableKeys) {
+        if (!common2.isObject(source)) throwError(state, "cannot merge mappings; the provided source object is unacceptable");
+        const sourceKeys = Object.keys(source);
+        for (let index = 0, quantity = sourceKeys.length; index < quantity; index += 1) {
+          const key = sourceKeys[index];
+          if (!_hasOwnProperty.call(destination, key)) {
+            setProperty(destination, key, source[key]);
+            overridableKeys[key] = true;
+          }
+        }
+      }
+      function storeMappingPair(state, _result, overridableKeys, keyTag, keyNode, valueNode, startLine, startLineStart, startPos) {
+        if (Array.isArray(keyNode)) {
+          keyNode = Array.prototype.slice.call(keyNode);
+          for (let index = 0, quantity = keyNode.length; index < quantity; index += 1) {
+            if (Array.isArray(keyNode[index])) throwError(state, "nested arrays are not supported inside keys");
+            if (typeof keyNode === "object" && _class(keyNode[index]) === "[object Object]") keyNode[index] = "[object Object]";
+          }
+        }
+        if (typeof keyNode === "object" && _class(keyNode) === "[object Object]") keyNode = "[object Object]";
+        keyNode = String(keyNode);
+        if (_result === null) _result = {};
+        if (keyTag === "tag:yaml.org,2002:merge") if (Array.isArray(valueNode)) {
+          if (valueNode.length > state.maxMergeSeqLength) throwError(state, "merge sequence length exceeded maxMergeSeqLength (" + state.maxMergeSeqLength + ")");
+          const seen = /* @__PURE__ */ new Set();
+          for (let index = 0, quantity = valueNode.length; index < quantity; index += 1) {
+            const src = valueNode[index];
+            if (seen.has(src)) continue;
+            seen.add(src);
+            mergeMappings(state, _result, src, overridableKeys);
+          }
+        } else mergeMappings(state, _result, valueNode, overridableKeys);
+        else {
+          if (!state.json && !_hasOwnProperty.call(overridableKeys, keyNode) && _hasOwnProperty.call(_result, keyNode)) {
+            state.line = startLine || state.line;
+            state.lineStart = startLineStart || state.lineStart;
+            state.position = startPos || state.position;
+            throwError(state, "duplicated mapping key");
+          }
+          setProperty(_result, keyNode, valueNode);
+          delete overridableKeys[keyNode];
+        }
+        return _result;
+      }
+      function readLineBreak(state) {
+        const ch = state.input.charCodeAt(state.position);
+        if (ch === 10) state.position++;
+        else if (ch === 13) {
+          state.position++;
+          if (state.input.charCodeAt(state.position) === 10) state.position++;
+        } else throwError(state, "a line break is expected");
+        state.line += 1;
+        state.lineStart = state.position;
+        state.firstTabInLine = -1;
+      }
+      function skipSeparationSpace(state, allowComments, checkIndent) {
+        let lineBreaks = 0;
+        let ch = state.input.charCodeAt(state.position);
+        while (ch !== 0) {
+          while (isWhiteSpace(ch)) {
+            if (ch === 9 && state.firstTabInLine === -1) state.firstTabInLine = state.position;
+            ch = state.input.charCodeAt(++state.position);
+          }
+          if (allowComments && ch === 35) do
+            ch = state.input.charCodeAt(++state.position);
+          while (ch !== 10 && ch !== 13 && ch !== 0);
+          if (isEol(ch)) {
+            readLineBreak(state);
+            ch = state.input.charCodeAt(state.position);
+            lineBreaks++;
+            state.lineIndent = 0;
+            while (ch === 32) {
+              state.lineIndent++;
+              ch = state.input.charCodeAt(++state.position);
+            }
+          } else break;
+        }
+        if (checkIndent !== -1 && lineBreaks !== 0 && state.lineIndent < checkIndent) throwWarning(state, "deficient indentation");
+        return lineBreaks;
+      }
+      function testDocumentSeparator(state) {
+        let _position = state.position;
+        let ch = state.input.charCodeAt(_position);
+        if ((ch === 45 || ch === 46) && ch === state.input.charCodeAt(_position + 1) && ch === state.input.charCodeAt(_position + 2)) {
+          _position += 3;
+          ch = state.input.charCodeAt(_position);
+          if (ch === 0 || isWsOrEol(ch)) return true;
+        }
+        return false;
+      }
+      function writeFoldedLines(state, count) {
+        if (count === 1) state.result += " ";
+        else if (count > 1) state.result += common2.repeat("\n", count - 1);
+      }
+      function readPlainScalar(state, nodeIndent, withinFlowCollection) {
+        let captureStart;
+        let captureEnd;
+        let hasPendingContent;
+        let _line;
+        let _lineStart;
+        let _lineIndent;
+        const _kind = state.kind;
+        const _result = state.result;
+        let ch = state.input.charCodeAt(state.position);
+        if (isWsOrEol(ch) || isFlowIndicator(ch) || ch === 35 || ch === 38 || ch === 42 || ch === 33 || ch === 124 || ch === 62 || ch === 39 || ch === 34 || ch === 37 || ch === 64 || ch === 96) return false;
+        if (ch === 63 || ch === 45) {
+          const following = state.input.charCodeAt(state.position + 1);
+          if (isWsOrEol(following) || withinFlowCollection && isFlowIndicator(following)) return false;
+        }
+        state.kind = "scalar";
+        state.result = "";
+        captureStart = captureEnd = state.position;
+        hasPendingContent = false;
+        while (ch !== 0) {
+          if (ch === 58) {
+            const following = state.input.charCodeAt(state.position + 1);
+            if (isWsOrEol(following) || withinFlowCollection && isFlowIndicator(following)) break;
+          } else if (ch === 35) {
+            if (isWsOrEol(state.input.charCodeAt(state.position - 1))) break;
+          } else if (state.position === state.lineStart && testDocumentSeparator(state) || withinFlowCollection && isFlowIndicator(ch)) break;
+          else if (isEol(ch)) {
+            _line = state.line;
+            _lineStart = state.lineStart;
+            _lineIndent = state.lineIndent;
+            skipSeparationSpace(state, false, -1);
+            if (state.lineIndent >= nodeIndent) {
+              hasPendingContent = true;
+              ch = state.input.charCodeAt(state.position);
+              continue;
+            } else {
+              state.position = captureEnd;
+              state.line = _line;
+              state.lineStart = _lineStart;
+              state.lineIndent = _lineIndent;
+              break;
+            }
+          }
+          if (hasPendingContent) {
+            captureSegment(state, captureStart, captureEnd, false);
+            writeFoldedLines(state, state.line - _line);
+            captureStart = captureEnd = state.position;
+            hasPendingContent = false;
+          }
+          if (!isWhiteSpace(ch)) captureEnd = state.position + 1;
+          ch = state.input.charCodeAt(++state.position);
+        }
+        captureSegment(state, captureStart, captureEnd, false);
+        if (state.result) return true;
+        state.kind = _kind;
+        state.result = _result;
+        return false;
+      }
+      function readSingleQuotedScalar(state, nodeIndent) {
+        let captureStart;
+        let captureEnd;
+        let ch = state.input.charCodeAt(state.position);
+        if (ch !== 39) return false;
+        state.kind = "scalar";
+        state.result = "";
+        state.position++;
+        captureStart = captureEnd = state.position;
+        while ((ch = state.input.charCodeAt(state.position)) !== 0) if (ch === 39) {
+          captureSegment(state, captureStart, state.position, true);
+          ch = state.input.charCodeAt(++state.position);
+          if (ch === 39) {
+            captureStart = state.position;
+            state.position++;
+            captureEnd = state.position;
+          } else return true;
+        } else if (isEol(ch)) {
+          captureSegment(state, captureStart, captureEnd, true);
+          writeFoldedLines(state, skipSeparationSpace(state, false, nodeIndent));
+          captureStart = captureEnd = state.position;
+        } else if (state.position === state.lineStart && testDocumentSeparator(state)) throwError(state, "unexpected end of the document within a single quoted scalar");
+        else {
+          state.position++;
+          if (!isWhiteSpace(ch)) captureEnd = state.position;
+        }
+        throwError(state, "unexpected end of the stream within a single quoted scalar");
+      }
+      function readDoubleQuotedScalar(state, nodeIndent) {
+        let captureStart;
+        let captureEnd;
+        let tmp;
+        let ch = state.input.charCodeAt(state.position);
+        if (ch !== 34) return false;
+        state.kind = "scalar";
+        state.result = "";
+        state.position++;
+        captureStart = captureEnd = state.position;
+        while ((ch = state.input.charCodeAt(state.position)) !== 0) if (ch === 34) {
+          captureSegment(state, captureStart, state.position, true);
+          state.position++;
+          return true;
+        } else if (ch === 92) {
+          captureSegment(state, captureStart, state.position, true);
+          ch = state.input.charCodeAt(++state.position);
+          if (isEol(ch)) skipSeparationSpace(state, false, nodeIndent);
+          else if (ch < 256 && simpleEscapeCheck[ch]) {
+            state.result += simpleEscapeMap[ch];
+            state.position++;
+          } else if ((tmp = escapedHexLen(ch)) > 0) {
+            let hexLength = tmp;
+            let hexResult = 0;
+            for (; hexLength > 0; hexLength--) {
+              ch = state.input.charCodeAt(++state.position);
+              if ((tmp = fromHexCode(ch)) >= 0) hexResult = (hexResult << 4) + tmp;
+              else throwError(state, "expected hexadecimal character");
+            }
+            state.result += charFromCodepoint(hexResult);
+            state.position++;
+          } else throwError(state, "unknown escape sequence");
+          captureStart = captureEnd = state.position;
+        } else if (isEol(ch)) {
+          captureSegment(state, captureStart, captureEnd, true);
+          writeFoldedLines(state, skipSeparationSpace(state, false, nodeIndent));
+          captureStart = captureEnd = state.position;
+        } else if (state.position === state.lineStart && testDocumentSeparator(state)) throwError(state, "unexpected end of the document within a double quoted scalar");
+        else {
+          state.position++;
+          if (!isWhiteSpace(ch)) captureEnd = state.position;
+        }
+        throwError(state, "unexpected end of the stream within a double quoted scalar");
+      }
+      function readFlowCollection(state, nodeIndent) {
+        let readNext = true;
+        let _line;
+        let _lineStart;
+        let _pos;
+        const _tag = state.tag;
+        let _result;
+        const _anchor = state.anchor;
+        let terminator;
+        let isPair;
+        let isExplicitPair;
+        let isMapping;
+        const overridableKeys = /* @__PURE__ */ Object.create(null);
+        let keyNode;
+        let keyTag;
+        let valueNode;
+        let ch = state.input.charCodeAt(state.position);
+        if (ch === 91) {
+          terminator = 93;
+          isMapping = false;
+          _result = [];
+        } else if (ch === 123) {
+          terminator = 125;
+          isMapping = true;
+          _result = {};
+        } else return false;
+        if (state.anchor !== null) storeAnchor(state, state.anchor, _result);
+        ch = state.input.charCodeAt(++state.position);
+        while (ch !== 0) {
+          skipSeparationSpace(state, true, nodeIndent);
+          ch = state.input.charCodeAt(state.position);
+          if (ch === terminator) {
+            state.position++;
+            state.tag = _tag;
+            state.anchor = _anchor;
+            state.kind = isMapping ? "mapping" : "sequence";
+            state.result = _result;
+            return true;
+          } else if (!readNext) throwError(state, "missed comma between flow collection entries");
+          else if (ch === 44) throwError(state, "expected the node content, but found ','");
+          keyTag = keyNode = valueNode = null;
+          isPair = isExplicitPair = false;
+          if (ch === 63) {
+            if (isWsOrEol(state.input.charCodeAt(state.position + 1))) {
+              isPair = isExplicitPair = true;
+              state.position++;
+              skipSeparationSpace(state, true, nodeIndent);
+            }
+          }
+          _line = state.line;
+          _lineStart = state.lineStart;
+          _pos = state.position;
+          composeNode(state, nodeIndent, CONTEXT_FLOW_IN, false, true);
+          keyTag = state.tag;
+          keyNode = state.result;
+          skipSeparationSpace(state, true, nodeIndent);
+          ch = state.input.charCodeAt(state.position);
+          if ((isExplicitPair || state.line === _line) && ch === 58) {
+            isPair = true;
+            ch = state.input.charCodeAt(++state.position);
+            skipSeparationSpace(state, true, nodeIndent);
+            composeNode(state, nodeIndent, CONTEXT_FLOW_IN, false, true);
+            valueNode = state.result;
+          }
+          if (isMapping) storeMappingPair(state, _result, overridableKeys, keyTag, keyNode, valueNode, _line, _lineStart, _pos);
+          else if (isPair) _result.push(storeMappingPair(state, null, overridableKeys, keyTag, keyNode, valueNode, _line, _lineStart, _pos));
+          else _result.push(keyNode);
+          skipSeparationSpace(state, true, nodeIndent);
+          ch = state.input.charCodeAt(state.position);
+          if (ch === 44) {
+            readNext = true;
+            ch = state.input.charCodeAt(++state.position);
+          } else readNext = false;
+        }
+        throwError(state, "unexpected end of the stream within a flow collection");
+      }
+      function readBlockScalar(state, nodeIndent) {
+        let folding;
+        let chomping = CHOMPING_CLIP;
+        let didReadContent = false;
+        let detectedIndent = false;
+        let textIndent = nodeIndent;
+        let emptyLines = 0;
+        let atMoreIndented = false;
+        let tmp;
+        let ch = state.input.charCodeAt(state.position);
+        if (ch === 124) folding = false;
+        else if (ch === 62) folding = true;
+        else return false;
+        state.kind = "scalar";
+        state.result = "";
+        while (ch !== 0) {
+          ch = state.input.charCodeAt(++state.position);
+          if (ch === 43 || ch === 45) if (CHOMPING_CLIP === chomping) chomping = ch === 43 ? CHOMPING_KEEP : CHOMPING_STRIP;
+          else throwError(state, "repeat of a chomping mode identifier");
+          else if ((tmp = fromDecimalCode(ch)) >= 0) if (tmp === 0) throwError(state, "bad explicit indentation width of a block scalar; it cannot be less than one");
+          else if (!detectedIndent) {
+            textIndent = nodeIndent + tmp - 1;
+            detectedIndent = true;
+          } else throwError(state, "repeat of an indentation width identifier");
+          else break;
+        }
+        if (isWhiteSpace(ch)) {
+          do
+            ch = state.input.charCodeAt(++state.position);
+          while (isWhiteSpace(ch));
+          if (ch === 35) do
+            ch = state.input.charCodeAt(++state.position);
+          while (!isEol(ch) && ch !== 0);
+        }
+        while (ch !== 0) {
+          readLineBreak(state);
+          state.lineIndent = 0;
+          ch = state.input.charCodeAt(state.position);
+          while ((!detectedIndent || state.lineIndent < textIndent) && ch === 32) {
+            state.lineIndent++;
+            ch = state.input.charCodeAt(++state.position);
+          }
+          if (!detectedIndent && state.lineIndent > textIndent) textIndent = state.lineIndent;
+          if (isEol(ch)) {
+            emptyLines++;
             continue;
           }
-          gateState.gate_active = true;
-          return {
-            action: gateDef.action_if_needed,
-            context: {}
-          };
+          if (!detectedIndent && textIndent === 0) throwError(state, "missing indentation for block scalar");
+          if (state.lineIndent < textIndent) {
+            if (chomping === CHOMPING_KEEP) state.result += common2.repeat("\n", didReadContent ? 1 + emptyLines : emptyLines);
+            else if (chomping === CHOMPING_CLIP) {
+              if (didReadContent) state.result += "\n";
+            }
+            break;
+          }
+          if (folding) if (isWhiteSpace(ch)) {
+            atMoreIndented = true;
+            state.result += common2.repeat("\n", didReadContent ? 1 + emptyLines : emptyLines);
+          } else if (atMoreIndented) {
+            atMoreIndented = false;
+            state.result += common2.repeat("\n", emptyLines + 1);
+          } else if (emptyLines === 0) {
+            if (didReadContent) state.result += " ";
+          } else state.result += common2.repeat("\n", emptyLines);
+          else state.result += common2.repeat("\n", didReadContent ? 1 + emptyLines : emptyLines);
+          didReadContent = true;
+          detectedIndent = true;
+          emptyLines = 0;
+          const captureStart = state.position;
+          while (!isEol(ch) && ch !== 0) ch = state.input.charCodeAt(++state.position);
+          captureSegment(state, captureStart, state.position, false);
         }
-        const effectiveMode = state.pipeline.gate_mode ?? (typeof configValue === "string" ? configValue : "ask");
-        if (effectiveMode === "ask" && state.pipeline.gate_mode === null) {
-          return {
-            action: NEXT_ACTIONS.ASK_GATE_MODE,
-            context: {}
-          };
-        }
-        if (gateDef.auto_approve_modes && gateDef.auto_approve_modes.includes(effectiveMode)) {
-          gateState.status = NODE_STATUSES.COMPLETED;
-          gateState.gate_active = false;
-          continue;
-        }
-        if (effectiveMode === "autonomous") {
-          const depId = gateDef.depends_on?.[0];
-          if (depId && nodes[depId]) {
-            const reviewState = nodes[depId];
-            if (reviewState.verdict === "approved") {
-              gateState.status = NODE_STATUSES.COMPLETED;
-              gateState.gate_active = false;
+        return true;
+      }
+      function readBlockSequence(state, nodeIndent) {
+        const _tag = state.tag;
+        const _anchor = state.anchor;
+        const _result = [];
+        let detected = false;
+        if (state.firstTabInLine !== -1) return false;
+        if (state.anchor !== null) storeAnchor(state, state.anchor, _result);
+        let ch = state.input.charCodeAt(state.position);
+        while (ch !== 0) {
+          if (state.firstTabInLine !== -1) {
+            state.position = state.firstTabInLine;
+            throwError(state, "tab characters must not be used in indentation");
+          }
+          if (ch !== 45) break;
+          if (!isWsOrEol(state.input.charCodeAt(state.position + 1))) break;
+          detected = true;
+          state.position++;
+          if (skipSeparationSpace(state, true, -1)) {
+            if (state.lineIndent <= nodeIndent) {
+              _result.push(null);
+              ch = state.input.charCodeAt(state.position);
               continue;
             }
           }
-          gateState.gate_active = true;
-          return {
-            action: gateDef.action_if_needed,
-            context: {}
-          };
+          const _line = state.line;
+          composeNode(state, nodeIndent, CONTEXT_BLOCK_IN, false, true);
+          _result.push(state.result);
+          skipSeparationSpace(state, true, -1);
+          ch = state.input.charCodeAt(state.position);
+          if ((state.line === _line || state.lineIndent > nodeIndent) && ch !== 0) throwError(state, "bad indentation of a sequence entry");
+          else if (state.lineIndent < nodeIndent) break;
         }
-        gateState.gate_active = true;
-        return {
-          action: gateDef.action_if_needed,
-          context: {}
+        if (detected) {
+          state.tag = _tag;
+          state.anchor = _anchor;
+          state.kind = "sequence";
+          state.result = _result;
+          return true;
+        }
+        return false;
+      }
+      function readBlockMapping(state, nodeIndent, flowIndent) {
+        let allowCompact;
+        let _keyLine;
+        let _keyLineStart;
+        let _keyPos;
+        const _tag = state.tag;
+        const _anchor = state.anchor;
+        const _result = {};
+        const overridableKeys = /* @__PURE__ */ Object.create(null);
+        let keyTag = null;
+        let keyNode = null;
+        let valueNode = null;
+        let atExplicitKey = false;
+        let detected = false;
+        if (state.firstTabInLine !== -1) return false;
+        if (state.anchor !== null) storeAnchor(state, state.anchor, _result);
+        let ch = state.input.charCodeAt(state.position);
+        while (ch !== 0) {
+          if (!atExplicitKey && state.firstTabInLine !== -1) {
+            state.position = state.firstTabInLine;
+            throwError(state, "tab characters must not be used in indentation");
+          }
+          const following = state.input.charCodeAt(state.position + 1);
+          const _line = state.line;
+          if ((ch === 63 || ch === 58) && isWsOrEol(following)) {
+            if (ch === 63) {
+              if (atExplicitKey) {
+                storeMappingPair(state, _result, overridableKeys, keyTag, keyNode, null, _keyLine, _keyLineStart, _keyPos);
+                keyTag = keyNode = valueNode = null;
+              }
+              detected = true;
+              atExplicitKey = true;
+              allowCompact = true;
+            } else if (atExplicitKey) {
+              atExplicitKey = false;
+              allowCompact = true;
+            } else throwError(state, "incomplete explicit mapping pair; a key node is missed; or followed by a non-tabulated empty line");
+            state.position += 1;
+            ch = following;
+          } else {
+            _keyLine = state.line;
+            _keyLineStart = state.lineStart;
+            _keyPos = state.position;
+            if (!composeNode(state, flowIndent, CONTEXT_FLOW_OUT, false, true)) break;
+            if (state.line === _line) {
+              ch = state.input.charCodeAt(state.position);
+              while (isWhiteSpace(ch)) ch = state.input.charCodeAt(++state.position);
+              if (ch === 58) {
+                ch = state.input.charCodeAt(++state.position);
+                if (!isWsOrEol(ch)) throwError(state, "a whitespace character is expected after the key-value separator within a block mapping");
+                if (atExplicitKey) {
+                  storeMappingPair(state, _result, overridableKeys, keyTag, keyNode, null, _keyLine, _keyLineStart, _keyPos);
+                  keyTag = keyNode = valueNode = null;
+                }
+                detected = true;
+                atExplicitKey = false;
+                allowCompact = false;
+                keyTag = state.tag;
+                keyNode = state.result;
+              } else if (detected) throwError(state, "can not read an implicit mapping pair; a colon is missed");
+              else {
+                state.tag = _tag;
+                state.anchor = _anchor;
+                return true;
+              }
+            } else if (detected) throwError(state, "can not read a block mapping entry; a multiline key may not be an implicit key");
+            else {
+              state.tag = _tag;
+              state.anchor = _anchor;
+              return true;
+            }
+          }
+          if (state.line === _line || state.lineIndent > nodeIndent) {
+            if (atExplicitKey) {
+              _keyLine = state.line;
+              _keyLineStart = state.lineStart;
+              _keyPos = state.position;
+            }
+            if (composeNode(state, nodeIndent, CONTEXT_BLOCK_OUT, true, allowCompact)) if (atExplicitKey) keyNode = state.result;
+            else valueNode = state.result;
+            if (!atExplicitKey) {
+              storeMappingPair(state, _result, overridableKeys, keyTag, keyNode, valueNode, _keyLine, _keyLineStart, _keyPos);
+              keyTag = keyNode = valueNode = null;
+            }
+            skipSeparationSpace(state, true, -1);
+            ch = state.input.charCodeAt(state.position);
+          }
+          if ((state.line === _line || state.lineIndent > nodeIndent) && ch !== 0) throwError(state, "bad indentation of a mapping entry");
+          else if (state.lineIndent < nodeIndent) break;
+        }
+        if (atExplicitKey) storeMappingPair(state, _result, overridableKeys, keyTag, keyNode, null, _keyLine, _keyLineStart, _keyPos);
+        if (detected) {
+          state.tag = _tag;
+          state.anchor = _anchor;
+          state.kind = "mapping";
+          state.result = _result;
+        }
+        return detected;
+      }
+      function readTagProperty(state) {
+        let isVerbatim = false;
+        let isNamed = false;
+        let tagHandle;
+        let tagName;
+        let ch = state.input.charCodeAt(state.position);
+        if (ch !== 33) return false;
+        if (state.tag !== null) throwError(state, "duplication of a tag property");
+        ch = state.input.charCodeAt(++state.position);
+        if (ch === 60) {
+          isVerbatim = true;
+          ch = state.input.charCodeAt(++state.position);
+        } else if (ch === 33) {
+          isNamed = true;
+          tagHandle = "!!";
+          ch = state.input.charCodeAt(++state.position);
+        } else tagHandle = "!";
+        let _position = state.position;
+        if (isVerbatim) {
+          do
+            ch = state.input.charCodeAt(++state.position);
+          while (ch !== 0 && ch !== 62);
+          if (state.position < state.length) {
+            tagName = state.input.slice(_position, state.position);
+            ch = state.input.charCodeAt(++state.position);
+          } else throwError(state, "unexpected end of the stream within a verbatim tag");
+        } else {
+          while (ch !== 0 && !isWsOrEol(ch)) {
+            if (ch === 33) if (!isNamed) {
+              tagHandle = state.input.slice(_position - 1, state.position + 1);
+              if (!PATTERN_TAG_HANDLE.test(tagHandle)) throwError(state, "named tag handle cannot contain such characters");
+              isNamed = true;
+              _position = state.position + 1;
+            } else throwError(state, "tag suffix cannot contain exclamation marks");
+            ch = state.input.charCodeAt(++state.position);
+          }
+          tagName = state.input.slice(_position, state.position);
+          if (PATTERN_FLOW_INDICATORS.test(tagName)) throwError(state, "tag suffix cannot contain flow indicator characters");
+        }
+        if (tagName && !PATTERN_TAG_URI.test(tagName)) throwError(state, "tag name cannot contain such characters: " + tagName);
+        try {
+          tagName = decodeURIComponent(tagName);
+        } catch (err) {
+          throwError(state, "tag name is malformed: " + tagName);
+        }
+        if (isVerbatim) state.tag = tagName;
+        else if (_hasOwnProperty.call(state.tagMap, tagHandle)) state.tag = state.tagMap[tagHandle] + tagName;
+        else if (tagHandle === "!") state.tag = "!" + tagName;
+        else if (tagHandle === "!!") state.tag = "tag:yaml.org,2002:" + tagName;
+        else throwError(state, 'undeclared tag handle "' + tagHandle + '"');
+        return true;
+      }
+      function readAnchorProperty(state) {
+        let ch = state.input.charCodeAt(state.position);
+        if (ch !== 38) return false;
+        if (state.anchor !== null) throwError(state, "duplication of an anchor property");
+        ch = state.input.charCodeAt(++state.position);
+        const _position = state.position;
+        while (ch !== 0 && !isWsOrEol(ch) && !isFlowIndicator(ch)) ch = state.input.charCodeAt(++state.position);
+        if (state.position === _position) throwError(state, "name of an anchor node must contain at least one character");
+        state.anchor = state.input.slice(_position, state.position);
+        return true;
+      }
+      function readAlias(state) {
+        let ch = state.input.charCodeAt(state.position);
+        if (ch !== 42) return false;
+        ch = state.input.charCodeAt(++state.position);
+        const _position = state.position;
+        while (ch !== 0 && !isWsOrEol(ch) && !isFlowIndicator(ch)) ch = state.input.charCodeAt(++state.position);
+        if (state.position === _position) throwError(state, "name of an alias node must contain at least one character");
+        const alias = state.input.slice(_position, state.position);
+        if (!_hasOwnProperty.call(state.anchorMap, alias)) throwError(state, 'unidentified alias "' + alias + '"');
+        state.result = state.anchorMap[alias];
+        skipSeparationSpace(state, true, -1);
+        return true;
+      }
+      function tryReadBlockMappingFromProperty(state, propertyStart, nodeIndent, flowIndent) {
+        const fallbackState = snapshotState(state);
+        beginAnchorTransaction(state);
+        restoreState(state, propertyStart);
+        state.tag = null;
+        state.anchor = null;
+        state.kind = null;
+        state.result = null;
+        if (readBlockMapping(state, nodeIndent, flowIndent) && state.kind === "mapping") {
+          commitAnchorTransaction(state);
+          return true;
+        }
+        rollbackAnchorTransaction(state);
+        restoreState(state, fallbackState);
+        return false;
+      }
+      function composeNode(state, parentIndent, nodeContext, allowToSeek, allowCompact) {
+        let allowBlockScalars;
+        let allowBlockCollections;
+        let indentStatus = 1;
+        let atNewLine = false;
+        let hasContent = false;
+        let propertyStart = null;
+        let type;
+        let flowIndent;
+        let blockIndent;
+        if (state.depth >= state.maxDepth) throwError(state, "nesting exceeded maxDepth (" + state.maxDepth + ")");
+        state.depth += 1;
+        if (state.listener !== null) state.listener("open", state);
+        state.tag = null;
+        state.anchor = null;
+        state.kind = null;
+        state.result = null;
+        const allowBlockStyles = allowBlockScalars = allowBlockCollections = CONTEXT_BLOCK_OUT === nodeContext || CONTEXT_BLOCK_IN === nodeContext;
+        if (allowToSeek) {
+          if (skipSeparationSpace(state, true, -1)) {
+            atNewLine = true;
+            if (state.lineIndent > parentIndent) indentStatus = 1;
+            else if (state.lineIndent === parentIndent) indentStatus = 0;
+            else if (state.lineIndent < parentIndent) indentStatus = -1;
+          }
+        }
+        if (indentStatus === 1) while (true) {
+          const ch = state.input.charCodeAt(state.position);
+          const propertyState = snapshotState(state);
+          if (atNewLine && (ch === 33 && state.tag !== null || ch === 38 && state.anchor !== null)) break;
+          if (!readTagProperty(state) && !readAnchorProperty(state)) break;
+          if (propertyStart === null) propertyStart = propertyState;
+          if (skipSeparationSpace(state, true, -1)) {
+            atNewLine = true;
+            allowBlockCollections = allowBlockStyles;
+            if (state.lineIndent > parentIndent) indentStatus = 1;
+            else if (state.lineIndent === parentIndent) indentStatus = 0;
+            else if (state.lineIndent < parentIndent) indentStatus = -1;
+          } else allowBlockCollections = false;
+        }
+        if (allowBlockCollections) allowBlockCollections = atNewLine || allowCompact;
+        if (indentStatus === 1 || CONTEXT_BLOCK_OUT === nodeContext) {
+          if (CONTEXT_FLOW_IN === nodeContext || CONTEXT_FLOW_OUT === nodeContext) flowIndent = parentIndent;
+          else flowIndent = parentIndent + 1;
+          blockIndent = state.position - state.lineStart;
+          if (indentStatus === 1) if (allowBlockCollections && (readBlockSequence(state, blockIndent) || readBlockMapping(state, blockIndent, flowIndent)) || readFlowCollection(state, flowIndent)) hasContent = true;
+          else {
+            const ch = state.input.charCodeAt(state.position);
+            if (propertyStart !== null && allowBlockStyles && !allowBlockCollections && ch !== 124 && ch !== 62 && tryReadBlockMappingFromProperty(state, propertyStart, propertyStart.position - propertyStart.lineStart, flowIndent)) hasContent = true;
+            else if (allowBlockScalars && readBlockScalar(state, flowIndent) || readSingleQuotedScalar(state, flowIndent) || readDoubleQuotedScalar(state, flowIndent)) hasContent = true;
+            else if (readAlias(state)) {
+              hasContent = true;
+              if (state.tag !== null || state.anchor !== null) throwError(state, "alias node should not have any properties");
+            } else if (readPlainScalar(state, flowIndent, CONTEXT_FLOW_IN === nodeContext)) {
+              hasContent = true;
+              if (state.tag === null) state.tag = "?";
+            }
+            if (state.anchor !== null) storeAnchor(state, state.anchor, state.result);
+          }
+          else if (indentStatus === 0) hasContent = allowBlockCollections && readBlockSequence(state, blockIndent);
+        }
+        if (state.tag === null) {
+          if (state.anchor !== null) storeAnchor(state, state.anchor, state.result);
+        } else if (state.tag === "?") {
+          if (state.result !== null && state.kind !== "scalar") throwError(state, 'unacceptable node kind for !<?> tag; it should be "scalar", not "' + state.kind + '"');
+          for (let typeIndex = 0, typeQuantity = state.implicitTypes.length; typeIndex < typeQuantity; typeIndex += 1) {
+            type = state.implicitTypes[typeIndex];
+            if (type.resolve(state.result)) {
+              state.result = type.construct(state.result);
+              state.tag = type.tag;
+              if (state.anchor !== null) storeAnchor(state, state.anchor, state.result);
+              break;
+            }
+          }
+        } else if (state.tag !== "!") {
+          if (_hasOwnProperty.call(state.typeMap[state.kind || "fallback"], state.tag)) type = state.typeMap[state.kind || "fallback"][state.tag];
+          else {
+            type = null;
+            const typeList = state.typeMap.multi[state.kind || "fallback"];
+            for (let typeIndex = 0, typeQuantity = typeList.length; typeIndex < typeQuantity; typeIndex += 1) if (state.tag.slice(0, typeList[typeIndex].tag.length) === typeList[typeIndex].tag) {
+              type = typeList[typeIndex];
+              break;
+            }
+          }
+          if (!type) throwError(state, "unknown tag !<" + state.tag + ">");
+          if (state.result !== null && type.kind !== state.kind) throwError(state, "unacceptable node kind for !<" + state.tag + '> tag; it should be "' + type.kind + '", not "' + state.kind + '"');
+          if (!type.resolve(state.result, state.tag)) throwError(state, "cannot resolve a node with !<" + state.tag + "> explicit tag");
+          else {
+            state.result = type.construct(state.result, state.tag);
+            if (state.anchor !== null) storeAnchor(state, state.anchor, state.result);
+          }
+        }
+        if (state.listener !== null) state.listener("close", state);
+        state.depth -= 1;
+        return state.tag !== null || state.anchor !== null || hasContent;
+      }
+      function readDocument3(state) {
+        const documentStart = state.position;
+        let hasDirectives = false;
+        let ch;
+        state.version = null;
+        state.checkLineBreaks = state.legacy;
+        state.tagMap = /* @__PURE__ */ Object.create(null);
+        state.anchorMap = /* @__PURE__ */ Object.create(null);
+        while ((ch = state.input.charCodeAt(state.position)) !== 0) {
+          skipSeparationSpace(state, true, -1);
+          ch = state.input.charCodeAt(state.position);
+          if (state.lineIndent > 0 || ch !== 37) break;
+          hasDirectives = true;
+          ch = state.input.charCodeAt(++state.position);
+          let _position = state.position;
+          while (ch !== 0 && !isWsOrEol(ch)) ch = state.input.charCodeAt(++state.position);
+          const directiveName = state.input.slice(_position, state.position);
+          const directiveArgs = [];
+          if (directiveName.length < 1) throwError(state, "directive name must not be less than one character in length");
+          while (ch !== 0) {
+            while (isWhiteSpace(ch)) ch = state.input.charCodeAt(++state.position);
+            if (ch === 35) {
+              do
+                ch = state.input.charCodeAt(++state.position);
+              while (ch !== 0 && !isEol(ch));
+              break;
+            }
+            if (isEol(ch)) break;
+            _position = state.position;
+            while (ch !== 0 && !isWsOrEol(ch)) ch = state.input.charCodeAt(++state.position);
+            directiveArgs.push(state.input.slice(_position, state.position));
+          }
+          if (ch !== 0) readLineBreak(state);
+          if (_hasOwnProperty.call(directiveHandlers, directiveName)) directiveHandlers[directiveName](state, directiveName, directiveArgs);
+          else throwWarning(state, 'unknown document directive "' + directiveName + '"');
+        }
+        skipSeparationSpace(state, true, -1);
+        if (state.lineIndent === 0 && state.input.charCodeAt(state.position) === 45 && state.input.charCodeAt(state.position + 1) === 45 && state.input.charCodeAt(state.position + 2) === 45) {
+          state.position += 3;
+          skipSeparationSpace(state, true, -1);
+        } else if (hasDirectives) throwError(state, "directives end mark is expected");
+        composeNode(state, state.lineIndent - 1, CONTEXT_BLOCK_OUT, false, true);
+        skipSeparationSpace(state, true, -1);
+        if (state.checkLineBreaks && PATTERN_NON_ASCII_LINE_BREAKS.test(state.input.slice(documentStart, state.position))) throwWarning(state, "non-ASCII line breaks are interpreted as content");
+        state.documents.push(state.result);
+        if (state.position === state.lineStart && testDocumentSeparator(state)) {
+          if (state.input.charCodeAt(state.position) === 46) {
+            state.position += 3;
+            skipSeparationSpace(state, true, -1);
+          }
+          return;
+        }
+        if (state.position < state.length - 1) throwError(state, "end of the stream or a document separator is expected");
+      }
+      function loadDocuments(input, options) {
+        input = String(input);
+        options = options || {};
+        if (input.length !== 0) {
+          if (input.charCodeAt(input.length - 1) !== 10 && input.charCodeAt(input.length - 1) !== 13) input += "\n";
+          if (input.charCodeAt(0) === 65279) input = input.slice(1);
+        }
+        const state = new State(input, options);
+        const nullpos = input.indexOf("\0");
+        if (nullpos !== -1) {
+          state.position = nullpos;
+          throwError(state, "null byte is not allowed in input");
+        }
+        state.input += "\0";
+        while (state.input.charCodeAt(state.position) === 32) {
+          state.lineIndent += 1;
+          state.position += 1;
+        }
+        while (state.position < state.length - 1) readDocument3(state);
+        return state.documents;
+      }
+      function loadAll2(input, iterator, options) {
+        if (iterator !== null && typeof iterator === "object" && typeof options === "undefined") {
+          options = iterator;
+          iterator = null;
+        }
+        const documents = loadDocuments(input, options);
+        if (typeof iterator !== "function") return documents;
+        for (let index = 0, length = documents.length; index < length; index += 1) iterator(documents[index]);
+      }
+      function load3(input, options) {
+        const documents = loadDocuments(input, options);
+        if (documents.length === 0) return;
+        else if (documents.length === 1) return documents[0];
+        throw new YAMLException2("expected a single document in the stream, but found more");
+      }
+      module.exports.loadAll = loadAll2;
+      module.exports.load = load3;
+    });
+    require_dumper = /* @__PURE__ */ __commonJSMin((exports, module) => {
+      var common2 = require_common();
+      var YAMLException2 = require_exception();
+      var DEFAULT_SCHEMA2 = require_default();
+      var _toString = Object.prototype.toString;
+      var _hasOwnProperty = Object.prototype.hasOwnProperty;
+      var CHAR_BOM = 65279;
+      var CHAR_TAB = 9;
+      var CHAR_LINE_FEED = 10;
+      var CHAR_CARRIAGE_RETURN = 13;
+      var CHAR_SPACE = 32;
+      var CHAR_EXCLAMATION = 33;
+      var CHAR_DOUBLE_QUOTE = 34;
+      var CHAR_SHARP = 35;
+      var CHAR_PERCENT = 37;
+      var CHAR_AMPERSAND = 38;
+      var CHAR_SINGLE_QUOTE = 39;
+      var CHAR_ASTERISK = 42;
+      var CHAR_COMMA = 44;
+      var CHAR_MINUS = 45;
+      var CHAR_COLON = 58;
+      var CHAR_EQUALS = 61;
+      var CHAR_GREATER_THAN = 62;
+      var CHAR_QUESTION = 63;
+      var CHAR_COMMERCIAL_AT = 64;
+      var CHAR_LEFT_SQUARE_BRACKET = 91;
+      var CHAR_RIGHT_SQUARE_BRACKET = 93;
+      var CHAR_GRAVE_ACCENT = 96;
+      var CHAR_LEFT_CURLY_BRACKET = 123;
+      var CHAR_VERTICAL_LINE = 124;
+      var CHAR_RIGHT_CURLY_BRACKET = 125;
+      var ESCAPE_SEQUENCES = {};
+      ESCAPE_SEQUENCES[0] = "\\0";
+      ESCAPE_SEQUENCES[7] = "\\a";
+      ESCAPE_SEQUENCES[8] = "\\b";
+      ESCAPE_SEQUENCES[9] = "\\t";
+      ESCAPE_SEQUENCES[10] = "\\n";
+      ESCAPE_SEQUENCES[11] = "\\v";
+      ESCAPE_SEQUENCES[12] = "\\f";
+      ESCAPE_SEQUENCES[13] = "\\r";
+      ESCAPE_SEQUENCES[27] = "\\e";
+      ESCAPE_SEQUENCES[34] = '\\"';
+      ESCAPE_SEQUENCES[92] = "\\\\";
+      ESCAPE_SEQUENCES[133] = "\\N";
+      ESCAPE_SEQUENCES[160] = "\\_";
+      ESCAPE_SEQUENCES[8232] = "\\L";
+      ESCAPE_SEQUENCES[8233] = "\\P";
+      var DEPRECATED_BOOLEANS_SYNTAX = [
+        "y",
+        "Y",
+        "yes",
+        "Yes",
+        "YES",
+        "on",
+        "On",
+        "ON",
+        "n",
+        "N",
+        "no",
+        "No",
+        "NO",
+        "off",
+        "Off",
+        "OFF"
+      ];
+      var DEPRECATED_BASE60_SYNTAX = /^[-+]?[0-9_]+(?::[0-9_]+)+(?:\.[0-9_]*)?$/;
+      function compileStyleMap(schema, map) {
+        if (map === null) return {};
+        const result = {};
+        const keys = Object.keys(map);
+        for (let index = 0, length = keys.length; index < length; index += 1) {
+          let tag = keys[index];
+          let style = String(map[tag]);
+          if (tag.slice(0, 2) === "!!") tag = "tag:yaml.org,2002:" + tag.slice(2);
+          const type = schema.compiledTypeMap["fallback"][tag];
+          if (type && _hasOwnProperty.call(type.styleAliases, style)) style = type.styleAliases[style];
+          result[tag] = style;
+        }
+        return result;
+      }
+      function encodeHex(character) {
+        let handle;
+        let length;
+        const string = character.toString(16).toUpperCase();
+        if (character <= 255) {
+          handle = "x";
+          length = 2;
+        } else if (character <= 65535) {
+          handle = "u";
+          length = 4;
+        } else if (character <= 4294967295) {
+          handle = "U";
+          length = 8;
+        } else throw new YAMLException2("code point within a string may not be greater than 0xFFFFFFFF");
+        return "\\" + handle + common2.repeat("0", length - string.length) + string;
+      }
+      var QUOTING_TYPE_SINGLE = 1;
+      var QUOTING_TYPE_DOUBLE = 2;
+      function State(options) {
+        this.schema = options["schema"] || DEFAULT_SCHEMA2;
+        this.indent = Math.max(1, options["indent"] || 2);
+        this.noArrayIndent = options["noArrayIndent"] || false;
+        this.skipInvalid = options["skipInvalid"] || false;
+        this.flowLevel = common2.isNothing(options["flowLevel"]) ? -1 : options["flowLevel"];
+        this.styleMap = compileStyleMap(this.schema, options["styles"] || null);
+        this.sortKeys = options["sortKeys"] || false;
+        this.lineWidth = options["lineWidth"] || 80;
+        this.noRefs = options["noRefs"] || false;
+        this.noCompatMode = options["noCompatMode"] || false;
+        this.condenseFlow = options["condenseFlow"] || false;
+        this.quotingType = options["quotingType"] === '"' ? QUOTING_TYPE_DOUBLE : QUOTING_TYPE_SINGLE;
+        this.forceQuotes = options["forceQuotes"] || false;
+        this.replacer = typeof options["replacer"] === "function" ? options["replacer"] : null;
+        this.implicitTypes = this.schema.compiledImplicit;
+        this.explicitTypes = this.schema.compiledExplicit;
+        this.tag = null;
+        this.result = "";
+        this.duplicates = [];
+        this.usedDuplicates = null;
+      }
+      function indentString(string, spaces) {
+        const ind = common2.repeat(" ", spaces);
+        let position = 0;
+        let result = "";
+        const length = string.length;
+        while (position < length) {
+          let line;
+          const next = string.indexOf("\n", position);
+          if (next === -1) {
+            line = string.slice(position);
+            position = length;
+          } else {
+            line = string.slice(position, next + 1);
+            position = next + 1;
+          }
+          if (line.length && line !== "\n") result += ind;
+          result += line;
+        }
+        return result;
+      }
+      function generateNextLine(state, level) {
+        return "\n" + common2.repeat(" ", state.indent * level);
+      }
+      function testImplicitResolving(state, str) {
+        for (let index = 0, length = state.implicitTypes.length; index < length; index += 1) if (state.implicitTypes[index].resolve(str)) return true;
+        return false;
+      }
+      function isWhitespace(c) {
+        return c === CHAR_SPACE || c === CHAR_TAB;
+      }
+      function isPrintable(c) {
+        return c >= 32 && c <= 126 || c >= 161 && c <= 55295 && c !== 8232 && c !== 8233 || c >= 57344 && c <= 65533 && c !== CHAR_BOM || c >= 65536 && c <= 1114111;
+      }
+      function isNsCharOrWhitespace(c) {
+        return isPrintable(c) && c !== CHAR_BOM && c !== CHAR_CARRIAGE_RETURN && c !== CHAR_LINE_FEED;
+      }
+      function isPlainSafe(c, prev, inblock) {
+        const cIsNsCharOrWhitespace = isNsCharOrWhitespace(c);
+        const cIsNsChar = cIsNsCharOrWhitespace && !isWhitespace(c);
+        return (inblock ? cIsNsCharOrWhitespace : cIsNsCharOrWhitespace && c !== CHAR_COMMA && c !== CHAR_LEFT_SQUARE_BRACKET && c !== CHAR_RIGHT_SQUARE_BRACKET && c !== CHAR_LEFT_CURLY_BRACKET && c !== CHAR_RIGHT_CURLY_BRACKET) && c !== CHAR_SHARP && !(prev === CHAR_COLON && !cIsNsChar) || isNsCharOrWhitespace(prev) && !isWhitespace(prev) && c === CHAR_SHARP || prev === CHAR_COLON && cIsNsChar;
+      }
+      function isPlainSafeFirst(c) {
+        return isPrintable(c) && c !== CHAR_BOM && !isWhitespace(c) && c !== CHAR_MINUS && c !== CHAR_QUESTION && c !== CHAR_COLON && c !== CHAR_COMMA && c !== CHAR_LEFT_SQUARE_BRACKET && c !== CHAR_RIGHT_SQUARE_BRACKET && c !== CHAR_LEFT_CURLY_BRACKET && c !== CHAR_RIGHT_CURLY_BRACKET && c !== CHAR_SHARP && c !== CHAR_AMPERSAND && c !== CHAR_ASTERISK && c !== CHAR_EXCLAMATION && c !== CHAR_VERTICAL_LINE && c !== CHAR_EQUALS && c !== CHAR_GREATER_THAN && c !== CHAR_SINGLE_QUOTE && c !== CHAR_DOUBLE_QUOTE && c !== CHAR_PERCENT && c !== CHAR_COMMERCIAL_AT && c !== CHAR_GRAVE_ACCENT;
+      }
+      function isPlainSafeLast(c) {
+        return !isWhitespace(c) && c !== CHAR_COLON;
+      }
+      function codePointAt(string, pos) {
+        const first = string.charCodeAt(pos);
+        let second;
+        if (first >= 55296 && first <= 56319 && pos + 1 < string.length) {
+          second = string.charCodeAt(pos + 1);
+          if (second >= 56320 && second <= 57343) return (first - 55296) * 1024 + second - 56320 + 65536;
+        }
+        return first;
+      }
+      function needIndentIndicator(string) {
+        return /^\n* /.test(string);
+      }
+      var STYLE_PLAIN = 1;
+      var STYLE_SINGLE = 2;
+      var STYLE_LITERAL = 3;
+      var STYLE_FOLDED = 4;
+      var STYLE_DOUBLE = 5;
+      function chooseScalarStyle(string, singleLineOnly, indentPerLevel, lineWidth, testAmbiguousType, quotingType, forceQuotes, inblock) {
+        let i;
+        let char = 0;
+        let prevChar = null;
+        let hasLineBreak = false;
+        let hasFoldableLine = false;
+        const shouldTrackWidth = lineWidth !== -1;
+        let previousLineBreak = -1;
+        let plain = isPlainSafeFirst(codePointAt(string, 0)) && isPlainSafeLast(codePointAt(string, string.length - 1));
+        if (singleLineOnly || forceQuotes) for (i = 0; i < string.length; char >= 65536 ? i += 2 : i++) {
+          char = codePointAt(string, i);
+          if (!isPrintable(char)) return STYLE_DOUBLE;
+          plain = plain && isPlainSafe(char, prevChar, inblock);
+          prevChar = char;
+        }
+        else {
+          for (i = 0; i < string.length; char >= 65536 ? i += 2 : i++) {
+            char = codePointAt(string, i);
+            if (char === CHAR_LINE_FEED) {
+              hasLineBreak = true;
+              if (shouldTrackWidth) {
+                hasFoldableLine = hasFoldableLine || i - previousLineBreak - 1 > lineWidth && string[previousLineBreak + 1] !== " ";
+                previousLineBreak = i;
+              }
+            } else if (!isPrintable(char)) return STYLE_DOUBLE;
+            plain = plain && isPlainSafe(char, prevChar, inblock);
+            prevChar = char;
+          }
+          hasFoldableLine = hasFoldableLine || shouldTrackWidth && i - previousLineBreak - 1 > lineWidth && string[previousLineBreak + 1] !== " ";
+        }
+        if (!hasLineBreak && !hasFoldableLine) {
+          if (plain && !forceQuotes && !testAmbiguousType(string)) return STYLE_PLAIN;
+          return quotingType === QUOTING_TYPE_DOUBLE ? STYLE_DOUBLE : STYLE_SINGLE;
+        }
+        if (indentPerLevel > 9 && needIndentIndicator(string)) return STYLE_DOUBLE;
+        if (!forceQuotes) return hasFoldableLine ? STYLE_FOLDED : STYLE_LITERAL;
+        return quotingType === QUOTING_TYPE_DOUBLE ? STYLE_DOUBLE : STYLE_SINGLE;
+      }
+      function writeScalar(state, string, level, iskey, inblock) {
+        state.dump = function() {
+          if (string.length === 0) return state.quotingType === QUOTING_TYPE_DOUBLE ? '""' : "''";
+          if (!state.noCompatMode) {
+            if (DEPRECATED_BOOLEANS_SYNTAX.indexOf(string) !== -1 || DEPRECATED_BASE60_SYNTAX.test(string)) return state.quotingType === QUOTING_TYPE_DOUBLE ? '"' + string + '"' : "'" + string + "'";
+          }
+          const indent = state.indent * Math.max(1, level);
+          const lineWidth = state.lineWidth === -1 ? -1 : Math.max(Math.min(state.lineWidth, 40), state.lineWidth - indent);
+          const singleLineOnly = iskey || state.flowLevel > -1 && level >= state.flowLevel;
+          function testAmbiguity(string2) {
+            return testImplicitResolving(state, string2);
+          }
+          switch (chooseScalarStyle(string, singleLineOnly, state.indent, lineWidth, testAmbiguity, state.quotingType, state.forceQuotes && !iskey, inblock)) {
+            case STYLE_PLAIN:
+              return string;
+            case STYLE_SINGLE:
+              return "'" + string.replace(/'/g, "''") + "'";
+            case STYLE_LITERAL:
+              return "|" + blockHeader(string, state.indent) + dropEndingNewline(indentString(string, indent));
+            case STYLE_FOLDED:
+              return ">" + blockHeader(string, state.indent) + dropEndingNewline(indentString(foldString(string, lineWidth), indent));
+            case STYLE_DOUBLE:
+              return '"' + escapeString(string, lineWidth) + '"';
+            default:
+              throw new YAMLException2("impossible error: invalid scalar style");
+          }
+        }();
+      }
+      function blockHeader(string, indentPerLevel) {
+        const indentIndicator = needIndentIndicator(string) ? String(indentPerLevel) : "";
+        const clip = string[string.length - 1] === "\n";
+        return indentIndicator + (clip && (string[string.length - 2] === "\n" || string === "\n") ? "+" : clip ? "" : "-") + "\n";
+      }
+      function dropEndingNewline(string) {
+        return string[string.length - 1] === "\n" ? string.slice(0, -1) : string;
+      }
+      function foldString(string, width) {
+        const lineRe = /(\n+)([^\n]*)/g;
+        let result = function() {
+          let nextLF = string.indexOf("\n");
+          nextLF = nextLF !== -1 ? nextLF : string.length;
+          lineRe.lastIndex = nextLF;
+          return foldLine(string.slice(0, nextLF), width);
+        }();
+        let prevMoreIndented = string[0] === "\n" || string[0] === " ";
+        let moreIndented;
+        let match;
+        while (match = lineRe.exec(string)) {
+          const prefix = match[1];
+          const line = match[2];
+          moreIndented = line[0] === " ";
+          result += prefix + (!prevMoreIndented && !moreIndented && line !== "" ? "\n" : "") + foldLine(line, width);
+          prevMoreIndented = moreIndented;
+        }
+        return result;
+      }
+      function foldLine(line, width) {
+        if (line === "" || line[0] === " ") return line;
+        const breakRe = / [^ ]/g;
+        let match;
+        let start = 0;
+        let end;
+        let curr = 0;
+        let next = 0;
+        let result = "";
+        while (match = breakRe.exec(line)) {
+          next = match.index;
+          if (next - start > width) {
+            end = curr > start ? curr : next;
+            result += "\n" + line.slice(start, end);
+            start = end + 1;
+          }
+          curr = next;
+        }
+        result += "\n";
+        if (line.length - start > width && curr > start) result += line.slice(start, curr) + "\n" + line.slice(curr + 1);
+        else result += line.slice(start);
+        return result.slice(1);
+      }
+      function escapeString(string) {
+        let result = "";
+        let char = 0;
+        for (let i = 0; i < string.length; char >= 65536 ? i += 2 : i++) {
+          char = codePointAt(string, i);
+          const escapeSeq = ESCAPE_SEQUENCES[char];
+          if (!escapeSeq && isPrintable(char)) {
+            result += string[i];
+            if (char >= 65536) result += string[i + 1];
+          } else result += escapeSeq || encodeHex(char);
+        }
+        return result;
+      }
+      function writeFlowSequence(state, level, object) {
+        let _result = "";
+        const _tag = state.tag;
+        for (let index = 0, length = object.length; index < length; index += 1) {
+          let value = object[index];
+          if (state.replacer) value = state.replacer.call(object, String(index), value);
+          if (writeNode(state, level, value, false, false) || typeof value === "undefined" && writeNode(state, level, null, false, false)) {
+            if (_result !== "") _result += "," + (!state.condenseFlow ? " " : "");
+            _result += state.dump;
+          }
+        }
+        state.tag = _tag;
+        state.dump = "[" + _result + "]";
+      }
+      function writeBlockSequence(state, level, object, compact) {
+        let _result = "";
+        const _tag = state.tag;
+        for (let index = 0, length = object.length; index < length; index += 1) {
+          let value = object[index];
+          if (state.replacer) value = state.replacer.call(object, String(index), value);
+          if (writeNode(state, level + 1, value, true, true, false, true) || typeof value === "undefined" && writeNode(state, level + 1, null, true, true, false, true)) {
+            if (!compact || _result !== "") _result += generateNextLine(state, level);
+            if (state.dump && CHAR_LINE_FEED === state.dump.charCodeAt(0)) _result += "-";
+            else _result += "- ";
+            _result += state.dump;
+          }
+        }
+        state.tag = _tag;
+        state.dump = _result || "[]";
+      }
+      function writeFlowMapping(state, level, object) {
+        let _result = "";
+        const _tag = state.tag;
+        const objectKeyList = Object.keys(object);
+        for (let index = 0, length = objectKeyList.length; index < length; index += 1) {
+          let pairBuffer = "";
+          if (_result !== "") pairBuffer += ", ";
+          if (state.condenseFlow) pairBuffer += '"';
+          const objectKey = objectKeyList[index];
+          let objectValue = object[objectKey];
+          if (state.replacer) objectValue = state.replacer.call(object, objectKey, objectValue);
+          if (!writeNode(state, level, objectKey, false, false)) continue;
+          if (state.dump.length > 1024) pairBuffer += "? ";
+          pairBuffer += state.dump + (state.condenseFlow ? '"' : "") + ":" + (state.condenseFlow ? "" : " ");
+          if (!writeNode(state, level, objectValue, false, false)) continue;
+          pairBuffer += state.dump;
+          _result += pairBuffer;
+        }
+        state.tag = _tag;
+        state.dump = "{" + _result + "}";
+      }
+      function writeBlockMapping(state, level, object, compact) {
+        let _result = "";
+        const _tag = state.tag;
+        const objectKeyList = Object.keys(object);
+        if (state.sortKeys === true) objectKeyList.sort();
+        else if (typeof state.sortKeys === "function") objectKeyList.sort(state.sortKeys);
+        else if (state.sortKeys) throw new YAMLException2("sortKeys must be a boolean or a function");
+        for (let index = 0, length = objectKeyList.length; index < length; index += 1) {
+          let pairBuffer = "";
+          if (!compact || _result !== "") pairBuffer += generateNextLine(state, level);
+          const objectKey = objectKeyList[index];
+          let objectValue = object[objectKey];
+          if (state.replacer) objectValue = state.replacer.call(object, objectKey, objectValue);
+          if (!writeNode(state, level + 1, objectKey, true, true, true)) continue;
+          const explicitPair = state.tag !== null && state.tag !== "?" || state.dump && state.dump.length > 1024;
+          if (explicitPair) if (state.dump && CHAR_LINE_FEED === state.dump.charCodeAt(0)) pairBuffer += "?";
+          else pairBuffer += "? ";
+          pairBuffer += state.dump;
+          if (explicitPair) pairBuffer += generateNextLine(state, level);
+          if (!writeNode(state, level + 1, objectValue, true, explicitPair)) continue;
+          if (state.dump && CHAR_LINE_FEED === state.dump.charCodeAt(0)) pairBuffer += ":";
+          else pairBuffer += ": ";
+          pairBuffer += state.dump;
+          _result += pairBuffer;
+        }
+        state.tag = _tag;
+        state.dump = _result || "{}";
+      }
+      function detectType(state, object, explicit) {
+        const typeList = explicit ? state.explicitTypes : state.implicitTypes;
+        for (let index = 0, length = typeList.length; index < length; index += 1) {
+          const type = typeList[index];
+          if ((type.instanceOf || type.predicate) && (!type.instanceOf || typeof object === "object" && object instanceof type.instanceOf) && (!type.predicate || type.predicate(object))) {
+            if (explicit) if (type.multi && type.representName) state.tag = type.representName(object);
+            else state.tag = type.tag;
+            else state.tag = "?";
+            if (type.represent) {
+              const style = state.styleMap[type.tag] || type.defaultStyle;
+              let _result;
+              if (_toString.call(type.represent) === "[object Function]") _result = type.represent(object, style);
+              else if (_hasOwnProperty.call(type.represent, style)) _result = type.represent[style](object, style);
+              else throw new YAMLException2("!<" + type.tag + '> tag resolver accepts not "' + style + '" style');
+              state.dump = _result;
+            }
+            return true;
+          }
+        }
+        return false;
+      }
+      function writeNode(state, level, object, block, compact, iskey, isblockseq) {
+        state.tag = null;
+        state.dump = object;
+        if (!detectType(state, object, false)) detectType(state, object, true);
+        const type = _toString.call(state.dump);
+        const inblock = block;
+        if (block) block = state.flowLevel < 0 || state.flowLevel > level;
+        const objectOrArray = type === "[object Object]" || type === "[object Array]";
+        let duplicateIndex;
+        let duplicate;
+        if (objectOrArray) {
+          duplicateIndex = state.duplicates.indexOf(object);
+          duplicate = duplicateIndex !== -1;
+        }
+        if (state.tag !== null && state.tag !== "?" || duplicate || state.indent !== 2 && level > 0) compact = false;
+        if (duplicate && state.usedDuplicates[duplicateIndex]) state.dump = "*ref_" + duplicateIndex;
+        else {
+          if (objectOrArray && duplicate && !state.usedDuplicates[duplicateIndex]) state.usedDuplicates[duplicateIndex] = true;
+          if (type === "[object Object]") if (block && Object.keys(state.dump).length !== 0) {
+            writeBlockMapping(state, level, state.dump, compact);
+            if (duplicate) state.dump = "&ref_" + duplicateIndex + state.dump;
+          } else {
+            writeFlowMapping(state, level, state.dump);
+            if (duplicate) state.dump = "&ref_" + duplicateIndex + " " + state.dump;
+          }
+          else if (type === "[object Array]") if (block && state.dump.length !== 0) {
+            if (state.noArrayIndent && !isblockseq && level > 0) writeBlockSequence(state, level - 1, state.dump, compact);
+            else writeBlockSequence(state, level, state.dump, compact);
+            if (duplicate) state.dump = "&ref_" + duplicateIndex + state.dump;
+          } else {
+            writeFlowSequence(state, level, state.dump);
+            if (duplicate) state.dump = "&ref_" + duplicateIndex + " " + state.dump;
+          }
+          else if (type === "[object String]") {
+            if (state.tag !== "?") writeScalar(state, state.dump, level, iskey, inblock);
+          } else if (type === "[object Undefined]") return false;
+          else {
+            if (state.skipInvalid) return false;
+            throw new YAMLException2("unacceptable kind of an object to dump " + type);
+          }
+          if (state.tag !== null && state.tag !== "?") {
+            let tagStr = encodeURI(state.tag[0] === "!" ? state.tag.slice(1) : state.tag).replace(/!/g, "%21");
+            if (state.tag[0] === "!") tagStr = "!" + tagStr;
+            else if (tagStr.slice(0, 18) === "tag:yaml.org,2002:") tagStr = "!!" + tagStr.slice(18);
+            else tagStr = "!<" + tagStr + ">";
+            state.dump = tagStr + " " + state.dump;
+          }
+        }
+        return true;
+      }
+      function getDuplicateReferences(object, state) {
+        const objects = [];
+        const duplicatesIndexes = [];
+        inspectNode(object, objects, duplicatesIndexes);
+        const length = duplicatesIndexes.length;
+        for (let index = 0; index < length; index += 1) state.duplicates.push(objects[duplicatesIndexes[index]]);
+        state.usedDuplicates = new Array(length);
+      }
+      function inspectNode(object, objects, duplicatesIndexes) {
+        if (object !== null && typeof object === "object") {
+          const index = objects.indexOf(object);
+          if (index !== -1) {
+            if (duplicatesIndexes.indexOf(index) === -1) duplicatesIndexes.push(index);
+          } else {
+            objects.push(object);
+            if (Array.isArray(object)) for (let i = 0, length = object.length; i < length; i += 1) inspectNode(object[i], objects, duplicatesIndexes);
+            else {
+              const objectKeyList = Object.keys(object);
+              for (let i = 0, length = objectKeyList.length; i < length; i += 1) inspectNode(object[objectKeyList[i]], objects, duplicatesIndexes);
+            }
+          }
+        }
+      }
+      function dump2(input, options) {
+        options = options || {};
+        const state = new State(options);
+        if (!state.noRefs) getDuplicateReferences(input, state);
+        let value = input;
+        if (state.replacer) value = state.replacer.call({ "": value }, "", value);
+        if (writeNode(state, 0, value, true, true)) return state.dump + "\n";
+        return "";
+      }
+      module.exports.dump = dump2;
+    });
+    import_js_yaml = /* @__PURE__ */ __toESM2((/* @__PURE__ */ __commonJSMin((exports, module) => {
+      var loader = require_loader();
+      var dumper = require_dumper();
+      function renamed(from, to) {
+        return function() {
+          throw new Error("Function yaml." + from + " is removed in js-yaml 4. Use yaml." + to + " instead, which is now safe by default.");
         };
       }
-      if (nodeDef.kind === "conditional") {
-        const condDef = nodeDef;
-        const condState = nodeState;
-        const condResult = evaluateCondition(condDef.condition, config, state);
-        condState.branch_taken = condResult ? "true" : "false";
-        const branchNodes = condDef.branches[condState.branch_taken];
-        if (branchNodes.length === 0) {
-          condState.status = NODE_STATUSES.COMPLETED;
-          continue;
-        }
-        condState.status = NODE_STATUSES.IN_PROGRESS;
-        for (const branchNode of branchNodes) {
-          if (!(branchNode.id in nodes)) {
-            nodes[branchNode.id] = scaffoldNodeState(branchNode);
-          }
-        }
-        return walkNodes(branchNodes, nodes, config, state, readDocument5, currentIteration);
-      }
-      if (nodeDef.kind === "parallel") {
-        const parallelDef = nodeDef;
-        const parallelState = nodeState;
-        parallelState.status = NODE_STATUSES.IN_PROGRESS;
-        for (const child of parallelDef.children) {
-          if (!(child.id in parallelState.nodes)) {
-            parallelState.nodes[child.id] = scaffoldNodeState(child);
-          }
-        }
-        return walkNodes(parallelDef.children, parallelState.nodes, config, state, readDocument5, currentIteration);
-      }
-      if (nodeDef.kind === "for_each_phase") {
-        const fepDef = nodeDef;
-        const fepState = nodeState;
-        if (fepState.iterations.length === 0) {
-          if (!readDocument5) {
-            return null;
-          }
-          const docPath = resolveStateRef(fepDef.source_doc_ref, state.graph);
-          if (typeof docPath !== "string") {
-            return null;
-          }
-          const doc = readDocument5(docPath);
-          if (!doc) {
-            return null;
-          }
-          const totalValue = doc.frontmatter[fepDef.total_field];
-          if (typeof totalValue !== "number" || !Number.isInteger(totalValue) || totalValue <= 0) {
-            return null;
-          }
-          const cappedTotal = Math.min(totalValue, config.limits.max_phases);
-          for (let i = 0; i < cappedTotal; i++) {
-            const iterationNodes = {};
-            for (const bodyDef of fepDef.body) {
-              iterationNodes[bodyDef.id] = scaffoldNodeState(bodyDef);
-            }
-            fepState.iterations.push({
-              index: i,
-              status: NODE_STATUSES.NOT_STARTED,
-              nodes: iterationNodes,
-              corrective_tasks: [],
-              commit_hash: null
-            });
-          }
-        }
-        fepState.status = NODE_STATUSES.IN_PROGRESS;
-        const iterResult = walkForEachIterations(fepDef, fepState, config, state, readDocument5);
-        if (iterResult === "all_completed") {
-          fepState.status = NODE_STATUSES.COMPLETED;
-          continue;
-        }
-        return iterResult;
-      }
-      if (nodeDef.kind === "for_each_task") {
-        const fetDef = nodeDef;
-        const fetState = nodeState;
-        if (fetState.iterations.length === 0) {
-          if (!readDocument5) {
-            return null;
-          }
-          const docPath = resolveDocRefInScope(fetDef.source_doc_ref, state.graph, currentIteration);
-          if (typeof docPath !== "string") {
-            return null;
-          }
-          const doc = readDocument5(docPath);
-          if (!doc) {
-            return null;
-          }
-          const tasksValue = doc.frontmatter[fetDef.tasks_field];
-          if (!Array.isArray(tasksValue)) {
-            return null;
-          }
-          if (tasksValue.length === 0) {
-            fetState.status = NODE_STATUSES.COMPLETED;
-            continue;
-          }
-          const cappedLength = Math.min(tasksValue.length, config.limits.max_tasks_per_phase);
-          for (let i = 0; i < cappedLength; i++) {
-            const iterationNodes = {};
-            for (const bodyDef of fetDef.body) {
-              iterationNodes[bodyDef.id] = scaffoldNodeState(bodyDef);
-            }
-            fetState.iterations.push({
-              index: i,
-              status: NODE_STATUSES.NOT_STARTED,
-              nodes: iterationNodes,
-              corrective_tasks: [],
-              commit_hash: null
-            });
-          }
-        }
-        fetState.status = NODE_STATUSES.IN_PROGRESS;
-        const iterResult = walkForEachIterations(fetDef, fetState, config, state, readDocument5);
-        if (iterResult === "all_completed") {
-          fetState.status = NODE_STATUSES.COMPLETED;
-          continue;
-        }
-        return iterResult;
-      }
-      return null;
-    }
-  }
-  return null;
-}
-function walkDAG(state, template, config, readDocument5) {
-  if (state.graph.status === GRAPH_STATUSES.HALTED) {
-    return {
-      action: NEXT_ACTIONS.DISPLAY_HALTED,
-      context: { details: state.pipeline.halt_reason ?? "Pipeline is halted" }
-    };
-  }
-  const result = walkNodes(template.nodes, state.graph.nodes, config, state, readDocument5);
-  if (result !== null) {
-    return result;
-  }
-  const allDone = template.nodes.every((nodeDef) => {
-    const ns = state.graph.nodes[nodeDef.id];
-    return ns !== void 0 && (ns.status === NODE_STATUSES.COMPLETED || ns.status === NODE_STATUSES.SKIPPED);
-  });
-  if (allDone) {
-    state.graph.status = GRAPH_STATUSES.COMPLETED;
-    return { action: NEXT_ACTIONS.DISPLAY_COMPLETE, context: {} };
-  }
-  return null;
-}
-var init_dag_walker = __esm({
-  "cli/src/lib/pipeline-engine/dag-walker.ts"() {
-    "use strict";
-    init_constants();
-    init_condition_evaluator();
-    init_scaffold();
+      module.exports.Type = require_type();
+      module.exports.Schema = require_schema();
+      module.exports.FAILSAFE_SCHEMA = require_failsafe();
+      module.exports.JSON_SCHEMA = require_json();
+      module.exports.CORE_SCHEMA = require_core();
+      module.exports.DEFAULT_SCHEMA = require_default();
+      module.exports.load = loader.load;
+      module.exports.loadAll = loader.loadAll;
+      module.exports.dump = dumper.dump;
+      module.exports.YAMLException = require_exception();
+      module.exports.types = {
+        binary: require_binary(),
+        float: require_float(),
+        map: require_map(),
+        null: require_null(),
+        pairs: require_pairs(),
+        set: require_set(),
+        timestamp: require_timestamp(),
+        bool: require_bool(),
+        int: require_int(),
+        merge: require_merge(),
+        omap: require_omap(),
+        seq: require_seq(),
+        str: require_str()
+      };
+      module.exports.safeLoad = renamed("safeLoad", "load");
+      module.exports.safeLoadAll = renamed("safeLoadAll", "loadAll");
+      module.exports.safeDump = renamed("safeDump", "dump");
+    }))(), 1);
+    ({ Type, Schema, FAILSAFE_SCHEMA, JSON_SCHEMA, CORE_SCHEMA, DEFAULT_SCHEMA, load: load2, loadAll, dump, YAMLException, types, safeLoad, safeLoadAll, safeDump } = import_js_yaml.default);
+    index_vite_proxy_tmp_default = import_js_yaml.default;
   }
 });
 
-// cli/src/lib/pipeline-engine/action-event-loader.ts
-function parseActionEventFile(text, filename) {
-  const fnMatch = FILENAME_RE.exec(filename);
-  if (!fnMatch) {
-    throw new Error(`Invalid catalog filename '${filename}': expected '<action|event>.<name>.md'.`);
-  }
-  const fileKind = fnMatch[1];
-  const fileName = fnMatch[2];
-  const fmMatch = FRONTMATTER_RE.exec(text);
-  if (!fmMatch) {
-    throw new Error(`File '${filename}' missing YAML frontmatter block.`);
-  }
-  const raw = jsYaml.load(fmMatch[1]);
-  if (!raw || typeof raw !== "object") {
-    throw new Error(`File '${filename}' has empty or non-object frontmatter.`);
-  }
-  if (raw["kind"] !== fileKind) {
-    throw new Error(`File '${filename}' frontmatter.kind '${raw["kind"]}' disagrees with filename kind '${fileKind}'.`);
-  }
-  if (raw["name"] !== fileName) {
-    throw new Error(`File '${filename}' frontmatter.name '${raw["name"]}' disagrees with filename stem '${fileName}'.`);
-  }
-  for (const field of ["title", "description"]) {
-    if (typeof raw[field] !== "string" || !raw[field].length) {
-      throw new Error(`File '${filename}' frontmatter.${field} is required and must be a non-empty string.`);
-    }
-  }
-  if (fileKind === "action") {
-    if (!CATEGORIES.has(raw["category"])) {
-      throw new Error(`File '${filename}' frontmatter.category '${raw["category"]}' is not one of ${[...CATEGORIES].join(", ")}.`);
-    }
-    if (!(raw["completion_event"] === null || typeof raw["completion_event"] === "string")) {
-      throw new Error(`File '${filename}' frontmatter.completion_event must be a string or null.`);
-    }
-  } else {
-    const payload = raw["signal_payload"];
-    if (payload === void 0 || payload === null || typeof payload !== "object" || Array.isArray(payload)) {
-      throw new Error(`File '${filename}' frontmatter.signal_payload must be an object map (use {} for no flags).`);
-    }
-    for (const [flag, def] of Object.entries(payload)) {
-      const d = def;
-      if (typeof d?.["required"] !== "boolean" || typeof d?.["description"] !== "string") {
-        throw new Error(`File '${filename}' signal_payload['${flag}'] must be { required: boolean, description: string }.`);
-      }
-    }
-  }
-  const body = fmMatch[2] ?? "";
-  return { kind: fileKind, name: fileName, frontmatter: raw, body };
-}
-var FRONTMATTER_RE, FILENAME_RE, CATEGORIES;
-var init_action_event_loader = __esm({
-  "cli/src/lib/pipeline-engine/action-event-loader.ts"() {
+// cli/src/lib/pipeline-engine/migrations/version.ts
+var CURRENT_SCHEMA_VERSION;
+var init_version = __esm({
+  "cli/src/lib/pipeline-engine/migrations/version.ts"() {
     "use strict";
-    init_js_yaml();
-    FRONTMATTER_RE = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/;
-    FILENAME_RE = /^(action|event)\.([a-z0-9_]+)\.md$/;
-    CATEGORIES = /* @__PURE__ */ new Set(["agent-spawn", "gate", "terminal", "source-control"]);
+    CURRENT_SCHEMA_VERSION = "orchestration-state-v6";
   }
 });
 
-// cli/src/lib/pipeline-engine/composer.ts
-import fs15 from "node:fs";
-import path19 from "node:path";
-function readBodyIfExists(filePath, filename, kind) {
-  if (!fs15.existsSync(filePath)) return null;
-  const text = fs15.readFileSync(filePath, "utf8");
-  const parsed = parseActionEventFile(text, filename);
-  if (parsed.kind !== kind) {
-    throw new Error(`Catalog file '${filePath}' parsed kind '${parsed.kind}' but kind '${kind}' expected.`);
-  }
-  return parsed.body;
-}
-function readEvent(filePath, filename) {
-  if (!fs15.existsSync(filePath)) return null;
-  const text = fs15.readFileSync(filePath, "utf8");
-  const parsed = parseActionEventFile(text, filename);
-  if (parsed.kind !== "event") {
-    throw new Error(`Catalog file '${filePath}' expected to be an event but kind was '${parsed.kind}'.`);
-  }
-  return { body: parsed.body, fm: parsed.frontmatter };
-}
-function validateCustomSlot(customFile, catalogFile, customFilename, catalogFilename, kind, catalogRoot) {
-  if (fs15.existsSync(customFile) && !fs15.existsSync(catalogFile)) {
-    throw new Error(
-      `Composer validation: custom '${customFilename}' references unknown ${kind} \u2014 expected catalog file '${catalogFilename}' under '${catalogRoot}'.`
-    );
-  }
-}
-function makeCustomReader(overlay) {
-  return (filePath, overlayKey) => {
-    if (overlay && Object.prototype.hasOwnProperty.call(overlay, overlayKey)) {
-      const v = overlay[overlayKey];
-      return v === "" ? null : v;
-    }
-    if (!fs15.existsSync(filePath)) return null;
-    return fs15.readFileSync(filePath, "utf8");
-  };
-}
-function deriveSignalLine(eventName, fm) {
-  const keys = Object.keys(fm.signal_payload ?? {});
-  if (keys.length === 0) return `Signal: ${eventName}`;
-  const flags = keys.map((k) => `--${k} <value>`).join(" ");
-  return `Signal: ${eventName} ${flags}`;
-}
-function trimBody(s) {
-  return s.replace(/^\s*\n+/, "").replace(/\n+\s*$/, "");
-}
-function admit(body) {
-  if (!body) return null;
-  const trimmed = trimBody(body);
-  return trimmed.trim() ? trimmed : null;
-}
-function emit2(sections, startStep) {
-  const lines = [];
-  let step = startStep;
-  let hadOverlay = false;
-  for (const s of sections) {
-    lines.push(`## Step ${step}`);
-    lines.push(s.body);
-    if (s.isOverlay) hadOverlay = true;
-    step += 1;
-  }
-  return { prompt: lines.join("\n\n"), has_custom_instructions: hadOverlay };
-}
-function composeActionPrompt(input) {
-  const { actionName, completionEvent, catalogRoot } = input;
-  const startStep = input.startStep ?? 1;
-  const customRoot = path19.join(catalogRoot, "custom");
-  const readCustom = makeCustomReader(input.overlay);
-  const sections = [];
-  const actionCustomPre = path19.join(customRoot, `action.${actionName}.pre.md`);
-  const actionCatalog = path19.join(catalogRoot, `action.${actionName}.md`);
-  validateCustomSlot(
-    actionCustomPre,
-    actionCatalog,
-    `custom/action.${actionName}.pre.md`,
-    `action.${actionName}.md`,
-    "action",
-    catalogRoot
-  );
-  const actionPre = admit(readCustom(actionCustomPre, `action.${actionName}.pre`));
-  if (actionPre !== null) sections.push({ body: actionPre, isOverlay: true });
-  const actionBody = readBodyIfExists(actionCatalog, `action.${actionName}.md`, "action");
-  if (actionBody === null) {
-    throw new Error(
-      `Composer validation: expected catalog file 'action.${actionName}.md' under '${catalogRoot}'.`
-    );
-  }
-  const actionBodyAdmitted = admit(actionBody);
-  if (actionBodyAdmitted !== null) sections.push({ body: actionBodyAdmitted, isOverlay: false });
-  if (completionEvent !== null) {
-    const eventCustomPre = path19.join(customRoot, `event.${completionEvent}.pre.md`);
-    const eventCatalog = path19.join(catalogRoot, `event.${completionEvent}.md`);
-    const eventCustomPost = path19.join(customRoot, `event.${completionEvent}.post.md`);
-    validateCustomSlot(
-      eventCustomPre,
-      eventCatalog,
-      `custom/event.${completionEvent}.pre.md`,
-      `event.${completionEvent}.md`,
-      "event",
-      catalogRoot
-    );
-    validateCustomSlot(
-      eventCustomPost,
-      eventCatalog,
-      `custom/event.${completionEvent}.post.md`,
-      `event.${completionEvent}.md`,
-      "event",
-      catalogRoot
-    );
-    const eventPre = admit(readCustom(eventCustomPre, `event.${completionEvent}.pre`));
-    if (eventPre !== null) sections.push({ body: eventPre, isOverlay: true });
-    const evt = readEvent(eventCatalog, `event.${completionEvent}.md`);
-    if (!evt) {
-      throw new Error(
-        `Composer validation: expected catalog file 'event.${completionEvent}.md' under '${catalogRoot}'.`
-      );
-    }
-    const whenCompleteBody = trimBody(evt.body) + "\n\n" + deriveSignalLine(completionEvent, evt.fm);
-    const whenAdmitted = admit(whenCompleteBody);
-    if (whenAdmitted !== null) sections.push({ body: whenAdmitted, isOverlay: false });
-    const eventPost = admit(readCustom(eventCustomPost, `event.${completionEvent}.post`));
-    if (eventPost !== null) sections.push({ body: eventPost, isOverlay: true });
-  }
-  return emit2(sections, startStep);
-}
-function composeOrphanRuntimeShape(input) {
-  const { eventName, catalogRoot, overlay } = input;
-  const customRoot = path19.join(catalogRoot, "custom");
-  const readCustom = makeCustomReader(overlay);
-  const eventCustomPost = path19.join(customRoot, `event.${eventName}.post.md`);
-  const post = admit(readCustom(eventCustomPost, `event.${eventName}.post`));
-  if (post !== null) {
-    return {
-      prompt: `## Step 1
-
-${post}
-
-${NEXT_ACTION_PLACEHOLDER}`,
-      has_custom_instructions: true
-    };
-  }
-  return {
-    prompt: `(no overlay content)
-
-${NEXT_ACTION_PLACEHOLDER}`,
-    has_custom_instructions: false
-  };
-}
-function composeOrphanEventPrompt(input) {
-  const { eventName, catalogRoot, overlay } = input;
-  const startStep = input.startStep ?? 1;
-  const customRoot = path19.join(catalogRoot, "custom");
-  const readCustom = makeCustomReader(overlay);
-  const sections = [];
-  const eventCatalog = path19.join(catalogRoot, `event.${eventName}.md`);
-  const eventCustomPre = path19.join(customRoot, `event.${eventName}.pre.md`);
-  const eventCustomPost = path19.join(customRoot, `event.${eventName}.post.md`);
-  validateCustomSlot(
-    eventCustomPre,
-    eventCatalog,
-    `custom/event.${eventName}.pre.md`,
-    `event.${eventName}.md`,
-    "event",
-    catalogRoot
-  );
-  validateCustomSlot(
-    eventCustomPost,
-    eventCatalog,
-    `custom/event.${eventName}.post.md`,
-    `event.${eventName}.md`,
-    "event",
-    catalogRoot
-  );
-  const eventPre = admit(readCustom(eventCustomPre, `event.${eventName}.pre`));
-  if (eventPre !== null) sections.push({ body: eventPre, isOverlay: true });
-  const evt = readEvent(eventCatalog, `event.${eventName}.md`);
-  if (!evt) {
-    throw new Error(`Composer validation: expected catalog file 'event.${eventName}.md' under '${catalogRoot}'.`);
-  }
-  const whenCompleteBody = trimBody(evt.body) + "\n\n" + deriveSignalLine(eventName, evt.fm);
-  const whenAdmitted = admit(whenCompleteBody);
-  if (whenAdmitted !== null) sections.push({ body: whenAdmitted, isOverlay: false });
-  const eventPost = admit(readCustom(eventCustomPost, `event.${eventName}.post`));
-  if (eventPost !== null) sections.push({ body: eventPost, isOverlay: true });
-  return emit2(sections, startStep);
-}
-var NEXT_ACTION_PLACEHOLDER;
-var init_composer = __esm({
-  "cli/src/lib/pipeline-engine/composer.ts"() {
-    "use strict";
-    init_action_event_loader();
-    NEXT_ACTION_PLACEHOLDER = `\u2190 the next action's prompt is composed here at runtime`;
-  }
-});
-
-// cli/node_modules/ajv/dist/compile/codegen/code.js
+// node_modules/ajv/dist/compile/codegen/code.js
 var require_code = __commonJS({
-  "cli/node_modules/ajv/dist/compile/codegen/code.js"(exports) {
+  "node_modules/ajv/dist/compile/codegen/code.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.regexpCode = exports.getEsmExportName = exports.getProperty = exports.safeStringify = exports.stringify = exports.strConcat = exports.addCodeArg = exports.str = exports._ = exports.nil = exports._Code = exports.Name = exports.IDENTIFIER = exports._CodeOrName = void 0;
@@ -12111,7 +9198,7 @@ var require_code = __commonJS({
     }
     exports._ = _;
     var plus = new _Code("+");
-    function str3(strs, ...args) {
+    function str(strs, ...args) {
       const expr = [safeStringify(strs[0])];
       let i = 0;
       while (i < args.length) {
@@ -12122,7 +9209,7 @@ var require_code = __commonJS({
       optimize(expr);
       return new _Code(expr);
     }
-    exports.str = str3;
+    exports.str = str;
     function addCodeArg(code2, arg) {
       if (arg instanceof _Code)
         code2.push(...arg._items);
@@ -12165,7 +9252,7 @@ var require_code = __commonJS({
       return;
     }
     function strConcat(c1, c2) {
-      return c2.emptyStr() ? c1 : c1.emptyStr() ? c2 : str3`${c1}${c2}`;
+      return c2.emptyStr() ? c1 : c1.emptyStr() ? c2 : str`${c1}${c2}`;
     }
     exports.strConcat = strConcat;
     function interpolate(x) {
@@ -12197,9 +9284,9 @@ var require_code = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/compile/codegen/scope.js
+// node_modules/ajv/dist/compile/codegen/scope.js
 var require_scope = __commonJS({
-  "cli/node_modules/ajv/dist/compile/codegen/scope.js"(exports) {
+  "node_modules/ajv/dist/compile/codegen/scope.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.ValueScope = exports.ValueScopeName = exports.Scope = exports.varKinds = exports.UsedValueState = void 0;
@@ -12342,9 +9429,9 @@ var require_scope = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/compile/codegen/index.js
+// node_modules/ajv/dist/compile/codegen/index.js
 var require_codegen = __commonJS({
-  "cli/node_modules/ajv/dist/compile/codegen/index.js"(exports) {
+  "node_modules/ajv/dist/compile/codegen/index.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.or = exports.and = exports.not = exports.CodeGen = exports.operators = exports.varKinds = exports.ValueScopeName = exports.ValueScope = exports.Scope = exports.Name = exports.regexpCode = exports.stringify = exports.getProperty = exports.nil = exports.strConcat = exports.str = exports._ = void 0;
@@ -13062,9 +10149,9 @@ var require_codegen = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/compile/util.js
+// node_modules/ajv/dist/compile/util.js
 var require_util = __commonJS({
-  "cli/node_modules/ajv/dist/compile/util.js"(exports) {
+  "node_modules/ajv/dist/compile/util.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.checkStrictMode = exports.getErrorPath = exports.Type = exports.useFunc = exports.setEvaluated = exports.evaluatedPropsToName = exports.mergeEvaluated = exports.eachItem = exports.unescapeJsonPointer = exports.escapeJsonPointer = exports.escapeFragment = exports.unescapeFragment = exports.schemaRefOrVal = exports.schemaHasRulesButRef = exports.schemaHasRules = exports.checkUnknownRules = exports.alwaysValidSchema = exports.toHash = void 0;
@@ -13077,72 +10164,72 @@ var require_util = __commonJS({
       return hash;
     }
     exports.toHash = toHash;
-    function alwaysValidSchema(it, schema3) {
-      if (typeof schema3 == "boolean")
-        return schema3;
-      if (Object.keys(schema3).length === 0)
+    function alwaysValidSchema(it, schema) {
+      if (typeof schema == "boolean")
+        return schema;
+      if (Object.keys(schema).length === 0)
         return true;
-      checkUnknownRules(it, schema3);
-      return !schemaHasRules(schema3, it.self.RULES.all);
+      checkUnknownRules(it, schema);
+      return !schemaHasRules(schema, it.self.RULES.all);
     }
     exports.alwaysValidSchema = alwaysValidSchema;
-    function checkUnknownRules(it, schema3 = it.schema) {
+    function checkUnknownRules(it, schema = it.schema) {
       const { opts, self } = it;
       if (!opts.strictSchema)
         return;
-      if (typeof schema3 === "boolean")
+      if (typeof schema === "boolean")
         return;
       const rules = self.RULES.keywords;
-      for (const key in schema3) {
+      for (const key in schema) {
         if (!rules[key])
           checkStrictMode(it, `unknown keyword: "${key}"`);
       }
     }
     exports.checkUnknownRules = checkUnknownRules;
-    function schemaHasRules(schema3, rules) {
-      if (typeof schema3 == "boolean")
-        return !schema3;
-      for (const key in schema3)
+    function schemaHasRules(schema, rules) {
+      if (typeof schema == "boolean")
+        return !schema;
+      for (const key in schema)
         if (rules[key])
           return true;
       return false;
     }
     exports.schemaHasRules = schemaHasRules;
-    function schemaHasRulesButRef(schema3, RULES) {
-      if (typeof schema3 == "boolean")
-        return !schema3;
-      for (const key in schema3)
+    function schemaHasRulesButRef(schema, RULES) {
+      if (typeof schema == "boolean")
+        return !schema;
+      for (const key in schema)
         if (key !== "$ref" && RULES.all[key])
           return true;
       return false;
     }
     exports.schemaHasRulesButRef = schemaHasRulesButRef;
-    function schemaRefOrVal({ topSchemaRef, schemaPath }, schema3, keyword, $data) {
+    function schemaRefOrVal({ topSchemaRef, schemaPath }, schema, keyword, $data) {
       if (!$data) {
-        if (typeof schema3 == "number" || typeof schema3 == "boolean")
-          return schema3;
-        if (typeof schema3 == "string")
-          return (0, codegen_1._)`${schema3}`;
+        if (typeof schema == "number" || typeof schema == "boolean")
+          return schema;
+        if (typeof schema == "string")
+          return (0, codegen_1._)`${schema}`;
       }
       return (0, codegen_1._)`${topSchemaRef}${schemaPath}${(0, codegen_1.getProperty)(keyword)}`;
     }
     exports.schemaRefOrVal = schemaRefOrVal;
-    function unescapeFragment(str3) {
-      return unescapeJsonPointer(decodeURIComponent(str3));
+    function unescapeFragment(str) {
+      return unescapeJsonPointer(decodeURIComponent(str));
     }
     exports.unescapeFragment = unescapeFragment;
-    function escapeFragment(str3) {
-      return encodeURIComponent(escapeJsonPointer(str3));
+    function escapeFragment(str) {
+      return encodeURIComponent(escapeJsonPointer(str));
     }
     exports.escapeFragment = escapeFragment;
-    function escapeJsonPointer(str3) {
-      if (typeof str3 == "number")
-        return `${str3}`;
-      return str3.replace(/~/g, "~0").replace(/\//g, "~1");
+    function escapeJsonPointer(str) {
+      if (typeof str == "number")
+        return `${str}`;
+      return str.replace(/~/g, "~0").replace(/\//g, "~1");
     }
     exports.escapeJsonPointer = escapeJsonPointer;
-    function unescapeJsonPointer(str3) {
-      return str3.replace(/~1/g, "/").replace(/~0/g, "~");
+    function unescapeJsonPointer(str) {
+      return str.replace(/~1/g, "/").replace(/~0/g, "~");
     }
     exports.unescapeJsonPointer = unescapeJsonPointer;
     function eachItem(xs, f) {
@@ -13204,14 +10291,14 @@ var require_util = __commonJS({
       });
     }
     exports.useFunc = useFunc;
-    var Type3;
-    (function(Type4) {
-      Type4[Type4["Num"] = 0] = "Num";
-      Type4[Type4["Str"] = 1] = "Str";
-    })(Type3 || (exports.Type = Type3 = {}));
+    var Type2;
+    (function(Type3) {
+      Type3[Type3["Num"] = 0] = "Num";
+      Type3[Type3["Str"] = 1] = "Str";
+    })(Type2 || (exports.Type = Type2 = {}));
     function getErrorPath(dataProp, dataPropType, jsPropertySyntax) {
       if (dataProp instanceof codegen_1.Name) {
-        const isNumber = dataPropType === Type3.Num;
+        const isNumber = dataPropType === Type2.Num;
         return jsPropertySyntax ? isNumber ? (0, codegen_1._)`"[" + ${dataProp} + "]"` : (0, codegen_1._)`"['" + ${dataProp} + "']"` : isNumber ? (0, codegen_1._)`"/" + ${dataProp}` : (0, codegen_1._)`"/" + ${dataProp}.replace(/~/g, "~0").replace(/\\//g, "~1")`;
       }
       return jsPropertySyntax ? (0, codegen_1.getProperty)(dataProp).toString() : "/" + escapeJsonPointer(dataProp);
@@ -13229,9 +10316,9 @@ var require_util = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/compile/names.js
+// node_modules/ajv/dist/compile/names.js
 var require_names = __commonJS({
-  "cli/node_modules/ajv/dist/compile/names.js"(exports) {
+  "node_modules/ajv/dist/compile/names.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -13268,9 +10355,9 @@ var require_names = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/compile/errors.js
+// node_modules/ajv/dist/compile/errors.js
 var require_errors = __commonJS({
-  "cli/node_modules/ajv/dist/compile/errors.js"(exports) {
+  "node_modules/ajv/dist/compile/errors.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.extendErrors = exports.resetErrorsCount = exports.reportExtraError = exports.reportError = exports.keyword$DataError = exports.keywordError = void 0;
@@ -13390,9 +10477,9 @@ var require_errors = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/compile/validate/boolSchema.js
+// node_modules/ajv/dist/compile/validate/boolSchema.js
 var require_boolSchema = __commonJS({
-  "cli/node_modules/ajv/dist/compile/validate/boolSchema.js"(exports) {
+  "node_modules/ajv/dist/compile/validate/boolSchema.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.boolOrEmptySchema = exports.topBoolOrEmptySchema = void 0;
@@ -13403,10 +10490,10 @@ var require_boolSchema = __commonJS({
       message: "boolean schema is false"
     };
     function topBoolOrEmptySchema(it) {
-      const { gen, schema: schema3, validateName: validateName2 } = it;
-      if (schema3 === false) {
+      const { gen, schema, validateName: validateName2 } = it;
+      if (schema === false) {
         falseSchemaError(it, false);
-      } else if (typeof schema3 == "object" && schema3.$async === true) {
+      } else if (typeof schema == "object" && schema.$async === true) {
         gen.return(names_1.default.data);
       } else {
         gen.assign((0, codegen_1._)`${validateName2}.errors`, null);
@@ -13415,8 +10502,8 @@ var require_boolSchema = __commonJS({
     }
     exports.topBoolOrEmptySchema = topBoolOrEmptySchema;
     function boolOrEmptySchema(it, valid) {
-      const { gen, schema: schema3 } = it;
-      if (schema3 === false) {
+      const { gen, schema } = it;
+      if (schema === false) {
         gen.var(valid, false);
         falseSchemaError(it);
       } else {
@@ -13441,9 +10528,9 @@ var require_boolSchema = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/compile/rules.js
+// node_modules/ajv/dist/compile/rules.js
 var require_rules = __commonJS({
-  "cli/node_modules/ajv/dist/compile/rules.js"(exports) {
+  "node_modules/ajv/dist/compile/rules.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getRules = exports.isJSONType = void 0;
@@ -13472,32 +10559,32 @@ var require_rules = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/compile/validate/applicability.js
+// node_modules/ajv/dist/compile/validate/applicability.js
 var require_applicability = __commonJS({
-  "cli/node_modules/ajv/dist/compile/validate/applicability.js"(exports) {
+  "node_modules/ajv/dist/compile/validate/applicability.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.shouldUseRule = exports.shouldUseGroup = exports.schemaHasRulesForType = void 0;
-    function schemaHasRulesForType({ schema: schema3, self }, type3) {
-      const group = self.RULES.types[type3];
-      return group && group !== true && shouldUseGroup(schema3, group);
+    function schemaHasRulesForType({ schema, self }, type) {
+      const group = self.RULES.types[type];
+      return group && group !== true && shouldUseGroup(schema, group);
     }
     exports.schemaHasRulesForType = schemaHasRulesForType;
-    function shouldUseGroup(schema3, group) {
-      return group.rules.some((rule) => shouldUseRule(schema3, rule));
+    function shouldUseGroup(schema, group) {
+      return group.rules.some((rule) => shouldUseRule(schema, rule));
     }
     exports.shouldUseGroup = shouldUseGroup;
-    function shouldUseRule(schema3, rule) {
+    function shouldUseRule(schema, rule) {
       var _a;
-      return schema3[rule.keyword] !== void 0 || ((_a = rule.definition.implements) === null || _a === void 0 ? void 0 : _a.some((kwd) => schema3[kwd] !== void 0));
+      return schema[rule.keyword] !== void 0 || ((_a = rule.definition.implements) === null || _a === void 0 ? void 0 : _a.some((kwd) => schema[kwd] !== void 0));
     }
     exports.shouldUseRule = shouldUseRule;
   }
 });
 
-// cli/node_modules/ajv/dist/compile/validate/dataType.js
+// node_modules/ajv/dist/compile/validate/dataType.js
 var require_dataType = __commonJS({
-  "cli/node_modules/ajv/dist/compile/validate/dataType.js"(exports) {
+  "node_modules/ajv/dist/compile/validate/dataType.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.reportTypeError = exports.checkDataTypes = exports.checkDataType = exports.coerceAndCheckDataType = exports.getJSONTypes = exports.getSchemaTypes = exports.DataType = void 0;
@@ -13511,38 +10598,38 @@ var require_dataType = __commonJS({
       DataType2[DataType2["Correct"] = 0] = "Correct";
       DataType2[DataType2["Wrong"] = 1] = "Wrong";
     })(DataType || (exports.DataType = DataType = {}));
-    function getSchemaTypes(schema3) {
-      const types3 = getJSONTypes(schema3.type);
-      const hasNull = types3.includes("null");
+    function getSchemaTypes(schema) {
+      const types2 = getJSONTypes(schema.type);
+      const hasNull = types2.includes("null");
       if (hasNull) {
-        if (schema3.nullable === false)
+        if (schema.nullable === false)
           throw new Error("type: null contradicts nullable: false");
       } else {
-        if (!types3.length && schema3.nullable !== void 0) {
+        if (!types2.length && schema.nullable !== void 0) {
           throw new Error('"nullable" cannot be used without "type"');
         }
-        if (schema3.nullable === true)
-          types3.push("null");
+        if (schema.nullable === true)
+          types2.push("null");
       }
-      return types3;
+      return types2;
     }
     exports.getSchemaTypes = getSchemaTypes;
     function getJSONTypes(ts) {
-      const types3 = Array.isArray(ts) ? ts : ts ? [ts] : [];
-      if (types3.every(rules_1.isJSONType))
-        return types3;
-      throw new Error("type must be JSONType or JSONType[]: " + types3.join(","));
+      const types2 = Array.isArray(ts) ? ts : ts ? [ts] : [];
+      if (types2.every(rules_1.isJSONType))
+        return types2;
+      throw new Error("type must be JSONType or JSONType[]: " + types2.join(","));
     }
     exports.getJSONTypes = getJSONTypes;
-    function coerceAndCheckDataType(it, types3) {
+    function coerceAndCheckDataType(it, types2) {
       const { gen, data, opts } = it;
-      const coerceTo = coerceToTypes(types3, opts.coerceTypes);
-      const checkTypes = types3.length > 0 && !(coerceTo.length === 0 && types3.length === 1 && (0, applicability_1.schemaHasRulesForType)(it, types3[0]));
+      const coerceTo = coerceToTypes(types2, opts.coerceTypes);
+      const checkTypes = types2.length > 0 && !(coerceTo.length === 0 && types2.length === 1 && (0, applicability_1.schemaHasRulesForType)(it, types2[0]));
       if (checkTypes) {
-        const wrongType = checkDataTypes(types3, data, opts.strictNumbers, DataType.Wrong);
+        const wrongType = checkDataTypes(types2, data, opts.strictNumbers, DataType.Wrong);
         gen.if(wrongType, () => {
           if (coerceTo.length)
-            coerceData(it, types3, coerceTo);
+            coerceData(it, types2, coerceTo);
           else
             reportTypeError(it);
         });
@@ -13551,15 +10638,15 @@ var require_dataType = __commonJS({
     }
     exports.coerceAndCheckDataType = coerceAndCheckDataType;
     var COERCIBLE = /* @__PURE__ */ new Set(["string", "number", "integer", "boolean", "null"]);
-    function coerceToTypes(types3, coerceTypes) {
-      return coerceTypes ? types3.filter((t) => COERCIBLE.has(t) || coerceTypes === "array" && t === "array") : [];
+    function coerceToTypes(types2, coerceTypes) {
+      return coerceTypes ? types2.filter((t) => COERCIBLE.has(t) || coerceTypes === "array" && t === "array") : [];
     }
-    function coerceData(it, types3, coerceTo) {
+    function coerceData(it, types2, coerceTo) {
       const { gen, data, opts } = it;
       const dataType = gen.let("dataType", (0, codegen_1._)`typeof ${data}`);
       const coerced = gen.let("coerced", (0, codegen_1._)`undefined`);
       if (opts.coerceTypes === "array") {
-        gen.if((0, codegen_1._)`${dataType} == 'object' && Array.isArray(${data}) && ${data}.length == 1`, () => gen.assign(data, (0, codegen_1._)`${data}[0]`).assign(dataType, (0, codegen_1._)`typeof ${data}`).if(checkDataTypes(types3, data, opts.strictNumbers), () => gen.assign(coerced, data)));
+        gen.if((0, codegen_1._)`${dataType} == 'object' && Array.isArray(${data}) && ${data}.length == 1`, () => gen.assign(data, (0, codegen_1._)`${data}[0]`).assign(dataType, (0, codegen_1._)`typeof ${data}`).if(checkDataTypes(types2, data, opts.strictNumbers), () => gen.assign(coerced, data)));
       }
       gen.if((0, codegen_1._)`${coerced} !== undefined`);
       for (const t of coerceTo) {
@@ -13635,26 +10722,26 @@ var require_dataType = __commonJS({
         return checkDataType(dataTypes[0], data, strictNums, correct);
       }
       let cond;
-      const types3 = (0, util_1.toHash)(dataTypes);
-      if (types3.array && types3.object) {
+      const types2 = (0, util_1.toHash)(dataTypes);
+      if (types2.array && types2.object) {
         const notObj = (0, codegen_1._)`typeof ${data} != "object"`;
-        cond = types3.null ? notObj : (0, codegen_1._)`!${data} || ${notObj}`;
-        delete types3.null;
-        delete types3.array;
-        delete types3.object;
+        cond = types2.null ? notObj : (0, codegen_1._)`!${data} || ${notObj}`;
+        delete types2.null;
+        delete types2.array;
+        delete types2.object;
       } else {
         cond = codegen_1.nil;
       }
-      if (types3.number)
-        delete types3.integer;
-      for (const t in types3)
+      if (types2.number)
+        delete types2.integer;
+      for (const t in types2)
         cond = (0, codegen_1.and)(cond, checkDataType(t, data, strictNums, correct));
       return cond;
     }
     exports.checkDataTypes = checkDataTypes;
     var typeError = {
-      message: ({ schema: schema3 }) => `must be ${schema3}`,
-      params: ({ schema: schema3, schemaValue }) => typeof schema3 == "string" ? (0, codegen_1._)`{type: ${schema3}}` : (0, codegen_1._)`{type: ${schemaValue}}`
+      message: ({ schema }) => `must be ${schema}`,
+      params: ({ schema, schemaValue }) => typeof schema == "string" ? (0, codegen_1._)`{type: ${schema}}` : (0, codegen_1._)`{type: ${schemaValue}}`
     };
     function reportTypeError(it) {
       const cxt = getTypeErrorContext(it);
@@ -13662,16 +10749,16 @@ var require_dataType = __commonJS({
     }
     exports.reportTypeError = reportTypeError;
     function getTypeErrorContext(it) {
-      const { gen, data, schema: schema3 } = it;
-      const schemaCode = (0, util_1.schemaRefOrVal)(it, schema3, "type");
+      const { gen, data, schema } = it;
+      const schemaCode = (0, util_1.schemaRefOrVal)(it, schema, "type");
       return {
         gen,
         keyword: "type",
         data,
-        schema: schema3.type,
+        schema: schema.type,
         schemaCode,
         schemaValue: schemaCode,
-        parentSchema: schema3,
+        parentSchema: schema,
         params: {},
         it
       };
@@ -13679,9 +10766,9 @@ var require_dataType = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/compile/validate/defaults.js
+// node_modules/ajv/dist/compile/validate/defaults.js
 var require_defaults = __commonJS({
-  "cli/node_modules/ajv/dist/compile/validate/defaults.js"(exports) {
+  "node_modules/ajv/dist/compile/validate/defaults.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.assignDefaults = void 0;
@@ -13716,9 +10803,9 @@ var require_defaults = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/code.js
+// node_modules/ajv/dist/vocabularies/code.js
 var require_code2 = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/code.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/code.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.validateUnion = exports.validateArray = exports.usePattern = exports.callValidateCode = exports.schemaProperties = exports.allSchemaProperties = exports.noPropertyInData = exports.propertyInData = exports.isOwnProperty = exports.hasPropFunc = exports.reportMissingProp = exports.checkMissingProp = exports.checkReportMissingProp = void 0;
@@ -13824,15 +10911,15 @@ var require_code2 = __commonJS({
     }
     exports.validateArray = validateArray;
     function validateUnion(cxt) {
-      const { gen, schema: schema3, keyword, it } = cxt;
-      if (!Array.isArray(schema3))
+      const { gen, schema, keyword, it } = cxt;
+      if (!Array.isArray(schema))
         throw new Error("ajv implementation error");
-      const alwaysValid = schema3.some((sch) => (0, util_1.alwaysValidSchema)(it, sch));
+      const alwaysValid = schema.some((sch) => (0, util_1.alwaysValidSchema)(it, sch));
       if (alwaysValid && !it.opts.unevaluated)
         return;
       const valid = gen.let("valid", false);
       const schValid = gen.name("_valid");
-      gen.block(() => schema3.forEach((_sch, i) => {
+      gen.block(() => schema.forEach((_sch, i) => {
         const schCxt = cxt.subschema({
           keyword,
           schemaProp: i,
@@ -13849,9 +10936,9 @@ var require_code2 = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/compile/validate/keyword.js
+// node_modules/ajv/dist/compile/validate/keyword.js
 var require_keyword = __commonJS({
-  "cli/node_modules/ajv/dist/compile/validate/keyword.js"(exports) {
+  "node_modules/ajv/dist/compile/validate/keyword.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.validateKeywordUsage = exports.validSchemaType = exports.funcKeywordCode = exports.macroKeywordCode = void 0;
@@ -13860,8 +10947,8 @@ var require_keyword = __commonJS({
     var code_1 = require_code2();
     var errors_1 = require_errors();
     function macroKeywordCode(cxt, def) {
-      const { gen, keyword, schema: schema3, parentSchema, it } = cxt;
-      const macroSchema = def.macro.call(it.self, schema3, parentSchema, it);
+      const { gen, keyword, schema, parentSchema, it } = cxt;
+      const macroSchema = def.macro.call(it.self, schema, parentSchema, it);
       const schemaRef = useKeyword(gen, keyword, macroSchema);
       if (it.opts.validateSchema !== false)
         it.self.validateSchema(macroSchema, true);
@@ -13878,9 +10965,9 @@ var require_keyword = __commonJS({
     exports.macroKeywordCode = macroKeywordCode;
     function funcKeywordCode(cxt, def) {
       var _a;
-      const { gen, keyword, schema: schema3, parentSchema, $data, it } = cxt;
+      const { gen, keyword, schema, parentSchema, $data, it } = cxt;
       checkAsyncKeyword(it, def);
-      const validate = !$data && def.compile ? def.compile.call(it.self, schema3, parentSchema, it) : def.validate;
+      const validate = !$data && def.compile ? def.compile.call(it.self, schema, parentSchema, it) : def.validate;
       const validateRef = useKeyword(gen, keyword, validate);
       const valid = gen.let("valid");
       cxt.block$data(valid, validateKeyword);
@@ -13940,20 +11027,20 @@ var require_keyword = __commonJS({
         throw new Error(`keyword "${keyword}" failed to compile`);
       return gen.scopeValue("keyword", typeof result == "function" ? { ref: result } : { ref: result, code: (0, codegen_1.stringify)(result) });
     }
-    function validSchemaType(schema3, schemaType, allowUndefined = false) {
-      return !schemaType.length || schemaType.some((st) => st === "array" ? Array.isArray(schema3) : st === "object" ? schema3 && typeof schema3 == "object" && !Array.isArray(schema3) : typeof schema3 == st || allowUndefined && typeof schema3 == "undefined");
+    function validSchemaType(schema, schemaType, allowUndefined = false) {
+      return !schemaType.length || schemaType.some((st) => st === "array" ? Array.isArray(schema) : st === "object" ? schema && typeof schema == "object" && !Array.isArray(schema) : typeof schema == st || allowUndefined && typeof schema == "undefined");
     }
     exports.validSchemaType = validSchemaType;
-    function validateKeywordUsage({ schema: schema3, opts, self, errSchemaPath }, def, keyword) {
+    function validateKeywordUsage({ schema, opts, self, errSchemaPath }, def, keyword) {
       if (Array.isArray(def.keyword) ? !def.keyword.includes(keyword) : def.keyword !== keyword) {
         throw new Error("ajv implementation error");
       }
       const deps = def.dependencies;
-      if (deps === null || deps === void 0 ? void 0 : deps.some((kwd) => !Object.prototype.hasOwnProperty.call(schema3, kwd))) {
+      if (deps === null || deps === void 0 ? void 0 : deps.some((kwd) => !Object.prototype.hasOwnProperty.call(schema, kwd))) {
         throw new Error(`parent schema must have dependencies of ${keyword}: ${deps.join(",")}`);
       }
       if (def.validateSchema) {
-        const valid = def.validateSchema(schema3[keyword]);
+        const valid = def.validateSchema(schema[keyword]);
         if (!valid) {
           const msg = `keyword "${keyword}" value is invalid at path "${errSchemaPath}": ` + self.errorsText(def.validateSchema.errors);
           if (opts.validateSchema === "log")
@@ -13967,16 +11054,16 @@ var require_keyword = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/compile/validate/subschema.js
+// node_modules/ajv/dist/compile/validate/subschema.js
 var require_subschema = __commonJS({
-  "cli/node_modules/ajv/dist/compile/validate/subschema.js"(exports) {
+  "node_modules/ajv/dist/compile/validate/subschema.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.extendSubschemaMode = exports.extendSubschemaData = exports.getSubschema = void 0;
     var codegen_1 = require_codegen();
     var util_1 = require_util();
-    function getSubschema(it, { keyword, schemaProp, schema: schema3, schemaPath, errSchemaPath, topSchemaRef }) {
-      if (keyword !== void 0 && schema3 !== void 0) {
+    function getSubschema(it, { keyword, schemaProp, schema, schemaPath, errSchemaPath, topSchemaRef }) {
+      if (keyword !== void 0 && schema !== void 0) {
         throw new Error('both "keyword" and "schema" passed, only one allowed');
       }
       if (keyword !== void 0) {
@@ -13991,12 +11078,12 @@ var require_subschema = __commonJS({
           errSchemaPath: `${it.errSchemaPath}/${keyword}/${(0, util_1.escapeFragment)(schemaProp)}`
         };
       }
-      if (schema3 !== void 0) {
+      if (schema !== void 0) {
         if (schemaPath === void 0 || errSchemaPath === void 0 || topSchemaRef === void 0) {
           throw new Error('"schemaPath", "errSchemaPath" and "topSchemaRef" are required with "schema"');
         }
         return {
-          schema: schema3,
+          schema,
           schemaPath,
           topSchemaRef,
           errSchemaPath
@@ -14050,9 +11137,9 @@ var require_subschema = __commonJS({
   }
 });
 
-// cli/node_modules/fast-deep-equal/index.js
+// node_modules/fast-deep-equal/index.js
 var require_fast_deep_equal = __commonJS({
-  "cli/node_modules/fast-deep-equal/index.js"(exports, module) {
+  "node_modules/fast-deep-equal/index.js"(exports, module) {
     "use strict";
     module.exports = function equal(a, b) {
       if (a === b) return true;
@@ -14085,11 +11172,11 @@ var require_fast_deep_equal = __commonJS({
   }
 });
 
-// cli/node_modules/json-schema-traverse/index.js
+// node_modules/json-schema-traverse/index.js
 var require_json_schema_traverse = __commonJS({
-  "cli/node_modules/json-schema-traverse/index.js"(exports, module) {
+  "node_modules/json-schema-traverse/index.js"(exports, module) {
     "use strict";
-    var traverse = module.exports = function(schema3, opts, cb) {
+    var traverse = module.exports = function(schema, opts, cb) {
       if (typeof opts == "function") {
         cb = opts;
         opts = {};
@@ -14099,7 +11186,7 @@ var require_json_schema_traverse = __commonJS({
       };
       var post = cb.post || function() {
       };
-      _traverse(opts, pre, post, schema3, "", schema3);
+      _traverse(opts, pre, post, schema, "", schema);
     };
     traverse.keywords = {
       additionalItems: true,
@@ -14145,37 +11232,37 @@ var require_json_schema_traverse = __commonJS({
       maxProperties: true,
       minProperties: true
     };
-    function _traverse(opts, pre, post, schema3, jsonPtr, rootSchema, parentJsonPtr, parentKeyword, parentSchema, keyIndex) {
-      if (schema3 && typeof schema3 == "object" && !Array.isArray(schema3)) {
-        pre(schema3, jsonPtr, rootSchema, parentJsonPtr, parentKeyword, parentSchema, keyIndex);
-        for (var key in schema3) {
-          var sch = schema3[key];
+    function _traverse(opts, pre, post, schema, jsonPtr, rootSchema, parentJsonPtr, parentKeyword, parentSchema, keyIndex) {
+      if (schema && typeof schema == "object" && !Array.isArray(schema)) {
+        pre(schema, jsonPtr, rootSchema, parentJsonPtr, parentKeyword, parentSchema, keyIndex);
+        for (var key in schema) {
+          var sch = schema[key];
           if (Array.isArray(sch)) {
             if (key in traverse.arrayKeywords) {
               for (var i = 0; i < sch.length; i++)
-                _traverse(opts, pre, post, sch[i], jsonPtr + "/" + key + "/" + i, rootSchema, jsonPtr, key, schema3, i);
+                _traverse(opts, pre, post, sch[i], jsonPtr + "/" + key + "/" + i, rootSchema, jsonPtr, key, schema, i);
             }
           } else if (key in traverse.propsKeywords) {
             if (sch && typeof sch == "object") {
               for (var prop in sch)
-                _traverse(opts, pre, post, sch[prop], jsonPtr + "/" + key + "/" + escapeJsonPtr(prop), rootSchema, jsonPtr, key, schema3, prop);
+                _traverse(opts, pre, post, sch[prop], jsonPtr + "/" + key + "/" + escapeJsonPtr(prop), rootSchema, jsonPtr, key, schema, prop);
             }
           } else if (key in traverse.keywords || opts.allKeys && !(key in traverse.skipKeywords)) {
-            _traverse(opts, pre, post, sch, jsonPtr + "/" + key, rootSchema, jsonPtr, key, schema3);
+            _traverse(opts, pre, post, sch, jsonPtr + "/" + key, rootSchema, jsonPtr, key, schema);
           }
         }
-        post(schema3, jsonPtr, rootSchema, parentJsonPtr, parentKeyword, parentSchema, keyIndex);
+        post(schema, jsonPtr, rootSchema, parentJsonPtr, parentKeyword, parentSchema, keyIndex);
       }
     }
-    function escapeJsonPtr(str3) {
-      return str3.replace(/~/g, "~0").replace(/\//g, "~1");
+    function escapeJsonPtr(str) {
+      return str.replace(/~/g, "~0").replace(/\//g, "~1");
     }
   }
 });
 
-// cli/node_modules/ajv/dist/compile/resolve.js
+// node_modules/ajv/dist/compile/resolve.js
 var require_resolve = __commonJS({
-  "cli/node_modules/ajv/dist/compile/resolve.js"(exports) {
+  "node_modules/ajv/dist/compile/resolve.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getSchemaRefs = exports.resolveUrl = exports.normalizeId = exports._getFullPath = exports.getFullPath = exports.inlineRef = void 0;
@@ -14200,14 +11287,14 @@ var require_resolve = __commonJS({
       "enum",
       "const"
     ]);
-    function inlineRef(schema3, limit = true) {
-      if (typeof schema3 == "boolean")
+    function inlineRef(schema, limit = true) {
+      if (typeof schema == "boolean")
         return true;
       if (limit === true)
-        return !hasRef(schema3);
+        return !hasRef(schema);
       if (!limit)
         return false;
-      return countKeys(schema3) <= limit;
+      return countKeys(schema) <= limit;
     }
     exports.inlineRef = inlineRef;
     var REF_KEYWORDS = /* @__PURE__ */ new Set([
@@ -14217,11 +11304,11 @@ var require_resolve = __commonJS({
       "$dynamicRef",
       "$dynamicAnchor"
     ]);
-    function hasRef(schema3) {
-      for (const key in schema3) {
+    function hasRef(schema) {
+      for (const key in schema) {
         if (REF_KEYWORDS.has(key))
           return true;
-        const sch = schema3[key];
+        const sch = schema[key];
         if (Array.isArray(sch) && sch.some(hasRef))
           return true;
         if (typeof sch == "object" && hasRef(sch))
@@ -14229,16 +11316,16 @@ var require_resolve = __commonJS({
       }
       return false;
     }
-    function countKeys(schema3) {
+    function countKeys(schema) {
       let count = 0;
-      for (const key in schema3) {
+      for (const key in schema) {
         if (key === "$ref")
           return Infinity;
         count++;
         if (SIMPLE_INLINED.has(key))
           continue;
-        if (typeof schema3[key] == "object") {
-          (0, util_1.eachItem)(schema3[key], (sch) => count += countKeys(sch));
+        if (typeof schema[key] == "object") {
+          (0, util_1.eachItem)(schema[key], (sch) => count += countKeys(sch));
         }
         if (count === Infinity)
           return Infinity;
@@ -14268,16 +11355,16 @@ var require_resolve = __commonJS({
     }
     exports.resolveUrl = resolveUrl;
     var ANCHOR = /^[a-z_][-a-z0-9._]*$/i;
-    function getSchemaRefs(schema3, baseId) {
-      if (typeof schema3 == "boolean")
+    function getSchemaRefs(schema, baseId) {
+      if (typeof schema == "boolean")
         return {};
       const { schemaId, uriResolver } = this.opts;
-      const schId = normalizeId(schema3[schemaId] || baseId);
+      const schId = normalizeId(schema[schemaId] || baseId);
       const baseIds = { "": schId };
       const pathPrefix = getFullPath(uriResolver, schId, false);
       const localRefs = {};
       const schemaRefs = /* @__PURE__ */ new Set();
-      traverse(schema3, { allKeys: true }, (sch, jsonPtr, _, parentJsonPtr) => {
+      traverse(schema, { allKeys: true }, (sch, jsonPtr, _, parentJsonPtr) => {
         if (parentJsonPtr === void 0)
           return;
         const fullPath = pathPrefix + jsonPtr;
@@ -14329,9 +11416,9 @@ var require_resolve = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/compile/validate/index.js
+// node_modules/ajv/dist/compile/validate/index.js
 var require_validate = __commonJS({
-  "cli/node_modules/ajv/dist/compile/validate/index.js"(exports) {
+  "node_modules/ajv/dist/compile/validate/index.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getData = exports.KeywordCxt = exports.validateFunctionCode = void 0;
@@ -14358,15 +11445,15 @@ var require_validate = __commonJS({
       validateFunction(it, () => (0, boolSchema_1.topBoolOrEmptySchema)(it));
     }
     exports.validateFunctionCode = validateFunctionCode;
-    function validateFunction({ gen, validateName: validateName2, schema: schema3, schemaEnv, opts }, body) {
+    function validateFunction({ gen, validateName: validateName2, schema, schemaEnv, opts }, body) {
       if (opts.code.es5) {
         gen.func(validateName2, (0, codegen_1._)`${names_1.default.data}, ${names_1.default.valCxt}`, schemaEnv.$async, () => {
-          gen.code((0, codegen_1._)`"use strict"; ${funcSourceUrl(schema3, opts)}`);
+          gen.code((0, codegen_1._)`"use strict"; ${funcSourceUrl(schema, opts)}`);
           destructureValCxtES5(gen, opts);
           gen.code(body);
         });
       } else {
-        gen.func(validateName2, (0, codegen_1._)`${names_1.default.data}, ${destructureValCxt(opts)}`, schemaEnv.$async, () => gen.code(funcSourceUrl(schema3, opts)).code(body));
+        gen.func(validateName2, (0, codegen_1._)`${names_1.default.data}, ${destructureValCxt(opts)}`, schemaEnv.$async, () => gen.code(funcSourceUrl(schema, opts)).code(body));
       }
     }
     function destructureValCxt(opts) {
@@ -14390,9 +11477,9 @@ var require_validate = __commonJS({
       });
     }
     function topSchemaObjCode(it) {
-      const { schema: schema3, opts, gen } = it;
+      const { schema, opts, gen } = it;
       validateFunction(it, () => {
-        if (opts.$comment && schema3.$comment)
+        if (opts.$comment && schema.$comment)
           commentKeyword(it);
         checkNoDefault(it);
         gen.let(names_1.default.vErrors, null);
@@ -14410,8 +11497,8 @@ var require_validate = __commonJS({
       gen.if((0, codegen_1._)`${it.evaluated}.dynamicProps`, () => gen.assign((0, codegen_1._)`${it.evaluated}.props`, (0, codegen_1._)`undefined`));
       gen.if((0, codegen_1._)`${it.evaluated}.dynamicItems`, () => gen.assign((0, codegen_1._)`${it.evaluated}.items`, (0, codegen_1._)`undefined`));
     }
-    function funcSourceUrl(schema3, opts) {
-      const schId = typeof schema3 == "object" && schema3[opts.schemaId];
+    function funcSourceUrl(schema, opts) {
+      const schId = typeof schema == "object" && schema[opts.schemaId];
       return schId && (opts.code.source || opts.code.process) ? (0, codegen_1._)`/*# sourceURL=${schId} */` : codegen_1.nil;
     }
     function subschemaCode(it, valid) {
@@ -14424,10 +11511,10 @@ var require_validate = __commonJS({
       }
       (0, boolSchema_1.boolOrEmptySchema)(it, valid);
     }
-    function schemaCxtHasRules({ schema: schema3, self }) {
-      if (typeof schema3 == "boolean")
-        return !schema3;
-      for (const key in schema3)
+    function schemaCxtHasRules({ schema, self }) {
+      if (typeof schema == "boolean")
+        return !schema;
+      for (const key in schema)
         if (self.RULES.all[key])
           return true;
       return false;
@@ -14436,8 +11523,8 @@ var require_validate = __commonJS({
       return typeof it.schema != "boolean";
     }
     function subSchemaObjCode(it, valid) {
-      const { schema: schema3, gen, opts } = it;
-      if (opts.$comment && schema3.$comment)
+      const { schema, gen, opts } = it;
+      if (opts.$comment && schema.$comment)
         commentKeyword(it);
       updateContext(it);
       checkAsyncSchema(it);
@@ -14452,19 +11539,19 @@ var require_validate = __commonJS({
     function typeAndKeywords(it, errsCount) {
       if (it.opts.jtd)
         return schemaKeywords(it, [], false, errsCount);
-      const types3 = (0, dataType_1.getSchemaTypes)(it.schema);
-      const checkedTypes = (0, dataType_1.coerceAndCheckDataType)(it, types3);
-      schemaKeywords(it, types3, !checkedTypes, errsCount);
+      const types2 = (0, dataType_1.getSchemaTypes)(it.schema);
+      const checkedTypes = (0, dataType_1.coerceAndCheckDataType)(it, types2);
+      schemaKeywords(it, types2, !checkedTypes, errsCount);
     }
     function checkRefsAndKeywords(it) {
-      const { schema: schema3, errSchemaPath, opts, self } = it;
-      if (schema3.$ref && opts.ignoreKeywordsWithRef && (0, util_1.schemaHasRulesButRef)(schema3, self.RULES)) {
+      const { schema, errSchemaPath, opts, self } = it;
+      if (schema.$ref && opts.ignoreKeywordsWithRef && (0, util_1.schemaHasRulesButRef)(schema, self.RULES)) {
         self.logger.warn(`$ref: keywords ignored in schema at path "${errSchemaPath}"`);
       }
     }
     function checkNoDefault(it) {
-      const { schema: schema3, opts } = it;
-      if (schema3.default !== void 0 && opts.useDefaults && opts.strictSchema) {
+      const { schema, opts } = it;
+      if (schema.default !== void 0 && opts.useDefaults && opts.strictSchema) {
         (0, util_1.checkStrictMode)(it, "default is ignored in the schema root");
       }
     }
@@ -14477,8 +11564,8 @@ var require_validate = __commonJS({
       if (it.schema.$async && !it.schemaEnv.$async)
         throw new Error("async schema in sync schema");
     }
-    function commentKeyword({ gen, schemaEnv, schema: schema3, errSchemaPath, opts }) {
-      const msg = schema3.$comment;
+    function commentKeyword({ gen, schemaEnv, schema, errSchemaPath, opts }) {
+      const msg = schema.$comment;
       if (opts.$comment === true) {
         gen.code((0, codegen_1._)`${names_1.default.self}.logger.log(${msg})`);
       } else if (typeof opts.$comment == "function") {
@@ -14504,27 +11591,27 @@ var require_validate = __commonJS({
       if (items instanceof codegen_1.Name)
         gen.assign((0, codegen_1._)`${evaluated}.items`, items);
     }
-    function schemaKeywords(it, types3, typeErrors, errsCount) {
-      const { gen, schema: schema3, data, allErrors, opts, self } = it;
+    function schemaKeywords(it, types2, typeErrors, errsCount) {
+      const { gen, schema, data, allErrors, opts, self } = it;
       const { RULES } = self;
-      if (schema3.$ref && (opts.ignoreKeywordsWithRef || !(0, util_1.schemaHasRulesButRef)(schema3, RULES))) {
+      if (schema.$ref && (opts.ignoreKeywordsWithRef || !(0, util_1.schemaHasRulesButRef)(schema, RULES))) {
         gen.block(() => keywordCode(it, "$ref", RULES.all.$ref.definition));
         return;
       }
       if (!opts.jtd)
-        checkStrictTypes(it, types3);
+        checkStrictTypes(it, types2);
       gen.block(() => {
         for (const group of RULES.rules)
           groupKeywords(group);
         groupKeywords(RULES.post);
       });
       function groupKeywords(group) {
-        if (!(0, applicability_1.shouldUseGroup)(schema3, group))
+        if (!(0, applicability_1.shouldUseGroup)(schema, group))
           return;
         if (group.type) {
           gen.if((0, dataType_2.checkDataType)(group.type, data, opts.strictNumbers));
           iterateKeywords(it, group);
-          if (types3.length === 1 && types3[0] === group.type && typeErrors) {
+          if (types2.length === 1 && types2[0] === group.type && typeErrors) {
             gen.else();
             (0, dataType_2.reportTypeError)(it);
           }
@@ -14537,38 +11624,38 @@ var require_validate = __commonJS({
       }
     }
     function iterateKeywords(it, group) {
-      const { gen, schema: schema3, opts: { useDefaults } } = it;
+      const { gen, schema, opts: { useDefaults } } = it;
       if (useDefaults)
         (0, defaults_1.assignDefaults)(it, group.type);
       gen.block(() => {
         for (const rule of group.rules) {
-          if ((0, applicability_1.shouldUseRule)(schema3, rule)) {
+          if ((0, applicability_1.shouldUseRule)(schema, rule)) {
             keywordCode(it, rule.keyword, rule.definition, group.type);
           }
         }
       });
     }
-    function checkStrictTypes(it, types3) {
+    function checkStrictTypes(it, types2) {
       if (it.schemaEnv.meta || !it.opts.strictTypes)
         return;
-      checkContextTypes(it, types3);
+      checkContextTypes(it, types2);
       if (!it.opts.allowUnionTypes)
-        checkMultipleTypes(it, types3);
+        checkMultipleTypes(it, types2);
       checkKeywordTypes(it, it.dataTypes);
     }
-    function checkContextTypes(it, types3) {
-      if (!types3.length)
+    function checkContextTypes(it, types2) {
+      if (!types2.length)
         return;
       if (!it.dataTypes.length) {
-        it.dataTypes = types3;
+        it.dataTypes = types2;
         return;
       }
-      types3.forEach((t) => {
+      types2.forEach((t) => {
         if (!includesType(it.dataTypes, t)) {
           strictTypesError(it, `type "${t}" not allowed by context "${it.dataTypes.join(",")}"`);
         }
       });
-      narrowSchemaTypes(it, types3);
+      narrowSchemaTypes(it, types2);
     }
     function checkMultipleTypes(it, ts) {
       if (ts.length > 1 && !(ts.length === 2 && ts.includes("null"))) {
@@ -14580,9 +11667,9 @@ var require_validate = __commonJS({
       for (const keyword in rules) {
         const rule = rules[keyword];
         if (typeof rule == "object" && (0, applicability_1.shouldUseRule)(it.schema, rule)) {
-          const { type: type3 } = rule.definition;
-          if (type3.length && !type3.some((t) => hasApplicableType(ts, t))) {
-            strictTypesError(it, `missing type "${type3.join(",")}" for keyword "${keyword}"`);
+          const { type } = rule.definition;
+          if (type.length && !type.some((t) => hasApplicableType(ts, t))) {
+            strictTypesError(it, `missing type "${type.join(",")}" for keyword "${keyword}"`);
           }
         }
       }
@@ -14837,9 +11924,9 @@ var require_validate = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/runtime/validation_error.js
+// node_modules/ajv/dist/runtime/validation_error.js
 var require_validation_error = __commonJS({
-  "cli/node_modules/ajv/dist/runtime/validation_error.js"(exports) {
+  "node_modules/ajv/dist/runtime/validation_error.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var ValidationError2 = class extends Error {
@@ -14853,9 +11940,9 @@ var require_validation_error = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/compile/ref_error.js
+// node_modules/ajv/dist/compile/ref_error.js
 var require_ref_error = __commonJS({
-  "cli/node_modules/ajv/dist/compile/ref_error.js"(exports) {
+  "node_modules/ajv/dist/compile/ref_error.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var resolve_1 = require_resolve();
@@ -14870,9 +11957,9 @@ var require_ref_error = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/compile/index.js
+// node_modules/ajv/dist/compile/index.js
 var require_compile = __commonJS({
-  "cli/node_modules/ajv/dist/compile/index.js"(exports) {
+  "node_modules/ajv/dist/compile/index.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.resolveSchema = exports.getCompilingSchema = exports.resolveRef = exports.compileSchema = exports.SchemaEnv = void 0;
@@ -14887,17 +11974,17 @@ var require_compile = __commonJS({
         var _a;
         this.refs = {};
         this.dynamicAnchors = {};
-        let schema3;
+        let schema;
         if (typeof env2.schema == "object")
-          schema3 = env2.schema;
+          schema = env2.schema;
         this.schema = env2.schema;
         this.schemaId = env2.schemaId;
         this.root = env2.root || this;
-        this.baseId = (_a = env2.baseId) !== null && _a !== void 0 ? _a : (0, resolve_1.normalizeId)(schema3 === null || schema3 === void 0 ? void 0 : schema3[env2.schemaId || "$id"]);
+        this.baseId = (_a = env2.baseId) !== null && _a !== void 0 ? _a : (0, resolve_1.normalizeId)(schema === null || schema === void 0 ? void 0 : schema[env2.schemaId || "$id"]);
         this.schemaPath = env2.schemaPath;
         this.localRefs = env2.localRefs;
         this.meta = env2.meta;
-        this.$async = schema3 === null || schema3 === void 0 ? void 0 : schema3.$async;
+        this.$async = schema === null || schema === void 0 ? void 0 : schema.$async;
         this.refs = {};
       }
     };
@@ -14996,10 +12083,10 @@ var require_compile = __commonJS({
         return schOrFunc;
       let _sch = resolve3.call(this, root, ref);
       if (_sch === void 0) {
-        const schema3 = (_a = root.localRefs) === null || _a === void 0 ? void 0 : _a[ref];
+        const schema = (_a = root.localRefs) === null || _a === void 0 ? void 0 : _a[ref];
         const { schemaId } = this.opts;
-        if (schema3)
-          _sch = new SchemaEnv({ schema: schema3, schemaId, root, baseId });
+        if (schema)
+          _sch = new SchemaEnv({ schema, schemaId, root, baseId });
       }
       if (_sch === void 0)
         return;
@@ -15047,12 +12134,12 @@ var require_compile = __commonJS({
       if (!schOrRef.validate)
         compileSchema.call(this, schOrRef);
       if (id === (0, resolve_1.normalizeId)(ref)) {
-        const { schema: schema3 } = schOrRef;
+        const { schema } = schOrRef;
         const { schemaId } = this.opts;
-        const schId = schema3[schemaId];
+        const schId = schema[schemaId];
         if (schId)
           baseId = (0, resolve_1.resolveUrl)(this.opts.uriResolver, baseId, schId);
-        return new SchemaEnv({ schema: schema3, schemaId, root, baseId });
+        return new SchemaEnv({ schema, schemaId, root, baseId });
       }
       return getJsonPointer.call(this, p, schOrRef);
     }
@@ -15064,29 +12151,29 @@ var require_compile = __commonJS({
       "dependencies",
       "definitions"
     ]);
-    function getJsonPointer(parsedRef, { baseId, schema: schema3, root }) {
+    function getJsonPointer(parsedRef, { baseId, schema, root }) {
       var _a;
       if (((_a = parsedRef.fragment) === null || _a === void 0 ? void 0 : _a[0]) !== "/")
         return;
       for (const part of parsedRef.fragment.slice(1).split("/")) {
-        if (typeof schema3 === "boolean")
+        if (typeof schema === "boolean")
           return;
-        const partSchema = schema3[(0, util_1.unescapeFragment)(part)];
+        const partSchema = schema[(0, util_1.unescapeFragment)(part)];
         if (partSchema === void 0)
           return;
-        schema3 = partSchema;
-        const schId = typeof schema3 === "object" && schema3[this.opts.schemaId];
+        schema = partSchema;
+        const schId = typeof schema === "object" && schema[this.opts.schemaId];
         if (!PREVENT_SCOPE_CHANGE.has(part) && schId) {
           baseId = (0, resolve_1.resolveUrl)(this.opts.uriResolver, baseId, schId);
         }
       }
       let env2;
-      if (typeof schema3 != "boolean" && schema3.$ref && !(0, util_1.schemaHasRulesButRef)(schema3, this.RULES)) {
-        const $ref = (0, resolve_1.resolveUrl)(this.opts.uriResolver, baseId, schema3.$ref);
+      if (typeof schema != "boolean" && schema.$ref && !(0, util_1.schemaHasRulesButRef)(schema, this.RULES)) {
+        const $ref = (0, resolve_1.resolveUrl)(this.opts.uriResolver, baseId, schema.$ref);
         env2 = resolveSchema.call(this, root, $ref);
       }
       const { schemaId } = this.opts;
-      env2 = env2 || new SchemaEnv({ schema: schema3, schemaId, root, baseId });
+      env2 = env2 || new SchemaEnv({ schema, schemaId, root, baseId });
       if (env2.schema !== env2.root.schema)
         return env2;
       return void 0;
@@ -15094,9 +12181,9 @@ var require_compile = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/refs/data.json
+// node_modules/ajv/dist/refs/data.json
 var require_data = __commonJS({
-  "cli/node_modules/ajv/dist/refs/data.json"(exports, module) {
+  "node_modules/ajv/dist/refs/data.json"(exports, module) {
     module.exports = {
       $id: "https://raw.githubusercontent.com/ajv-validator/ajv/master/lib/refs/data.json#",
       description: "Meta-schema for $data reference (JSON AnySchema extension proposal)",
@@ -15113,9 +12200,9 @@ var require_data = __commonJS({
   }
 });
 
-// cli/node_modules/fast-uri/lib/utils.js
+// node_modules/fast-uri/lib/utils.js
 var require_utils = __commonJS({
-  "cli/node_modules/fast-uri/lib/utils.js"(exports, module) {
+  "node_modules/fast-uri/lib/utils.js"(exports, module) {
     "use strict";
     var isUUID = RegExp.prototype.test.bind(/^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$/iu);
     var isIPv4 = RegExp.prototype.test.bind(/^(?:(?:25[0-5]|2[0-4]\d|1\d{2}|[1-9]\d|\d)\.){3}(?:25[0-5]|2[0-4]\d|1\d{2}|[1-9]\d|\d)$/u);
@@ -15232,15 +12319,15 @@ var require_utils = __commonJS({
         return { host, isIPV6: false };
       }
     }
-    function findToken(str3, token) {
+    function findToken(str, token) {
       let ind = 0;
-      for (let i = 0; i < str3.length; i++) {
-        if (str3[i] === token) ind++;
+      for (let i = 0; i < str.length; i++) {
+        if (str[i] === token) ind++;
       }
       return ind;
     }
-    function removeDotSegments(path23) {
-      let input = path23;
+    function removeDotSegments(path30) {
+      let input = path30;
       const output = [];
       let nextSlash = -1;
       let len = 0;
@@ -15426,9 +12513,9 @@ var require_utils = __commonJS({
   }
 });
 
-// cli/node_modules/fast-uri/lib/schemes.js
+// node_modules/fast-uri/lib/schemes.js
 var require_schemes = __commonJS({
-  "cli/node_modules/fast-uri/lib/schemes.js"(exports, module) {
+  "node_modules/fast-uri/lib/schemes.js"(exports, module) {
     "use strict";
     var { isUUID } = require_utils();
     var URN_REG = /([\da-z][\d\-a-z]{0,31}):((?:[\w!$'()*+,\-.:;=@]|%[\da-f]{2})+)/iu;
@@ -15492,8 +12579,8 @@ var require_schemes = __commonJS({
         wsComponent.secure = void 0;
       }
       if (wsComponent.resourceName) {
-        const [path23, query] = wsComponent.resourceName.split("?");
-        wsComponent.path = path23 && path23 !== "/" ? path23 : void 0;
+        const [path30, query] = wsComponent.resourceName.split("?");
+        wsComponent.path = path30 && path30 !== "/" ? path30 : void 0;
         wsComponent.query = query;
         wsComponent.resourceName = void 0;
       }
@@ -15636,9 +12723,9 @@ var require_schemes = __commonJS({
   }
 });
 
-// cli/node_modules/fast-uri/index.js
+// node_modules/fast-uri/index.js
 var require_fast_uri = __commonJS({
-  "cli/node_modules/fast-uri/index.js"(exports, module) {
+  "node_modules/fast-uri/index.js"(exports, module) {
     "use strict";
     var { normalizeIPv6, removeDotSegments, recomposeAuthority, normalizePercentEncoding, normalizePathEncoding, escapePreservingEscapes, reescapeHostDelimiters, isIPv4, nonSimpleDomain } = require_utils();
     var { SCHEMES, getSchemeHandler } = require_schemes();
@@ -15922,9 +13009,9 @@ var require_fast_uri = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/runtime/uri.js
+// node_modules/ajv/dist/runtime/uri.js
 var require_uri = __commonJS({
-  "cli/node_modules/ajv/dist/runtime/uri.js"(exports) {
+  "node_modules/ajv/dist/runtime/uri.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var uri = require_fast_uri();
@@ -15933,9 +13020,9 @@ var require_uri = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/core.js
-var require_core = __commonJS({
-  "cli/node_modules/ajv/dist/core.js"(exports) {
+// node_modules/ajv/dist/core.js
+var require_core2 = __commonJS({
+  "node_modules/ajv/dist/core.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.CodeGen = exports.Name = exports.nil = exports.stringify = exports.str = exports._ = exports.KeywordCxt = void 0;
@@ -15972,7 +13059,7 @@ var require_core = __commonJS({
     var util_1 = require_util();
     var $dataRefSchema = require_data();
     var uri_1 = require_uri();
-    var defaultRegExp = (str3, flags) => new RegExp(str3, flags);
+    var defaultRegExp = (str, flags) => new RegExp(str, flags);
     defaultRegExp.code = "new RegExp";
     var META_IGNORE_OPTIONS = ["removeAdditional", "useDefaults", "coerceTypes"];
     var EXT_SCOPE_NAMES = /* @__PURE__ */ new Set([
@@ -16041,7 +13128,7 @@ var require_core = __commonJS({
         uriResolver
       };
     }
-    var Ajv2 = class {
+    var Ajv3 = class {
       constructor(opts = {}) {
         this.schemas = {};
         this.refs = {};
@@ -16102,16 +13189,16 @@ var require_core = __commonJS({
           this.errors = v.errors;
         return valid;
       }
-      compile(schema3, _meta) {
-        const sch = this._addSchema(schema3, _meta);
+      compile(schema, _meta) {
+        const sch = this._addSchema(schema, _meta);
         return sch.validate || this._compileSchemaEnv(sch);
       }
-      compileAsync(schema3, meta) {
+      compileAsync(schema, meta) {
         if (typeof this.opts.loadSchema != "function") {
           throw new Error("options.loadSchema should be a function");
         }
         const { loadSchema } = this.opts;
-        return runCompileAsync.call(this, schema3, meta);
+        return runCompileAsync.call(this, schema, meta);
         async function runCompileAsync(_schema, _meta) {
           await loadMetaSchema.call(this, _schema.$schema);
           const sch = this._addSchema(_schema, _meta);
@@ -16157,37 +13244,37 @@ var require_core = __commonJS({
         }
       }
       // Adds schema to the instance
-      addSchema(schema3, key, _meta, _validateSchema = this.opts.validateSchema) {
-        if (Array.isArray(schema3)) {
-          for (const sch of schema3)
+      addSchema(schema, key, _meta, _validateSchema = this.opts.validateSchema) {
+        if (Array.isArray(schema)) {
+          for (const sch of schema)
             this.addSchema(sch, void 0, _meta, _validateSchema);
           return this;
         }
         let id;
-        if (typeof schema3 === "object") {
+        if (typeof schema === "object") {
           const { schemaId } = this.opts;
-          id = schema3[schemaId];
+          id = schema[schemaId];
           if (id !== void 0 && typeof id != "string") {
             throw new Error(`schema ${schemaId} must be string`);
           }
         }
         key = (0, resolve_1.normalizeId)(key || id);
         this._checkUnique(key);
-        this.schemas[key] = this._addSchema(schema3, _meta, key, _validateSchema, true);
+        this.schemas[key] = this._addSchema(schema, _meta, key, _validateSchema, true);
         return this;
       }
       // Add schema that will be used to validate other schemas
       // options in META_IGNORE_OPTIONS are alway set to false
-      addMetaSchema(schema3, key, _validateSchema = this.opts.validateSchema) {
-        this.addSchema(schema3, key, true, _validateSchema);
+      addMetaSchema(schema, key, _validateSchema = this.opts.validateSchema) {
+        this.addSchema(schema, key, true, _validateSchema);
         return this;
       }
       //  Validate schema against its meta-schema
-      validateSchema(schema3, throwOrLogError) {
-        if (typeof schema3 == "boolean")
+      validateSchema(schema, throwOrLogError) {
+        if (typeof schema == "boolean")
           return true;
         let $schema;
-        $schema = schema3.$schema;
+        $schema = schema.$schema;
         if ($schema !== void 0 && typeof $schema != "string") {
           throw new Error("$schema must be a string");
         }
@@ -16197,7 +13284,7 @@ var require_core = __commonJS({
           this.errors = null;
           return true;
         }
-        const valid = this.validate($schema, schema3);
+        const valid = this.validate($schema, schema);
         if (!valid && throwOrLogError) {
           const message = "schema is invalid: " + this.errorsText();
           if (this.opts.validateSchema === "log")
@@ -16340,9 +13427,9 @@ var require_core = __commonJS({
             if (typeof rule != "object")
               continue;
             const { $data } = rule.definition;
-            const schema3 = keywords[key];
-            if ($data && schema3)
-              keywords[key] = schemaOrData(schema3);
+            const schema = keywords[key];
+            if ($data && schema)
+              keywords[key] = schemaOrData(schema);
           }
         }
         return metaSchema;
@@ -16360,23 +13447,23 @@ var require_core = __commonJS({
           }
         }
       }
-      _addSchema(schema3, meta, baseId, validateSchema = this.opts.validateSchema, addSchema = this.opts.addUsedSchema) {
+      _addSchema(schema, meta, baseId, validateSchema = this.opts.validateSchema, addSchema = this.opts.addUsedSchema) {
         let id;
         const { schemaId } = this.opts;
-        if (typeof schema3 == "object") {
-          id = schema3[schemaId];
+        if (typeof schema == "object") {
+          id = schema[schemaId];
         } else {
           if (this.opts.jtd)
             throw new Error("schema must be object");
-          else if (typeof schema3 != "boolean")
+          else if (typeof schema != "boolean")
             throw new Error("schema must be object or boolean");
         }
-        let sch = this._cache.get(schema3);
+        let sch = this._cache.get(schema);
         if (sch !== void 0)
           return sch;
         baseId = (0, resolve_1.normalizeId)(id || baseId);
-        const localRefs = resolve_1.getSchemaRefs.call(this, schema3, baseId);
-        sch = new compile_1.SchemaEnv({ schema: schema3, schemaId, meta, baseId, localRefs });
+        const localRefs = resolve_1.getSchemaRefs.call(this, schema, baseId);
+        sch = new compile_1.SchemaEnv({ schema, schemaId, meta, baseId, localRefs });
         this._cache.set(sch.schema, sch);
         if (addSchema && !baseId.startsWith("#")) {
           if (baseId)
@@ -16384,7 +13471,7 @@ var require_core = __commonJS({
           this.refs[baseId] = sch;
         }
         if (validateSchema)
-          this.validateSchema(schema3, true);
+          this.validateSchema(schema, true);
         return sch;
       }
       _checkUnique(id) {
@@ -16411,9 +13498,9 @@ var require_core = __commonJS({
         }
       }
     };
-    Ajv2.ValidationError = validation_error_1.default;
-    Ajv2.MissingRefError = ref_error_1.default;
-    exports.default = Ajv2;
+    Ajv3.ValidationError = validation_error_1.default;
+    Ajv3.MissingRefError = ref_error_1.default;
+    exports.default = Ajv3;
     function checkOptions(checkOpts, options, msg, log = "error") {
       for (const key in checkOpts) {
         const opt = key;
@@ -16538,15 +13625,15 @@ var require_core = __commonJS({
     var $dataRef = {
       $ref: "https://raw.githubusercontent.com/ajv-validator/ajv/master/lib/refs/data.json#"
     };
-    function schemaOrData(schema3) {
-      return { anyOf: [schema3, $dataRef] };
+    function schemaOrData(schema) {
+      return { anyOf: [schema, $dataRef] };
     }
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/core/id.js
+// node_modules/ajv/dist/vocabularies/core/id.js
 var require_id = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/core/id.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/core/id.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var def = {
@@ -16559,9 +13646,9 @@ var require_id = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/core/ref.js
+// node_modules/ajv/dist/vocabularies/core/ref.js
 var require_ref = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/core/ref.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/core/ref.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.callRef = exports.getValidate = void 0;
@@ -16681,14 +13768,14 @@ var require_ref = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/core/index.js
-var require_core2 = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/core/index.js"(exports) {
+// node_modules/ajv/dist/vocabularies/core/index.js
+var require_core3 = __commonJS({
+  "node_modules/ajv/dist/vocabularies/core/index.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var id_1 = require_id();
     var ref_1 = require_ref();
-    var core3 = [
+    var core = [
       "$schema",
       "$id",
       "$defs",
@@ -16698,13 +13785,13 @@ var require_core2 = __commonJS({
       id_1.default,
       ref_1.default
     ];
-    exports.default = core3;
+    exports.default = core;
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/validation/limitNumber.js
+// node_modules/ajv/dist/vocabularies/validation/limitNumber.js
 var require_limitNumber = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/validation/limitNumber.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/validation/limitNumber.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -16734,9 +13821,9 @@ var require_limitNumber = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/validation/multipleOf.js
+// node_modules/ajv/dist/vocabularies/validation/multipleOf.js
 var require_multipleOf = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/validation/multipleOf.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/validation/multipleOf.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -16762,21 +13849,21 @@ var require_multipleOf = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/runtime/ucs2length.js
+// node_modules/ajv/dist/runtime/ucs2length.js
 var require_ucs2length = __commonJS({
-  "cli/node_modules/ajv/dist/runtime/ucs2length.js"(exports) {
+  "node_modules/ajv/dist/runtime/ucs2length.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    function ucs2length(str3) {
-      const len = str3.length;
+    function ucs2length(str) {
+      const len = str.length;
       let length = 0;
       let pos = 0;
       let value;
       while (pos < len) {
         length++;
-        value = str3.charCodeAt(pos++);
+        value = str.charCodeAt(pos++);
         if (value >= 55296 && value <= 56319 && pos < len) {
-          value = str3.charCodeAt(pos);
+          value = str.charCodeAt(pos);
           if ((value & 64512) === 56320)
             pos++;
         }
@@ -16788,9 +13875,9 @@ var require_ucs2length = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/validation/limitLength.js
+// node_modules/ajv/dist/vocabularies/validation/limitLength.js
 var require_limitLength = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/validation/limitLength.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/validation/limitLength.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -16820,9 +13907,9 @@ var require_limitLength = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/validation/pattern.js
+// node_modules/ajv/dist/vocabularies/validation/pattern.js
 var require_pattern = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/validation/pattern.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/validation/pattern.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -16839,7 +13926,7 @@ var require_pattern = __commonJS({
       $data: true,
       error,
       code(cxt) {
-        const { gen, data, $data, schema: schema3, schemaCode, it } = cxt;
+        const { gen, data, $data, schema, schemaCode, it } = cxt;
         const u = it.opts.unicodeRegExp ? "u" : "";
         if ($data) {
           const { regExp } = it.opts.code;
@@ -16848,7 +13935,7 @@ var require_pattern = __commonJS({
           gen.try(() => gen.assign(valid, (0, codegen_1._)`${regExpCode}(${schemaCode}, ${u}).test(${data})`), () => gen.assign(valid, false));
           cxt.fail$data((0, codegen_1._)`!${valid}`);
         } else {
-          const regExp = (0, code_1.usePattern)(cxt, schema3);
+          const regExp = (0, code_1.usePattern)(cxt, schema);
           cxt.fail$data((0, codegen_1._)`!${regExp}.test(${data})`);
         }
       }
@@ -16857,9 +13944,9 @@ var require_pattern = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/validation/limitProperties.js
+// node_modules/ajv/dist/vocabularies/validation/limitProperties.js
 var require_limitProperties = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/validation/limitProperties.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/validation/limitProperties.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -16886,9 +13973,9 @@ var require_limitProperties = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/validation/required.js
+// node_modules/ajv/dist/vocabularies/validation/required.js
 var require_required = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/validation/required.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/validation/required.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -16905,11 +13992,11 @@ var require_required = __commonJS({
       $data: true,
       error,
       code(cxt) {
-        const { gen, schema: schema3, schemaCode, data, $data, it } = cxt;
+        const { gen, schema, schemaCode, data, $data, it } = cxt;
         const { opts } = it;
-        if (!$data && schema3.length === 0)
+        if (!$data && schema.length === 0)
           return;
-        const useLoop = schema3.length >= opts.loopRequired;
+        const useLoop = schema.length >= opts.loopRequired;
         if (it.allErrors)
           allErrorsMode();
         else
@@ -16917,7 +14004,7 @@ var require_required = __commonJS({
         if (opts.strictRequired) {
           const props = cxt.parentSchema.properties;
           const { definedProperties } = cxt.it;
-          for (const requiredKey of schema3) {
+          for (const requiredKey of schema) {
             if ((props === null || props === void 0 ? void 0 : props[requiredKey]) === void 0 && !definedProperties.has(requiredKey)) {
               const schemaPath = it.schemaEnv.baseId + it.errSchemaPath;
               const msg = `required property "${requiredKey}" is not defined at "${schemaPath}" (strictRequired)`;
@@ -16929,7 +14016,7 @@ var require_required = __commonJS({
           if (useLoop || $data) {
             cxt.block$data(codegen_1.nil, loopAllRequired);
           } else {
-            for (const prop of schema3) {
+            for (const prop of schema) {
               (0, code_1.checkReportMissingProp)(cxt, prop);
             }
           }
@@ -16941,7 +14028,7 @@ var require_required = __commonJS({
             cxt.block$data(valid, () => loopUntilMissing(missing, valid));
             cxt.ok(valid);
           } else {
-            gen.if((0, code_1.checkMissingProp)(cxt, schema3, missing));
+            gen.if((0, code_1.checkMissingProp)(cxt, schema, missing));
             (0, code_1.reportMissingProp)(cxt, missing);
             gen.else();
           }
@@ -16968,9 +14055,9 @@ var require_required = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/validation/limitItems.js
+// node_modules/ajv/dist/vocabularies/validation/limitItems.js
 var require_limitItems = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/validation/limitItems.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/validation/limitItems.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -16997,9 +14084,9 @@ var require_limitItems = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/runtime/equal.js
+// node_modules/ajv/dist/runtime/equal.js
 var require_equal = __commonJS({
-  "cli/node_modules/ajv/dist/runtime/equal.js"(exports) {
+  "node_modules/ajv/dist/runtime/equal.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var equal = require_fast_deep_equal();
@@ -17008,9 +14095,9 @@ var require_equal = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/validation/uniqueItems.js
+// node_modules/ajv/dist/vocabularies/validation/uniqueItems.js
 var require_uniqueItems = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/validation/uniqueItems.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/validation/uniqueItems.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var dataType_1 = require_dataType();
@@ -17028,8 +14115,8 @@ var require_uniqueItems = __commonJS({
       $data: true,
       error,
       code(cxt) {
-        const { gen, data, $data, schema: schema3, parentSchema, schemaCode, it } = cxt;
-        if (!$data && !schema3)
+        const { gen, data, $data, schema, parentSchema, schemaCode, it } = cxt;
+        if (!$data && !schema)
           return;
         const valid = gen.let("valid");
         const itemTypes = parentSchema.items ? (0, dataType_1.getSchemaTypes)(parentSchema.items) : [];
@@ -17075,9 +14162,9 @@ var require_uniqueItems = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/validation/const.js
+// node_modules/ajv/dist/vocabularies/validation/const.js
 var require_const = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/validation/const.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/validation/const.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -17092,11 +14179,11 @@ var require_const = __commonJS({
       $data: true,
       error,
       code(cxt) {
-        const { gen, data, $data, schemaCode, schema: schema3 } = cxt;
-        if ($data || schema3 && typeof schema3 == "object") {
+        const { gen, data, $data, schemaCode, schema } = cxt;
+        if ($data || schema && typeof schema == "object") {
           cxt.fail$data((0, codegen_1._)`!${(0, util_1.useFunc)(gen, equal_1.default)}(${data}, ${schemaCode})`);
         } else {
-          cxt.fail((0, codegen_1._)`${schema3} !== ${data}`);
+          cxt.fail((0, codegen_1._)`${schema} !== ${data}`);
         }
       }
     };
@@ -17104,9 +14191,9 @@ var require_const = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/validation/enum.js
+// node_modules/ajv/dist/vocabularies/validation/enum.js
 var require_enum = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/validation/enum.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/validation/enum.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -17122,10 +14209,10 @@ var require_enum = __commonJS({
       $data: true,
       error,
       code(cxt) {
-        const { gen, data, $data, schema: schema3, schemaCode, it } = cxt;
-        if (!$data && schema3.length === 0)
+        const { gen, data, $data, schema, schemaCode, it } = cxt;
+        if (!$data && schema.length === 0)
           throw new Error("enum must have non-empty array");
-        const useLoop = schema3.length >= it.opts.loopEnum;
+        const useLoop = schema.length >= it.opts.loopEnum;
         let eql;
         const getEql = () => eql !== null && eql !== void 0 ? eql : eql = (0, util_1.useFunc)(gen, equal_1.default);
         let valid;
@@ -17133,10 +14220,10 @@ var require_enum = __commonJS({
           valid = gen.let("valid");
           cxt.block$data(valid, loopEnum);
         } else {
-          if (!Array.isArray(schema3))
+          if (!Array.isArray(schema))
             throw new Error("ajv implementation error");
           const vSchema = gen.const("vSchema", schemaCode);
-          valid = (0, codegen_1.or)(...schema3.map((_x, i) => equalCode(vSchema, i)));
+          valid = (0, codegen_1.or)(...schema.map((_x, i) => equalCode(vSchema, i)));
         }
         cxt.pass(valid);
         function loopEnum() {
@@ -17144,7 +14231,7 @@ var require_enum = __commonJS({
           gen.forOf("v", schemaCode, (v) => gen.if((0, codegen_1._)`${getEql()}(${data}, ${v})`, () => gen.assign(valid, true).break()));
         }
         function equalCode(vSchema, i) {
-          const sch = schema3[i];
+          const sch = schema[i];
           return typeof sch === "object" && sch !== null ? (0, codegen_1._)`${getEql()}(${data}, ${vSchema}[${i}])` : (0, codegen_1._)`${data} === ${sch}`;
         }
       }
@@ -17153,9 +14240,9 @@ var require_enum = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/validation/index.js
+// node_modules/ajv/dist/vocabularies/validation/index.js
 var require_validation = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/validation/index.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/validation/index.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var limitNumber_1 = require_limitNumber();
@@ -17191,9 +14278,9 @@ var require_validation = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/applicator/additionalItems.js
+// node_modules/ajv/dist/vocabularies/applicator/additionalItems.js
 var require_additionalItems = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/applicator/additionalItems.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/applicator/additionalItems.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.validateAdditionalItems = void 0;
@@ -17220,13 +14307,13 @@ var require_additionalItems = __commonJS({
       }
     };
     function validateAdditionalItems(cxt, items) {
-      const { gen, schema: schema3, data, keyword, it } = cxt;
+      const { gen, schema, data, keyword, it } = cxt;
       it.items = true;
       const len = gen.const("len", (0, codegen_1._)`${data}.length`);
-      if (schema3 === false) {
+      if (schema === false) {
         cxt.setParams({ len: items.length });
         cxt.pass((0, codegen_1._)`${len} <= ${items.length}`);
-      } else if (typeof schema3 == "object" && !(0, util_1.alwaysValidSchema)(it, schema3)) {
+      } else if (typeof schema == "object" && !(0, util_1.alwaysValidSchema)(it, schema)) {
         const valid = gen.var("valid", (0, codegen_1._)`${len} <= ${items.length}`);
         gen.if((0, codegen_1.not)(valid), () => validateItems(valid));
         cxt.ok(valid);
@@ -17244,9 +14331,9 @@ var require_additionalItems = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/applicator/items.js
+// node_modules/ajv/dist/vocabularies/applicator/items.js
 var require_items = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/applicator/items.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/applicator/items.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.validateTuple = void 0;
@@ -17259,11 +14346,11 @@ var require_items = __commonJS({
       schemaType: ["object", "array", "boolean"],
       before: "uniqueItems",
       code(cxt) {
-        const { schema: schema3, it } = cxt;
-        if (Array.isArray(schema3))
-          return validateTuple(cxt, "additionalItems", schema3);
+        const { schema, it } = cxt;
+        if (Array.isArray(schema))
+          return validateTuple(cxt, "additionalItems", schema);
         it.items = true;
-        if ((0, util_1.alwaysValidSchema)(it, schema3))
+        if ((0, util_1.alwaysValidSchema)(it, schema))
           return;
         cxt.ok((0, code_1.validateArray)(cxt));
       }
@@ -17301,9 +14388,9 @@ var require_items = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/applicator/prefixItems.js
+// node_modules/ajv/dist/vocabularies/applicator/prefixItems.js
 var require_prefixItems = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/applicator/prefixItems.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/applicator/prefixItems.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var items_1 = require_items();
@@ -17318,9 +14405,9 @@ var require_prefixItems = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/applicator/items2020.js
+// node_modules/ajv/dist/vocabularies/applicator/items2020.js
 var require_items2020 = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/applicator/items2020.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/applicator/items2020.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -17338,10 +14425,10 @@ var require_items2020 = __commonJS({
       before: "uniqueItems",
       error,
       code(cxt) {
-        const { schema: schema3, parentSchema, it } = cxt;
+        const { schema, parentSchema, it } = cxt;
         const { prefixItems } = parentSchema;
         it.items = true;
-        if ((0, util_1.alwaysValidSchema)(it, schema3))
+        if ((0, util_1.alwaysValidSchema)(it, schema))
           return;
         if (prefixItems)
           (0, additionalItems_1.validateAdditionalItems)(cxt, prefixItems);
@@ -17353,9 +14440,9 @@ var require_items2020 = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/applicator/contains.js
+// node_modules/ajv/dist/vocabularies/applicator/contains.js
 var require_contains = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/applicator/contains.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/applicator/contains.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -17372,7 +14459,7 @@ var require_contains = __commonJS({
       trackErrors: true,
       error,
       code(cxt) {
-        const { gen, schema: schema3, parentSchema, data, it } = cxt;
+        const { gen, schema, parentSchema, data, it } = cxt;
         let min;
         let max;
         const { minContains, maxContains } = parentSchema;
@@ -17393,7 +14480,7 @@ var require_contains = __commonJS({
           cxt.fail();
           return;
         }
-        if ((0, util_1.alwaysValidSchema)(it, schema3)) {
+        if ((0, util_1.alwaysValidSchema)(it, schema)) {
           let cond = (0, codegen_1._)`${len} >= ${min}`;
           if (max !== void 0)
             cond = (0, codegen_1._)`${cond} && ${len} <= ${max}`;
@@ -17447,9 +14534,9 @@ var require_contains = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/applicator/dependencies.js
+// node_modules/ajv/dist/vocabularies/applicator/dependencies.js
 var require_dependencies = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/applicator/dependencies.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/applicator/dependencies.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.validateSchemaDeps = exports.validatePropertyDeps = exports.error = void 0;
@@ -17478,14 +14565,14 @@ var require_dependencies = __commonJS({
         validateSchemaDeps(cxt, schDeps);
       }
     };
-    function splitDependencies({ schema: schema3 }) {
+    function splitDependencies({ schema }) {
       const propertyDeps = {};
       const schemaDeps = {};
-      for (const key in schema3) {
+      for (const key in schema) {
         if (key === "__proto__")
           continue;
-        const deps = Array.isArray(schema3[key]) ? propertyDeps : schemaDeps;
-        deps[key] = schema3[key];
+        const deps = Array.isArray(schema[key]) ? propertyDeps : schemaDeps;
+        deps[key] = schema[key];
       }
       return [propertyDeps, schemaDeps];
     }
@@ -17541,9 +14628,9 @@ var require_dependencies = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/applicator/propertyNames.js
+// node_modules/ajv/dist/vocabularies/applicator/propertyNames.js
 var require_propertyNames = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/applicator/propertyNames.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/applicator/propertyNames.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -17558,8 +14645,8 @@ var require_propertyNames = __commonJS({
       schemaType: ["object", "boolean"],
       error,
       code(cxt) {
-        const { gen, schema: schema3, data, it } = cxt;
-        if ((0, util_1.alwaysValidSchema)(it, schema3))
+        const { gen, schema, data, it } = cxt;
+        if ((0, util_1.alwaysValidSchema)(it, schema))
           return;
         const valid = gen.name("valid");
         gen.forIn("key", data, (key) => {
@@ -17584,9 +14671,9 @@ var require_propertyNames = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/applicator/additionalProperties.js
+// node_modules/ajv/dist/vocabularies/applicator/additionalProperties.js
 var require_additionalProperties = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/applicator/additionalProperties.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/applicator/additionalProperties.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -17605,12 +14692,12 @@ var require_additionalProperties = __commonJS({
       trackErrors: true,
       error,
       code(cxt) {
-        const { gen, schema: schema3, parentSchema, data, errsCount, it } = cxt;
+        const { gen, schema, parentSchema, data, errsCount, it } = cxt;
         if (!errsCount)
           throw new Error("ajv implementation error");
         const { allErrors, opts } = it;
         it.props = true;
-        if (opts.removeAdditional !== "all" && (0, util_1.alwaysValidSchema)(it, schema3))
+        if (opts.removeAdditional !== "all" && (0, util_1.alwaysValidSchema)(it, schema))
           return;
         const props = (0, code_1.allSchemaProperties)(parentSchema.properties);
         const patProps = (0, code_1.allSchemaProperties)(parentSchema.patternProperties);
@@ -17643,18 +14730,18 @@ var require_additionalProperties = __commonJS({
           gen.code((0, codegen_1._)`delete ${data}[${key}]`);
         }
         function additionalPropertyCode(key) {
-          if (opts.removeAdditional === "all" || opts.removeAdditional && schema3 === false) {
+          if (opts.removeAdditional === "all" || opts.removeAdditional && schema === false) {
             deleteAdditional(key);
             return;
           }
-          if (schema3 === false) {
+          if (schema === false) {
             cxt.setParams({ additionalProperty: key });
             cxt.error();
             if (!allErrors)
               gen.break();
             return;
           }
-          if (typeof schema3 == "object" && !(0, util_1.alwaysValidSchema)(it, schema3)) {
+          if (typeof schema == "object" && !(0, util_1.alwaysValidSchema)(it, schema)) {
             const valid = gen.name("valid");
             if (opts.removeAdditional === "failing") {
               applyAdditionalSchema(key, valid, false);
@@ -17690,9 +14777,9 @@ var require_additionalProperties = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/applicator/properties.js
+// node_modules/ajv/dist/vocabularies/applicator/properties.js
 var require_properties = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/applicator/properties.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/applicator/properties.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var validate_1 = require_validate();
@@ -17704,18 +14791,18 @@ var require_properties = __commonJS({
       type: "object",
       schemaType: "object",
       code(cxt) {
-        const { gen, schema: schema3, parentSchema, data, it } = cxt;
+        const { gen, schema, parentSchema, data, it } = cxt;
         if (it.opts.removeAdditional === "all" && parentSchema.additionalProperties === void 0) {
           additionalProperties_1.default.code(new validate_1.KeywordCxt(it, additionalProperties_1.default, "additionalProperties"));
         }
-        const allProps = (0, code_1.allSchemaProperties)(schema3);
+        const allProps = (0, code_1.allSchemaProperties)(schema);
         for (const prop of allProps) {
           it.definedProperties.add(prop);
         }
         if (it.opts.unevaluated && allProps.length && it.props !== true) {
           it.props = util_1.mergeEvaluated.props(gen, (0, util_1.toHash)(allProps), it.props);
         }
-        const properties = allProps.filter((p) => !(0, util_1.alwaysValidSchema)(it, schema3[p]));
+        const properties = allProps.filter((p) => !(0, util_1.alwaysValidSchema)(it, schema[p]));
         if (properties.length === 0)
           return;
         const valid = gen.name("valid");
@@ -17733,7 +14820,7 @@ var require_properties = __commonJS({
           cxt.ok(valid);
         }
         function hasDefault(prop) {
-          return it.opts.useDefaults && !it.compositeRule && schema3[prop].default !== void 0;
+          return it.opts.useDefaults && !it.compositeRule && schema[prop].default !== void 0;
         }
         function applyPropertySchema(prop) {
           cxt.subschema({
@@ -17748,9 +14835,9 @@ var require_properties = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/applicator/patternProperties.js
+// node_modules/ajv/dist/vocabularies/applicator/patternProperties.js
 var require_patternProperties = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/applicator/patternProperties.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/applicator/patternProperties.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -17762,10 +14849,10 @@ var require_patternProperties = __commonJS({
       type: "object",
       schemaType: "object",
       code(cxt) {
-        const { gen, schema: schema3, data, parentSchema, it } = cxt;
+        const { gen, schema, data, parentSchema, it } = cxt;
         const { opts } = it;
-        const patterns = (0, code_1.allSchemaProperties)(schema3);
-        const alwaysValidPatterns = patterns.filter((p) => (0, util_1.alwaysValidSchema)(it, schema3[p]));
+        const patterns = (0, code_1.allSchemaProperties)(schema);
+        const alwaysValidPatterns = patterns.filter((p) => (0, util_1.alwaysValidSchema)(it, schema[p]));
         if (patterns.length === 0 || alwaysValidPatterns.length === patterns.length && (!it.opts.unevaluated || it.props === true)) {
           return;
         }
@@ -17822,9 +14909,9 @@ var require_patternProperties = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/applicator/not.js
+// node_modules/ajv/dist/vocabularies/applicator/not.js
 var require_not = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/applicator/not.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/applicator/not.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var util_1 = require_util();
@@ -17833,8 +14920,8 @@ var require_not = __commonJS({
       schemaType: ["object", "boolean"],
       trackErrors: true,
       code(cxt) {
-        const { gen, schema: schema3, it } = cxt;
-        if ((0, util_1.alwaysValidSchema)(it, schema3)) {
+        const { gen, schema, it } = cxt;
+        if ((0, util_1.alwaysValidSchema)(it, schema)) {
           cxt.fail();
           return;
         }
@@ -17853,9 +14940,9 @@ var require_not = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/applicator/anyOf.js
+// node_modules/ajv/dist/vocabularies/applicator/anyOf.js
 var require_anyOf = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/applicator/anyOf.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/applicator/anyOf.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -17870,9 +14957,9 @@ var require_anyOf = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/applicator/oneOf.js
+// node_modules/ajv/dist/vocabularies/applicator/oneOf.js
 var require_oneOf = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/applicator/oneOf.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/applicator/oneOf.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -17887,12 +14974,12 @@ var require_oneOf = __commonJS({
       trackErrors: true,
       error,
       code(cxt) {
-        const { gen, schema: schema3, parentSchema, it } = cxt;
-        if (!Array.isArray(schema3))
+        const { gen, schema, parentSchema, it } = cxt;
+        if (!Array.isArray(schema))
           throw new Error("ajv implementation error");
         if (it.opts.discriminator && parentSchema.discriminator)
           return;
-        const schArr = schema3;
+        const schArr = schema;
         const valid = gen.let("valid", false);
         const passing = gen.let("passing", null);
         const schValid = gen.name("_valid");
@@ -17928,9 +15015,9 @@ var require_oneOf = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/applicator/allOf.js
+// node_modules/ajv/dist/vocabularies/applicator/allOf.js
 var require_allOf = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/applicator/allOf.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/applicator/allOf.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var util_1 = require_util();
@@ -17938,11 +15025,11 @@ var require_allOf = __commonJS({
       keyword: "allOf",
       schemaType: "array",
       code(cxt) {
-        const { gen, schema: schema3, it } = cxt;
-        if (!Array.isArray(schema3))
+        const { gen, schema, it } = cxt;
+        if (!Array.isArray(schema))
           throw new Error("ajv implementation error");
         const valid = gen.name("valid");
-        schema3.forEach((sch, i) => {
+        schema.forEach((sch, i) => {
           if ((0, util_1.alwaysValidSchema)(it, sch))
             return;
           const schCxt = cxt.subschema({ keyword: "allOf", schemaProp: i }, valid);
@@ -17955,9 +15042,9 @@ var require_allOf = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/applicator/if.js
+// node_modules/ajv/dist/vocabularies/applicator/if.js
 var require_if = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/applicator/if.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/applicator/if.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -18017,16 +15104,16 @@ var require_if = __commonJS({
       }
     };
     function hasSchema(it, keyword) {
-      const schema3 = it.schema[keyword];
-      return schema3 !== void 0 && !(0, util_1.alwaysValidSchema)(it, schema3);
+      const schema = it.schema[keyword];
+      return schema !== void 0 && !(0, util_1.alwaysValidSchema)(it, schema);
     }
     exports.default = def;
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/applicator/thenElse.js
+// node_modules/ajv/dist/vocabularies/applicator/thenElse.js
 var require_thenElse = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/applicator/thenElse.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/applicator/thenElse.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var util_1 = require_util();
@@ -18042,9 +15129,9 @@ var require_thenElse = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/applicator/index.js
+// node_modules/ajv/dist/vocabularies/applicator/index.js
 var require_applicator = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/applicator/index.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/applicator/index.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var additionalItems_1 = require_additionalItems();
@@ -18090,9 +15177,9 @@ var require_applicator = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/format/format.js
+// node_modules/ajv/dist/vocabularies/format/format.js
 var require_format = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/format/format.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/format/format.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -18107,7 +15194,7 @@ var require_format = __commonJS({
       $data: true,
       error,
       code(cxt, ruleType) {
-        const { gen, data, $data, schema: schema3, schemaCode, it } = cxt;
+        const { gen, data, $data, schema, schemaCode, it } = cxt;
         const { opts, errSchemaPath, schemaEnv, self } = it;
         if (!opts.validateFormats)
           return;
@@ -18137,7 +15224,7 @@ var require_format = __commonJS({
           }
         }
         function validateFormat() {
-          const formatDef = self.formats[schema3];
+          const formatDef = self.formats[schema];
           if (!formatDef) {
             unknownFormat();
             return;
@@ -18154,12 +15241,12 @@ var require_format = __commonJS({
             }
             throw new Error(unknownMsg());
             function unknownMsg() {
-              return `unknown format "${schema3}" ignored in schema at path "${errSchemaPath}"`;
+              return `unknown format "${schema}" ignored in schema at path "${errSchemaPath}"`;
             }
           }
           function getFormat(fmtDef) {
-            const code2 = fmtDef instanceof RegExp ? (0, codegen_1.regexpCode)(fmtDef) : opts.code.formats ? (0, codegen_1._)`${opts.code.formats}${(0, codegen_1.getProperty)(schema3)}` : void 0;
-            const fmt = gen.scopeValue("formats", { key: schema3, ref: fmtDef, code: code2 });
+            const code2 = fmtDef instanceof RegExp ? (0, codegen_1.regexpCode)(fmtDef) : opts.code.formats ? (0, codegen_1._)`${opts.code.formats}${(0, codegen_1.getProperty)(schema)}` : void 0;
+            const fmt = gen.scopeValue("formats", { key: schema, ref: fmtDef, code: code2 });
             if (typeof fmtDef == "object" && !(fmtDef instanceof RegExp)) {
               return [fmtDef.type || "string", fmtDef.validate, (0, codegen_1._)`${fmt}.validate`];
             }
@@ -18180,9 +15267,9 @@ var require_format = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/format/index.js
+// node_modules/ajv/dist/vocabularies/format/index.js
 var require_format2 = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/format/index.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/format/index.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var format_1 = require_format();
@@ -18191,9 +15278,9 @@ var require_format2 = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/metadata.js
+// node_modules/ajv/dist/vocabularies/metadata.js
 var require_metadata = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/metadata.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/metadata.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.contentVocabulary = exports.metadataVocabulary = void 0;
@@ -18214,12 +15301,12 @@ var require_metadata = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/draft7.js
+// node_modules/ajv/dist/vocabularies/draft7.js
 var require_draft7 = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/draft7.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/draft7.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var core_1 = require_core2();
+    var core_1 = require_core3();
     var validation_1 = require_validation();
     var applicator_1 = require_applicator();
     var format_1 = require_format2();
@@ -18236,9 +15323,9 @@ var require_draft7 = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/discriminator/types.js
+// node_modules/ajv/dist/vocabularies/discriminator/types.js
 var require_types = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/discriminator/types.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/discriminator/types.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.DiscrError = void 0;
@@ -18250,9 +15337,9 @@ var require_types = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/vocabularies/discriminator/index.js
+// node_modules/ajv/dist/vocabularies/discriminator/index.js
 var require_discriminator = __commonJS({
-  "cli/node_modules/ajv/dist/vocabularies/discriminator/index.js"(exports) {
+  "node_modules/ajv/dist/vocabularies/discriminator/index.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -18270,15 +15357,15 @@ var require_discriminator = __commonJS({
       schemaType: "object",
       error,
       code(cxt) {
-        const { gen, data, schema: schema3, parentSchema, it } = cxt;
+        const { gen, data, schema, parentSchema, it } = cxt;
         const { oneOf } = parentSchema;
         if (!it.opts.discriminator) {
           throw new Error("discriminator: requires discriminator option");
         }
-        const tagName = schema3.propertyName;
+        const tagName = schema.propertyName;
         if (typeof tagName != "string")
           throw new Error("discriminator: requires propertyName");
-        if (schema3.mapping)
+        if (schema.mapping)
           throw new Error("discriminator: mapping is not supported");
         if (!oneOf)
           throw new Error("discriminator: requires oneOf keyword");
@@ -18355,9 +15442,9 @@ var require_discriminator = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/refs/json-schema-draft-07.json
+// node_modules/ajv/dist/refs/json-schema-draft-07.json
 var require_json_schema_draft_07 = __commonJS({
-  "cli/node_modules/ajv/dist/refs/json-schema-draft-07.json"(exports, module) {
+  "node_modules/ajv/dist/refs/json-schema-draft-07.json"(exports, module) {
     module.exports = {
       $schema: "http://json-schema.org/draft-07/schema#",
       $id: "http://json-schema.org/draft-07/schema#",
@@ -18512,19 +15599,19 @@ var require_json_schema_draft_07 = __commonJS({
   }
 });
 
-// cli/node_modules/ajv/dist/ajv.js
+// node_modules/ajv/dist/ajv.js
 var require_ajv = __commonJS({
-  "cli/node_modules/ajv/dist/ajv.js"(exports, module) {
+  "node_modules/ajv/dist/ajv.js"(exports, module) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.MissingRefError = exports.ValidationError = exports.CodeGen = exports.Name = exports.nil = exports.stringify = exports.str = exports._ = exports.KeywordCxt = exports.Ajv = void 0;
-    var core_1 = require_core();
+    var core_1 = require_core2();
     var draft7_1 = require_draft7();
     var discriminator_1 = require_discriminator();
     var draft7MetaSchema = require_json_schema_draft_07();
     var META_SUPPORT_DATA = ["/properties"];
     var META_SCHEMA_ID = "http://json-schema.org/draft-07/schema";
-    var Ajv2 = class extends core_1.default {
+    var Ajv3 = class extends core_1.default {
       _addVocabularies() {
         super._addVocabularies();
         draft7_1.default.forEach((v) => this.addVocabulary(v));
@@ -18543,11 +15630,11 @@ var require_ajv = __commonJS({
         return this.opts.defaultMeta = super.defaultMeta() || (this.getSchema(META_SCHEMA_ID) ? META_SCHEMA_ID : void 0);
       }
     };
-    exports.Ajv = Ajv2;
-    module.exports = exports = Ajv2;
-    module.exports.Ajv = Ajv2;
+    exports.Ajv = Ajv3;
+    module.exports = exports = Ajv3;
+    module.exports.Ajv = Ajv3;
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.default = Ajv2;
+    exports.default = Ajv3;
     var validate_1 = require_validate();
     Object.defineProperty(exports, "KeywordCxt", { enumerable: true, get: function() {
       return validate_1.KeywordCxt;
@@ -18582,23 +15669,23 @@ var require_ajv = __commonJS({
   }
 });
 
-// cli/src/lib/pipeline-engine/schemas/orchestration-state-v5.schema.json
-var orchestration_state_v5_schema_default;
-var init_orchestration_state_v5_schema = __esm({
-  "cli/src/lib/pipeline-engine/schemas/orchestration-state-v5.schema.json"() {
-    orchestration_state_v5_schema_default = {
+// cli/src/lib/pipeline-engine/schemas/orchestration-state-v6.schema.json
+var orchestration_state_v6_schema_default;
+var init_orchestration_state_v6_schema = __esm({
+  "cli/src/lib/pipeline-engine/schemas/orchestration-state-v6.schema.json"() {
+    orchestration_state_v6_schema_default = {
       $schema: "http://json-schema.org/draft-07/schema#",
-      $id: "orchestration-state-v5",
-      title: "Orchestration State v5",
-      description: "Canonical schema for the orchestration system's v5 state format.",
+      $id: "orchestration-state-v6",
+      title: "Orchestration State v6",
+      description: "Canonical schema for the orchestration system's v6 state format.",
       type: "object",
       additionalProperties: false,
       required: ["$schema", "project", "config", "pipeline", "graph"],
       properties: {
         $schema: {
           title: "Schema Version",
-          description: "Schema version identifier. Must be orchestration-state-v5.",
-          const: "orchestration-state-v5"
+          description: "Schema version identifier. Must be orchestration-state-v6.",
+          const: "orchestration-state-v6"
         },
         project: {
           title: "Project Metadata",
@@ -18621,6 +15708,12 @@ var init_orchestration_state_v5_schema = __esm({
               title: "Updated Timestamp",
               description: "ISO 8601 timestamp of the last state mutation.",
               type: "string"
+            },
+            project_type: {
+              title: "Project Type",
+              description: "Project kind enum. Absent means standard (a project predating the field). standard = ordinary registered-repo project; side-project = local-only side-project.",
+              type: "string",
+              enum: ["standard", "side-project"]
             }
           }
         },
@@ -18949,7 +16042,7 @@ var init_orchestration_state_v5_schema = __esm({
           description: "State for a single phase or task iteration within a for-each node.",
           type: "object",
           additionalProperties: false,
-          required: ["index", "status", "nodes", "corrective_tasks", "commit_hash"],
+          required: ["index", "status", "nodes", "corrective_tasks", "repos"],
           properties: {
             index: {
               title: "Iteration Index",
@@ -18982,13 +16075,19 @@ var init_orchestration_state_v5_schema = __esm({
               description: "Relative path to the authoring doc for this iteration (phase plan or task handoff). Optional; absent on iterations that have not yet been authored.",
               type: ["string", "null"]
             },
-            commit_hash: {
-              title: "Commit Hash",
-              description: "Per-task commit hash set by the COMMIT_COMPLETED mutation, or null if no commit has been made for this iteration.",
-              oneOf: [
-                { type: "string" },
-                { type: "null" }
-              ]
+            repos: {
+              title: "Per-Repo Commit Entries",
+              description: "One entry per repo this iteration touches. name is the repo slug (possibly blank for migrated v5 state); commit_hash is the per-repo commit, null until committed.",
+              type: "array",
+              items: {
+                type: "object",
+                additionalProperties: false,
+                required: ["name", "commit_hash"],
+                properties: {
+                  name: { type: "string" },
+                  commit_hash: { oneOf: [{ type: "string" }, { type: "null" }] }
+                }
+              }
             }
           }
         },
@@ -18997,7 +16096,7 @@ var init_orchestration_state_v5_schema = __esm({
           description: "State for a corrective task injected into the pipeline after a review rejection.",
           type: "object",
           additionalProperties: false,
-          required: ["index", "reason", "injected_after", "status", "nodes", "commit_hash"],
+          required: ["index", "reason", "injected_after", "status", "nodes", "repos"],
           properties: {
             index: {
               title: "Corrective Task Index",
@@ -19030,13 +16129,19 @@ var init_orchestration_state_v5_schema = __esm({
               description: "Relative path to the corrective task handoff doc. Optional; absent on entries that have not yet been authored.",
               type: ["string", "null"]
             },
-            commit_hash: {
-              title: "Commit Hash",
-              description: "Per-corrective-task commit hash set by the COMMIT_COMPLETED mutation, or null if no commit has been made for this corrective task.",
-              oneOf: [
-                { type: "string" },
-                { type: "null" }
-              ]
+            repos: {
+              title: "Per-Repo Commit Entries",
+              description: "One entry per repo this corrective task touches. name is the repo slug (possibly blank for migrated v5 state); commit_hash is the per-repo commit, null until committed.",
+              type: "array",
+              items: {
+                type: "object",
+                additionalProperties: false,
+                required: ["name", "commit_hash"],
+                properties: {
+                  name: { type: "string" },
+                  commit_hash: { oneOf: [{ type: "string" }, { type: "null" }] }
+                }
+              }
             }
           }
         },
@@ -19190,8 +16295,8 @@ function getValidator() {
   if (validateFn !== null) {
     return validateFn;
   }
-  const ajv = new import_ajv.Ajv({ allErrors: true });
-  validateFn = ajv.compile(orchestration_state_v5_schema_default);
+  const ajv = new import_ajv2.Ajv({ allErrors: true });
+  validateFn = ajv.compile(orchestration_state_v6_schema_default);
   return validateFn;
 }
 function instancePathToDotNotation(instancePath) {
@@ -19210,54 +16315,54 @@ function instancePathToDotNotation(instancePath) {
 }
 function formatSchemaError(error) {
   const basePath = instancePathToDotNotation(error.instancePath);
-  let path23;
+  let path30;
   let problem;
   switch (error.keyword) {
     case "required": {
       const missing = error.params["missingProperty"];
-      path23 = basePath ? `${basePath}.${missing}` : missing;
+      path30 = basePath ? `${basePath}.${missing}` : missing;
       problem = "required field missing";
       break;
     }
     case "type": {
       const expected = error.params["type"];
       const actual = error.data === null ? "null" : typeof error.data;
-      path23 = basePath;
+      path30 = basePath;
       problem = `expected ${expected}, got ${actual}`;
       break;
     }
     case "enum": {
       const allowedValues = error.params["allowedValues"];
-      path23 = basePath;
+      path30 = basePath;
       problem = `invalid value ${JSON.stringify(error.data)} \u2014 must be one of: ${allowedValues.join(", ")}`;
       break;
     }
     case "const": {
       const expectedValue = error.params["allowedValue"];
-      path23 = basePath;
+      path30 = basePath;
       problem = `expected ${JSON.stringify(expectedValue)}, got ${JSON.stringify(error.data)}`;
       break;
     }
     case "additionalProperties": {
       const additionalProp = error.params["additionalProperty"];
-      path23 = basePath ? `${basePath}.${additionalProp}` : additionalProp;
+      path30 = basePath ? `${basePath}.${additionalProp}` : additionalProp;
       problem = "unexpected field";
       if (additionalProp === "commit_hash" && basePath.startsWith("pipeline.source_control")) {
-        problem += " \u2014 global commit_hash was removed in v5; per-task commit_hash is now recorded on each IterationEntry";
+        problem += " \u2014 global commit_hash was removed in v5; per-repo commit_hash is now recorded in the repos array on each IterationEntry (v6)";
       }
       break;
     }
     case "minimum": {
       const limit = error.params["limit"];
-      path23 = basePath;
+      path30 = basePath;
       problem = `value must be >= ${limit}`;
       break;
     }
     default:
-      path23 = basePath;
+      path30 = basePath;
       problem = error.message ?? "validation failed";
   }
-  return `[schema] ${path23}: ${problem}`;
+  return `[schema] ${path30}: ${problem}`;
 }
 function validateStateSchema(state) {
   const validate = getValidator();
@@ -19268,13 +16373,2714 @@ function validateStateSchema(state) {
   const errors = validate.errors ?? [];
   return errors.map(formatSchemaError);
 }
-var import_ajv, validateFn;
+var import_ajv2, validateFn;
 var init_schema_validator = __esm({
   "cli/src/lib/pipeline-engine/schema-validator.ts"() {
     "use strict";
-    import_ajv = __toESM(require_ajv(), 1);
-    init_orchestration_state_v5_schema();
+    import_ajv2 = __toESM(require_ajv(), 1);
+    init_orchestration_state_v6_schema();
     validateFn = null;
+  }
+});
+
+// cli/src/lib/skill-manifest.ts
+import { readdirSync as readdirSync3, readFileSync as readFileSync3 } from "node:fs";
+import path23 from "node:path";
+function* walkSkillFiles(root) {
+  const stack = [root];
+  while (stack.length) {
+    const dir = stack.pop();
+    let entries;
+    try {
+      entries = readdirSync3(dir, { withFileTypes: true });
+    } catch {
+      continue;
+    }
+    for (const e of entries) {
+      if (e.isDirectory()) {
+        if (EXCLUDED_DIRS.has(e.name)) continue;
+        stack.push(path23.join(dir, e.name));
+      } else if (e.isFile() && e.name === "SKILL.md") {
+        yield path23.join(dir, e.name);
+      }
+    }
+  }
+}
+function parseFrontmatter(text) {
+  if (!text.startsWith("---")) return { error: "no frontmatter block" };
+  const end = text.indexOf("\n---", 3);
+  if (end === -1) return { error: "frontmatter not terminated" };
+  const raw = text.slice(3, end);
+  const fm = {};
+  for (const rawLine of raw.split(/\r?\n/)) {
+    const line = rawLine.replace(/\s+$/, "");
+    if (!line || line.startsWith("#")) continue;
+    const m = line.match(/^([a-zA-Z_][a-zA-Z0-9_-]*)\s*:\s*(.*)$/);
+    if (!m) return { error: `malformed line: ${line}` };
+    const rawValue = m[2].trim();
+    const wasQuoted = rawValue.length >= 2 && (rawValue.startsWith('"') && rawValue.endsWith('"') || rawValue.startsWith("'") && rawValue.endsWith("'"));
+    let value;
+    if (wasQuoted) value = rawValue.slice(1, -1);
+    else if (rawValue === "true") value = true;
+    else if (rawValue === "false") value = false;
+    else value = rawValue;
+    fm[m[1]] = value;
+  }
+  return { frontmatter: fm };
+}
+function buildSkillManifest(opts) {
+  const warn = opts.warn ?? ((msg) => process.stderr.write(msg + "\n"));
+  const out = [];
+  for (const file of walkSkillFiles(opts.repoRoot)) {
+    let text;
+    try {
+      text = readFileSync3(file, "utf8");
+    } catch (err) {
+      warn(`warn: ${file}: ${err.message}`);
+      continue;
+    }
+    const parsed = parseFrontmatter(text);
+    if (parsed.error) {
+      warn(`warn: ${file}: ${parsed.error}`);
+      continue;
+    }
+    const fm = parsed.frontmatter;
+    const name = fm["name"];
+    const description = fm["description"];
+    if (typeof name !== "string" || !name) {
+      warn(`warn: ${file}: missing name`);
+      continue;
+    }
+    if (typeof description !== "string" || !description) {
+      warn(`warn: ${file}: missing description`);
+      continue;
+    }
+    if (name.startsWith("rad-")) continue;
+    if (fm["disable-model-invocation"] === true) continue;
+    out.push({ name, description, path: path23.resolve(file) });
+  }
+  out.sort((a, b) => a.name.localeCompare(b.name));
+  return out;
+}
+var EXCLUDED_DIRS;
+var init_skill_manifest = __esm({
+  "cli/src/lib/skill-manifest.ts"() {
+    "use strict";
+    EXCLUDED_DIRS = /* @__PURE__ */ new Set([
+      "node_modules",
+      ".git",
+      "dist",
+      "build",
+      "out",
+      "coverage",
+      "prompt-tests"
+    ]);
+  }
+});
+
+// cli/src/lib/pipeline-engine/constants.ts
+var NODE_KINDS, NODE_STATUSES, GRAPH_STATUSES, CONDITION_OPERATORS, NEXT_ACTIONS, EVENTS, OUT_OF_BAND_EVENTS, REVIEW_VERDICTS, VALID_VERDICTS, ALLOWED_NODE_TRANSITIONS;
+var init_constants = __esm({
+  "cli/src/lib/pipeline-engine/constants.ts"() {
+    "use strict";
+    NODE_KINDS = Object.freeze({
+      STEP: "step",
+      GATE: "gate",
+      FOR_EACH_PHASE: "for_each_phase",
+      FOR_EACH_TASK: "for_each_task",
+      CONDITIONAL: "conditional",
+      PARALLEL: "parallel"
+    });
+    NODE_STATUSES = Object.freeze({
+      NOT_STARTED: "not_started",
+      IN_PROGRESS: "in_progress",
+      COMPLETED: "completed",
+      FAILED: "failed",
+      HALTED: "halted",
+      SKIPPED: "skipped"
+    });
+    GRAPH_STATUSES = Object.freeze({
+      NOT_STARTED: "not_started",
+      IN_PROGRESS: "in_progress",
+      COMPLETED: "completed",
+      HALTED: "halted"
+    });
+    CONDITION_OPERATORS = Object.freeze({
+      EQ: "eq",
+      NEQ: "neq",
+      IN: "in",
+      NOT_IN: "not_in",
+      TRUTHY: "truthy",
+      FALSY: "falsy"
+    });
+    NEXT_ACTIONS = Object.freeze({
+      // Planning agent spawns
+      SPAWN_REQUIREMENTS: "spawn_requirements",
+      SPAWN_MASTER_PLAN: "spawn_master_plan",
+      // Planning scripts
+      EXPLODE_MASTER_PLAN: "explode_master_plan",
+      // Human gates
+      REQUEST_PLAN_APPROVAL: "request_plan_approval",
+      GATE_TASK: "gate_task",
+      GATE_PHASE: "gate_phase",
+      ASK_GATE_MODE: "ask_gate_mode",
+      REQUEST_FINAL_APPROVAL: "request_final_approval",
+      // Execution agent spawns
+      EXECUTE_TASK: "execute_task",
+      SPAWN_CODE_REVIEWER: "spawn_code_reviewer",
+      SPAWN_PHASE_REVIEWER: "spawn_phase_reviewer",
+      SPAWN_FINAL_REVIEWER: "spawn_final_reviewer",
+      // Source control
+      INVOKE_SOURCE_CONTROL_COMMIT: "invoke_source_control_commit",
+      INVOKE_SOURCE_CONTROL_PR: "invoke_source_control_pr",
+      // Terminal states
+      DISPLAY_HALTED: "display_halted",
+      DISPLAY_COMPLETE: "display_complete"
+    });
+    EVENTS = Object.freeze({
+      // ── Planning step events ──────────────────────────────────────────────
+      REQUIREMENTS_COMPLETED: "requirements_completed",
+      MASTER_PLAN_COMPLETED: "master_plan_completed",
+      EXPLOSION_COMPLETED: "explosion_completed",
+      EXPLOSION_FAILED: "explosion_failed",
+      // ── Gate approved events ──────────────────────────────────────────────
+      PLAN_APPROVED: "plan_approved",
+      TASK_GATE_APPROVED: "task_gate_approved",
+      PHASE_GATE_APPROVED: "phase_gate_approved",
+      FINAL_APPROVED: "final_approved",
+      // ── Task execution events ─────────────────────────────────────────────
+      TASK_COMPLETED: "task_completed",
+      CODE_REVIEW_COMPLETED: "code_review_completed",
+      // ── Phase review events ───────────────────────────────────────────────
+      PHASE_REVIEW_COMPLETED: "phase_review_completed",
+      // ── Final review events ───────────────────────────────────────────────
+      FINAL_REVIEW_COMPLETED: "final_review_completed",
+      // ── Source control events ─────────────────────────────────────────────
+      COMMIT_COMPLETED: "commit_completed",
+      PR_REQUESTED: "pr_requested",
+      PR_CREATED: "pr_created",
+      // ── Out-of-band events ────────────────────────────────────────────────
+      PLAN_REJECTED: "plan_rejected",
+      GATE_REJECTED: "gate_rejected",
+      FINAL_REJECTED: "final_rejected",
+      HALT: "halt",
+      GATE_MODE_SET: "gate_mode_set",
+      SOURCE_CONTROL_INIT: "source_control_init"
+    });
+    OUT_OF_BAND_EVENTS = /* @__PURE__ */ new Set([
+      "plan_rejected",
+      "gate_rejected",
+      "final_rejected",
+      "halt",
+      "gate_mode_set",
+      "source_control_init",
+      // Parse-failure recovery loop: step-level `failed` events are not template-indexed
+      // by buildEventIndex, so routing `explosion_failed` requires the out-of-band path.
+      "explosion_failed"
+    ]);
+    REVIEW_VERDICTS = Object.freeze({
+      APPROVED: "approved",
+      CHANGES_REQUESTED: "changes_requested",
+      REJECTED: "rejected"
+    });
+    VALID_VERDICTS = new Set(Object.values(REVIEW_VERDICTS));
+    ALLOWED_NODE_TRANSITIONS = /* @__PURE__ */ new Map([
+      ["not_started", /* @__PURE__ */ new Set(["in_progress", "skipped", "completed"])],
+      ["in_progress", /* @__PURE__ */ new Set(["completed", "failed", "halted"])],
+      ["completed", /* @__PURE__ */ new Set(["not_started", "in_progress"])],
+      ["failed", /* @__PURE__ */ new Set(["in_progress"])],
+      ["halted", /* @__PURE__ */ new Set([])],
+      ["skipped", /* @__PURE__ */ new Set([])]
+    ]);
+  }
+});
+
+// cli/src/lib/pipeline-engine/template-validator.ts
+function makeError(subtype, templateId, message, detail) {
+  return {
+    type: "template_validation_error",
+    subtype,
+    template_id: templateId,
+    message,
+    detail
+  };
+}
+function validateScope(nodes, templateId, errors, warnings) {
+  const scopeIds = new Set(nodes.map((n) => n.id));
+  for (const node of nodes) {
+    if (!VALID_KINDS.includes(node.kind)) {
+      errors.push(makeError(
+        "invalid_kind",
+        templateId,
+        `Template validation failed: invalid node kind.
+  Node '${node.id}' has kind: '${node.kind}'
+  Valid kinds: step, gate, for_each_phase, for_each_task, conditional, parallel
+  Fix: change the kind to one of the valid values above.`,
+        { node_id: node.id, invalid_kind: node.kind, valid_kinds: [...VALID_KINDS] }
+      ));
+    }
+  }
+  for (const node of nodes) {
+    for (const ref of node.depends_on ?? []) {
+      if (!scopeIds.has(ref)) {
+        errors.push(makeError(
+          "dangling_ref",
+          templateId,
+          `Template validation failed: dangling node reference.
+  Node '${node.id}' depends on '${ref}', which is not defined in this scope.
+  Fix: add a node with id '${ref}', or remove it from ${node.id}.depends_on.`,
+          { node_id: node.id, missing_ref: ref }
+        ));
+      }
+    }
+  }
+  const inDegree = /* @__PURE__ */ new Map();
+  const adjacency = /* @__PURE__ */ new Map();
+  for (const node of nodes) {
+    inDegree.set(node.id, 0);
+    adjacency.set(node.id, []);
+  }
+  for (const node of nodes) {
+    const deps = (node.depends_on ?? []).filter((dep) => scopeIds.has(dep));
+    inDegree.set(node.id, deps.length);
+    for (const dep of deps) {
+      adjacency.get(dep).push(node.id);
+    }
+  }
+  const queue = [];
+  for (const [id, deg] of inDegree) {
+    if (deg === 0) queue.push(id);
+  }
+  let processed = 0;
+  while (queue.length > 0) {
+    const nodeId = queue.shift();
+    processed++;
+    for (const dependent of adjacency.get(nodeId)) {
+      const newDeg = inDegree.get(dependent) - 1;
+      inDegree.set(dependent, newDeg);
+      if (newDeg === 0) queue.push(dependent);
+    }
+  }
+  if (processed < nodes.length) {
+    const cycleNodes = nodes.filter((n) => inDegree.get(n.id) > 0).map((n) => n.id);
+    const nodeList = cycleNodes.join(", ");
+    errors.push(makeError(
+      "cycle_detected",
+      templateId,
+      `Template validation failed: cycle detected in node dependencies.
+  Nodes in cycle: ${nodeList}
+  Fix: break the cycle by removing a depends_on reference.`,
+      { cycle_nodes: cycleNodes }
+    ));
+  }
+  const referencedIds = /* @__PURE__ */ new Set();
+  for (const node of nodes) {
+    for (const ref of node.depends_on ?? []) {
+      referencedIds.add(ref);
+    }
+  }
+  for (const node of nodes) {
+    const deps = node.depends_on ?? [];
+    if (deps.length > 0 && !referencedIds.has(node.id)) {
+      errors.push(makeError(
+        "unreachable_node",
+        templateId,
+        `Template validation failed: unreachable node.
+  Node '${node.id}' has no incoming depends_on references and is not a root node.
+  Fix: add '${node.id}' to another node's depends_on, or remove it from the template.`,
+        { node_id: node.id }
+      ));
+    }
+  }
+  for (const node of nodes) {
+    if (node.kind === "for_each_phase" || node.kind === "for_each_task") {
+      validateScope(node.body, templateId, errors, warnings);
+    } else if (node.kind === "conditional") {
+      validateScope(node.branches.true, templateId, errors, warnings);
+      validateScope(node.branches.false, templateId, errors, warnings);
+    } else if (node.kind === "parallel") {
+      validateScope(node.children, templateId, errors, warnings);
+    }
+  }
+}
+function validateTemplate(template, templateId) {
+  if (template.template.status === "deprecated") {
+    return { valid: true, errors: [], warnings: [] };
+  }
+  const errors = [];
+  const warnings = [];
+  if (template.template.id !== templateId) {
+    warnings.push(makeError(
+      "id_mismatch",
+      templateId,
+      `Template validation warning: template id mismatch.
+  Expected: '${templateId}', found: '${template.template.id}'
+  This is a warning \u2014 the template will still load.`,
+      { expected_id: templateId, actual_id: template.template.id }
+    ));
+  }
+  validateScope(template.nodes, templateId, errors, warnings);
+  return {
+    valid: errors.length === 0,
+    errors,
+    warnings
+  };
+}
+var VALID_KINDS;
+var init_template_validator = __esm({
+  "cli/src/lib/pipeline-engine/template-validator.ts"() {
+    "use strict";
+    init_constants();
+    VALID_KINDS = Object.values(NODE_KINDS);
+  }
+});
+
+// cli/src/lib/pipeline-engine/template-loader.ts
+import * as fs19 from "node:fs";
+import * as path24 from "node:path";
+function buildEventIndex(nodes, parentPath) {
+  const index = /* @__PURE__ */ new Map();
+  for (const node of nodes) {
+    const templatePath = parentPath === "" ? node.id : `${parentPath}.${node.id}`;
+    if (node.kind === "step") {
+      const completedEvent = node.events.completed;
+      if (index.has(completedEvent)) {
+        throw new Error(`Duplicate event name in template: ${completedEvent}`);
+      }
+      index.set(completedEvent, { nodeDef: node, eventPhase: "completed", templatePath });
+      const startedEvent = node.events.started;
+      if (startedEvent !== void 0) {
+        if (index.has(startedEvent)) {
+          throw new Error(`Duplicate event name in template: ${startedEvent}`);
+        }
+        index.set(startedEvent, { nodeDef: node, eventPhase: "completed", templatePath });
+      }
+    } else if (node.kind === "gate") {
+      const approvedEvent = node.approved_event;
+      if (index.has(approvedEvent)) {
+        throw new Error(`Duplicate event name in template: ${approvedEvent}`);
+      }
+      index.set(approvedEvent, { nodeDef: node, eventPhase: "approved", templatePath });
+    } else if (node.kind === "for_each_phase") {
+      const childIndex = buildEventIndex(node.body, `${templatePath}.body`);
+      for (const [eventName, entry] of childIndex) {
+        if (index.has(eventName)) {
+          throw new Error(`Duplicate event name in template: ${eventName}`);
+        }
+        index.set(eventName, entry);
+      }
+    } else if (node.kind === "for_each_task") {
+      const childIndex = buildEventIndex(node.body, `${templatePath}.body`);
+      for (const [eventName, entry] of childIndex) {
+        if (index.has(eventName)) {
+          throw new Error(`Duplicate event name in template: ${eventName}`);
+        }
+        index.set(eventName, entry);
+      }
+    } else if (node.kind === "conditional") {
+      const trueIndex = buildEventIndex(node.branches.true, `${templatePath}.branches.true`);
+      for (const [eventName, entry] of trueIndex) {
+        if (index.has(eventName)) {
+          throw new Error(`Duplicate event name in template: ${eventName}`);
+        }
+        index.set(eventName, entry);
+      }
+      const falseIndex = buildEventIndex(node.branches.false, `${templatePath}.branches.false`);
+      for (const [eventName, entry] of falseIndex) {
+        if (index.has(eventName)) {
+          throw new Error(`Duplicate event name in template: ${eventName}`);
+        }
+        index.set(eventName, entry);
+      }
+    } else if (node.kind === "parallel") {
+      const childIndex = buildEventIndex(node.children, `${templatePath}.children`);
+      for (const [eventName, entry] of childIndex) {
+        if (index.has(eventName)) {
+          throw new Error(`Duplicate event name in template: ${eventName}`);
+        }
+        index.set(eventName, entry);
+      }
+    } else {
+      const _exhaustive = node;
+      throw new Error(`Unexpected node kind in template: ${_exhaustive.kind}`);
+    }
+  }
+  return index;
+}
+function loadTemplate(templatePath) {
+  let raw;
+  try {
+    raw = fs19.readFileSync(templatePath, "utf-8");
+  } catch (err) {
+    if (err !== null && typeof err === "object" && err.code === "ENOENT") {
+      throw new Error(`Template file not found: ${templatePath}`);
+    }
+    throw err;
+  }
+  let parsed;
+  try {
+    parsed = load2(raw);
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    throw new Error(`Invalid YAML in template: ${templatePath}: ${message}`);
+  }
+  if (parsed === null || typeof parsed !== "object") {
+    throw new Error("Malformed template: missing template");
+  }
+  const obj = parsed;
+  if (!obj["template"] || typeof obj["template"] !== "object") {
+    throw new Error("Malformed template: missing template");
+  }
+  const header = obj["template"];
+  if (!header["id"] || typeof header["id"] !== "string") {
+    throw new Error("Malformed template: missing template.id");
+  }
+  if (!header["version"] || typeof header["version"] !== "string") {
+    throw new Error("Malformed template: missing template.version");
+  }
+  if (!header["description"] || typeof header["description"] !== "string") {
+    throw new Error("Malformed template: missing template.description");
+  }
+  if (!obj["nodes"] || !Array.isArray(obj["nodes"]) || obj["nodes"].length === 0) {
+    throw new Error("Malformed template: missing nodes");
+  }
+  const template = parsed;
+  const eventIndex = buildEventIndex(template.nodes, "");
+  const templateId = path24.basename(templatePath, ".yml");
+  const validationResult = validateTemplate(template, templateId);
+  const throwableErrors = validationResult.errors.filter(
+    (e) => e.subtype !== "unreachable_node"
+  );
+  if (throwableErrors.length > 0) {
+    const messages = throwableErrors.map((e) => e.message).join("\n");
+    throw new Error(`Template validation failed for '${templateId}':
+${messages}`);
+  }
+  return { template, eventIndex };
+}
+var init_template_loader = __esm({
+  "cli/src/lib/pipeline-engine/template-loader.ts"() {
+    "use strict";
+    init_js_yaml();
+    init_template_validator();
+  }
+});
+
+// cli/src/lib/pipeline-engine/template-resolver.ts
+import * as fs20 from "node:fs";
+import * as path25 from "node:path";
+function resolveTemplateName(state, cliTemplateName, config, projectDir, templatesDir) {
+  let templateName;
+  let source;
+  if (state !== null && state.graph.template_id) {
+    templateName = state.graph.template_id;
+    source = "state";
+  } else if (cliTemplateName !== void 0 && cliTemplateName !== "") {
+    templateName = cliTemplateName;
+    source = "cli";
+  } else if (config.default_template !== "" && config.default_template !== "ask") {
+    const raw = config.default_template;
+    templateName = CONFIG_SENTINEL_REMAP[raw] ?? raw;
+    source = "config";
+  } else {
+    templateName = "extra-high";
+    source = "default";
+  }
+  const { path: templatePath, isProjectLocal } = resolveTemplatePath(templateName, projectDir, templatesDir);
+  return { templateName, templatePath, source, isProjectLocal };
+}
+function resolveTemplatePath(templateName, projectDir, templatesDir) {
+  const projectLocalPath = path25.join(projectDir, "template.yml");
+  if (fs20.existsSync(projectLocalPath)) {
+    return { path: path25.resolve(projectLocalPath), isProjectLocal: true };
+  }
+  return { path: path25.join(templatesDir, templateName + ".yml"), isProjectLocal: false };
+}
+function snapshotTemplate(globalTemplatePath, projectDir) {
+  fs20.mkdirSync(projectDir, { recursive: true });
+  fs20.copyFileSync(globalTemplatePath, path25.join(projectDir, "template.yml"));
+}
+var CONFIG_SENTINEL_REMAP;
+var init_template_resolver = __esm({
+  "cli/src/lib/pipeline-engine/template-resolver.ts"() {
+    "use strict";
+    CONFIG_SENTINEL_REMAP = {
+      default: "extra-high",
+      quick: "low",
+      full: "extra-high"
+    };
+  }
+});
+
+// cli/src/lib/pipeline-engine/frontmatter-validators.ts
+function coerceNull(value) {
+  if (value === "null" || value === "undefined") return null;
+  return value;
+}
+function getValidationRules(event) {
+  return VALIDATION_RULES[event] ?? [];
+}
+function validateFrontmatter(event, frontmatter, _docPath) {
+  const rules = getValidationRules(event);
+  for (const rule of rules) {
+    if (rule.when !== void 0 && !rule.when(frontmatter)) {
+      continue;
+    }
+    let value = frontmatter[rule.field];
+    if (rule.field === "verdict") {
+      value = coerceNull(value);
+    }
+    if (rule.mustBeAbsent) {
+      if (value !== void 0 && value !== null) {
+        return {
+          error: `Invalid value: ${rule.field} must be ${rule.expected}`,
+          event,
+          field: rule.field
+        };
+      }
+      continue;
+    }
+    if (value === void 0 || value === null) {
+      return { error: "Missing required field", event, field: rule.field };
+    }
+    if (rule.field === "tasks") {
+      if (!Array.isArray(value)) {
+        return { error: "Invalid value: tasks must be an array", event, field: rule.field };
+      }
+      if (value.length === 0) {
+        return { error: "Invalid value: tasks must be a non-empty array", event, field: rule.field };
+      }
+    } else if (!rule.validate(value)) {
+      return {
+        error: `Invalid value: ${rule.field} must be ${rule.expected}`,
+        event,
+        field: rule.field
+      };
+    }
+  }
+  return null;
+}
+var VALIDATION_RULES;
+var init_frontmatter_validators = __esm({
+  "cli/src/lib/pipeline-engine/frontmatter-validators.ts"() {
+    "use strict";
+    VALIDATION_RULES = {
+      requirements_completed: [
+        {
+          field: "requirement_count",
+          validate: (v) => typeof v === "number" && Number.isInteger(v) && v > 0,
+          expected: "a positive integer"
+        }
+      ],
+      plan_approved: [
+        {
+          field: "total_phases",
+          validate: (v) => typeof v === "number" && Number.isInteger(v) && v > 0,
+          expected: "a positive integer"
+        },
+        {
+          field: "total_tasks",
+          validate: (v) => typeof v === "number" && Number.isInteger(v) && v > 0,
+          expected: "a positive integer"
+        }
+      ],
+      // Retained post-Iter 7: event no longer fires, but the phase-plan document
+      // contract is still live (explosion-script-authored; consumed downstream).
+      // Keeps the rule shape as a schema reference for the existing doc format.
+      phase_plan_created: [
+        {
+          field: "tasks",
+          validate: (v) => Array.isArray(v) && v.length > 0,
+          expected: "a non-empty array"
+        }
+      ],
+      // Iter 10 — conditional orchestrator-mediation contract. `verdict` is the
+      // reviewer's raw verdict; when it is `changes_requested`, the orchestrator's
+      // mediation addendum MUST supply `orchestrator_mediated`, `effective_outcome`,
+      // and (iff effective_outcome is `changes_requested`) `corrective_handoff_path`.
+      // When verdict is `approved` or `rejected`, all three mediation fields must
+      // be absent. See ok-write-the-plan-vast-thacker.md for the contract rationale.
+      code_review_completed: [
+        {
+          field: "verdict",
+          // Validate the raw verdict is exactly one of the three allowed values —
+          // no trimming, no case normalization. A typo or stray whitespace
+          // (e.g., "approved ") would otherwise slip past the conditional
+          // mediation rules (which gate on exact-string match of
+          // 'changes_requested') and surface as a later runtime halt from the
+          // mutation's unknown-verdict branch instead of a structured frontmatter
+          // error. Fail early here with a clear field-specific message so the
+          // operator can fix the frontmatter and re-signal the event.
+          validate: (v) => typeof v === "string" && (v === "approved" || v === "changes_requested" || v === "rejected"),
+          expected: "one of 'approved', 'changes_requested', 'rejected'"
+        },
+        // verdict === 'changes_requested' branch — mediation fields required
+        {
+          field: "orchestrator_mediated",
+          validate: (v) => v === true,
+          expected: "true (orchestrator mediation required for changes_requested verdicts)",
+          when: (fm) => fm.verdict === "changes_requested"
+        },
+        {
+          field: "effective_outcome",
+          validate: (v) => v === "approved" || v === "changes_requested",
+          expected: "'approved' or 'changes_requested'",
+          when: (fm) => fm.verdict === "changes_requested"
+        },
+        // When effective_outcome is changes_requested, corrective_handoff_path is
+        // OPTIONAL. Absence is the orchestrator's budget-exhausted halt signal —
+        // the mutation reads effective_outcome=changes_requested + no handoff path
+        // as "orchestrator declined to author a handoff because budget is blown"
+        // and converts it into a clean pipeline halt. When supplied, the path must
+        // be a non-empty string (whitespace-only is rejected).
+        {
+          field: "corrective_handoff_path",
+          validate: (v) => typeof v === "string" && v.trim().length > 0,
+          expected: "a non-empty string when supplied",
+          when: (fm) => fm.verdict === "changes_requested" && fm.effective_outcome === "changes_requested" && fm.corrective_handoff_path !== void 0 && fm.corrective_handoff_path !== null
+        },
+        {
+          field: "corrective_handoff_path",
+          validate: () => true,
+          expected: "absent (must be omitted when effective_outcome is approved)",
+          when: (fm) => fm.verdict === "changes_requested" && fm.effective_outcome === "approved",
+          mustBeAbsent: true
+        },
+        // verdict ∈ {'approved','rejected'} branch — mediation fields must be absent
+        {
+          field: "orchestrator_mediated",
+          validate: () => true,
+          expected: "absent (only permitted on changes_requested verdicts)",
+          when: (fm) => fm.verdict === "approved" || fm.verdict === "rejected",
+          mustBeAbsent: true
+        },
+        {
+          field: "effective_outcome",
+          validate: () => true,
+          expected: "absent (only permitted on changes_requested verdicts)",
+          when: (fm) => fm.verdict === "approved" || fm.verdict === "rejected",
+          mustBeAbsent: true
+        },
+        {
+          field: "corrective_handoff_path",
+          validate: () => true,
+          expected: "absent (only permitted on changes_requested verdicts)",
+          when: (fm) => fm.verdict === "approved" || fm.verdict === "rejected",
+          mustBeAbsent: true
+        }
+      ],
+      // Iter 11 — conditional orchestrator-mediation contract (parallels iter-10
+      // code_review_completed). `verdict` is the reviewer's raw verdict; when it is
+      // `changes_requested`, the orchestrator's mediation addendum MUST supply
+      // `orchestrator_mediated`, `effective_outcome`, and (iff effective_outcome is
+      // `changes_requested`) `corrective_handoff_path`. When verdict is `approved`
+      // or `rejected`, all three mediation fields must be absent. The mutation
+      // layer is `mutations.ts` PHASE_REVIEW_COMPLETED; the operator-facing write
+      // surface + judgment rubric lives in
+      // `harness-files/skills/rad-orchestration/references/corrective-playbook.md`
+      // (Phase-Scope Mediation section).
+      phase_review_completed: [
+        {
+          field: "verdict",
+          // Validate the raw verdict is exactly one of the three allowed values —
+          // no trimming, no case normalization. A typo or stray whitespace
+          // (e.g., "approved ") would otherwise slip past the conditional
+          // mediation rules (which gate on exact-string match of
+          // 'changes_requested') and surface as a later runtime halt from the
+          // mutation's unknown-verdict branch instead of a structured frontmatter
+          // error. Fail early here with a clear field-specific message so the
+          // operator can fix the frontmatter and re-signal the event.
+          validate: (v) => typeof v === "string" && (v === "approved" || v === "changes_requested" || v === "rejected"),
+          expected: "one of 'approved', 'changes_requested', 'rejected'"
+        },
+        {
+          field: "exit_criteria_met",
+          validate: (v) => v !== void 0 && v !== null,
+          expected: "a defined value"
+        },
+        // verdict === 'changes_requested' branch — mediation fields required
+        {
+          field: "orchestrator_mediated",
+          validate: (v) => v === true,
+          expected: "true (orchestrator mediation required for changes_requested verdicts)",
+          when: (fm) => fm.verdict === "changes_requested"
+        },
+        {
+          field: "effective_outcome",
+          validate: (v) => v === "approved" || v === "changes_requested",
+          expected: "'approved' or 'changes_requested'",
+          when: (fm) => fm.verdict === "changes_requested"
+        },
+        // When effective_outcome is changes_requested, corrective_handoff_path is
+        // OPTIONAL. Absence is the orchestrator's budget-exhausted halt signal —
+        // the mutation reads effective_outcome=changes_requested + no handoff path
+        // as "orchestrator declined to author a handoff because budget is blown"
+        // and converts it into a clean pipeline halt. When supplied, the path must
+        // be a non-empty string (whitespace-only is rejected).
+        {
+          field: "corrective_handoff_path",
+          validate: (v) => typeof v === "string" && v.trim().length > 0,
+          expected: "a non-empty string when supplied",
+          when: (fm) => fm.verdict === "changes_requested" && fm.effective_outcome === "changes_requested" && fm.corrective_handoff_path !== void 0 && fm.corrective_handoff_path !== null
+        },
+        {
+          field: "corrective_handoff_path",
+          validate: () => true,
+          expected: "absent (must be omitted when effective_outcome is approved)",
+          when: (fm) => fm.verdict === "changes_requested" && fm.effective_outcome === "approved",
+          mustBeAbsent: true
+        },
+        // verdict ∈ {'approved','rejected'} branch — mediation fields must be absent
+        {
+          field: "orchestrator_mediated",
+          validate: () => true,
+          expected: "absent (only permitted on changes_requested verdicts)",
+          when: (fm) => fm.verdict === "approved" || fm.verdict === "rejected",
+          mustBeAbsent: true
+        },
+        {
+          field: "effective_outcome",
+          validate: () => true,
+          expected: "absent (only permitted on changes_requested verdicts)",
+          when: (fm) => fm.verdict === "approved" || fm.verdict === "rejected",
+          mustBeAbsent: true
+        },
+        {
+          field: "corrective_handoff_path",
+          validate: () => true,
+          expected: "absent (only permitted on changes_requested verdicts)",
+          when: (fm) => fm.verdict === "approved" || fm.verdict === "rejected",
+          mustBeAbsent: true
+        }
+      ],
+      // Iter 12 — final_review_completed verdict enum check. Final-review
+      // corrective cycles are out of scope (final review is strict-verdict-only;
+      // no orchestrator mediation is wired for it). The validator enforces that
+      // the reviewer always supplies a valid verdict; mediation fields
+      // (`orchestrator_mediated`, `effective_outcome`, `corrective_handoff_path`)
+      // are not checked here because they are not part of the final-review
+      // contract. A future iteration that wires final-review mediation can extend
+      // this rule set with conditional mediation-field rules parallel to the
+      // iter-10 code_review_completed + iter-11 phase_review_completed shape.
+      final_review_completed: [
+        {
+          field: "verdict",
+          validate: (v) => typeof v === "string" && (v === "approved" || v === "changes_requested" || v === "rejected"),
+          expected: "one of 'approved', 'changes_requested', 'rejected'"
+        }
+      ]
+    };
+  }
+});
+
+// cli/src/lib/pipeline-engine/pre-reads.ts
+import { join as join5, isAbsolute } from "node:path";
+function extractMasterPlanDocPath(state) {
+  if (typeof state !== "object" || state === null) return void 0;
+  const s = state;
+  if (typeof s.graph !== "object" || s.graph === null) return void 0;
+  const g = s.graph;
+  if (typeof g.nodes !== "object" || g.nodes === null) return void 0;
+  const n = g.nodes;
+  if (typeof n.master_plan !== "object" || n.master_plan === null) return void 0;
+  const mp = n.master_plan;
+  return typeof mp.doc_path === "string" ? mp.doc_path : void 0;
+}
+function preRead(event, context, readDocument3, projectDir, state, entry) {
+  if (event === "plan_approved" && (!context.doc_path || context.doc_path.trim() === "")) {
+    const derived = extractMasterPlanDocPath(state);
+    if (!derived) {
+      return {
+        context,
+        error: {
+          message: "Cannot derive master plan path: graph.nodes.master_plan.doc_path is not set",
+          event: "plan_approved",
+          field: "doc_path"
+        }
+      };
+    }
+    context = { ...context, doc_path: isAbsolute(derived) ? derived : join5(projectDir, derived) };
+  }
+  if (event === "plan_approved" && context.doc_path) {
+    const resolvedPath2 = isAbsolute(context.doc_path) ? context.doc_path : join5(projectDir, context.doc_path);
+    const doc2 = readDocument3(resolvedPath2);
+    if (doc2 === null) {
+      return {
+        context,
+        error: {
+          message: `Pre-read failed: document not found or unreadable: ${resolvedPath2}`,
+          event,
+          field: "doc_path"
+        }
+      };
+    }
+    const enrichedContext2 = { ...doc2.frontmatter, ...context };
+    const validationError2 = validateFrontmatter(event, enrichedContext2, resolvedPath2);
+    if (validationError2) {
+      return {
+        context: enrichedContext2,
+        error: {
+          message: validationError2.error,
+          event: validationError2.event,
+          field: validationError2.field
+        }
+      };
+    }
+    context = enrichedContext2;
+  }
+  if (entry.eventPhase === "approved") {
+    return { context };
+  }
+  const { nodeDef } = entry;
+  if (nodeDef.kind !== "step" || !nodeDef.doc_output_field) {
+    return { context };
+  }
+  if (!context.doc_path || context.doc_path.trim() === "") {
+    return {
+      context,
+      error: {
+        message: "Pre-read failed: missing required field 'doc_path' in event context",
+        event,
+        field: "doc_path"
+      }
+    };
+  }
+  const resolvedPath = isAbsolute(context.doc_path) ? context.doc_path : join5(projectDir, context.doc_path);
+  const doc = readDocument3(resolvedPath);
+  if (doc === null) {
+    return {
+      context,
+      error: {
+        message: `Pre-read failed: document not found or unreadable: ${resolvedPath}`,
+        event,
+        field: "doc_path"
+      }
+    };
+  }
+  const enrichedContext = { ...doc.frontmatter, ...context };
+  const validationError = validateFrontmatter(event, enrichedContext, resolvedPath);
+  if (validationError) {
+    return {
+      context: enrichedContext,
+      error: {
+        message: validationError.error,
+        event: validationError.event,
+        field: validationError.field
+      }
+    };
+  }
+  return { context: enrichedContext };
+}
+var init_pre_reads = __esm({
+  "cli/src/lib/pipeline-engine/pre-reads.ts"() {
+    "use strict";
+    init_frontmatter_validators();
+  }
+});
+
+// cli/src/lib/pipeline-engine/scaffold.ts
+function scaffoldNodeState(nodeDef) {
+  switch (nodeDef.kind) {
+    case "step":
+      return { kind: "step", status: NODE_STATUSES.NOT_STARTED, doc_path: null, retries: 0 };
+    case "gate":
+      return { kind: "gate", status: NODE_STATUSES.NOT_STARTED, gate_active: false };
+    case "conditional":
+      return { kind: "conditional", status: NODE_STATUSES.NOT_STARTED, branch_taken: null };
+    case "parallel": {
+      const pDef = nodeDef;
+      const nodes = {};
+      for (const child of pDef.children) {
+        nodes[child.id] = scaffoldNodeState(child);
+      }
+      return { kind: "parallel", status: NODE_STATUSES.NOT_STARTED, nodes };
+    }
+    case "for_each_phase":
+      return { kind: "for_each_phase", status: NODE_STATUSES.NOT_STARTED, iterations: [] };
+    case "for_each_task":
+      return { kind: "for_each_task", status: NODE_STATUSES.NOT_STARTED, iterations: [] };
+    default: {
+      const _exhaustive = nodeDef;
+      throw new Error(`Unexpected node kind: ${_exhaustive.kind}`);
+    }
+  }
+}
+var init_scaffold = __esm({
+  "cli/src/lib/pipeline-engine/scaffold.ts"() {
+    "use strict";
+    init_constants();
+  }
+});
+
+// cli/src/lib/pipeline-engine/context-enrichment.ts
+function buildRepositorySkillsBlock(state) {
+  const repoRoot = state.pipeline.source_control?.worktree_path ?? process.cwd();
+  let arr;
+  try {
+    arr = buildSkillManifest({ repoRoot });
+  } catch (err) {
+    console.warn(
+      `context-enrichment: buildSkillManifest failed (${err.message}); emitting empty repository_skills_block`
+    );
+    return "";
+  }
+  if (!Array.isArray(arr) || arr.length === 0) return "";
+  const json = JSON.stringify(arr, null, 2);
+  return `
+
+## Repository Skills Available
+
+${json}
+
+Entries above are a catalog. Read a listed path **only when** its description matches the work you are about to plan \u2014 skip the rest to avoid token waste. Any \`SKILL.md\` you encounter outside this catalog (e.g., via Grep/Glob) was filtered on purpose; do not Read it.
+`;
+}
+function formatPhaseId(phaseNumber) {
+  return `P${String(phaseNumber).padStart(2, "0")}`;
+}
+function formatTaskId(phaseNumber, taskNumber) {
+  return `${formatPhaseId(phaseNumber)}-T${String(taskNumber).padStart(2, "0")}`;
+}
+function resolveActivePhaseIndex(state) {
+  const phaseLoop = state.graph.nodes["phase_loop"];
+  if (!phaseLoop?.iterations?.length) return 1;
+  const matches = phaseLoop.iterations.filter((it) => it.status === "in_progress");
+  if (matches.length > 1) {
+    throw new Error(
+      `Ambiguous phase resolution: ${matches.length} phases are in_progress simultaneously. Pass --phase <N> to specify explicitly.`
+    );
+  }
+  if (matches.length === 1) return matches[0].index + 1;
+  const notStarted = phaseLoop.iterations.find((it) => it.status === "not_started");
+  if (notStarted) return notStarted.index + 1;
+  return 1;
+}
+function resolveActiveTaskIndex(state, phaseIndex) {
+  const phaseLoop = state.graph.nodes["phase_loop"];
+  if (!phaseLoop?.iterations?.length) return 1;
+  const phaseIteration = phaseLoop.iterations[phaseIndex - 1];
+  if (!phaseIteration?.nodes) return 1;
+  const taskLoop = phaseIteration.nodes["task_loop"];
+  if (!taskLoop?.iterations?.length) return 1;
+  const matches = taskLoop.iterations.filter((it) => it.status === "in_progress");
+  if (matches.length > 1) {
+    throw new Error(
+      `Ambiguous task resolution: ${matches.length} tasks are in_progress simultaneously in phase ${phaseIndex}. Pass --task <N> to specify explicitly.`
+    );
+  }
+  if (matches.length === 1) return matches[0].index + 1;
+  const notStarted = taskLoop.iterations.find((it) => it.status === "not_started");
+  if (notStarted) return notStarted.index + 1;
+  return 1;
+}
+function enrichActionContext(input) {
+  const { action, walkerContext, state } = input;
+  if (action in PLANNING_SPAWN_STEPS) {
+    const repository_skills_block = buildRepositorySkillsBlock(state);
+    const base = {
+      ...walkerContext,
+      step: PLANNING_SPAWN_STEPS[action],
+      repository_skills_block
+    };
+    if (action === "spawn_master_plan") {
+      return {
+        ...base,
+        limits: {
+          max_phases: input.config.limits.max_phases,
+          max_tasks_per_phase: input.config.limits.max_tasks_per_phase
+        }
+      };
+    }
+    return base;
+  }
+  if (PHASE_LEVEL_ACTIONS.has(action)) {
+    const phaseNumber = resolveActivePhaseIndex(state);
+    const phase_id = formatPhaseId(phaseNumber);
+    const base = { ...walkerContext, phase_number: phaseNumber, phase_id };
+    if (action === "spawn_phase_reviewer") {
+      const phaseLoop = state.graph.nodes["phase_loop"];
+      const phaseIter = phaseLoop?.iterations[phaseNumber - 1];
+      const taskLoop = phaseIter?.nodes["task_loop"];
+      const taskIters = taskLoop?.iterations ?? [];
+      const firstTask = taskIters[0];
+      const lastTask = taskIters[taskIters.length - 1];
+      const phase_first_sha = firstTask?.repos[0]?.commit_hash ?? null;
+      const lastTaskFinalCorrective = lastTask?.corrective_tasks.slice().reverse().find((ct) => ct.repos.some((r) => r.commit_hash != null));
+      const phase_head_sha = lastTaskFinalCorrective?.repos.slice().reverse().find((r) => r.commit_hash != null)?.commit_hash ?? lastTask?.repos.slice().reverse().find((r) => r.commit_hash != null)?.commit_hash ?? null;
+      const correctiveFields = phaseIter && phaseIter.corrective_tasks.length > 0 ? { is_correction: true, corrective_index: phaseIter.corrective_tasks.length } : {};
+      return { ...base, phase_first_sha, phase_head_sha, ...correctiveFields };
+    }
+    return base;
+  }
+  if (TASK_LEVEL_ACTIONS.has(action)) {
+    const phaseNumber = resolveActivePhaseIndex(state);
+    const taskNumber = resolveActiveTaskIndex(state, phaseNumber);
+    const phase_id = formatPhaseId(phaseNumber);
+    const task_id = formatTaskId(phaseNumber, taskNumber);
+    const base = {
+      ...walkerContext,
+      phase_number: phaseNumber,
+      phase_id,
+      task_number: taskNumber,
+      task_id
+    };
+    const phaseLoopForSentinel = state.graph.nodes["phase_loop"];
+    const phaseIterForSentinel = phaseLoopForSentinel?.iterations[phaseNumber - 1];
+    const phaseCorrectives = phaseIterForSentinel?.corrective_tasks ?? [];
+    const phaseCorrectiveActive = phaseCorrectives.length > 0 && (phaseCorrectives[phaseCorrectives.length - 1].status === "not_started" || phaseCorrectives[phaseCorrectives.length - 1].status === "in_progress");
+    if (phaseCorrectiveActive) {
+      base.task_number = null;
+      base.task_id = `${phase_id}-PHASE`;
+    }
+    if (action === "execute_task") {
+      const phaseLoop = state.graph.nodes["phase_loop"];
+      const phaseIter = phaseLoop?.iterations[phaseNumber - 1];
+      const phaseCTs = phaseIter?.corrective_tasks ?? [];
+      const activePhaseCorrective = phaseCTs.length > 0 ? phaseCTs[phaseCTs.length - 1] : void 0;
+      if (activePhaseCorrective && (activePhaseCorrective.status === "not_started" || activePhaseCorrective.status === "in_progress")) {
+        const phaseCorrectiveDoc = activePhaseCorrective.doc_path;
+        if (typeof phaseCorrectiveDoc === "string" && phaseCorrectiveDoc.trim().length > 0) {
+          return { ...base, handoff_doc: phaseCorrectiveDoc };
+        }
+      }
+      const taskLoop = phaseIter?.nodes["task_loop"];
+      const taskIter = taskLoop?.iterations[taskNumber - 1];
+      const correctives = taskIter?.corrective_tasks ?? [];
+      const activeCorrective = correctives.length > 0 ? correctives[correctives.length - 1] : void 0;
+      if (activeCorrective && (activeCorrective.status === "not_started" || activeCorrective.status === "in_progress")) {
+        const correctiveDoc = activeCorrective.doc_path;
+        if (typeof correctiveDoc === "string" && correctiveDoc.trim().length > 0) {
+          return { ...base, handoff_doc: correctiveDoc };
+        }
+      }
+      const handoff_doc = taskIter?.doc_path ?? "";
+      return { ...base, handoff_doc };
+    }
+    if (action === "spawn_code_reviewer") {
+      const phaseLoop = state.graph.nodes["phase_loop"];
+      const phaseIter = phaseLoop?.iterations[phaseNumber - 1];
+      const phaseCTs = phaseIter?.corrective_tasks ?? [];
+      const activePhaseCorrective = phaseCTs.slice().reverse().find(
+        (ct) => ct.status === "in_progress" || ct.status === "not_started"
+      );
+      if (activePhaseCorrective) {
+        const head_sha2 = activePhaseCorrective.repos.slice().reverse().find((r) => r.commit_hash != null)?.commit_hash ?? null;
+        return {
+          ...base,
+          head_sha: head_sha2,
+          is_correction: true,
+          corrective_index: activePhaseCorrective.index
+        };
+      }
+      const taskLoop = phaseIter?.nodes["task_loop"];
+      const taskIter = taskLoop?.iterations[taskNumber - 1];
+      const correctives = taskIter?.corrective_tasks ?? [];
+      const activeCorrective = correctives.slice().reverse().find(
+        (ct) => ct.status === "in_progress" || ct.status === "not_started"
+      );
+      const head_sha = activeCorrective ? activeCorrective.repos.slice().reverse().find((r) => r.commit_hash != null)?.commit_hash ?? null : taskIter?.repos.slice().reverse().find((r) => r.commit_hash != null)?.commit_hash ?? null;
+      const correctiveFields = activeCorrective ? { is_correction: true, corrective_index: activeCorrective.index } : {};
+      return { ...base, head_sha, ...correctiveFields };
+    }
+    return base;
+  }
+  if (action === "invoke_source_control_commit") {
+    const phaseNumber = resolveActivePhaseIndex(state);
+    const taskNumber = resolveActiveTaskIndex(state, phaseNumber);
+    return {
+      ...walkerContext,
+      phase_number: phaseNumber,
+      phase_id: formatPhaseId(phaseNumber),
+      task_number: taskNumber,
+      task_id: formatTaskId(phaseNumber, taskNumber),
+      branch: state.pipeline.source_control?.branch ?? "",
+      worktree_path: state.pipeline.source_control?.worktree_path ?? ""
+    };
+  }
+  if (action === "invoke_source_control_pr") {
+    return {
+      ...walkerContext,
+      branch: state.pipeline.source_control?.branch ?? "",
+      base_branch: state.pipeline.source_control?.base_branch ?? "",
+      worktree_path: state.pipeline.source_control?.worktree_path ?? ""
+    };
+  }
+  if (action === "request_final_approval") {
+    return {
+      ...walkerContext,
+      pr_url: state.pipeline.source_control?.pr_url ?? null
+    };
+  }
+  if (action === "spawn_final_reviewer") {
+    const phaseLoop = state.graph.nodes["phase_loop"];
+    const commits = [];
+    const phaseIterations = phaseLoop?.iterations ?? [];
+    for (const phaseIter of phaseIterations) {
+      const taskLoop = phaseIter.nodes["task_loop"];
+      const taskIterations = taskLoop?.iterations ?? [];
+      for (const taskIter of taskIterations) {
+        for (const r of taskIter.repos ?? []) {
+          if (r.commit_hash != null) commits.push(r.commit_hash);
+        }
+        for (const ct of taskIter.corrective_tasks ?? []) {
+          for (const r of ct.repos ?? []) {
+            if (r.commit_hash != null) commits.push(r.commit_hash);
+          }
+        }
+      }
+      for (const ct of phaseIter.corrective_tasks ?? []) {
+        for (const r of ct.repos ?? []) {
+          if (r.commit_hash != null) commits.push(r.commit_hash);
+        }
+      }
+    }
+    const project_base_sha = commits.length > 0 ? commits[0] : null;
+    const project_head_sha = commits.length > 0 ? commits[commits.length - 1] : null;
+    return {
+      ...walkerContext,
+      project_base_sha,
+      project_head_sha
+    };
+  }
+  if (EMPTY_CONTEXT_ACTIONS.has(action)) {
+    return { ...walkerContext };
+  }
+  if (action === "display_halted") {
+    return {
+      ...walkerContext,
+      details: walkerContext.details ?? `Pipeline halted at node: ${state.graph.current_node_path ?? "unknown"}`
+    };
+  }
+  return { ...walkerContext };
+}
+var PLANNING_SPAWN_STEPS, PHASE_LEVEL_ACTIONS, TASK_LEVEL_ACTIONS, EMPTY_CONTEXT_ACTIONS;
+var init_context_enrichment = __esm({
+  "cli/src/lib/pipeline-engine/context-enrichment.ts"() {
+    "use strict";
+    init_skill_manifest();
+    PLANNING_SPAWN_STEPS = {
+      spawn_requirements: "requirements",
+      spawn_master_plan: "master_plan"
+    };
+    PHASE_LEVEL_ACTIONS = /* @__PURE__ */ new Set([
+      "spawn_phase_reviewer",
+      "gate_phase"
+    ]);
+    TASK_LEVEL_ACTIONS = /* @__PURE__ */ new Set([
+      "execute_task",
+      "spawn_code_reviewer",
+      "gate_task"
+    ]);
+    EMPTY_CONTEXT_ACTIONS = /* @__PURE__ */ new Set([
+      "request_plan_approval",
+      "ask_gate_mode",
+      "display_complete"
+    ]);
+  }
+});
+
+// cli/src/lib/pipeline-engine/mutations.ts
+function resolveNodeState(state, nodeId, scope, phase, task) {
+  if (scope === "top") {
+    return state.graph.nodes[nodeId];
+  }
+  if (phase === void 0) {
+    throw new Error(`resolveNodeState: scope is '${scope}' but phase is undefined`);
+  }
+  const phaseLoopNode = state.graph.nodes["phase_loop"];
+  if (phaseLoopNode.kind !== "for_each_phase") {
+    throw new Error(`Expected phase_loop to be a for_each_phase node, got ${phaseLoopNode.kind}`);
+  }
+  const phaseIteration = phaseLoopNode.iterations[phase - 1];
+  if (scope === "phase") {
+    return phaseIteration.nodes[nodeId];
+  }
+  if (phaseIteration.corrective_tasks.length > 0) {
+    const latest = phaseIteration.corrective_tasks[phaseIteration.corrective_tasks.length - 1];
+    if ((latest.status === "in_progress" || latest.status === "not_started") && nodeId in latest.nodes) {
+      return latest.nodes[nodeId];
+    }
+  }
+  const taskLoopNode = phaseIteration.nodes["task_loop"];
+  if (taskLoopNode.kind !== "for_each_task") {
+    throw new Error(`Expected task_loop to be a for_each_task node, got ${taskLoopNode.kind}`);
+  }
+  const taskIteration = taskLoopNode.iterations[(task ?? 1) - 1];
+  if (taskIteration.corrective_tasks.length > 0) {
+    const latest = taskIteration.corrective_tasks[taskIteration.corrective_tasks.length - 1];
+    if ((latest.status === "in_progress" || latest.status === "not_started") && nodeId in latest.nodes) {
+      return latest.nodes[nodeId];
+    }
+  }
+  return taskIteration.nodes[nodeId];
+}
+function resolvePhaseIteration(state, phase) {
+  const phaseLoopNode = state.graph.nodes["phase_loop"];
+  if (phaseLoopNode.kind !== "for_each_phase") {
+    throw new Error(`Expected phase_loop to be a for_each_phase node, got ${phaseLoopNode.kind}`);
+  }
+  return phaseLoopNode.iterations[phase - 1];
+}
+function resolveTaskIteration(state, phase, task) {
+  const phaseLoopNode = state.graph.nodes["phase_loop"];
+  if (phaseLoopNode.kind !== "for_each_phase") {
+    throw new Error(`Expected phase_loop to be a for_each_phase node, got ${phaseLoopNode.kind}`);
+  }
+  const phaseIteration = phaseLoopNode.iterations[phase - 1];
+  const taskLoopNode = phaseIteration.nodes["task_loop"];
+  if (taskLoopNode.kind !== "for_each_task") {
+    throw new Error(`Expected task_loop to be a for_each_task node, got ${taskLoopNode.kind}`);
+  }
+  return taskLoopNode.iterations[task - 1];
+}
+function findTaskLoopBodyDefs(template) {
+  for (const nodeDef of template.nodes) {
+    if (nodeDef.kind === "for_each_phase") {
+      for (const bodyNode of nodeDef.body) {
+        if (bodyNode.kind === "for_each_task") {
+          return bodyNode.body;
+        }
+      }
+    }
+  }
+  return [];
+}
+function resolveHostingIteration(state, phase, task) {
+  const phaseIter = resolvePhaseIteration(state, phase);
+  const phaseCTs = phaseIter.corrective_tasks;
+  if (phaseCTs.length > 0) {
+    const last = phaseCTs[phaseCTs.length - 1];
+    if ((last.status === "in_progress" || last.status === "not_started") && "code_review" in last.nodes) {
+      return { iteration: phaseIter, scope: "phase" };
+    }
+  }
+  return { iteration: resolveTaskIteration(state, phase, task), scope: "task" };
+}
+function normalizeOptionalUrl(raw) {
+  if (typeof raw !== "string") return null;
+  const trimmed = raw.trim();
+  return trimmed === "" ? null : trimmed;
+}
+function normalizeAutoSetting(field, raw) {
+  if (typeof raw !== "string") {
+    throw new Error(
+      `source_control_init: ${field} must be one of "always" | "yes" | "never" | "no", got ${raw === void 0 ? "undefined" : JSON.stringify(raw)}`
+    );
+  }
+  const v = raw.trim().toLowerCase();
+  if (v === "always" || v === "yes") return "always";
+  if (v === "never" || v === "no") return "never";
+  throw new Error(
+    `source_control_init: ${field} must be one of "always" | "yes" | "never" | "no", got ${JSON.stringify(raw)}`
+  );
+}
+function getMutation(event) {
+  return mutationRegistry.get(event);
+}
+var mutationRegistry, planningCompletedSteps, MAX_PARSE_RETRIES;
+var init_mutations = __esm({
+  "cli/src/lib/pipeline-engine/mutations.ts"() {
+    "use strict";
+    init_constants();
+    init_scaffold();
+    init_context_enrichment();
+    mutationRegistry = /* @__PURE__ */ new Map();
+    planningCompletedSteps = [
+      [EVENTS.REQUIREMENTS_COMPLETED, "requirements"],
+      [EVENTS.MASTER_PLAN_COMPLETED, "master_plan"]
+    ];
+    for (const [eventName, nodeId] of planningCompletedSteps) {
+      mutationRegistry.set(eventName, (state, context, _config, _template) => {
+        const cloned = structuredClone(state);
+        const mutations_applied = [];
+        const node = resolveNodeState(cloned, nodeId, "top");
+        node.status = "completed";
+        mutations_applied.push(`set ${nodeId}.status = completed`);
+        const docPath = context.doc_path ?? null;
+        node.doc_path = docPath;
+        mutations_applied.push(`set ${nodeId}.doc_path = ${docPath ?? "null"}`);
+        return { state: cloned, mutations_applied };
+      });
+    }
+    mutationRegistry.set(EVENTS.EXPLOSION_COMPLETED, (state, _context, _config, _template) => {
+      const cloned = structuredClone(state);
+      const mutations_applied = [];
+      const node = resolveNodeState(cloned, "explode_master_plan", "top");
+      node.status = "completed";
+      mutations_applied.push("set explode_master_plan.status = completed");
+      node.doc_path = null;
+      mutations_applied.push("set explode_master_plan.doc_path = null");
+      const masterPlanNode = resolveNodeState(cloned, "master_plan", "top");
+      if (masterPlanNode.last_parse_error !== null && masterPlanNode.last_parse_error !== void 0) {
+        masterPlanNode.last_parse_error = null;
+        mutations_applied.push("cleared master_plan.last_parse_error");
+      }
+      masterPlanNode.parse_retry_count = 0;
+      mutations_applied.push("reset master_plan.parse_retry_count = 0");
+      return { state: cloned, mutations_applied };
+    });
+    MAX_PARSE_RETRIES = 3;
+    mutationRegistry.set(EVENTS.EXPLOSION_FAILED, (state, context, _config, _template) => {
+      const cloned = structuredClone(state);
+      const mutations_applied = [];
+      const masterPlanNode = resolveNodeState(cloned, "master_plan", "top");
+      const explodeNode = resolveNodeState(cloned, "explode_master_plan", "top");
+      const parseError = context.parse_error;
+      if (!parseError || !Number.isInteger(parseError.line) || parseError.line < 1 || typeof parseError.expected !== "string" || typeof parseError.found !== "string" || typeof parseError.message !== "string") {
+        explodeNode.status = "failed";
+        explodeNode.doc_path = null;
+        cloned.graph.status = "halted";
+        cloned.pipeline.halt_reason = "Explosion dispatch error: explosion_failed received without a valid parse_error payload. This is a programmer error \u2014 the orchestrator or CLI wrapper must pass --parse-error with { line, expected, found, message }.";
+        mutations_applied.push("set explode_master_plan.status = failed (invalid dispatch)");
+        mutations_applied.push("set explode_master_plan.doc_path = null (invalid dispatch)");
+        mutations_applied.push("set graph.status = halted (dispatch error)");
+        mutations_applied.push("set pipeline.halt_reason (dispatch error)");
+        return { state: cloned, mutations_applied };
+      }
+      masterPlanNode.last_parse_error = parseError;
+      mutations_applied.push(
+        `set master_plan.last_parse_error = { line: ${parseError.line}, ... }`
+      );
+      const previousCount = masterPlanNode.parse_retry_count ?? 0;
+      const nextCount = previousCount + 1;
+      masterPlanNode.parse_retry_count = nextCount;
+      mutations_applied.push(`set master_plan.parse_retry_count = ${nextCount}`);
+      if (nextCount > MAX_PARSE_RETRIES) {
+        explodeNode.status = "failed";
+        mutations_applied.push(`set explode_master_plan.status = failed (parse retry cap ${MAX_PARSE_RETRIES} exceeded)`);
+        explodeNode.doc_path = null;
+        mutations_applied.push("set explode_master_plan.doc_path = null");
+        cloned.graph.status = "halted";
+        mutations_applied.push("set graph.status = halted");
+        const reasonMsg = parseError.message;
+        cloned.pipeline.halt_reason = `Explosion parser rejected planner output ${nextCount} times (cap=${MAX_PARSE_RETRIES}). Manual intervention required. Last error: ${reasonMsg}`;
+        mutations_applied.push(`set pipeline.halt_reason (parse retry cap exceeded)`);
+        return { state: cloned, mutations_applied };
+      }
+      explodeNode.status = "not_started";
+      explodeNode.doc_path = null;
+      mutations_applied.push("set explode_master_plan.status = not_started");
+      mutations_applied.push("set explode_master_plan.doc_path = null (recovery reset)");
+      masterPlanNode.status = "in_progress";
+      mutations_applied.push("set master_plan.status = in_progress (recovery re-spawn)");
+      return { state: cloned, mutations_applied };
+    });
+    mutationRegistry.set(EVENTS.PLAN_APPROVED, (state, _context, _config, _template) => {
+      const cloned = structuredClone(state);
+      const mutations_applied = [];
+      const node = resolveNodeState(cloned, "plan_approval_gate", "top");
+      node.status = "completed";
+      node.gate_active = true;
+      mutations_applied.push("set plan_approval_gate.status = completed");
+      mutations_applied.push("set plan_approval_gate.gate_active = true");
+      cloned.pipeline.current_tier = "execution";
+      mutations_applied.push("set pipeline.current_tier = execution");
+      return { state: cloned, mutations_applied };
+    });
+    mutationRegistry.set(EVENTS.TASK_GATE_APPROVED, (state, context, _config, _template) => {
+      const cloned = structuredClone(state);
+      const mutations_applied = [];
+      const node = resolveNodeState(cloned, "task_gate", "task", context.phase, context.task);
+      node.status = "completed";
+      node.gate_active = true;
+      mutations_applied.push("set task_gate.status = completed");
+      mutations_applied.push("set task_gate.gate_active = true");
+      return { state: cloned, mutations_applied };
+    });
+    mutationRegistry.set(EVENTS.PHASE_GATE_APPROVED, (state, context, _config, _template) => {
+      const cloned = structuredClone(state);
+      const mutations_applied = [];
+      const node = resolveNodeState(cloned, "phase_gate", "phase", context.phase);
+      node.status = "completed";
+      node.gate_active = true;
+      mutations_applied.push("set phase_gate.status = completed");
+      mutations_applied.push("set phase_gate.gate_active = true");
+      return { state: cloned, mutations_applied };
+    });
+    mutationRegistry.set(EVENTS.FINAL_APPROVED, (state, _context, _config, _template) => {
+      const cloned = structuredClone(state);
+      const mutations_applied = [];
+      const node = resolveNodeState(cloned, "final_approval_gate", "top");
+      node.status = "completed";
+      node.gate_active = true;
+      mutations_applied.push("set final_approval_gate.status = completed");
+      mutations_applied.push("set final_approval_gate.gate_active = true");
+      return { state: cloned, mutations_applied };
+    });
+    mutationRegistry.set(EVENTS.PHASE_REVIEW_COMPLETED, (state, context, config, template) => {
+      const cloned = structuredClone(state);
+      const mutations_applied = [];
+      let phase = context.phase;
+      if (phase === void 0) {
+        try {
+          phase = resolveActivePhaseIndex(cloned);
+        } catch (err) {
+          const detail = err instanceof Error ? err.message : String(err);
+          throw new Error(
+            `Cannot apply mutation for "phase_review_completed": failed to resolve the active phase from state.
+${detail}
+Pass --phase <N> to specify the phase explicitly.`
+          );
+        }
+      }
+      let node;
+      try {
+        node = resolveNodeState(cloned, "phase_review", "phase", phase);
+      } catch (err) {
+        const detail = err instanceof Error ? err.message : String(err);
+        throw new Error(
+          `Cannot apply mutation for "phase_review_completed": could not resolve phase_review for phase ${phase}.
+${detail}
+Pass --phase <N> to specify an existing phase explicitly.`
+        );
+      }
+      node.status = "completed";
+      mutations_applied.push("set phase_review.status = completed");
+      const docPath = context.doc_path ?? null;
+      node.doc_path = docPath;
+      mutations_applied.push(`set phase_review.doc_path = ${docPath ?? "null"}`);
+      const rawVerdict = context.verdict ?? null;
+      const effectiveOutcome = context.effective_outcome;
+      const correctiveHandoffPath = context.corrective_handoff_path;
+      const orchestratorMediated = context.orchestrator_mediated;
+      const mediationActive = rawVerdict === REVIEW_VERDICTS.CHANGES_REQUESTED && orchestratorMediated === true && effectiveOutcome !== void 0 && effectiveOutcome !== null;
+      const verdictForState = mediationActive ? effectiveOutcome : rawVerdict;
+      node.verdict = verdictForState;
+      mutations_applied.push(`set phase_review.verdict = ${verdictForState ?? "null"}`);
+      if (rawVerdict !== null && !VALID_VERDICTS.has(rawVerdict)) {
+        cloned.graph.status = "halted";
+        cloned.pipeline.halt_reason = `Unrecognized verdict '${rawVerdict}' in phase_review_completed`;
+        return {
+          state: cloned,
+          mutations_applied: [
+            ...mutations_applied,
+            `set graph.status = halted (unrecognized verdict '${rawVerdict}')`
+          ]
+        };
+      }
+      const routingVerdict = verdictForState;
+      if (routingVerdict === REVIEW_VERDICTS.CHANGES_REQUESTED) {
+        const iteration = resolvePhaseIteration(cloned, phase);
+        const correctiveCount = iteration.corrective_tasks.length;
+        const maxRetries = config.limits.max_retries_per_task;
+        const trimmedHandoffPath = typeof correctiveHandoffPath === "string" ? correctiveHandoffPath.trim() : "";
+        const hasHandoffPath = trimmedHandoffPath.length > 0;
+        if (!hasHandoffPath) {
+          iteration.status = "halted";
+          cloned.graph.status = "halted";
+          cloned.pipeline.halt_reason = `phase_review_completed: effective_outcome=changes_requested with no corrective_handoff_path. Possible causes: (1) budget exhausted (phase corrective_tasks.length=${correctiveCount}, max_retries_per_task=${maxRetries}) \u2014 this is the expected halt per the corrective-playbook; (2) orchestrator omitted the handoff path in error \u2014 check the review addendum.`;
+          mutations_applied.push("set phase_iteration.status = halted (effective_outcome=changes_requested, no handoff)");
+          mutations_applied.push("set graph.status = halted");
+          mutations_applied.push("set pipeline.halt_reason (budget-exhausted halt signal)");
+          return { state: cloned, mutations_applied };
+        }
+        if (correctiveCount >= maxRetries) {
+          iteration.status = "halted";
+          cloned.graph.status = "halted";
+          cloned.pipeline.halt_reason = `Retry budget exhausted for phase (max_retries_per_task=${maxRetries}) but a corrective_handoff_path was supplied. The orchestrator must not author a corrective handoff on exhaustion \u2014 this is a contract violation.`;
+          mutations_applied.push("set phase_iteration.status = halted (retry budget exhausted; handoff path supplied)");
+          mutations_applied.push("set graph.status = halted");
+          mutations_applied.push("set pipeline.halt_reason (budget exhausted with supplied handoff path)");
+          return { state: cloned, mutations_applied };
+        }
+        const bodyDefs = findTaskLoopBodyDefs(template);
+        if (bodyDefs.length === 0) {
+          throw new Error("findTaskLoopBodyDefs: no for_each_task body found in template");
+        }
+        const nodes = {};
+        for (const bodyDef of bodyDefs) {
+          nodes[bodyDef.id] = scaffoldNodeState(bodyDef);
+        }
+        const entry = {
+          index: correctiveCount + 1,
+          reason: context.reason ?? "Phase review requested changes",
+          injected_after: "phase_review",
+          status: "not_started",
+          nodes,
+          doc_path: trimmedHandoffPath,
+          repos: []
+        };
+        iteration.corrective_tasks.push(entry);
+        mutations_applied.push(`injected phase corrective task ${entry.index} (changes_requested)`);
+        mutations_applied.push(`set phase_corrective_task[${entry.index}].doc_path = ${trimmedHandoffPath}`);
+        mutations_applied.push(`phase corrective_tasks.length = ${iteration.corrective_tasks.length}`);
+      } else if (routingVerdict === REVIEW_VERDICTS.REJECTED) {
+        const iteration = resolvePhaseIteration(cloned, phase);
+        iteration.status = "halted";
+        cloned.graph.status = "halted";
+        cloned.pipeline.halt_reason = `Phase review rejected: reviewer issued a 'rejected' verdict. Rejected verdicts halt the pipeline with no corrective cycle \u2014 no retry is attempted.`;
+        mutations_applied.push("set phase_iteration.status = halted (rejected verdict)");
+        mutations_applied.push("set graph.status = halted");
+        mutations_applied.push("set pipeline.halt_reason (reviewer rejected verdict)");
+      } else if (rawVerdict === REVIEW_VERDICTS.CHANGES_REQUESTED && routingVerdict !== REVIEW_VERDICTS.CHANGES_REQUESTED && routingVerdict !== REVIEW_VERDICTS.APPROVED) {
+        throw new Error(
+          "phase_review_completed: raw verdict=changes_requested without a valid effective_outcome. The orchestrator mediation contract was bypassed \u2014 ensure the review doc carries orchestrator_mediated=true and effective_outcome \u2208 {approved, changes_requested}."
+        );
+      }
+      return { state: cloned, mutations_applied };
+    });
+    mutationRegistry.set(EVENTS.TASK_COMPLETED, (state, context, _config, _template) => {
+      const cloned = structuredClone(state);
+      const mutations_applied = [];
+      let phase = context.phase;
+      if (phase === void 0) {
+        try {
+          phase = resolveActivePhaseIndex(cloned);
+        } catch {
+          throw new Error(
+            `Cannot apply mutation for "task_completed": no active phase could be resolved from state.
+Either no phase is currently in_progress, or multiple phases are in_progress simultaneously.
+Pass --phase <N> to specify the phase explicitly.`
+          );
+        }
+      }
+      let task = context.task;
+      if (task === void 0) {
+        try {
+          task = resolveActiveTaskIndex(cloned, phase);
+        } catch {
+          throw new Error(
+            `Cannot apply mutation for "task_completed": no active task could be resolved from state for phase ${phase}.
+Either no task is currently in_progress, or multiple tasks are in_progress simultaneously.
+Pass --task <N> to specify the task explicitly.`
+          );
+        }
+      }
+      try {
+        const node = resolveNodeState(cloned, "task_executor", "task", phase, task);
+        node.status = "completed";
+        mutations_applied.push("set task_executor.status = completed");
+      } catch {
+        if (context.phase === void 0) {
+          const phaseLoopNode = cloned.graph.nodes["phase_loop"];
+          const hasInProgressPhase = phaseLoopNode?.iterations?.some((it) => it.status === "in_progress");
+          if (hasInProgressPhase) {
+            throw new Error(
+              `Cannot apply mutation for "task_completed": no active task could be resolved from state for phase ${phase}.
+Either no task is currently in_progress, or multiple tasks are in_progress simultaneously.
+Pass --task <N> to specify the task explicitly.`
+            );
+          }
+          throw new Error(
+            `Cannot apply mutation for "task_completed": no active phase could be resolved from state.
+Either no phase is currently in_progress, or multiple phases are in_progress simultaneously.
+Pass --phase <N> to specify the phase explicitly.`
+          );
+        }
+        throw new Error(
+          `Cannot apply mutation for "task_completed": no active task could be resolved from state for phase ${phase}.
+Either no task is currently in_progress, or multiple tasks are in_progress simultaneously.
+Pass --task <N> to specify the task explicitly.`
+        );
+      }
+      return { state: cloned, mutations_applied };
+    });
+    mutationRegistry.set(EVENTS.CODE_REVIEW_COMPLETED, (state, context, config, template) => {
+      const cloned = structuredClone(state);
+      const mutations_applied = [];
+      let phase = context.phase;
+      if (phase === void 0) {
+        try {
+          phase = resolveActivePhaseIndex(cloned);
+        } catch {
+          throw new Error(
+            `Cannot apply mutation for "code_review_completed": no active phase could be resolved from state.
+Either no phase is currently in_progress, or multiple phases are in_progress simultaneously.
+Pass --phase <N> to specify the phase explicitly.`
+          );
+        }
+      }
+      let task = context.task;
+      if (task === void 0) {
+        try {
+          task = resolveActiveTaskIndex(cloned, phase);
+        } catch {
+          throw new Error(
+            `Cannot apply mutation for "code_review_completed": no active task could be resolved from state for phase ${phase}.
+Either no task is currently in_progress, or multiple tasks are in_progress simultaneously.
+Pass --task <N> to specify the task explicitly.`
+          );
+        }
+      }
+      let node;
+      try {
+        node = resolveNodeState(cloned, "code_review", "task", phase, task);
+      } catch {
+        throw new Error(
+          `Cannot apply mutation for "code_review_completed": failed to resolve code_review node for phase ${phase}, task ${task}.
+Either no task is currently in_progress, or multiple tasks are in_progress simultaneously.
+Pass --phase <N> and/or --task <N> to specify explicitly.`
+        );
+      }
+      node.status = "completed";
+      mutations_applied.push("set code_review.status = completed");
+      const docPath = context.doc_path ?? null;
+      node.doc_path = docPath;
+      mutations_applied.push(`set code_review.doc_path = ${docPath ?? "null"}`);
+      const rawVerdict = context.verdict ?? null;
+      const effectiveOutcome = context.effective_outcome;
+      const correctiveHandoffPath = context.corrective_handoff_path;
+      const orchestratorMediated = context.orchestrator_mediated;
+      const mediationActive = rawVerdict === REVIEW_VERDICTS.CHANGES_REQUESTED && orchestratorMediated === true && effectiveOutcome !== void 0 && effectiveOutcome !== null;
+      const verdictForState = mediationActive ? effectiveOutcome : rawVerdict;
+      node.verdict = verdictForState;
+      mutations_applied.push(`set code_review.verdict = ${verdictForState ?? "null"}`);
+      if (rawVerdict !== null && !VALID_VERDICTS.has(rawVerdict)) {
+        cloned.graph.status = "halted";
+        cloned.pipeline.halt_reason = `Unrecognized verdict '${rawVerdict}' in code_review_completed`;
+        return {
+          state: cloned,
+          mutations_applied: [
+            ...mutations_applied,
+            `set graph.status = halted (unrecognized verdict '${rawVerdict}')`
+          ]
+        };
+      }
+      const routingVerdict = verdictForState;
+      if (routingVerdict === REVIEW_VERDICTS.CHANGES_REQUESTED) {
+        const { iteration, scope } = resolveHostingIteration(cloned, phase, task);
+        const correctiveCount = iteration.corrective_tasks.length;
+        const maxRetries = config.limits.max_retries_per_task;
+        const trimmedHandoffPath = typeof correctiveHandoffPath === "string" ? correctiveHandoffPath.trim() : "";
+        const hasHandoffPath = trimmedHandoffPath.length > 0;
+        if (!hasHandoffPath) {
+          iteration.status = "halted";
+          cloned.graph.status = "halted";
+          cloned.pipeline.halt_reason = `code_review_completed: effective_outcome=changes_requested with no corrective_handoff_path. Possible causes: (1) budget exhausted (corrective_tasks.length=${correctiveCount}, max_retries_per_task=${maxRetries}, scope=${scope}) \u2014 this is the expected halt per the corrective-playbook; (2) orchestrator omitted the handoff path in error \u2014 check the review addendum.`;
+          mutations_applied.push(`set ${scope}_iteration.status = halted (effective_outcome=changes_requested, no handoff, scope=${scope})`);
+          mutations_applied.push("set graph.status = halted");
+          mutations_applied.push("set pipeline.halt_reason (budget-exhausted halt signal)");
+          return { state: cloned, mutations_applied };
+        }
+        if (correctiveCount >= maxRetries) {
+          iteration.status = "halted";
+          cloned.graph.status = "halted";
+          cloned.pipeline.halt_reason = `Retry budget exhausted for ${scope} (max_retries_per_task=${maxRetries}) but a corrective_handoff_path was supplied. The orchestrator must not author a corrective handoff on exhaustion \u2014 this is a contract violation.`;
+          mutations_applied.push(`set ${scope}_iteration.status = halted (retry budget exhausted; handoff path supplied, scope=${scope})`);
+          mutations_applied.push("set graph.status = halted");
+          mutations_applied.push("set pipeline.halt_reason (budget exhausted with supplied handoff path)");
+          return { state: cloned, mutations_applied };
+        }
+        const bodyDefs = findTaskLoopBodyDefs(template);
+        if (bodyDefs.length === 0) {
+          throw new Error("findTaskLoopBodyDefs: no for_each_task body found in template");
+        }
+        const nodes = {};
+        for (const bodyDef of bodyDefs) {
+          nodes[bodyDef.id] = scaffoldNodeState(bodyDef);
+        }
+        const entry = {
+          index: correctiveCount + 1,
+          reason: context.reason ?? "Code review requested changes",
+          injected_after: "code_review",
+          status: "not_started",
+          nodes,
+          doc_path: trimmedHandoffPath,
+          repos: []
+        };
+        iteration.corrective_tasks.push(entry);
+        mutations_applied.push(`injected corrective task ${entry.index} (changes_requested, scope=${scope})`);
+        mutations_applied.push(`set corrective_task[${entry.index}].doc_path = ${trimmedHandoffPath}`);
+        mutations_applied.push(`corrective_tasks.length = ${iteration.corrective_tasks.length} (scope=${scope})`);
+      } else if (routingVerdict === REVIEW_VERDICTS.REJECTED) {
+        const { iteration, scope } = resolveHostingIteration(cloned, phase, task);
+        iteration.status = "halted";
+        cloned.graph.status = "halted";
+        cloned.pipeline.halt_reason = `Code review rejected (scope=${scope}): reviewer issued a 'rejected' verdict. Rejected verdicts halt the pipeline with no corrective cycle \u2014 no retry is attempted.`;
+        mutations_applied.push(`set ${scope === "phase" ? "phase_iteration" : "task_iteration"}.status = halted (rejected verdict, scope=${scope})`);
+        mutations_applied.push("set graph.status = halted");
+        mutations_applied.push("set pipeline.halt_reason (reviewer rejected verdict)");
+      } else if (rawVerdict === REVIEW_VERDICTS.CHANGES_REQUESTED && routingVerdict !== REVIEW_VERDICTS.CHANGES_REQUESTED && routingVerdict !== REVIEW_VERDICTS.APPROVED) {
+        throw new Error(
+          "code_review_completed: raw verdict=changes_requested without a valid effective_outcome. The orchestrator mediation contract was bypassed \u2014 ensure the review doc carries orchestrator_mediated=true and effective_outcome \u2208 {approved, changes_requested}."
+        );
+      }
+      return { state: cloned, mutations_applied };
+    });
+    mutationRegistry.set(EVENTS.FINAL_REVIEW_COMPLETED, (state, context, _config, _template) => {
+      const cloned = structuredClone(state);
+      const mutations_applied = [];
+      const node = resolveNodeState(cloned, "final_review", "top");
+      node.status = "completed";
+      mutations_applied.push("set final_review.status = completed");
+      const docPath = context.doc_path ?? null;
+      node.doc_path = docPath;
+      mutations_applied.push(`set final_review.doc_path = ${docPath ?? "null"}`);
+      const verdict = context.verdict ?? null;
+      node.verdict = verdict;
+      mutations_applied.push(`set final_review.verdict = ${verdict ?? "null"}`);
+      if (verdict !== null && !VALID_VERDICTS.has(verdict)) {
+        cloned.graph.status = "halted";
+        cloned.pipeline.halt_reason = `Unrecognized verdict '${verdict}' in final_review_completed`;
+        return {
+          state: cloned,
+          mutations_applied: [
+            ...mutations_applied,
+            `set graph.status = halted (unrecognized verdict '${verdict}')`
+          ]
+        };
+      }
+      if (verdict === REVIEW_VERDICTS.APPROVED) {
+        cloned.pipeline.current_tier = "review";
+        mutations_applied.push("set pipeline.current_tier = review");
+      }
+      return { state: cloned, mutations_applied };
+    });
+    mutationRegistry.set(EVENTS.COMMIT_COMPLETED, (state, context, _config, _template) => {
+      const cloned = structuredClone(state);
+      const mutations_applied = [];
+      let phase = context.phase;
+      if (phase === void 0) {
+        try {
+          phase = resolveActivePhaseIndex(cloned);
+        } catch {
+          throw new Error(
+            `Cannot apply mutation for "commit_completed": no active phase could be resolved from state.
+Either no phase is currently in_progress, or multiple phases are in_progress simultaneously.
+Pass --phase <N> to specify the phase explicitly.`
+          );
+        }
+      }
+      let task = context.task;
+      if (task === void 0) {
+        try {
+          task = resolveActiveTaskIndex(cloned, phase);
+        } catch {
+          throw new Error(
+            `Cannot apply mutation for "commit_completed": no active task could be resolved from state for phase ${phase}.
+Either no task is currently in_progress, or multiple tasks are in_progress simultaneously.
+Pass --task <N> to specify the task explicitly.`
+          );
+        }
+      }
+      try {
+        const node = resolveNodeState(cloned, "commit", "task", phase, task);
+        node.status = "completed";
+        mutations_applied.push("set commit.status = completed");
+        const commitHash = context.commit_hash ?? null;
+        const phaseIteration = resolvePhaseIteration(cloned, phase);
+        const activePhaseCorrective = phaseIteration.corrective_tasks.slice().reverse().find(
+          (ct) => ct.status === "in_progress" || ct.status === "not_started"
+        );
+        if (activePhaseCorrective) {
+          if (activePhaseCorrective.repos && activePhaseCorrective.repos.length > 0) {
+            activePhaseCorrective.repos[0].commit_hash = commitHash;
+          } else {
+            activePhaseCorrective.repos = [{ name: "", commit_hash: commitHash }];
+          }
+          mutations_applied.push(`set phase_corrective_task[${activePhaseCorrective.index}].repos[0].commit_hash = ${commitHash ?? "null"}`);
+          return { state: cloned, mutations_applied };
+        }
+        const taskIteration = resolveTaskIteration(cloned, phase, task);
+        const activeCorrective = taskIteration.corrective_tasks.slice().reverse().find(
+          (ct) => ct.status === "in_progress" || ct.status === "not_started"
+        );
+        if (activeCorrective) {
+          if (activeCorrective.repos && activeCorrective.repos.length > 0) {
+            activeCorrective.repos[0].commit_hash = commitHash;
+          } else {
+            activeCorrective.repos = [{ name: "", commit_hash: commitHash }];
+          }
+          mutations_applied.push(`set corrective_task[${activeCorrective.index}].repos[0].commit_hash = ${commitHash ?? "null"}`);
+        } else {
+          if (taskIteration.repos && taskIteration.repos.length > 0) {
+            taskIteration.repos[0].commit_hash = commitHash;
+          } else {
+            taskIteration.repos = [{ name: "", commit_hash: commitHash }];
+          }
+          mutations_applied.push(`set task_iteration[${taskIteration.index}].repos[0].commit_hash = ${commitHash ?? "null"}`);
+        }
+        return { state: cloned, mutations_applied };
+      } catch {
+        if (context.phase === void 0) {
+          const phaseLoopNode = cloned.graph.nodes["phase_loop"];
+          const hasInProgressPhase = phaseLoopNode?.iterations?.some((it) => it.status === "in_progress");
+          if (hasInProgressPhase) {
+            throw new Error(
+              `Cannot apply mutation for "commit_completed": no active task could be resolved from state for phase ${phase}.
+Either no task is currently in_progress, or multiple tasks are in_progress simultaneously.
+Pass --task <N> to specify the task explicitly.`
+            );
+          }
+          throw new Error(
+            `Cannot apply mutation for "commit_completed": no active phase could be resolved from state.
+Either no phase is currently in_progress, or multiple phases are in_progress simultaneously.
+Pass --phase <N> to specify the phase explicitly.`
+          );
+        }
+        throw new Error(
+          `Cannot apply mutation for "commit_completed": no active task could be resolved from state for phase ${phase}.
+Either no task is currently in_progress, or multiple tasks are in_progress simultaneously.
+Pass --task <N> to specify the task explicitly.`
+        );
+      }
+    });
+    mutationRegistry.set(EVENTS.PR_REQUESTED, (state, _context, _config, _template) => {
+      const cloned = structuredClone(state);
+      const mutations_applied = [];
+      if (!cloned.graph.nodes["final_pr"]) {
+        cloned.graph.nodes["final_pr"] = scaffoldNodeState({
+          id: "final_pr",
+          kind: "step",
+          action: "invoke_source_control_pr",
+          events: { started: "pr_requested", completed: "pr_created" }
+        });
+        mutations_applied.push("scaffold final_pr (was not yet initialized)");
+      }
+      const node = resolveNodeState(cloned, "final_pr", "top");
+      node.status = "in_progress";
+      mutations_applied.push("set final_pr.status = in_progress");
+      return { state: cloned, mutations_applied };
+    });
+    mutationRegistry.set(EVENTS.PR_CREATED, (state, context, _config, _template) => {
+      const cloned = structuredClone(state);
+      const mutations_applied = [];
+      const node = resolveNodeState(cloned, "final_pr", "top");
+      node.status = "completed";
+      mutations_applied.push("set final_pr.status = completed");
+      if (context.pr_url !== void 0) {
+        if (!cloned.pipeline.source_control) {
+          throw new Error(
+            "pr_created: pipeline.source_control is null \u2014 cannot store pr_url. Source control must be initialized via source_control_init before PR creation."
+          );
+        }
+        cloned.pipeline.source_control.pr_url = context.pr_url ?? null;
+        mutations_applied.push(`set pipeline.source_control.pr_url = ${context.pr_url ?? "null"}`);
+      }
+      return { state: cloned, mutations_applied };
+    });
+    mutationRegistry.set(EVENTS.PLAN_REJECTED, (state, _context, _config, _template) => {
+      const cloned = structuredClone(state);
+      const mutations_applied = [];
+      const masterPlanNode = resolveNodeState(cloned, "master_plan", "top");
+      masterPlanNode.status = "not_started";
+      mutations_applied.push("set master_plan.status = not_started");
+      masterPlanNode.doc_path = null;
+      mutations_applied.push("set master_plan.doc_path = null");
+      const planGateNode = resolveNodeState(cloned, "plan_approval_gate", "top");
+      planGateNode.status = "not_started";
+      mutations_applied.push("set plan_approval_gate.status = not_started");
+      planGateNode.gate_active = false;
+      mutations_applied.push("set plan_approval_gate.gate_active = false");
+      const phaseLoopNode = cloned.graph.nodes["phase_loop"];
+      if (phaseLoopNode !== void 0) {
+        if (phaseLoopNode.kind !== "for_each_phase") {
+          throw new Error(`Expected phase_loop to be a for_each_phase node, got ${phaseLoopNode.kind}`);
+        }
+        phaseLoopNode.iterations = [];
+        mutations_applied.push("set phase_loop.iterations = []");
+      }
+      return { state: cloned, mutations_applied };
+    });
+    mutationRegistry.set(EVENTS.GATE_REJECTED, (state, context, _config, _template) => {
+      const cloned = structuredClone(state);
+      const mutations_applied = [];
+      cloned.pipeline.current_tier = "halted";
+      mutations_applied.push("set pipeline.current_tier = halted");
+      cloned.graph.status = "halted";
+      mutations_applied.push("set graph.status = halted");
+      const gateType = context.gate_type ?? "unknown";
+      const reason = context.reason || "No reason provided";
+      cloned.pipeline.halt_reason = `Gate rejected (${gateType}): ${reason}`;
+      mutations_applied.push(`set pipeline.halt_reason = Gate rejected (${gateType}): ${reason}`);
+      return { state: cloned, mutations_applied };
+    });
+    mutationRegistry.set(EVENTS.FINAL_REJECTED, (state, _context, _config, _template) => {
+      const cloned = structuredClone(state);
+      const mutations_applied = [];
+      const finalReviewNode = resolveNodeState(cloned, "final_review", "top");
+      finalReviewNode.status = "not_started";
+      mutations_applied.push("set final_review.status = not_started");
+      finalReviewNode.doc_path = null;
+      mutations_applied.push("set final_review.doc_path = null");
+      const finalGateNode = resolveNodeState(cloned, "final_approval_gate", "top");
+      finalGateNode.status = "not_started";
+      mutations_applied.push("set final_approval_gate.status = not_started");
+      finalGateNode.gate_active = false;
+      mutations_applied.push("set final_approval_gate.gate_active = false");
+      return { state: cloned, mutations_applied };
+    });
+    mutationRegistry.set(EVENTS.HALT, (state, context, _config, _template) => {
+      const cloned = structuredClone(state);
+      const mutations_applied = [];
+      cloned.pipeline.current_tier = "halted";
+      mutations_applied.push("set pipeline.current_tier = halted");
+      cloned.graph.status = "halted";
+      mutations_applied.push("set graph.status = halted");
+      const haltReason = context.reason ?? "Pipeline halted by operator";
+      cloned.pipeline.halt_reason = haltReason;
+      mutations_applied.push(`set pipeline.halt_reason = ${haltReason}`);
+      return { state: cloned, mutations_applied };
+    });
+    mutationRegistry.set(EVENTS.GATE_MODE_SET, (state, context, _config, _template) => {
+      const cloned = structuredClone(state);
+      const mode = context.gate_mode;
+      if (!mode || !["task", "phase", "autonomous"].includes(mode)) {
+        throw new Error(`Invalid gate mode '${mode}': expected task, phase, or autonomous`);
+      }
+      cloned.pipeline.gate_mode = mode;
+      return {
+        state: cloned,
+        mutations_applied: [`set pipeline.gate_mode = ${mode}`]
+      };
+    });
+    mutationRegistry.set(EVENTS.SOURCE_CONTROL_INIT, (state, context, _config, _template) => {
+      const branch = context.branch;
+      const baseBranch = context.base_branch;
+      if (!branch || !baseBranch) {
+        throw new Error("source_control_init requires --branch and --base-branch");
+      }
+      const autoCommit = normalizeAutoSetting("auto_commit", context.auto_commit);
+      const autoPr = normalizeAutoSetting("auto_pr", context.auto_pr);
+      const cloned = structuredClone(state);
+      cloned.pipeline.source_control = {
+        branch,
+        base_branch: baseBranch,
+        worktree_path: context.worktree_path?.trim() || ".",
+        auto_commit: autoCommit,
+        auto_pr: autoPr,
+        remote_url: normalizeOptionalUrl(context.remote_url),
+        compare_url: normalizeOptionalUrl(context.compare_url),
+        pr_url: null
+      };
+      return {
+        state: cloned,
+        mutations_applied: ["created pipeline.source_control"]
+      };
+    });
+  }
+});
+
+// cli/src/lib/pipeline-engine/condition-evaluator.ts
+function resolveDotPath(obj, path30) {
+  const segments = path30.split(".");
+  let current = obj;
+  for (let i = 0; i < segments.length; i++) {
+    if (current === void 0 || current === null) {
+      const blame = i === 0 ? "<root>" : segments[i - 1];
+      throw new Error(
+        `Cannot resolve path '${path30}': segment '${blame}' resolved to ${typeof current}`
+      );
+    }
+    current = current[segments[i]];
+  }
+  return current;
+}
+function evaluateCondition(condition, config, state) {
+  const hasConfigRef = condition.config_ref !== void 0;
+  const hasStateRef = condition.state_ref !== void 0;
+  if (hasConfigRef && hasStateRef) {
+    throw new Error(
+      "ConditionExpression must have exactly one of config_ref or state_ref, but both were present"
+    );
+  }
+  if (!hasConfigRef && !hasStateRef) {
+    throw new Error(
+      "ConditionExpression must have exactly one of config_ref or state_ref, but neither was present"
+    );
+  }
+  const resolved = hasConfigRef ? resolveDotPath(config, condition.config_ref) : resolveDotPath(state, condition.state_ref);
+  switch (condition.operator) {
+    case "eq":
+      return resolved === condition.value;
+    case "neq":
+      return resolved !== condition.value;
+    case "in": {
+      if (!Array.isArray(condition.value)) {
+        throw new Error("Operator 'in' requires value to be an array");
+      }
+      return condition.value.includes(resolved);
+    }
+    case "not_in": {
+      if (!Array.isArray(condition.value)) {
+        throw new Error("Operator 'not_in' requires value to be an array");
+      }
+      return !condition.value.includes(resolved);
+    }
+    case "truthy":
+      return Boolean(resolved);
+    case "falsy":
+      return !resolved;
+    default: {
+      const _exhaustive = condition.operator;
+      throw new Error(`Unknown operator: '${String(_exhaustive)}'`);
+    }
+  }
+}
+var init_condition_evaluator = __esm({
+  "cli/src/lib/pipeline-engine/condition-evaluator.ts"() {
+    "use strict";
+  }
+});
+
+// cli/src/lib/pipeline-engine/dag-walker.ts
+function resolveNodeStatePath(templatePath, _context) {
+  let result = templatePath;
+  if (_context.phase !== void 0) {
+    result = result.replaceAll("phase_loop.body.", `phase_loop[${_context.phase - 1}].`);
+  }
+  if (_context.task !== void 0) {
+    result = result.replaceAll("task_loop.body.", `task_loop[${_context.task - 1}].`);
+  }
+  return result;
+}
+function resolveConfigValue(dotPath, config) {
+  const segments = dotPath.split(".");
+  let current = config;
+  for (const segment of segments) {
+    if (current === null || current === void 0 || typeof current !== "object") {
+      return void 0;
+    }
+    current = current[segment];
+  }
+  return current;
+}
+function checkDependencies(dependsOn, nodes) {
+  if (!dependsOn || dependsOn.length === 0) {
+    return true;
+  }
+  return dependsOn.every((depId) => {
+    const depState = nodes[depId];
+    return depState !== void 0 && (depState.status === NODE_STATUSES.COMPLETED || depState.status === NODE_STATUSES.SKIPPED);
+  });
+}
+function resolveStateRef(ref, graphState) {
+  const path30 = ref.startsWith("$.") ? ref.slice(2) : ref;
+  const segments = path30.split(".");
+  let current = graphState;
+  for (const segment of segments) {
+    if (current === null || current === void 0 || typeof current !== "object") {
+      return void 0;
+    }
+    current = current[segment];
+  }
+  return current;
+}
+function resolveDocRefInScope(ref, graphState, currentIteration) {
+  if (ref === "$.current_phase.doc_path") {
+    return currentIteration?.doc_path ?? void 0;
+  }
+  return resolveStateRef(ref, graphState);
+}
+function walkForEachIterations(fepDef, fepState, config, state, readDocument3) {
+  for (const iteration of fepState.iterations) {
+    if (iteration.status === NODE_STATUSES.COMPLETED || iteration.status === NODE_STATUSES.SKIPPED) {
+      continue;
+    }
+    if (iteration.status === NODE_STATUSES.HALTED) {
+      return { action: NEXT_ACTIONS.DISPLAY_HALTED, context: { details: state.pipeline.halt_reason ?? "Pipeline is halted" } };
+    }
+    if (iteration.status === NODE_STATUSES.NOT_STARTED) {
+      iteration.status = NODE_STATUSES.IN_PROGRESS;
+    }
+    const orderedNodes = {};
+    for (const bodyDef of fepDef.body) {
+      orderedNodes[bodyDef.id] = iteration.nodes[bodyDef.id] ?? scaffoldNodeState(bodyDef);
+    }
+    for (const key of Object.keys(iteration.nodes)) {
+      if (!(key in orderedNodes)) {
+        orderedNodes[key] = iteration.nodes[key];
+      }
+    }
+    iteration.nodes = orderedNodes;
+    if (iteration.corrective_tasks.length > 0) {
+      const latestCorrective = iteration.corrective_tasks[iteration.corrective_tasks.length - 1];
+      if (latestCorrective.status === NODE_STATUSES.HALTED) {
+        return { action: NEXT_ACTIONS.DISPLAY_HALTED, context: { details: state.pipeline.halt_reason ?? "Pipeline is halted" } };
+      }
+      if (latestCorrective.status === NODE_STATUSES.COMPLETED) {
+        iteration.status = NODE_STATUSES.COMPLETED;
+        continue;
+      }
+      if (latestCorrective.status === NODE_STATUSES.NOT_STARTED) {
+        latestCorrective.status = NODE_STATUSES.IN_PROGRESS;
+      }
+      let correctiveBodyDefs;
+      if (fepDef.kind === "for_each_phase") {
+        const fetDef = fepDef.body.find((n) => n.kind === "for_each_task");
+        correctiveBodyDefs = fetDef ? fetDef.body : fepDef.body;
+      } else {
+        correctiveBodyDefs = fepDef.body;
+      }
+      const correctiveResult = walkNodes(correctiveBodyDefs, latestCorrective.nodes, config, state, readDocument3, iteration);
+      if (correctiveResult !== null) {
+        return correctiveResult;
+      }
+      const allCorrectiveDone = correctiveBodyDefs.every((bn) => {
+        const bnState = latestCorrective.nodes[bn.id];
+        return bnState !== void 0 && (bnState.status === NODE_STATUSES.COMPLETED || bnState.status === NODE_STATUSES.SKIPPED);
+      });
+      if (allCorrectiveDone) {
+        latestCorrective.status = NODE_STATUSES.COMPLETED;
+        iteration.status = NODE_STATUSES.COMPLETED;
+        continue;
+      }
+      return null;
+    }
+    const bodyResult = walkNodes(fepDef.body, iteration.nodes, config, state, readDocument3, iteration);
+    if (bodyResult !== null) {
+      return bodyResult;
+    }
+    const allBodyDone = fepDef.body.every((bn) => {
+      const bnState = iteration.nodes[bn.id];
+      return bnState !== void 0 && (bnState.status === NODE_STATUSES.COMPLETED || bnState.status === NODE_STATUSES.SKIPPED);
+    });
+    if (allBodyDone) {
+      iteration.status = NODE_STATUSES.COMPLETED;
+      continue;
+    }
+    return null;
+  }
+  return "all_completed";
+}
+function walkNodes(nodeDefs, nodes, config, state, readDocument3, currentIteration) {
+  for (const nodeDef of nodeDefs) {
+    const nodeState = nodes[nodeDef.id];
+    if (!nodeState) {
+      continue;
+    }
+    if (!checkDependencies(nodeDef.depends_on, nodes)) {
+      continue;
+    }
+    if (nodeState.status === NODE_STATUSES.HALTED) {
+      return { action: NEXT_ACTIONS.DISPLAY_HALTED, context: { details: state.pipeline.halt_reason ?? "Pipeline is halted" } };
+    }
+    if (nodeState.status === NODE_STATUSES.COMPLETED || nodeState.status === NODE_STATUSES.SKIPPED) {
+      continue;
+    }
+    if (nodeState.status === NODE_STATUSES.IN_PROGRESS) {
+      if (nodeDef.kind === "conditional") {
+        const condDef = nodeDef;
+        const condState = nodeState;
+        const branchKey = condState.branch_taken;
+        if (branchKey === null) {
+          return null;
+        }
+        const branchNodes = condDef.branches[branchKey];
+        const allBranchDone = branchNodes.every((bn) => {
+          const bnState = nodes[bn.id];
+          return bnState !== void 0 && (bnState.status === NODE_STATUSES.COMPLETED || bnState.status === NODE_STATUSES.SKIPPED);
+        });
+        if (allBranchDone) {
+          condState.status = NODE_STATUSES.COMPLETED;
+          continue;
+        }
+        return walkNodes(branchNodes, nodes, config, state, readDocument3, currentIteration);
+      }
+      if (nodeDef.kind === "parallel") {
+        const parallelDef = nodeDef;
+        const parallelState = nodeState;
+        const allChildrenDone = parallelDef.children.every((child) => {
+          const childState = parallelState.nodes[child.id];
+          return childState !== void 0 && (childState.status === NODE_STATUSES.COMPLETED || childState.status === NODE_STATUSES.SKIPPED);
+        });
+        if (allChildrenDone) {
+          parallelState.status = NODE_STATUSES.COMPLETED;
+          continue;
+        }
+        return walkNodes(parallelDef.children, parallelState.nodes, config, state, readDocument3, currentIteration);
+      }
+      if (nodeDef.kind === "for_each_phase") {
+        const fepDef = nodeDef;
+        const fepState = nodeState;
+        const iterResult = walkForEachIterations(fepDef, fepState, config, state, readDocument3);
+        if (iterResult === "all_completed") {
+          fepState.status = NODE_STATUSES.COMPLETED;
+          continue;
+        }
+        return iterResult;
+      }
+      if (nodeDef.kind === "for_each_task") {
+        const fetDef = nodeDef;
+        const fetState = nodeState;
+        const iterResult = walkForEachIterations(fetDef, fetState, config, state, readDocument3);
+        if (iterResult === "all_completed") {
+          fetState.status = NODE_STATUSES.COMPLETED;
+          continue;
+        }
+        return iterResult;
+      }
+      if (nodeDef.kind === "step") {
+        const stepDef = nodeDef;
+        nodeState.status = NODE_STATUSES.IN_PROGRESS;
+        return {
+          action: stepDef.action,
+          context: stepDef.context ?? {}
+        };
+      }
+      if (nodeDef.kind === "gate") {
+        const gateDef = nodeDef;
+        return {
+          action: gateDef.action_if_needed,
+          context: {}
+        };
+      }
+      return null;
+    }
+    if (nodeState.status === NODE_STATUSES.NOT_STARTED) {
+      if (nodeDef.kind === "step") {
+        const stepDef = nodeDef;
+        nodeState.status = NODE_STATUSES.IN_PROGRESS;
+        return {
+          action: stepDef.action,
+          context: stepDef.context ?? {}
+        };
+      }
+      if (nodeDef.kind === "gate") {
+        const gateDef = nodeDef;
+        const gateState = nodeState;
+        const configValue = resolveConfigValue(gateDef.mode_ref, config);
+        if (typeof configValue === "boolean") {
+          if (!configValue) {
+            gateState.status = NODE_STATUSES.COMPLETED;
+            gateState.gate_active = false;
+            continue;
+          }
+          gateState.gate_active = true;
+          return {
+            action: gateDef.action_if_needed,
+            context: {}
+          };
+        }
+        const effectiveMode = state.pipeline.gate_mode ?? (typeof configValue === "string" ? configValue : "ask");
+        if (effectiveMode === "ask" && state.pipeline.gate_mode === null) {
+          return {
+            action: NEXT_ACTIONS.ASK_GATE_MODE,
+            context: {}
+          };
+        }
+        if (gateDef.auto_approve_modes && gateDef.auto_approve_modes.includes(effectiveMode)) {
+          gateState.status = NODE_STATUSES.COMPLETED;
+          gateState.gate_active = false;
+          continue;
+        }
+        if (effectiveMode === "autonomous") {
+          const depId = gateDef.depends_on?.[0];
+          if (depId && nodes[depId]) {
+            const reviewState = nodes[depId];
+            if (reviewState.verdict === "approved") {
+              gateState.status = NODE_STATUSES.COMPLETED;
+              gateState.gate_active = false;
+              continue;
+            }
+          }
+          gateState.gate_active = true;
+          return {
+            action: gateDef.action_if_needed,
+            context: {}
+          };
+        }
+        gateState.gate_active = true;
+        return {
+          action: gateDef.action_if_needed,
+          context: {}
+        };
+      }
+      if (nodeDef.kind === "conditional") {
+        const condDef = nodeDef;
+        const condState = nodeState;
+        const condResult = evaluateCondition(condDef.condition, config, state);
+        condState.branch_taken = condResult ? "true" : "false";
+        const branchNodes = condDef.branches[condState.branch_taken];
+        if (branchNodes.length === 0) {
+          condState.status = NODE_STATUSES.COMPLETED;
+          continue;
+        }
+        condState.status = NODE_STATUSES.IN_PROGRESS;
+        for (const branchNode of branchNodes) {
+          if (!(branchNode.id in nodes)) {
+            nodes[branchNode.id] = scaffoldNodeState(branchNode);
+          }
+        }
+        return walkNodes(branchNodes, nodes, config, state, readDocument3, currentIteration);
+      }
+      if (nodeDef.kind === "parallel") {
+        const parallelDef = nodeDef;
+        const parallelState = nodeState;
+        parallelState.status = NODE_STATUSES.IN_PROGRESS;
+        for (const child of parallelDef.children) {
+          if (!(child.id in parallelState.nodes)) {
+            parallelState.nodes[child.id] = scaffoldNodeState(child);
+          }
+        }
+        return walkNodes(parallelDef.children, parallelState.nodes, config, state, readDocument3, currentIteration);
+      }
+      if (nodeDef.kind === "for_each_phase") {
+        const fepDef = nodeDef;
+        const fepState = nodeState;
+        if (fepState.iterations.length === 0) {
+          if (!readDocument3) {
+            return null;
+          }
+          const docPath = resolveStateRef(fepDef.source_doc_ref, state.graph);
+          if (typeof docPath !== "string") {
+            return null;
+          }
+          const doc = readDocument3(docPath);
+          if (!doc) {
+            return null;
+          }
+          const totalValue = doc.frontmatter[fepDef.total_field];
+          if (typeof totalValue !== "number" || !Number.isInteger(totalValue) || totalValue <= 0) {
+            return null;
+          }
+          const cappedTotal = Math.min(totalValue, config.limits.max_phases);
+          for (let i = 0; i < cappedTotal; i++) {
+            const iterationNodes = {};
+            for (const bodyDef of fepDef.body) {
+              iterationNodes[bodyDef.id] = scaffoldNodeState(bodyDef);
+            }
+            fepState.iterations.push({
+              index: i,
+              status: NODE_STATUSES.NOT_STARTED,
+              nodes: iterationNodes,
+              corrective_tasks: [],
+              repos: []
+            });
+          }
+        }
+        fepState.status = NODE_STATUSES.IN_PROGRESS;
+        const iterResult = walkForEachIterations(fepDef, fepState, config, state, readDocument3);
+        if (iterResult === "all_completed") {
+          fepState.status = NODE_STATUSES.COMPLETED;
+          continue;
+        }
+        return iterResult;
+      }
+      if (nodeDef.kind === "for_each_task") {
+        const fetDef = nodeDef;
+        const fetState = nodeState;
+        if (fetState.iterations.length === 0) {
+          if (!readDocument3) {
+            return null;
+          }
+          const docPath = resolveDocRefInScope(fetDef.source_doc_ref, state.graph, currentIteration);
+          if (typeof docPath !== "string") {
+            return null;
+          }
+          const doc = readDocument3(docPath);
+          if (!doc) {
+            return null;
+          }
+          const tasksValue = doc.frontmatter[fetDef.tasks_field];
+          if (!Array.isArray(tasksValue)) {
+            return null;
+          }
+          if (tasksValue.length === 0) {
+            fetState.status = NODE_STATUSES.COMPLETED;
+            continue;
+          }
+          const cappedLength = Math.min(tasksValue.length, config.limits.max_tasks_per_phase);
+          for (let i = 0; i < cappedLength; i++) {
+            const iterationNodes = {};
+            for (const bodyDef of fetDef.body) {
+              iterationNodes[bodyDef.id] = scaffoldNodeState(bodyDef);
+            }
+            fetState.iterations.push({
+              index: i,
+              status: NODE_STATUSES.NOT_STARTED,
+              nodes: iterationNodes,
+              corrective_tasks: [],
+              repos: []
+            });
+          }
+        }
+        fetState.status = NODE_STATUSES.IN_PROGRESS;
+        const iterResult = walkForEachIterations(fetDef, fetState, config, state, readDocument3);
+        if (iterResult === "all_completed") {
+          fetState.status = NODE_STATUSES.COMPLETED;
+          continue;
+        }
+        return iterResult;
+      }
+      return null;
+    }
+  }
+  return null;
+}
+function walkDAG(state, template, config, readDocument3) {
+  if (state.graph.status === GRAPH_STATUSES.HALTED) {
+    return {
+      action: NEXT_ACTIONS.DISPLAY_HALTED,
+      context: { details: state.pipeline.halt_reason ?? "Pipeline is halted" }
+    };
+  }
+  const result = walkNodes(template.nodes, state.graph.nodes, config, state, readDocument3);
+  if (result !== null) {
+    return result;
+  }
+  const allDone = template.nodes.every((nodeDef) => {
+    const ns = state.graph.nodes[nodeDef.id];
+    return ns !== void 0 && (ns.status === NODE_STATUSES.COMPLETED || ns.status === NODE_STATUSES.SKIPPED);
+  });
+  if (allDone) {
+    state.graph.status = GRAPH_STATUSES.COMPLETED;
+    return { action: NEXT_ACTIONS.DISPLAY_COMPLETE, context: {} };
+  }
+  return null;
+}
+var init_dag_walker = __esm({
+  "cli/src/lib/pipeline-engine/dag-walker.ts"() {
+    "use strict";
+    init_constants();
+    init_condition_evaluator();
+    init_scaffold();
+  }
+});
+
+// cli/src/lib/pipeline-engine/action-event-loader.ts
+function parseActionEventFile(text, filename) {
+  const fnMatch = FILENAME_RE.exec(filename);
+  if (!fnMatch) {
+    throw new Error(`Invalid catalog filename '${filename}': expected '<action|event>.<name>.md'.`);
+  }
+  const fileKind = fnMatch[1];
+  const fileName = fnMatch[2];
+  const fmMatch = FRONTMATTER_RE.exec(text);
+  if (!fmMatch) {
+    throw new Error(`File '${filename}' missing YAML frontmatter block.`);
+  }
+  const raw = index_vite_proxy_tmp_default.load(fmMatch[1]);
+  if (!raw || typeof raw !== "object") {
+    throw new Error(`File '${filename}' has empty or non-object frontmatter.`);
+  }
+  if (raw["kind"] !== fileKind) {
+    throw new Error(`File '${filename}' frontmatter.kind '${raw["kind"]}' disagrees with filename kind '${fileKind}'.`);
+  }
+  if (raw["name"] !== fileName) {
+    throw new Error(`File '${filename}' frontmatter.name '${raw["name"]}' disagrees with filename stem '${fileName}'.`);
+  }
+  for (const field of ["title", "description"]) {
+    if (typeof raw[field] !== "string" || !raw[field].length) {
+      throw new Error(`File '${filename}' frontmatter.${field} is required and must be a non-empty string.`);
+    }
+  }
+  if (fileKind === "action") {
+    if (!CATEGORIES.has(raw["category"])) {
+      throw new Error(`File '${filename}' frontmatter.category '${raw["category"]}' is not one of ${[...CATEGORIES].join(", ")}.`);
+    }
+    if (!(raw["completion_event"] === null || typeof raw["completion_event"] === "string")) {
+      throw new Error(`File '${filename}' frontmatter.completion_event must be a string or null.`);
+    }
+  } else {
+    const payload = raw["signal_payload"];
+    if (payload === void 0 || payload === null || typeof payload !== "object" || Array.isArray(payload)) {
+      throw new Error(`File '${filename}' frontmatter.signal_payload must be an object map (use {} for no flags).`);
+    }
+    for (const [flag, def] of Object.entries(payload)) {
+      const d = def;
+      if (typeof d?.["required"] !== "boolean" || typeof d?.["description"] !== "string") {
+        throw new Error(`File '${filename}' signal_payload['${flag}'] must be { required: boolean, description: string }.`);
+      }
+    }
+  }
+  const body = fmMatch[2] ?? "";
+  return { kind: fileKind, name: fileName, frontmatter: raw, body };
+}
+var FRONTMATTER_RE, FILENAME_RE, CATEGORIES;
+var init_action_event_loader = __esm({
+  "cli/src/lib/pipeline-engine/action-event-loader.ts"() {
+    "use strict";
+    init_js_yaml();
+    FRONTMATTER_RE = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/;
+    FILENAME_RE = /^(action|event)\.([a-z0-9_]+)\.md$/;
+    CATEGORIES = /* @__PURE__ */ new Set(["agent-spawn", "gate", "terminal", "source-control"]);
+  }
+});
+
+// cli/src/lib/pipeline-engine/composer.ts
+import fs21 from "node:fs";
+import path26 from "node:path";
+function readBodyIfExists(filePath, filename, kind) {
+  if (!fs21.existsSync(filePath)) return null;
+  const text = fs21.readFileSync(filePath, "utf8");
+  const parsed = parseActionEventFile(text, filename);
+  if (parsed.kind !== kind) {
+    throw new Error(`Catalog file '${filePath}' parsed kind '${parsed.kind}' but kind '${kind}' expected.`);
+  }
+  return parsed.body;
+}
+function readEvent(filePath, filename) {
+  if (!fs21.existsSync(filePath)) return null;
+  const text = fs21.readFileSync(filePath, "utf8");
+  const parsed = parseActionEventFile(text, filename);
+  if (parsed.kind !== "event") {
+    throw new Error(`Catalog file '${filePath}' expected to be an event but kind was '${parsed.kind}'.`);
+  }
+  return { body: parsed.body, fm: parsed.frontmatter };
+}
+function validateCustomSlot(customFile, catalogFile, customFilename, catalogFilename, kind, catalogRoot) {
+  if (fs21.existsSync(customFile) && !fs21.existsSync(catalogFile)) {
+    throw new Error(
+      `Composer validation: custom '${customFilename}' references unknown ${kind} \u2014 expected catalog file '${catalogFilename}' under '${catalogRoot}'.`
+    );
+  }
+}
+function makeCustomReader(overlay) {
+  return (filePath, overlayKey) => {
+    if (overlay && Object.prototype.hasOwnProperty.call(overlay, overlayKey)) {
+      const v = overlay[overlayKey];
+      return v === "" ? null : v;
+    }
+    if (!fs21.existsSync(filePath)) return null;
+    return fs21.readFileSync(filePath, "utf8");
+  };
+}
+function deriveSignalLine(eventName, fm) {
+  const keys = Object.keys(fm.signal_payload ?? {});
+  if (keys.length === 0) return `Signal: ${eventName}`;
+  const flags = keys.map((k) => `--${k} <value>`).join(" ");
+  return `Signal: ${eventName} ${flags}`;
+}
+function trimBody(s) {
+  return s.replace(/^\s*\n+/, "").replace(/\n+\s*$/, "");
+}
+function admit(body) {
+  if (!body) return null;
+  const trimmed = trimBody(body);
+  return trimmed.trim() ? trimmed : null;
+}
+function emit2(sections, startStep) {
+  const lines = [];
+  let step = startStep;
+  let hadOverlay = false;
+  for (const s of sections) {
+    lines.push(`## Step ${step}`);
+    lines.push(s.body);
+    if (s.isOverlay) hadOverlay = true;
+    step += 1;
+  }
+  return { prompt: lines.join("\n\n"), has_custom_instructions: hadOverlay };
+}
+function composeActionPrompt(input) {
+  const { actionName, completionEvent, catalogRoot } = input;
+  const startStep = input.startStep ?? 1;
+  const customRoot = path26.join(catalogRoot, "custom");
+  const readCustom = makeCustomReader(input.overlay);
+  const sections = [];
+  const actionCustomPre = path26.join(customRoot, `action.${actionName}.pre.md`);
+  const actionCatalog = path26.join(catalogRoot, `action.${actionName}.md`);
+  validateCustomSlot(
+    actionCustomPre,
+    actionCatalog,
+    `custom/action.${actionName}.pre.md`,
+    `action.${actionName}.md`,
+    "action",
+    catalogRoot
+  );
+  const actionPre = admit(readCustom(actionCustomPre, `action.${actionName}.pre`));
+  if (actionPre !== null) sections.push({ body: actionPre, isOverlay: true });
+  const actionBody = readBodyIfExists(actionCatalog, `action.${actionName}.md`, "action");
+  if (actionBody === null) {
+    throw new Error(
+      `Composer validation: expected catalog file 'action.${actionName}.md' under '${catalogRoot}'.`
+    );
+  }
+  const actionBodyAdmitted = admit(actionBody);
+  if (actionBodyAdmitted !== null) sections.push({ body: actionBodyAdmitted, isOverlay: false });
+  if (completionEvent !== null) {
+    const eventCustomPre = path26.join(customRoot, `event.${completionEvent}.pre.md`);
+    const eventCatalog = path26.join(catalogRoot, `event.${completionEvent}.md`);
+    const eventCustomPost = path26.join(customRoot, `event.${completionEvent}.post.md`);
+    validateCustomSlot(
+      eventCustomPre,
+      eventCatalog,
+      `custom/event.${completionEvent}.pre.md`,
+      `event.${completionEvent}.md`,
+      "event",
+      catalogRoot
+    );
+    validateCustomSlot(
+      eventCustomPost,
+      eventCatalog,
+      `custom/event.${completionEvent}.post.md`,
+      `event.${completionEvent}.md`,
+      "event",
+      catalogRoot
+    );
+    const eventPre = admit(readCustom(eventCustomPre, `event.${completionEvent}.pre`));
+    if (eventPre !== null) sections.push({ body: eventPre, isOverlay: true });
+    const evt = readEvent(eventCatalog, `event.${completionEvent}.md`);
+    if (!evt) {
+      throw new Error(
+        `Composer validation: expected catalog file 'event.${completionEvent}.md' under '${catalogRoot}'.`
+      );
+    }
+    const whenCompleteBody = trimBody(evt.body) + "\n\n" + deriveSignalLine(completionEvent, evt.fm);
+    const whenAdmitted = admit(whenCompleteBody);
+    if (whenAdmitted !== null) sections.push({ body: whenAdmitted, isOverlay: false });
+    const eventPost = admit(readCustom(eventCustomPost, `event.${completionEvent}.post`));
+    if (eventPost !== null) sections.push({ body: eventPost, isOverlay: true });
+  }
+  return emit2(sections, startStep);
+}
+function composeOrphanRuntimeShape(input) {
+  const { eventName, catalogRoot, overlay } = input;
+  const customRoot = path26.join(catalogRoot, "custom");
+  const readCustom = makeCustomReader(overlay);
+  const eventCustomPost = path26.join(customRoot, `event.${eventName}.post.md`);
+  const post = admit(readCustom(eventCustomPost, `event.${eventName}.post`));
+  if (post !== null) {
+    return {
+      prompt: `## Step 1
+
+${post}
+
+${NEXT_ACTION_PLACEHOLDER}`,
+      has_custom_instructions: true
+    };
+  }
+  return {
+    prompt: `(no overlay content)
+
+${NEXT_ACTION_PLACEHOLDER}`,
+    has_custom_instructions: false
+  };
+}
+function composeOrphanEventPrompt(input) {
+  const { eventName, catalogRoot, overlay } = input;
+  const startStep = input.startStep ?? 1;
+  const customRoot = path26.join(catalogRoot, "custom");
+  const readCustom = makeCustomReader(overlay);
+  const sections = [];
+  const eventCatalog = path26.join(catalogRoot, `event.${eventName}.md`);
+  const eventCustomPre = path26.join(customRoot, `event.${eventName}.pre.md`);
+  const eventCustomPost = path26.join(customRoot, `event.${eventName}.post.md`);
+  validateCustomSlot(
+    eventCustomPre,
+    eventCatalog,
+    `custom/event.${eventName}.pre.md`,
+    `event.${eventName}.md`,
+    "event",
+    catalogRoot
+  );
+  validateCustomSlot(
+    eventCustomPost,
+    eventCatalog,
+    `custom/event.${eventName}.post.md`,
+    `event.${eventName}.md`,
+    "event",
+    catalogRoot
+  );
+  const eventPre = admit(readCustom(eventCustomPre, `event.${eventName}.pre`));
+  if (eventPre !== null) sections.push({ body: eventPre, isOverlay: true });
+  const evt = readEvent(eventCatalog, `event.${eventName}.md`);
+  if (!evt) {
+    throw new Error(`Composer validation: expected catalog file 'event.${eventName}.md' under '${catalogRoot}'.`);
+  }
+  const whenCompleteBody = trimBody(evt.body) + "\n\n" + deriveSignalLine(eventName, evt.fm);
+  const whenAdmitted = admit(whenCompleteBody);
+  if (whenAdmitted !== null) sections.push({ body: whenAdmitted, isOverlay: false });
+  const eventPost = admit(readCustom(eventCustomPost, `event.${eventName}.post`));
+  if (eventPost !== null) sections.push({ body: eventPost, isOverlay: true });
+  return emit2(sections, startStep);
+}
+var NEXT_ACTION_PLACEHOLDER;
+var init_composer = __esm({
+  "cli/src/lib/pipeline-engine/composer.ts"() {
+    "use strict";
+    init_action_event_loader();
+    NEXT_ACTION_PLACEHOLDER = `\u2190 the next action's prompt is composed here at runtime`;
   }
 });
 
@@ -19299,10 +19105,10 @@ function checkGraphStatus(state) {
   }
   return [];
 }
-function checkNodeStatuses(nodes, path23) {
+function checkNodeStatuses(nodes, path30) {
   const errors = [];
   for (const [id, node] of Object.entries(nodes)) {
-    const nodePath = `${path23}.${id}`;
+    const nodePath = `${path30}.${id}`;
     if (!validNodeStatuses.has(node.status)) {
       errors.push(`Invalid node status '${node.status}' at ${nodePath}`);
     }
@@ -19323,10 +19129,10 @@ function checkNodeStatuses(nodes, path23) {
   }
   return errors;
 }
-function checkIterationIndices(nodes, path23) {
+function checkIterationIndices(nodes, path30) {
   const errors = [];
   for (const [id, node] of Object.entries(nodes)) {
-    const nodePath = `${path23}.${id}`;
+    const nodePath = `${path30}.${id}`;
     if (node.kind === "for_each_phase" || node.kind === "for_each_task") {
       for (let i = 0; i < node.iterations.length; i++) {
         const iter = node.iterations[i];
@@ -19348,10 +19154,10 @@ function checkIterationIndices(nodes, path23) {
   }
   return errors;
 }
-function checkCompletedParentChildren(nodes, path23) {
+function checkCompletedParentChildren(nodes, path30) {
   const errors = [];
   for (const [id, node] of Object.entries(nodes)) {
-    const nodePath = `${path23}.${id}`;
+    const nodePath = `${path30}.${id}`;
     if (node.kind === "for_each_phase" || node.kind === "for_each_task") {
       if (node.status === "completed") {
         for (const iter of node.iterations) {
@@ -19377,30 +19183,30 @@ function checkCompletedParentChildren(nodes, path23) {
   }
   return errors;
 }
-function findInProgressNodes(nodes, path23, parentPath) {
+function findInProgressNodes(nodes, path30, parentPath) {
   const errors = [];
   for (const [id, node] of Object.entries(nodes)) {
     if (node.status === "in_progress") {
-      errors.push(`Node '${path23}.${id}' is in_progress but parent '${parentPath}' is completed`);
+      errors.push(`Node '${path30}.${id}' is in_progress but parent '${parentPath}' is completed`);
     }
     if (node.kind === "for_each_phase" || node.kind === "for_each_task") {
       for (const iter of node.iterations) {
-        errors.push(...findInProgressNodes(iter.nodes, `${path23}.${id}.iterations[${iter.index}].nodes`, parentPath));
+        errors.push(...findInProgressNodes(iter.nodes, `${path30}.${id}.iterations[${iter.index}].nodes`, parentPath));
         for (const ct of iter.corrective_tasks) {
-          errors.push(...findInProgressNodes(ct.nodes, `${path23}.${id}.iterations[${iter.index}].corrective_tasks[${ct.index}].nodes`, parentPath));
+          errors.push(...findInProgressNodes(ct.nodes, `${path30}.${id}.iterations[${iter.index}].corrective_tasks[${ct.index}].nodes`, parentPath));
         }
       }
     }
     if (node.kind === "parallel") {
-      errors.push(...findInProgressNodes(node.nodes, `${path23}.${id}.nodes`, parentPath));
+      errors.push(...findInProgressNodes(node.nodes, `${path30}.${id}.nodes`, parentPath));
     }
   }
   return errors;
 }
-function checkCorrectiveTaskStructure(nodes, path23) {
+function checkCorrectiveTaskStructure(nodes, path30) {
   const errors = [];
   for (const [id, node] of Object.entries(nodes)) {
-    const nodePath = `${path23}.${id}`;
+    const nodePath = `${path30}.${id}`;
     if (node.kind === "for_each_phase" || node.kind === "for_each_task") {
       for (const iter of node.iterations) {
         for (const ct of iter.corrective_tasks) {
@@ -19415,33 +19221,33 @@ function checkCorrectiveTaskStructure(nodes, path23) {
   }
   return errors;
 }
-function validateCorrectiveEntry(ct, path23) {
+function validateCorrectiveEntry(ct, path30) {
   const errors = [];
   if (typeof ct.index !== "number" || ct.index < 1) {
-    errors.push(`Corrective task at ${path23} has invalid index: ${ct.index} (must be >= 1)`);
+    errors.push(`Corrective task at ${path30} has invalid index: ${ct.index} (must be >= 1)`);
   }
   if (typeof ct.reason !== "string" || ct.reason.length === 0) {
-    errors.push(`Corrective task at ${path23} has empty or missing reason`);
+    errors.push(`Corrective task at ${path30} has empty or missing reason`);
   }
   if (typeof ct.injected_after !== "string" || ct.injected_after.length === 0) {
-    errors.push(`Corrective task at ${path23} has empty or missing injected_after`);
+    errors.push(`Corrective task at ${path30} has empty or missing injected_after`);
   }
   if (!validNodeStatuses.has(ct.status)) {
-    errors.push(`Corrective task at ${path23} has invalid status: '${ct.status}'`);
+    errors.push(`Corrective task at ${path30} has invalid status: '${ct.status}'`);
   }
   if (!ct.nodes || typeof ct.nodes !== "object") {
-    errors.push(`Corrective task at ${path23} has missing or invalid nodes`);
+    errors.push(`Corrective task at ${path30} has missing or invalid nodes`);
   } else if (ct.injected_after !== "phase_review" && Object.keys(ct.nodes).length === 0) {
-    errors.push(`Corrective task at ${path23} has empty or missing nodes`);
+    errors.push(`Corrective task at ${path30} has empty or missing nodes`);
   }
   return errors;
 }
 function checkIterationLimits(state, config) {
   const errors = [];
   const limits = config.limits;
-  function walk(nodes, path23) {
+  function walk(nodes, path30) {
     for (const [id, node] of Object.entries(nodes)) {
-      const nodePath = `${path23}.${id}`;
+      const nodePath = `${path30}.${id}`;
       if (node.kind === "for_each_phase") {
         if (node.iterations.length > limits.max_phases) {
           errors.push(`${nodePath} has ${node.iterations.length} iterations, exceeding max_phases limit of ${limits.max_phases}`);
@@ -19466,18 +19272,18 @@ function checkIterationLimits(state, config) {
   walk(state.graph.nodes, "graph.nodes");
   return errors;
 }
-function collectNodeDefKinds(nodes, map3) {
+function collectNodeDefKinds(nodes, map) {
   for (const nodeDef of nodes) {
-    map3.set(nodeDef.id, nodeDef.kind);
+    map.set(nodeDef.id, nodeDef.kind);
     if (nodeDef.kind === "for_each_phase" || nodeDef.kind === "for_each_task") {
-      collectNodeDefKinds(nodeDef.body, map3);
+      collectNodeDefKinds(nodeDef.body, map);
     }
     if (nodeDef.kind === "conditional") {
-      collectNodeDefKinds(nodeDef.branches.true, map3);
-      collectNodeDefKinds(nodeDef.branches.false, map3);
+      collectNodeDefKinds(nodeDef.branches.true, map);
+      collectNodeDefKinds(nodeDef.branches.false, map);
     }
     if (nodeDef.kind === "parallel") {
-      collectNodeDefKinds(nodeDef.children, map3);
+      collectNodeDefKinds(nodeDef.children, map);
     }
   }
 }
@@ -19485,9 +19291,9 @@ function checkNodeKindMatchesTemplate(state, template) {
   const errors = [];
   const templateKindMap = /* @__PURE__ */ new Map();
   collectNodeDefKinds(template.nodes, templateKindMap);
-  function walkStateNodes(nodes, path23) {
+  function walkStateNodes(nodes, path30) {
     for (const [id, node] of Object.entries(nodes)) {
-      const nodePath = `${path23}.${id}`;
+      const nodePath = `${path30}.${id}`;
       const templateKind = templateKindMap.get(id);
       if (templateKind !== void 0 && node.kind !== templateKind) {
         errors.push(`Node '${id}' has kind '${node.kind}' but template defines kind '${templateKind}'`);
@@ -19519,7 +19325,7 @@ function checkStatusTransitions(previousState, proposedState) {
   );
   return errors;
 }
-function compareNodes(prevNodes, currNodes, path23, errors) {
+function compareNodes(prevNodes, currNodes, path30, errors) {
   for (const [id, currNode] of Object.entries(currNodes)) {
     const prevNode = prevNodes[id];
     if (!prevNode) continue;
@@ -19527,7 +19333,7 @@ function compareNodes(prevNodes, currNodes, path23, errors) {
       const allowed = ALLOWED_NODE_TRANSITIONS.get(prevNode.status);
       if (allowed && allowed.size === 0) {
         errors.push(
-          `Illegal status transition at ${path23}.${id}: '${prevNode.status}' \u2192 '${currNode.status}'`
+          `Illegal status transition at ${path30}.${id}: '${prevNode.status}' \u2192 '${currNode.status}'`
         );
       }
     }
@@ -19535,21 +19341,21 @@ function compareNodes(prevNodes, currNodes, path23, errors) {
       for (const currIter of currNode.iterations) {
         const prevIter = prevNode.iterations[currIter.index];
         if (!prevIter) continue;
-        compareNodes(prevIter.nodes, currIter.nodes, `${path23}.${id}.iterations[${currIter.index}].nodes`, errors);
+        compareNodes(prevIter.nodes, currIter.nodes, `${path30}.${id}.iterations[${currIter.index}].nodes`, errors);
         for (const currCt of currIter.corrective_tasks) {
           const prevCt = prevIter.corrective_tasks.find((ct) => ct.index === currCt.index);
           if (!prevCt) continue;
           compareNodes(
             prevCt.nodes,
             currCt.nodes,
-            `${path23}.${id}.iterations[${currIter.index}].corrective_tasks[${currCt.index}].nodes`,
+            `${path30}.${id}.iterations[${currIter.index}].corrective_tasks[${currCt.index}].nodes`,
             errors
           );
         }
       }
     }
     if (currNode.kind === "parallel" && prevNode.kind === "parallel") {
-      compareNodes(prevNode.nodes, currNode.nodes, `${path23}.${id}.nodes`, errors);
+      compareNodes(prevNode.nodes, currNode.nodes, `${path30}.${id}.nodes`, errors);
     }
   }
 }
@@ -19565,9 +19371,9 @@ var init_validator = __esm({
 });
 
 // cli/src/lib/pipeline-engine/engine.ts
-import * as fs16 from "node:fs";
+import * as fs22 from "node:fs";
 import * as os6 from "node:os";
-import * as path20 from "node:path";
+import * as path27 from "node:path";
 function resolveActionEventsRoot() {
   if (__actionEventsRootOverride !== null) return __actionEventsRootOverride;
   const envOverride = process.env["RADORCH_ACTION_EVENTS_DIR"];
@@ -19577,9 +19383,9 @@ function resolveActionEventsRoot() {
 function resolveCompletionEvent(actionName, _template) {
   const root = resolveActionEventsRoot();
   const filename = `action.${actionName}.md`;
-  const filePath = path20.join(root, filename);
-  if (!fs16.existsSync(filePath)) return void 0;
-  const text = fs16.readFileSync(filePath, "utf8");
+  const filePath = path27.join(root, filename);
+  if (!fs22.existsSync(filePath)) return void 0;
+  const text = fs22.readFileSync(filePath, "utf8");
   const parsed = parseActionEventFile(text, filename);
   if (parsed.kind !== "action") {
     throw new Error(`Catalog file '${filePath}' parsed kind '${parsed.kind}' but action expected.`);
@@ -19589,11 +19395,11 @@ function resolveCompletionEvent(actionName, _template) {
 }
 function isOrphanEvent(eventName) {
   const root = resolveActionEventsRoot();
-  if (!fs16.existsSync(root)) return true;
-  const actionFiles = fs16.readdirSync(root).filter((f) => /^action\..+\.md$/.test(f));
+  if (!fs22.existsSync(root)) return true;
+  const actionFiles = fs22.readdirSync(root).filter((f) => /^action\..+\.md$/.test(f));
   for (const filename of actionFiles) {
     try {
-      const parsed = parseActionEventFile(fs16.readFileSync(path20.join(root, filename), "utf8"), filename);
+      const parsed = parseActionEventFile(fs22.readFileSync(path27.join(root, filename), "utf8"), filename);
       if (parsed.kind !== "action") continue;
       const fm = parsed.frontmatter;
       if (fm.completion_event === eventName) return false;
@@ -19655,7 +19461,7 @@ function scaffoldState(template, projectName, config) {
     nodes[node.id] = scaffoldNodeState(node);
   }
   return {
-    $schema: "orchestration-state-v5",
+    $schema: CURRENT_SCHEMA_VERSION,
     project: {
       name: projectName,
       created: now,
@@ -19708,28 +19514,28 @@ function processEvent(event, projectDir, context, io, pathContext, configPath) {
     const config = io.readConfig(configPath);
     const state = io.readState(projectDir);
     const resolution = resolveTemplateName(state, context.template, config, projectDir, templatesDir);
-    const effectiveLoadPath = state !== null ? resolution.templatePath : path20.join(templatesDir, resolution.templateName + ".yml");
+    const effectiveLoadPath = state !== null ? resolution.templatePath : path27.join(templatesDir, resolution.templateName + ".yml");
     const loadedTemplate = loadTemplate(effectiveLoadPath);
     const { template, eventIndex } = loadedTemplate;
     const wrappedReadDocument = (docPath) => {
-      if (path20.isAbsolute(docPath)) {
+      if (path27.isAbsolute(docPath)) {
         return io.readDocument(docPath);
       }
-      const resolvedProjectDir = path20.resolve(projectDir);
-      const resolved = path20.resolve(resolvedProjectDir, docPath);
-      const relativeToProject = path20.relative(resolvedProjectDir, resolved);
-      if (relativeToProject === ".." || relativeToProject.startsWith(`..${path20.sep}`) || path20.isAbsolute(relativeToProject)) {
+      const resolvedProjectDir = path27.resolve(projectDir);
+      const resolved = path27.resolve(resolvedProjectDir, docPath);
+      const relativeToProject = path27.relative(resolvedProjectDir, resolved);
+      if (relativeToProject === ".." || relativeToProject.startsWith(`..${path27.sep}`) || path27.isAbsolute(relativeToProject)) {
         throw new Error(`Document path escapes project directory: ${docPath}`);
       }
       return io.readDocument(resolved);
     };
     if (event === "start") {
       if (state === null) {
-        const projectName = path20.basename(projectDir);
+        const projectName = path27.basename(projectDir);
         io.ensureDirectories(projectDir);
         try {
           snapshotTemplate(
-            path20.join(templatesDir, resolution.templateName + ".yml"),
+            path27.join(templatesDir, resolution.templateName + ".yml"),
             projectDir
           );
         } catch (err) {
@@ -19812,7 +19618,7 @@ function processEvent(event, projectDir, context, io, pathContext, configPath) {
         normalizedContext2.doc_path = normalizeDocPath(
           normalizedContext2.doc_path,
           PROJECTS_BASE_PATH,
-          path20.basename(projectDir)
+          path27.basename(projectDir)
         );
       }
       const mutationResult2 = mutation2(state, normalizedContext2, config, template);
@@ -19899,7 +19705,7 @@ function processEvent(event, projectDir, context, io, pathContext, configPath) {
       normalizedContext.doc_path = normalizeDocPath(
         normalizedContext.doc_path,
         PROJECTS_BASE_PATH,
-        path20.basename(projectDir)
+        path27.basename(projectDir)
       );
     }
     const mutationResult = mutation(state, normalizedContext, config, template);
@@ -19976,14 +19782,15 @@ var init_engine = __esm({
     init_paths();
     init_scaffold();
     init_validator();
-    PROJECTS_BASE_PATH = path20.join(os6.homedir(), ".radorc", "projects");
+    init_version();
+    PROJECTS_BASE_PATH = path27.join(os6.homedir(), ".radorc", "projects");
     __actionEventsRootOverride = null;
   }
 });
 
 // cli/src/lib/pipeline-engine/state-io.ts
-import * as fs17 from "node:fs";
-import * as path21 from "node:path";
+import * as fs23 from "node:fs";
+import * as path28 from "node:path";
 function deepMerge2(target, source) {
   const result = { ...target };
   for (const key of Object.keys(source)) {
@@ -20003,10 +19810,10 @@ function deepMerge2(target, source) {
 function isEnoent2(err) {
   return err !== null && typeof err === "object" && err.code === "ENOENT";
 }
-function readState3(projectDir) {
-  const statePath = path21.join(projectDir, "state.json");
+function readState4(projectDir) {
+  const statePath = path28.join(projectDir, "state.json");
   try {
-    const raw = fs17.readFileSync(statePath, "utf-8");
+    const raw = fs23.readFileSync(statePath, "utf-8");
     return JSON.parse(raw);
   } catch (err) {
     if (isEnoent2(err)) return null;
@@ -20014,14 +19821,14 @@ function readState3(projectDir) {
   }
 }
 function writeState2(projectDir, state) {
-  fs17.mkdirSync(projectDir, { recursive: true });
-  const statePath = path21.join(projectDir, "state.json");
-  const tmpPath = path21.join(projectDir, "state.json.tmp");
+  fs23.mkdirSync(projectDir, { recursive: true });
+  const statePath = path28.join(projectDir, "state.json");
+  const tmpPath = path28.join(projectDir, "state.json.tmp");
   try {
-    fs17.writeFileSync(tmpPath, JSON.stringify(state, null, 2), "utf-8");
-    fs17.renameSync(tmpPath, statePath);
+    fs23.writeFileSync(tmpPath, JSON.stringify(state, null, 2), "utf-8");
+    fs23.renameSync(tmpPath, statePath);
   } catch (err) {
-    fs17.rmSync(tmpPath, { force: true });
+    fs23.rmSync(tmpPath, { force: true });
     throw err;
   }
 }
@@ -20040,8 +19847,8 @@ function readConfig(configPath) {
     return base;
   }
   try {
-    const raw = fs17.readFileSync(configPath, "utf-8");
-    const parsed = jsYaml.load(raw);
+    const raw = fs23.readFileSync(configPath, "utf-8");
+    const parsed = index_vite_proxy_tmp_default.load(raw);
     if (parsed === null || typeof parsed !== "object" || Array.isArray(parsed)) {
       return base;
     }
@@ -20052,10 +19859,10 @@ function readConfig(configPath) {
     throw err;
   }
 }
-function readDocument4(docPath) {
+function readDocument2(docPath) {
   let raw;
   try {
-    raw = fs17.readFileSync(docPath, "utf-8");
+    raw = fs23.readFileSync(docPath, "utf-8");
   } catch (err) {
     if (isEnoent2(err)) return null;
     throw err;
@@ -20066,7 +19873,7 @@ function readDocument4(docPath) {
   }
   const frontmatterText = match[1] ?? "";
   const content = match[2] ?? "";
-  const parsed = jsYaml.load(frontmatterText);
+  const parsed = index_vite_proxy_tmp_default.load(frontmatterText);
   const frontmatter = parsed !== null && typeof parsed === "object" && !Array.isArray(parsed) ? parsed : {};
   return {
     frontmatter,
@@ -20074,9 +19881,9 @@ function readDocument4(docPath) {
   };
 }
 function ensureDirectories(projectDir) {
-  fs17.mkdirSync(projectDir, { recursive: true });
+  fs23.mkdirSync(projectDir, { recursive: true });
   for (const subdir of ["phases", "tasks", "reports", "reviews"]) {
-    fs17.mkdirSync(path21.join(projectDir, subdir), { recursive: true });
+    fs23.mkdirSync(path28.join(projectDir, subdir), { recursive: true });
   }
 }
 var DEFAULT_CONFIG;
@@ -20107,15 +19914,15 @@ var init_state_io = __esm({
 
 // cli/src/lib/pipeline-engine/path-context.ts
 import os7 from "node:os";
-import path22 from "node:path";
+import path29 from "node:path";
 import { fileURLToPath } from "node:url";
 function resolvePathContext() {
-  const scriptsDir = path22.dirname(fileURLToPath(import.meta.url));
-  const templatesDir = process.env["RADORCH_TEMPLATES_DIR"] ?? path22.join(os7.homedir(), ".radorc", "templates");
+  const scriptsDir = path29.dirname(fileURLToPath(import.meta.url));
+  const templatesDir = process.env["RADORCH_TEMPLATES_DIR"] ?? path29.join(os7.homedir(), ".radorc", "templates");
   return { scriptsDir, templatesDir };
 }
 function resolveDiscoveredConfigPath() {
-  return path22.join(os7.homedir(), ".radorc", "orchestration.yml");
+  return path29.join(os7.homedir(), ".radorc", "orchestration.yml");
 }
 var init_path_context = __esm({
   "cli/src/lib/pipeline-engine/path-context.ts"() {
@@ -20125,7 +19932,7 @@ var init_path_context = __esm({
 
 // cli/src/commands/gate/shared.ts
 function makeIO() {
-  return { readState: readState3, writeState: writeState2, readConfig, readDocument: readDocument4, ensureDirectories };
+  return { readState: readState4, writeState: writeState2, readConfig, readDocument: readDocument2, ensureDirectories };
 }
 function autoResolveMasterPlanDocPath(state) {
   const s = state;
@@ -20153,7 +19960,7 @@ __export(approve_plan_exports, {
 async function runApprovePlan(opts) {
   const dir = opts.projectDir;
   if (!dir) throw new UserError("--project-dir is required");
-  const state = readState3(dir);
+  const state = readState4(dir);
   if (!state) throw new UserError(`No state.json at ${dir}`);
   const docPath = autoResolveMasterPlanDocPath(state);
   const ctx = docPath ? { doc_path: docPath } : {};
@@ -20193,7 +20000,7 @@ __export(approve_final_exports, {
 async function runApproveFinal(opts) {
   const dir = opts.projectDir;
   if (!dir) throw new UserError("--project-dir is required");
-  const state = readState3(dir);
+  const state = readState4(dir);
   if (!state) throw new UserError(`No state.json at ${dir}`);
   const docPath = autoResolveFinalReviewDocPath(state);
   const ctx = docPath ? { doc_path: docPath } : {};
@@ -20252,7 +20059,7 @@ __export(compose_exports, {
   composeCommand: () => composeCommand,
   runCompose: () => runCompose
 });
-import fs18 from "node:fs";
+import fs24 from "node:fs";
 function validateMode(raw) {
   if (raw === void 0 || raw === "") return "standalone";
   if (raw !== "standalone" && raw !== "runtime-orphan") {
@@ -20290,7 +20097,7 @@ function readOptionalStdinJson() {
   if (process.stdin.isTTY) return {};
   let raw = "";
   try {
-    raw = fs18.readFileSync(0, "utf8");
+    raw = fs24.readFileSync(0, "utf8");
   } catch {
     return {};
   }
@@ -20431,2641 +20238,17 @@ function scanUserLevelHarnesses() {
 // cli/src/commands/doctor/checks.ts
 init_package_version();
 
-// lib/repo-registry/src/io.ts
+// lib/repo-registry/dist/io.js
+init_js_yaml();
 import fs5 from "node:fs";
 import path6 from "node:path";
-
-// lib/repo-registry/node_modules/js-yaml/dist/js-yaml.mjs
-function isNothing2(subject) {
-  return typeof subject === "undefined" || subject === null;
-}
-function isObject2(subject) {
-  return typeof subject === "object" && subject !== null;
-}
-function toArray2(sequence) {
-  if (Array.isArray(sequence)) return sequence;
-  else if (isNothing2(sequence)) return [];
-  return [sequence];
-}
-function extend3(target, source) {
-  var index, length, key, sourceKeys;
-  if (source) {
-    sourceKeys = Object.keys(source);
-    for (index = 0, length = sourceKeys.length; index < length; index += 1) {
-      key = sourceKeys[index];
-      target[key] = source[key];
-    }
-  }
-  return target;
-}
-function repeat2(string, count) {
-  var result = "", cycle;
-  for (cycle = 0; cycle < count; cycle += 1) {
-    result += string;
-  }
-  return result;
-}
-function isNegativeZero2(number) {
-  return number === 0 && Number.NEGATIVE_INFINITY === 1 / number;
-}
-var isNothing_12 = isNothing2;
-var isObject_12 = isObject2;
-var toArray_12 = toArray2;
-var repeat_12 = repeat2;
-var isNegativeZero_12 = isNegativeZero2;
-var extend_12 = extend3;
-var common3 = {
-  isNothing: isNothing_12,
-  isObject: isObject_12,
-  toArray: toArray_12,
-  repeat: repeat_12,
-  isNegativeZero: isNegativeZero_12,
-  extend: extend_12
-};
-function formatError2(exception3, compact) {
-  var where = "", message = exception3.reason || "(unknown reason)";
-  if (!exception3.mark) return message;
-  if (exception3.mark.name) {
-    where += 'in "' + exception3.mark.name + '" ';
-  }
-  where += "(" + (exception3.mark.line + 1) + ":" + (exception3.mark.column + 1) + ")";
-  if (!compact && exception3.mark.snippet) {
-    where += "\n\n" + exception3.mark.snippet;
-  }
-  return message + " " + where;
-}
-function YAMLException$12(reason, mark) {
-  Error.call(this);
-  this.name = "YAMLException";
-  this.reason = reason;
-  this.mark = mark;
-  this.message = formatError2(this, false);
-  if (Error.captureStackTrace) {
-    Error.captureStackTrace(this, this.constructor);
-  } else {
-    this.stack = new Error().stack || "";
-  }
-}
-YAMLException$12.prototype = Object.create(Error.prototype);
-YAMLException$12.prototype.constructor = YAMLException$12;
-YAMLException$12.prototype.toString = function toString2(compact) {
-  return this.name + ": " + formatError2(this, compact);
-};
-var exception2 = YAMLException$12;
-function getLine2(buffer, lineStart, lineEnd, position, maxLineLength) {
-  var head = "";
-  var tail = "";
-  var maxHalfLength = Math.floor(maxLineLength / 2) - 1;
-  if (position - lineStart > maxHalfLength) {
-    head = " ... ";
-    lineStart = position - maxHalfLength + head.length;
-  }
-  if (lineEnd - position > maxHalfLength) {
-    tail = " ...";
-    lineEnd = position + maxHalfLength - tail.length;
-  }
-  return {
-    str: head + buffer.slice(lineStart, lineEnd).replace(/\t/g, "\u2192") + tail,
-    pos: position - lineStart + head.length
-    // relative position
-  };
-}
-function padStart2(string, max) {
-  return common3.repeat(" ", max - string.length) + string;
-}
-function makeSnippet2(mark, options) {
-  options = Object.create(options || null);
-  if (!mark.buffer) return null;
-  if (!options.maxLength) options.maxLength = 79;
-  if (typeof options.indent !== "number") options.indent = 1;
-  if (typeof options.linesBefore !== "number") options.linesBefore = 3;
-  if (typeof options.linesAfter !== "number") options.linesAfter = 2;
-  var re = /\r?\n|\r|\0/g;
-  var lineStarts = [0];
-  var lineEnds = [];
-  var match;
-  var foundLineNo = -1;
-  while (match = re.exec(mark.buffer)) {
-    lineEnds.push(match.index);
-    lineStarts.push(match.index + match[0].length);
-    if (mark.position <= match.index && foundLineNo < 0) {
-      foundLineNo = lineStarts.length - 2;
-    }
-  }
-  if (foundLineNo < 0) foundLineNo = lineStarts.length - 1;
-  var result = "", i, line;
-  var lineNoLength = Math.min(mark.line + options.linesAfter, lineEnds.length).toString().length;
-  var maxLineLength = options.maxLength - (options.indent + lineNoLength + 3);
-  for (i = 1; i <= options.linesBefore; i++) {
-    if (foundLineNo - i < 0) break;
-    line = getLine2(
-      mark.buffer,
-      lineStarts[foundLineNo - i],
-      lineEnds[foundLineNo - i],
-      mark.position - (lineStarts[foundLineNo] - lineStarts[foundLineNo - i]),
-      maxLineLength
-    );
-    result = common3.repeat(" ", options.indent) + padStart2((mark.line - i + 1).toString(), lineNoLength) + " | " + line.str + "\n" + result;
-  }
-  line = getLine2(mark.buffer, lineStarts[foundLineNo], lineEnds[foundLineNo], mark.position, maxLineLength);
-  result += common3.repeat(" ", options.indent) + padStart2((mark.line + 1).toString(), lineNoLength) + " | " + line.str + "\n";
-  result += common3.repeat("-", options.indent + lineNoLength + 3 + line.pos) + "^\n";
-  for (i = 1; i <= options.linesAfter; i++) {
-    if (foundLineNo + i >= lineEnds.length) break;
-    line = getLine2(
-      mark.buffer,
-      lineStarts[foundLineNo + i],
-      lineEnds[foundLineNo + i],
-      mark.position - (lineStarts[foundLineNo] - lineStarts[foundLineNo + i]),
-      maxLineLength
-    );
-    result += common3.repeat(" ", options.indent) + padStart2((mark.line + i + 1).toString(), lineNoLength) + " | " + line.str + "\n";
-  }
-  return result.replace(/\n$/, "");
-}
-var snippet2 = makeSnippet2;
-var TYPE_CONSTRUCTOR_OPTIONS2 = [
-  "kind",
-  "multi",
-  "resolve",
-  "construct",
-  "instanceOf",
-  "predicate",
-  "represent",
-  "representName",
-  "defaultStyle",
-  "styleAliases"
-];
-var YAML_NODE_KINDS2 = [
-  "scalar",
-  "sequence",
-  "mapping"
-];
-function compileStyleAliases2(map3) {
-  var result = {};
-  if (map3 !== null) {
-    Object.keys(map3).forEach(function(style) {
-      map3[style].forEach(function(alias) {
-        result[String(alias)] = style;
-      });
-    });
-  }
-  return result;
-}
-function Type$12(tag, options) {
-  options = options || {};
-  Object.keys(options).forEach(function(name) {
-    if (TYPE_CONSTRUCTOR_OPTIONS2.indexOf(name) === -1) {
-      throw new exception2('Unknown option "' + name + '" is met in definition of "' + tag + '" YAML type.');
-    }
-  });
-  this.options = options;
-  this.tag = tag;
-  this.kind = options["kind"] || null;
-  this.resolve = options["resolve"] || function() {
-    return true;
-  };
-  this.construct = options["construct"] || function(data) {
-    return data;
-  };
-  this.instanceOf = options["instanceOf"] || null;
-  this.predicate = options["predicate"] || null;
-  this.represent = options["represent"] || null;
-  this.representName = options["representName"] || null;
-  this.defaultStyle = options["defaultStyle"] || null;
-  this.multi = options["multi"] || false;
-  this.styleAliases = compileStyleAliases2(options["styleAliases"] || null);
-  if (YAML_NODE_KINDS2.indexOf(this.kind) === -1) {
-    throw new exception2('Unknown kind "' + this.kind + '" is specified for "' + tag + '" YAML type.');
-  }
-}
-var type2 = Type$12;
-function compileList2(schema3, name) {
-  var result = [];
-  schema3[name].forEach(function(currentType) {
-    var newIndex = result.length;
-    result.forEach(function(previousType, previousIndex) {
-      if (previousType.tag === currentType.tag && previousType.kind === currentType.kind && previousType.multi === currentType.multi) {
-        newIndex = previousIndex;
-      }
-    });
-    result[newIndex] = currentType;
-  });
-  return result;
-}
-function compileMap2() {
-  var result = {
-    scalar: {},
-    sequence: {},
-    mapping: {},
-    fallback: {},
-    multi: {
-      scalar: [],
-      sequence: [],
-      mapping: [],
-      fallback: []
-    }
-  }, index, length;
-  function collectType(type3) {
-    if (type3.multi) {
-      result.multi[type3.kind].push(type3);
-      result.multi["fallback"].push(type3);
-    } else {
-      result[type3.kind][type3.tag] = result["fallback"][type3.tag] = type3;
-    }
-  }
-  for (index = 0, length = arguments.length; index < length; index += 1) {
-    arguments[index].forEach(collectType);
-  }
-  return result;
-}
-function Schema$12(definition) {
-  return this.extend(definition);
-}
-Schema$12.prototype.extend = function extend4(definition) {
-  var implicit = [];
-  var explicit = [];
-  if (definition instanceof type2) {
-    explicit.push(definition);
-  } else if (Array.isArray(definition)) {
-    explicit = explicit.concat(definition);
-  } else if (definition && (Array.isArray(definition.implicit) || Array.isArray(definition.explicit))) {
-    if (definition.implicit) implicit = implicit.concat(definition.implicit);
-    if (definition.explicit) explicit = explicit.concat(definition.explicit);
-  } else {
-    throw new exception2("Schema.extend argument should be a Type, [ Type ], or a schema definition ({ implicit: [...], explicit: [...] })");
-  }
-  implicit.forEach(function(type$1) {
-    if (!(type$1 instanceof type2)) {
-      throw new exception2("Specified list of YAML types (or a single Type object) contains a non-Type object.");
-    }
-    if (type$1.loadKind && type$1.loadKind !== "scalar") {
-      throw new exception2("There is a non-scalar type in the implicit list of a schema. Implicit resolving of such types is not supported.");
-    }
-    if (type$1.multi) {
-      throw new exception2("There is a multi type in the implicit list of a schema. Multi tags can only be listed as explicit.");
-    }
-  });
-  explicit.forEach(function(type$1) {
-    if (!(type$1 instanceof type2)) {
-      throw new exception2("Specified list of YAML types (or a single Type object) contains a non-Type object.");
-    }
-  });
-  var result = Object.create(Schema$12.prototype);
-  result.implicit = (this.implicit || []).concat(implicit);
-  result.explicit = (this.explicit || []).concat(explicit);
-  result.compiledImplicit = compileList2(result, "implicit");
-  result.compiledExplicit = compileList2(result, "explicit");
-  result.compiledTypeMap = compileMap2(result.compiledImplicit, result.compiledExplicit);
-  return result;
-};
-var schema2 = Schema$12;
-var str2 = new type2("tag:yaml.org,2002:str", {
-  kind: "scalar",
-  construct: function(data) {
-    return data !== null ? data : "";
-  }
-});
-var seq2 = new type2("tag:yaml.org,2002:seq", {
-  kind: "sequence",
-  construct: function(data) {
-    return data !== null ? data : [];
-  }
-});
-var map2 = new type2("tag:yaml.org,2002:map", {
-  kind: "mapping",
-  construct: function(data) {
-    return data !== null ? data : {};
-  }
-});
-var failsafe2 = new schema2({
-  explicit: [
-    str2,
-    seq2,
-    map2
-  ]
-});
-function resolveYamlNull2(data) {
-  if (data === null) return true;
-  var max = data.length;
-  return max === 1 && data === "~" || max === 4 && (data === "null" || data === "Null" || data === "NULL");
-}
-function constructYamlNull2() {
-  return null;
-}
-function isNull2(object) {
-  return object === null;
-}
-var _null2 = new type2("tag:yaml.org,2002:null", {
-  kind: "scalar",
-  resolve: resolveYamlNull2,
-  construct: constructYamlNull2,
-  predicate: isNull2,
-  represent: {
-    canonical: function() {
-      return "~";
-    },
-    lowercase: function() {
-      return "null";
-    },
-    uppercase: function() {
-      return "NULL";
-    },
-    camelcase: function() {
-      return "Null";
-    },
-    empty: function() {
-      return "";
-    }
-  },
-  defaultStyle: "lowercase"
-});
-function resolveYamlBoolean2(data) {
-  if (data === null) return false;
-  var max = data.length;
-  return max === 4 && (data === "true" || data === "True" || data === "TRUE") || max === 5 && (data === "false" || data === "False" || data === "FALSE");
-}
-function constructYamlBoolean2(data) {
-  return data === "true" || data === "True" || data === "TRUE";
-}
-function isBoolean2(object) {
-  return Object.prototype.toString.call(object) === "[object Boolean]";
-}
-var bool2 = new type2("tag:yaml.org,2002:bool", {
-  kind: "scalar",
-  resolve: resolveYamlBoolean2,
-  construct: constructYamlBoolean2,
-  predicate: isBoolean2,
-  represent: {
-    lowercase: function(object) {
-      return object ? "true" : "false";
-    },
-    uppercase: function(object) {
-      return object ? "TRUE" : "FALSE";
-    },
-    camelcase: function(object) {
-      return object ? "True" : "False";
-    }
-  },
-  defaultStyle: "lowercase"
-});
-function isHexCode2(c) {
-  return 48 <= c && c <= 57 || 65 <= c && c <= 70 || 97 <= c && c <= 102;
-}
-function isOctCode2(c) {
-  return 48 <= c && c <= 55;
-}
-function isDecCode2(c) {
-  return 48 <= c && c <= 57;
-}
-function resolveYamlInteger2(data) {
-  if (data === null) return false;
-  var max = data.length, index = 0, hasDigits = false, ch;
-  if (!max) return false;
-  ch = data[index];
-  if (ch === "-" || ch === "+") {
-    ch = data[++index];
-  }
-  if (ch === "0") {
-    if (index + 1 === max) return true;
-    ch = data[++index];
-    if (ch === "b") {
-      index++;
-      for (; index < max; index++) {
-        ch = data[index];
-        if (ch === "_") continue;
-        if (ch !== "0" && ch !== "1") return false;
-        hasDigits = true;
-      }
-      return hasDigits && ch !== "_";
-    }
-    if (ch === "x") {
-      index++;
-      for (; index < max; index++) {
-        ch = data[index];
-        if (ch === "_") continue;
-        if (!isHexCode2(data.charCodeAt(index))) return false;
-        hasDigits = true;
-      }
-      return hasDigits && ch !== "_";
-    }
-    if (ch === "o") {
-      index++;
-      for (; index < max; index++) {
-        ch = data[index];
-        if (ch === "_") continue;
-        if (!isOctCode2(data.charCodeAt(index))) return false;
-        hasDigits = true;
-      }
-      return hasDigits && ch !== "_";
-    }
-  }
-  if (ch === "_") return false;
-  for (; index < max; index++) {
-    ch = data[index];
-    if (ch === "_") continue;
-    if (!isDecCode2(data.charCodeAt(index))) {
-      return false;
-    }
-    hasDigits = true;
-  }
-  if (!hasDigits || ch === "_") return false;
-  return true;
-}
-function constructYamlInteger2(data) {
-  var value = data, sign = 1, ch;
-  if (value.indexOf("_") !== -1) {
-    value = value.replace(/_/g, "");
-  }
-  ch = value[0];
-  if (ch === "-" || ch === "+") {
-    if (ch === "-") sign = -1;
-    value = value.slice(1);
-    ch = value[0];
-  }
-  if (value === "0") return 0;
-  if (ch === "0") {
-    if (value[1] === "b") return sign * parseInt(value.slice(2), 2);
-    if (value[1] === "x") return sign * parseInt(value.slice(2), 16);
-    if (value[1] === "o") return sign * parseInt(value.slice(2), 8);
-  }
-  return sign * parseInt(value, 10);
-}
-function isInteger2(object) {
-  return Object.prototype.toString.call(object) === "[object Number]" && (object % 1 === 0 && !common3.isNegativeZero(object));
-}
-var int2 = new type2("tag:yaml.org,2002:int", {
-  kind: "scalar",
-  resolve: resolveYamlInteger2,
-  construct: constructYamlInteger2,
-  predicate: isInteger2,
-  represent: {
-    binary: function(obj) {
-      return obj >= 0 ? "0b" + obj.toString(2) : "-0b" + obj.toString(2).slice(1);
-    },
-    octal: function(obj) {
-      return obj >= 0 ? "0o" + obj.toString(8) : "-0o" + obj.toString(8).slice(1);
-    },
-    decimal: function(obj) {
-      return obj.toString(10);
-    },
-    /* eslint-disable max-len */
-    hexadecimal: function(obj) {
-      return obj >= 0 ? "0x" + obj.toString(16).toUpperCase() : "-0x" + obj.toString(16).toUpperCase().slice(1);
-    }
-  },
-  defaultStyle: "decimal",
-  styleAliases: {
-    binary: [2, "bin"],
-    octal: [8, "oct"],
-    decimal: [10, "dec"],
-    hexadecimal: [16, "hex"]
-  }
-});
-var YAML_FLOAT_PATTERN2 = new RegExp(
-  // 2.5e4, 2.5 and integers
-  "^(?:[-+]?(?:[0-9][0-9_]*)(?:\\.[0-9_]*)?(?:[eE][-+]?[0-9]+)?|\\.[0-9_]+(?:[eE][-+]?[0-9]+)?|[-+]?\\.(?:inf|Inf|INF)|\\.(?:nan|NaN|NAN))$"
-);
-function resolveYamlFloat2(data) {
-  if (data === null) return false;
-  if (!YAML_FLOAT_PATTERN2.test(data) || // Quick hack to not allow integers end with `_`
-  // Probably should update regexp & check speed
-  data[data.length - 1] === "_") {
-    return false;
-  }
-  return true;
-}
-function constructYamlFloat2(data) {
-  var value, sign;
-  value = data.replace(/_/g, "").toLowerCase();
-  sign = value[0] === "-" ? -1 : 1;
-  if ("+-".indexOf(value[0]) >= 0) {
-    value = value.slice(1);
-  }
-  if (value === ".inf") {
-    return sign === 1 ? Number.POSITIVE_INFINITY : Number.NEGATIVE_INFINITY;
-  } else if (value === ".nan") {
-    return NaN;
-  }
-  return sign * parseFloat(value, 10);
-}
-var SCIENTIFIC_WITHOUT_DOT2 = /^[-+]?[0-9]+e/;
-function representYamlFloat2(object, style) {
-  var res;
-  if (isNaN(object)) {
-    switch (style) {
-      case "lowercase":
-        return ".nan";
-      case "uppercase":
-        return ".NAN";
-      case "camelcase":
-        return ".NaN";
-    }
-  } else if (Number.POSITIVE_INFINITY === object) {
-    switch (style) {
-      case "lowercase":
-        return ".inf";
-      case "uppercase":
-        return ".INF";
-      case "camelcase":
-        return ".Inf";
-    }
-  } else if (Number.NEGATIVE_INFINITY === object) {
-    switch (style) {
-      case "lowercase":
-        return "-.inf";
-      case "uppercase":
-        return "-.INF";
-      case "camelcase":
-        return "-.Inf";
-    }
-  } else if (common3.isNegativeZero(object)) {
-    return "-0.0";
-  }
-  res = object.toString(10);
-  return SCIENTIFIC_WITHOUT_DOT2.test(res) ? res.replace("e", ".e") : res;
-}
-function isFloat2(object) {
-  return Object.prototype.toString.call(object) === "[object Number]" && (object % 1 !== 0 || common3.isNegativeZero(object));
-}
-var float2 = new type2("tag:yaml.org,2002:float", {
-  kind: "scalar",
-  resolve: resolveYamlFloat2,
-  construct: constructYamlFloat2,
-  predicate: isFloat2,
-  represent: representYamlFloat2,
-  defaultStyle: "lowercase"
-});
-var json2 = failsafe2.extend({
-  implicit: [
-    _null2,
-    bool2,
-    int2,
-    float2
-  ]
-});
-var core2 = json2;
-var YAML_DATE_REGEXP2 = new RegExp(
-  "^([0-9][0-9][0-9][0-9])-([0-9][0-9])-([0-9][0-9])$"
-);
-var YAML_TIMESTAMP_REGEXP2 = new RegExp(
-  "^([0-9][0-9][0-9][0-9])-([0-9][0-9]?)-([0-9][0-9]?)(?:[Tt]|[ \\t]+)([0-9][0-9]?):([0-9][0-9]):([0-9][0-9])(?:\\.([0-9]*))?(?:[ \\t]*(Z|([-+])([0-9][0-9]?)(?::([0-9][0-9]))?))?$"
-);
-function resolveYamlTimestamp2(data) {
-  if (data === null) return false;
-  if (YAML_DATE_REGEXP2.exec(data) !== null) return true;
-  if (YAML_TIMESTAMP_REGEXP2.exec(data) !== null) return true;
-  return false;
-}
-function constructYamlTimestamp2(data) {
-  var match, year, month, day, hour, minute, second, fraction = 0, delta = null, tz_hour, tz_minute, date;
-  match = YAML_DATE_REGEXP2.exec(data);
-  if (match === null) match = YAML_TIMESTAMP_REGEXP2.exec(data);
-  if (match === null) throw new Error("Date resolve error");
-  year = +match[1];
-  month = +match[2] - 1;
-  day = +match[3];
-  if (!match[4]) {
-    return new Date(Date.UTC(year, month, day));
-  }
-  hour = +match[4];
-  minute = +match[5];
-  second = +match[6];
-  if (match[7]) {
-    fraction = match[7].slice(0, 3);
-    while (fraction.length < 3) {
-      fraction += "0";
-    }
-    fraction = +fraction;
-  }
-  if (match[9]) {
-    tz_hour = +match[10];
-    tz_minute = +(match[11] || 0);
-    delta = (tz_hour * 60 + tz_minute) * 6e4;
-    if (match[9] === "-") delta = -delta;
-  }
-  date = new Date(Date.UTC(year, month, day, hour, minute, second, fraction));
-  if (delta) date.setTime(date.getTime() - delta);
-  return date;
-}
-function representYamlTimestamp2(object) {
-  return object.toISOString();
-}
-var timestamp2 = new type2("tag:yaml.org,2002:timestamp", {
-  kind: "scalar",
-  resolve: resolveYamlTimestamp2,
-  construct: constructYamlTimestamp2,
-  instanceOf: Date,
-  represent: representYamlTimestamp2
-});
-function resolveYamlMerge2(data) {
-  return data === "<<" || data === null;
-}
-var merge2 = new type2("tag:yaml.org,2002:merge", {
-  kind: "scalar",
-  resolve: resolveYamlMerge2
-});
-var BASE64_MAP2 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=\n\r";
-function resolveYamlBinary2(data) {
-  if (data === null) return false;
-  var code2, idx, bitlen = 0, max = data.length, map3 = BASE64_MAP2;
-  for (idx = 0; idx < max; idx++) {
-    code2 = map3.indexOf(data.charAt(idx));
-    if (code2 > 64) continue;
-    if (code2 < 0) return false;
-    bitlen += 6;
-  }
-  return bitlen % 8 === 0;
-}
-function constructYamlBinary2(data) {
-  var idx, tailbits, input = data.replace(/[\r\n=]/g, ""), max = input.length, map3 = BASE64_MAP2, bits = 0, result = [];
-  for (idx = 0; idx < max; idx++) {
-    if (idx % 4 === 0 && idx) {
-      result.push(bits >> 16 & 255);
-      result.push(bits >> 8 & 255);
-      result.push(bits & 255);
-    }
-    bits = bits << 6 | map3.indexOf(input.charAt(idx));
-  }
-  tailbits = max % 4 * 6;
-  if (tailbits === 0) {
-    result.push(bits >> 16 & 255);
-    result.push(bits >> 8 & 255);
-    result.push(bits & 255);
-  } else if (tailbits === 18) {
-    result.push(bits >> 10 & 255);
-    result.push(bits >> 2 & 255);
-  } else if (tailbits === 12) {
-    result.push(bits >> 4 & 255);
-  }
-  return new Uint8Array(result);
-}
-function representYamlBinary2(object) {
-  var result = "", bits = 0, idx, tail, max = object.length, map3 = BASE64_MAP2;
-  for (idx = 0; idx < max; idx++) {
-    if (idx % 3 === 0 && idx) {
-      result += map3[bits >> 18 & 63];
-      result += map3[bits >> 12 & 63];
-      result += map3[bits >> 6 & 63];
-      result += map3[bits & 63];
-    }
-    bits = (bits << 8) + object[idx];
-  }
-  tail = max % 3;
-  if (tail === 0) {
-    result += map3[bits >> 18 & 63];
-    result += map3[bits >> 12 & 63];
-    result += map3[bits >> 6 & 63];
-    result += map3[bits & 63];
-  } else if (tail === 2) {
-    result += map3[bits >> 10 & 63];
-    result += map3[bits >> 4 & 63];
-    result += map3[bits << 2 & 63];
-    result += map3[64];
-  } else if (tail === 1) {
-    result += map3[bits >> 2 & 63];
-    result += map3[bits << 4 & 63];
-    result += map3[64];
-    result += map3[64];
-  }
-  return result;
-}
-function isBinary2(obj) {
-  return Object.prototype.toString.call(obj) === "[object Uint8Array]";
-}
-var binary2 = new type2("tag:yaml.org,2002:binary", {
-  kind: "scalar",
-  resolve: resolveYamlBinary2,
-  construct: constructYamlBinary2,
-  predicate: isBinary2,
-  represent: representYamlBinary2
-});
-var _hasOwnProperty$32 = Object.prototype.hasOwnProperty;
-var _toString$22 = Object.prototype.toString;
-function resolveYamlOmap2(data) {
-  if (data === null) return true;
-  var objectKeys = [], index, length, pair, pairKey, pairHasKey, object = data;
-  for (index = 0, length = object.length; index < length; index += 1) {
-    pair = object[index];
-    pairHasKey = false;
-    if (_toString$22.call(pair) !== "[object Object]") return false;
-    for (pairKey in pair) {
-      if (_hasOwnProperty$32.call(pair, pairKey)) {
-        if (!pairHasKey) pairHasKey = true;
-        else return false;
-      }
-    }
-    if (!pairHasKey) return false;
-    if (objectKeys.indexOf(pairKey) === -1) objectKeys.push(pairKey);
-    else return false;
-  }
-  return true;
-}
-function constructYamlOmap2(data) {
-  return data !== null ? data : [];
-}
-var omap2 = new type2("tag:yaml.org,2002:omap", {
-  kind: "sequence",
-  resolve: resolveYamlOmap2,
-  construct: constructYamlOmap2
-});
-var _toString$12 = Object.prototype.toString;
-function resolveYamlPairs2(data) {
-  if (data === null) return true;
-  var index, length, pair, keys, result, object = data;
-  result = new Array(object.length);
-  for (index = 0, length = object.length; index < length; index += 1) {
-    pair = object[index];
-    if (_toString$12.call(pair) !== "[object Object]") return false;
-    keys = Object.keys(pair);
-    if (keys.length !== 1) return false;
-    result[index] = [keys[0], pair[keys[0]]];
-  }
-  return true;
-}
-function constructYamlPairs2(data) {
-  if (data === null) return [];
-  var index, length, pair, keys, result, object = data;
-  result = new Array(object.length);
-  for (index = 0, length = object.length; index < length; index += 1) {
-    pair = object[index];
-    keys = Object.keys(pair);
-    result[index] = [keys[0], pair[keys[0]]];
-  }
-  return result;
-}
-var pairs2 = new type2("tag:yaml.org,2002:pairs", {
-  kind: "sequence",
-  resolve: resolveYamlPairs2,
-  construct: constructYamlPairs2
-});
-var _hasOwnProperty$22 = Object.prototype.hasOwnProperty;
-function resolveYamlSet2(data) {
-  if (data === null) return true;
-  var key, object = data;
-  for (key in object) {
-    if (_hasOwnProperty$22.call(object, key)) {
-      if (object[key] !== null) return false;
-    }
-  }
-  return true;
-}
-function constructYamlSet2(data) {
-  return data !== null ? data : {};
-}
-var set2 = new type2("tag:yaml.org,2002:set", {
-  kind: "mapping",
-  resolve: resolveYamlSet2,
-  construct: constructYamlSet2
-});
-var _default2 = core2.extend({
-  implicit: [
-    timestamp2,
-    merge2
-  ],
-  explicit: [
-    binary2,
-    omap2,
-    pairs2,
-    set2
-  ]
-});
-var _hasOwnProperty$12 = Object.prototype.hasOwnProperty;
-var CONTEXT_FLOW_IN2 = 1;
-var CONTEXT_FLOW_OUT2 = 2;
-var CONTEXT_BLOCK_IN2 = 3;
-var CONTEXT_BLOCK_OUT2 = 4;
-var CHOMPING_CLIP2 = 1;
-var CHOMPING_STRIP2 = 2;
-var CHOMPING_KEEP2 = 3;
-var PATTERN_NON_PRINTABLE2 = /[\x00-\x08\x0B\x0C\x0E-\x1F\x7F-\x84\x86-\x9F\uFFFE\uFFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF]/;
-var PATTERN_NON_ASCII_LINE_BREAKS2 = /[\x85\u2028\u2029]/;
-var PATTERN_FLOW_INDICATORS2 = /[,\[\]\{\}]/;
-var PATTERN_TAG_HANDLE2 = /^(?:!|!!|![a-z\-]+!)$/i;
-var PATTERN_TAG_URI2 = /^(?:!|[^,\[\]\{\}])(?:%[0-9a-f]{2}|[0-9a-z\-#;\/\?:@&=\+\$,_\.!~\*'\(\)\[\]])*$/i;
-function _class2(obj) {
-  return Object.prototype.toString.call(obj);
-}
-function is_EOL2(c) {
-  return c === 10 || c === 13;
-}
-function is_WHITE_SPACE2(c) {
-  return c === 9 || c === 32;
-}
-function is_WS_OR_EOL2(c) {
-  return c === 9 || c === 32 || c === 10 || c === 13;
-}
-function is_FLOW_INDICATOR2(c) {
-  return c === 44 || c === 91 || c === 93 || c === 123 || c === 125;
-}
-function fromHexCode2(c) {
-  var lc;
-  if (48 <= c && c <= 57) {
-    return c - 48;
-  }
-  lc = c | 32;
-  if (97 <= lc && lc <= 102) {
-    return lc - 97 + 10;
-  }
-  return -1;
-}
-function escapedHexLen2(c) {
-  if (c === 120) {
-    return 2;
-  }
-  if (c === 117) {
-    return 4;
-  }
-  if (c === 85) {
-    return 8;
-  }
-  return 0;
-}
-function fromDecimalCode2(c) {
-  if (48 <= c && c <= 57) {
-    return c - 48;
-  }
-  return -1;
-}
-function simpleEscapeSequence2(c) {
-  return c === 48 ? "\0" : c === 97 ? "\x07" : c === 98 ? "\b" : c === 116 ? "	" : c === 9 ? "	" : c === 110 ? "\n" : c === 118 ? "\v" : c === 102 ? "\f" : c === 114 ? "\r" : c === 101 ? "\x1B" : c === 32 ? " " : c === 34 ? '"' : c === 47 ? "/" : c === 92 ? "\\" : c === 78 ? "\x85" : c === 95 ? "\xA0" : c === 76 ? "\u2028" : c === 80 ? "\u2029" : "";
-}
-function charFromCodepoint2(c) {
-  if (c <= 65535) {
-    return String.fromCharCode(c);
-  }
-  return String.fromCharCode(
-    (c - 65536 >> 10) + 55296,
-    (c - 65536 & 1023) + 56320
-  );
-}
-function setProperty2(object, key, value) {
-  if (key === "__proto__") {
-    Object.defineProperty(object, key, {
-      configurable: true,
-      enumerable: true,
-      writable: true,
-      value
-    });
-  } else {
-    object[key] = value;
-  }
-}
-var simpleEscapeCheck2 = new Array(256);
-var simpleEscapeMap2 = new Array(256);
-for (i = 0; i < 256; i++) {
-  simpleEscapeCheck2[i] = simpleEscapeSequence2(i) ? 1 : 0;
-  simpleEscapeMap2[i] = simpleEscapeSequence2(i);
-}
-var i;
-function State$12(input, options) {
-  this.input = input;
-  this.filename = options["filename"] || null;
-  this.schema = options["schema"] || _default2;
-  this.onWarning = options["onWarning"] || null;
-  this.legacy = options["legacy"] || false;
-  this.json = options["json"] || false;
-  this.listener = options["listener"] || null;
-  this.implicitTypes = this.schema.compiledImplicit;
-  this.typeMap = this.schema.compiledTypeMap;
-  this.length = input.length;
-  this.position = 0;
-  this.line = 0;
-  this.lineStart = 0;
-  this.lineIndent = 0;
-  this.firstTabInLine = -1;
-  this.documents = [];
-}
-function generateError2(state, message) {
-  var mark = {
-    name: state.filename,
-    buffer: state.input.slice(0, -1),
-    // omit trailing \0
-    position: state.position,
-    line: state.line,
-    column: state.position - state.lineStart
-  };
-  mark.snippet = snippet2(mark);
-  return new exception2(message, mark);
-}
-function throwError2(state, message) {
-  throw generateError2(state, message);
-}
-function throwWarning2(state, message) {
-  if (state.onWarning) {
-    state.onWarning.call(null, generateError2(state, message));
-  }
-}
-var directiveHandlers2 = {
-  YAML: function handleYamlDirective2(state, name, args) {
-    var match, major, minor;
-    if (state.version !== null) {
-      throwError2(state, "duplication of %YAML directive");
-    }
-    if (args.length !== 1) {
-      throwError2(state, "YAML directive accepts exactly one argument");
-    }
-    match = /^([0-9]+)\.([0-9]+)$/.exec(args[0]);
-    if (match === null) {
-      throwError2(state, "ill-formed argument of the YAML directive");
-    }
-    major = parseInt(match[1], 10);
-    minor = parseInt(match[2], 10);
-    if (major !== 1) {
-      throwError2(state, "unacceptable YAML version of the document");
-    }
-    state.version = args[0];
-    state.checkLineBreaks = minor < 2;
-    if (minor !== 1 && minor !== 2) {
-      throwWarning2(state, "unsupported YAML version of the document");
-    }
-  },
-  TAG: function handleTagDirective2(state, name, args) {
-    var handle, prefix;
-    if (args.length !== 2) {
-      throwError2(state, "TAG directive accepts exactly two arguments");
-    }
-    handle = args[0];
-    prefix = args[1];
-    if (!PATTERN_TAG_HANDLE2.test(handle)) {
-      throwError2(state, "ill-formed tag handle (first argument) of the TAG directive");
-    }
-    if (_hasOwnProperty$12.call(state.tagMap, handle)) {
-      throwError2(state, 'there is a previously declared suffix for "' + handle + '" tag handle');
-    }
-    if (!PATTERN_TAG_URI2.test(prefix)) {
-      throwError2(state, "ill-formed tag prefix (second argument) of the TAG directive");
-    }
-    try {
-      prefix = decodeURIComponent(prefix);
-    } catch (err) {
-      throwError2(state, "tag prefix is malformed: " + prefix);
-    }
-    state.tagMap[handle] = prefix;
-  }
-};
-function captureSegment2(state, start, end, checkJson) {
-  var _position, _length, _character, _result;
-  if (start < end) {
-    _result = state.input.slice(start, end);
-    if (checkJson) {
-      for (_position = 0, _length = _result.length; _position < _length; _position += 1) {
-        _character = _result.charCodeAt(_position);
-        if (!(_character === 9 || 32 <= _character && _character <= 1114111)) {
-          throwError2(state, "expected valid JSON character");
-        }
-      }
-    } else if (PATTERN_NON_PRINTABLE2.test(_result)) {
-      throwError2(state, "the stream contains non-printable characters");
-    }
-    state.result += _result;
-  }
-}
-function mergeMappings2(state, destination, source, overridableKeys) {
-  var sourceKeys, key, index, quantity;
-  if (!common3.isObject(source)) {
-    throwError2(state, "cannot merge mappings; the provided source object is unacceptable");
-  }
-  sourceKeys = Object.keys(source);
-  for (index = 0, quantity = sourceKeys.length; index < quantity; index += 1) {
-    key = sourceKeys[index];
-    if (!_hasOwnProperty$12.call(destination, key)) {
-      setProperty2(destination, key, source[key]);
-      overridableKeys[key] = true;
-    }
-  }
-}
-function storeMappingPair2(state, _result, overridableKeys, keyTag, keyNode, valueNode, startLine, startLineStart, startPos) {
-  var index, quantity;
-  if (Array.isArray(keyNode)) {
-    keyNode = Array.prototype.slice.call(keyNode);
-    for (index = 0, quantity = keyNode.length; index < quantity; index += 1) {
-      if (Array.isArray(keyNode[index])) {
-        throwError2(state, "nested arrays are not supported inside keys");
-      }
-      if (typeof keyNode === "object" && _class2(keyNode[index]) === "[object Object]") {
-        keyNode[index] = "[object Object]";
-      }
-    }
-  }
-  if (typeof keyNode === "object" && _class2(keyNode) === "[object Object]") {
-    keyNode = "[object Object]";
-  }
-  keyNode = String(keyNode);
-  if (_result === null) {
-    _result = {};
-  }
-  if (keyTag === "tag:yaml.org,2002:merge") {
-    if (Array.isArray(valueNode)) {
-      for (index = 0, quantity = valueNode.length; index < quantity; index += 1) {
-        mergeMappings2(state, _result, valueNode[index], overridableKeys);
-      }
-    } else {
-      mergeMappings2(state, _result, valueNode, overridableKeys);
-    }
-  } else {
-    if (!state.json && !_hasOwnProperty$12.call(overridableKeys, keyNode) && _hasOwnProperty$12.call(_result, keyNode)) {
-      state.line = startLine || state.line;
-      state.lineStart = startLineStart || state.lineStart;
-      state.position = startPos || state.position;
-      throwError2(state, "duplicated mapping key");
-    }
-    setProperty2(_result, keyNode, valueNode);
-    delete overridableKeys[keyNode];
-  }
-  return _result;
-}
-function readLineBreak2(state) {
-  var ch;
-  ch = state.input.charCodeAt(state.position);
-  if (ch === 10) {
-    state.position++;
-  } else if (ch === 13) {
-    state.position++;
-    if (state.input.charCodeAt(state.position) === 10) {
-      state.position++;
-    }
-  } else {
-    throwError2(state, "a line break is expected");
-  }
-  state.line += 1;
-  state.lineStart = state.position;
-  state.firstTabInLine = -1;
-}
-function skipSeparationSpace2(state, allowComments, checkIndent) {
-  var lineBreaks = 0, ch = state.input.charCodeAt(state.position);
-  while (ch !== 0) {
-    while (is_WHITE_SPACE2(ch)) {
-      if (ch === 9 && state.firstTabInLine === -1) {
-        state.firstTabInLine = state.position;
-      }
-      ch = state.input.charCodeAt(++state.position);
-    }
-    if (allowComments && ch === 35) {
-      do {
-        ch = state.input.charCodeAt(++state.position);
-      } while (ch !== 10 && ch !== 13 && ch !== 0);
-    }
-    if (is_EOL2(ch)) {
-      readLineBreak2(state);
-      ch = state.input.charCodeAt(state.position);
-      lineBreaks++;
-      state.lineIndent = 0;
-      while (ch === 32) {
-        state.lineIndent++;
-        ch = state.input.charCodeAt(++state.position);
-      }
-    } else {
-      break;
-    }
-  }
-  if (checkIndent !== -1 && lineBreaks !== 0 && state.lineIndent < checkIndent) {
-    throwWarning2(state, "deficient indentation");
-  }
-  return lineBreaks;
-}
-function testDocumentSeparator2(state) {
-  var _position = state.position, ch;
-  ch = state.input.charCodeAt(_position);
-  if ((ch === 45 || ch === 46) && ch === state.input.charCodeAt(_position + 1) && ch === state.input.charCodeAt(_position + 2)) {
-    _position += 3;
-    ch = state.input.charCodeAt(_position);
-    if (ch === 0 || is_WS_OR_EOL2(ch)) {
-      return true;
-    }
-  }
-  return false;
-}
-function writeFoldedLines2(state, count) {
-  if (count === 1) {
-    state.result += " ";
-  } else if (count > 1) {
-    state.result += common3.repeat("\n", count - 1);
-  }
-}
-function readPlainScalar2(state, nodeIndent, withinFlowCollection) {
-  var preceding, following, captureStart, captureEnd, hasPendingContent, _line, _lineStart, _lineIndent, _kind = state.kind, _result = state.result, ch;
-  ch = state.input.charCodeAt(state.position);
-  if (is_WS_OR_EOL2(ch) || is_FLOW_INDICATOR2(ch) || ch === 35 || ch === 38 || ch === 42 || ch === 33 || ch === 124 || ch === 62 || ch === 39 || ch === 34 || ch === 37 || ch === 64 || ch === 96) {
-    return false;
-  }
-  if (ch === 63 || ch === 45) {
-    following = state.input.charCodeAt(state.position + 1);
-    if (is_WS_OR_EOL2(following) || withinFlowCollection && is_FLOW_INDICATOR2(following)) {
-      return false;
-    }
-  }
-  state.kind = "scalar";
-  state.result = "";
-  captureStart = captureEnd = state.position;
-  hasPendingContent = false;
-  while (ch !== 0) {
-    if (ch === 58) {
-      following = state.input.charCodeAt(state.position + 1);
-      if (is_WS_OR_EOL2(following) || withinFlowCollection && is_FLOW_INDICATOR2(following)) {
-        break;
-      }
-    } else if (ch === 35) {
-      preceding = state.input.charCodeAt(state.position - 1);
-      if (is_WS_OR_EOL2(preceding)) {
-        break;
-      }
-    } else if (state.position === state.lineStart && testDocumentSeparator2(state) || withinFlowCollection && is_FLOW_INDICATOR2(ch)) {
-      break;
-    } else if (is_EOL2(ch)) {
-      _line = state.line;
-      _lineStart = state.lineStart;
-      _lineIndent = state.lineIndent;
-      skipSeparationSpace2(state, false, -1);
-      if (state.lineIndent >= nodeIndent) {
-        hasPendingContent = true;
-        ch = state.input.charCodeAt(state.position);
-        continue;
-      } else {
-        state.position = captureEnd;
-        state.line = _line;
-        state.lineStart = _lineStart;
-        state.lineIndent = _lineIndent;
-        break;
-      }
-    }
-    if (hasPendingContent) {
-      captureSegment2(state, captureStart, captureEnd, false);
-      writeFoldedLines2(state, state.line - _line);
-      captureStart = captureEnd = state.position;
-      hasPendingContent = false;
-    }
-    if (!is_WHITE_SPACE2(ch)) {
-      captureEnd = state.position + 1;
-    }
-    ch = state.input.charCodeAt(++state.position);
-  }
-  captureSegment2(state, captureStart, captureEnd, false);
-  if (state.result) {
-    return true;
-  }
-  state.kind = _kind;
-  state.result = _result;
-  return false;
-}
-function readSingleQuotedScalar2(state, nodeIndent) {
-  var ch, captureStart, captureEnd;
-  ch = state.input.charCodeAt(state.position);
-  if (ch !== 39) {
-    return false;
-  }
-  state.kind = "scalar";
-  state.result = "";
-  state.position++;
-  captureStart = captureEnd = state.position;
-  while ((ch = state.input.charCodeAt(state.position)) !== 0) {
-    if (ch === 39) {
-      captureSegment2(state, captureStart, state.position, true);
-      ch = state.input.charCodeAt(++state.position);
-      if (ch === 39) {
-        captureStart = state.position;
-        state.position++;
-        captureEnd = state.position;
-      } else {
-        return true;
-      }
-    } else if (is_EOL2(ch)) {
-      captureSegment2(state, captureStart, captureEnd, true);
-      writeFoldedLines2(state, skipSeparationSpace2(state, false, nodeIndent));
-      captureStart = captureEnd = state.position;
-    } else if (state.position === state.lineStart && testDocumentSeparator2(state)) {
-      throwError2(state, "unexpected end of the document within a single quoted scalar");
-    } else {
-      state.position++;
-      captureEnd = state.position;
-    }
-  }
-  throwError2(state, "unexpected end of the stream within a single quoted scalar");
-}
-function readDoubleQuotedScalar2(state, nodeIndent) {
-  var captureStart, captureEnd, hexLength, hexResult, tmp, ch;
-  ch = state.input.charCodeAt(state.position);
-  if (ch !== 34) {
-    return false;
-  }
-  state.kind = "scalar";
-  state.result = "";
-  state.position++;
-  captureStart = captureEnd = state.position;
-  while ((ch = state.input.charCodeAt(state.position)) !== 0) {
-    if (ch === 34) {
-      captureSegment2(state, captureStart, state.position, true);
-      state.position++;
-      return true;
-    } else if (ch === 92) {
-      captureSegment2(state, captureStart, state.position, true);
-      ch = state.input.charCodeAt(++state.position);
-      if (is_EOL2(ch)) {
-        skipSeparationSpace2(state, false, nodeIndent);
-      } else if (ch < 256 && simpleEscapeCheck2[ch]) {
-        state.result += simpleEscapeMap2[ch];
-        state.position++;
-      } else if ((tmp = escapedHexLen2(ch)) > 0) {
-        hexLength = tmp;
-        hexResult = 0;
-        for (; hexLength > 0; hexLength--) {
-          ch = state.input.charCodeAt(++state.position);
-          if ((tmp = fromHexCode2(ch)) >= 0) {
-            hexResult = (hexResult << 4) + tmp;
-          } else {
-            throwError2(state, "expected hexadecimal character");
-          }
-        }
-        state.result += charFromCodepoint2(hexResult);
-        state.position++;
-      } else {
-        throwError2(state, "unknown escape sequence");
-      }
-      captureStart = captureEnd = state.position;
-    } else if (is_EOL2(ch)) {
-      captureSegment2(state, captureStart, captureEnd, true);
-      writeFoldedLines2(state, skipSeparationSpace2(state, false, nodeIndent));
-      captureStart = captureEnd = state.position;
-    } else if (state.position === state.lineStart && testDocumentSeparator2(state)) {
-      throwError2(state, "unexpected end of the document within a double quoted scalar");
-    } else {
-      state.position++;
-      captureEnd = state.position;
-    }
-  }
-  throwError2(state, "unexpected end of the stream within a double quoted scalar");
-}
-function readFlowCollection2(state, nodeIndent) {
-  var readNext = true, _line, _lineStart, _pos, _tag = state.tag, _result, _anchor = state.anchor, following, terminator, isPair, isExplicitPair, isMapping, overridableKeys = /* @__PURE__ */ Object.create(null), keyNode, keyTag, valueNode, ch;
-  ch = state.input.charCodeAt(state.position);
-  if (ch === 91) {
-    terminator = 93;
-    isMapping = false;
-    _result = [];
-  } else if (ch === 123) {
-    terminator = 125;
-    isMapping = true;
-    _result = {};
-  } else {
-    return false;
-  }
-  if (state.anchor !== null) {
-    state.anchorMap[state.anchor] = _result;
-  }
-  ch = state.input.charCodeAt(++state.position);
-  while (ch !== 0) {
-    skipSeparationSpace2(state, true, nodeIndent);
-    ch = state.input.charCodeAt(state.position);
-    if (ch === terminator) {
-      state.position++;
-      state.tag = _tag;
-      state.anchor = _anchor;
-      state.kind = isMapping ? "mapping" : "sequence";
-      state.result = _result;
-      return true;
-    } else if (!readNext) {
-      throwError2(state, "missed comma between flow collection entries");
-    } else if (ch === 44) {
-      throwError2(state, "expected the node content, but found ','");
-    }
-    keyTag = keyNode = valueNode = null;
-    isPair = isExplicitPair = false;
-    if (ch === 63) {
-      following = state.input.charCodeAt(state.position + 1);
-      if (is_WS_OR_EOL2(following)) {
-        isPair = isExplicitPair = true;
-        state.position++;
-        skipSeparationSpace2(state, true, nodeIndent);
-      }
-    }
-    _line = state.line;
-    _lineStart = state.lineStart;
-    _pos = state.position;
-    composeNode2(state, nodeIndent, CONTEXT_FLOW_IN2, false, true);
-    keyTag = state.tag;
-    keyNode = state.result;
-    skipSeparationSpace2(state, true, nodeIndent);
-    ch = state.input.charCodeAt(state.position);
-    if ((isExplicitPair || state.line === _line) && ch === 58) {
-      isPair = true;
-      ch = state.input.charCodeAt(++state.position);
-      skipSeparationSpace2(state, true, nodeIndent);
-      composeNode2(state, nodeIndent, CONTEXT_FLOW_IN2, false, true);
-      valueNode = state.result;
-    }
-    if (isMapping) {
-      storeMappingPair2(state, _result, overridableKeys, keyTag, keyNode, valueNode, _line, _lineStart, _pos);
-    } else if (isPair) {
-      _result.push(storeMappingPair2(state, null, overridableKeys, keyTag, keyNode, valueNode, _line, _lineStart, _pos));
-    } else {
-      _result.push(keyNode);
-    }
-    skipSeparationSpace2(state, true, nodeIndent);
-    ch = state.input.charCodeAt(state.position);
-    if (ch === 44) {
-      readNext = true;
-      ch = state.input.charCodeAt(++state.position);
-    } else {
-      readNext = false;
-    }
-  }
-  throwError2(state, "unexpected end of the stream within a flow collection");
-}
-function readBlockScalar2(state, nodeIndent) {
-  var captureStart, folding, chomping = CHOMPING_CLIP2, didReadContent = false, detectedIndent = false, textIndent = nodeIndent, emptyLines = 0, atMoreIndented = false, tmp, ch;
-  ch = state.input.charCodeAt(state.position);
-  if (ch === 124) {
-    folding = false;
-  } else if (ch === 62) {
-    folding = true;
-  } else {
-    return false;
-  }
-  state.kind = "scalar";
-  state.result = "";
-  while (ch !== 0) {
-    ch = state.input.charCodeAt(++state.position);
-    if (ch === 43 || ch === 45) {
-      if (CHOMPING_CLIP2 === chomping) {
-        chomping = ch === 43 ? CHOMPING_KEEP2 : CHOMPING_STRIP2;
-      } else {
-        throwError2(state, "repeat of a chomping mode identifier");
-      }
-    } else if ((tmp = fromDecimalCode2(ch)) >= 0) {
-      if (tmp === 0) {
-        throwError2(state, "bad explicit indentation width of a block scalar; it cannot be less than one");
-      } else if (!detectedIndent) {
-        textIndent = nodeIndent + tmp - 1;
-        detectedIndent = true;
-      } else {
-        throwError2(state, "repeat of an indentation width identifier");
-      }
-    } else {
-      break;
-    }
-  }
-  if (is_WHITE_SPACE2(ch)) {
-    do {
-      ch = state.input.charCodeAt(++state.position);
-    } while (is_WHITE_SPACE2(ch));
-    if (ch === 35) {
-      do {
-        ch = state.input.charCodeAt(++state.position);
-      } while (!is_EOL2(ch) && ch !== 0);
-    }
-  }
-  while (ch !== 0) {
-    readLineBreak2(state);
-    state.lineIndent = 0;
-    ch = state.input.charCodeAt(state.position);
-    while ((!detectedIndent || state.lineIndent < textIndent) && ch === 32) {
-      state.lineIndent++;
-      ch = state.input.charCodeAt(++state.position);
-    }
-    if (!detectedIndent && state.lineIndent > textIndent) {
-      textIndent = state.lineIndent;
-    }
-    if (is_EOL2(ch)) {
-      emptyLines++;
-      continue;
-    }
-    if (state.lineIndent < textIndent) {
-      if (chomping === CHOMPING_KEEP2) {
-        state.result += common3.repeat("\n", didReadContent ? 1 + emptyLines : emptyLines);
-      } else if (chomping === CHOMPING_CLIP2) {
-        if (didReadContent) {
-          state.result += "\n";
-        }
-      }
-      break;
-    }
-    if (folding) {
-      if (is_WHITE_SPACE2(ch)) {
-        atMoreIndented = true;
-        state.result += common3.repeat("\n", didReadContent ? 1 + emptyLines : emptyLines);
-      } else if (atMoreIndented) {
-        atMoreIndented = false;
-        state.result += common3.repeat("\n", emptyLines + 1);
-      } else if (emptyLines === 0) {
-        if (didReadContent) {
-          state.result += " ";
-        }
-      } else {
-        state.result += common3.repeat("\n", emptyLines);
-      }
-    } else {
-      state.result += common3.repeat("\n", didReadContent ? 1 + emptyLines : emptyLines);
-    }
-    didReadContent = true;
-    detectedIndent = true;
-    emptyLines = 0;
-    captureStart = state.position;
-    while (!is_EOL2(ch) && ch !== 0) {
-      ch = state.input.charCodeAt(++state.position);
-    }
-    captureSegment2(state, captureStart, state.position, false);
-  }
-  return true;
-}
-function readBlockSequence2(state, nodeIndent) {
-  var _line, _tag = state.tag, _anchor = state.anchor, _result = [], following, detected = false, ch;
-  if (state.firstTabInLine !== -1) return false;
-  if (state.anchor !== null) {
-    state.anchorMap[state.anchor] = _result;
-  }
-  ch = state.input.charCodeAt(state.position);
-  while (ch !== 0) {
-    if (state.firstTabInLine !== -1) {
-      state.position = state.firstTabInLine;
-      throwError2(state, "tab characters must not be used in indentation");
-    }
-    if (ch !== 45) {
-      break;
-    }
-    following = state.input.charCodeAt(state.position + 1);
-    if (!is_WS_OR_EOL2(following)) {
-      break;
-    }
-    detected = true;
-    state.position++;
-    if (skipSeparationSpace2(state, true, -1)) {
-      if (state.lineIndent <= nodeIndent) {
-        _result.push(null);
-        ch = state.input.charCodeAt(state.position);
-        continue;
-      }
-    }
-    _line = state.line;
-    composeNode2(state, nodeIndent, CONTEXT_BLOCK_IN2, false, true);
-    _result.push(state.result);
-    skipSeparationSpace2(state, true, -1);
-    ch = state.input.charCodeAt(state.position);
-    if ((state.line === _line || state.lineIndent > nodeIndent) && ch !== 0) {
-      throwError2(state, "bad indentation of a sequence entry");
-    } else if (state.lineIndent < nodeIndent) {
-      break;
-    }
-  }
-  if (detected) {
-    state.tag = _tag;
-    state.anchor = _anchor;
-    state.kind = "sequence";
-    state.result = _result;
-    return true;
-  }
-  return false;
-}
-function readBlockMapping2(state, nodeIndent, flowIndent) {
-  var following, allowCompact, _line, _keyLine, _keyLineStart, _keyPos, _tag = state.tag, _anchor = state.anchor, _result = {}, overridableKeys = /* @__PURE__ */ Object.create(null), keyTag = null, keyNode = null, valueNode = null, atExplicitKey = false, detected = false, ch;
-  if (state.firstTabInLine !== -1) return false;
-  if (state.anchor !== null) {
-    state.anchorMap[state.anchor] = _result;
-  }
-  ch = state.input.charCodeAt(state.position);
-  while (ch !== 0) {
-    if (!atExplicitKey && state.firstTabInLine !== -1) {
-      state.position = state.firstTabInLine;
-      throwError2(state, "tab characters must not be used in indentation");
-    }
-    following = state.input.charCodeAt(state.position + 1);
-    _line = state.line;
-    if ((ch === 63 || ch === 58) && is_WS_OR_EOL2(following)) {
-      if (ch === 63) {
-        if (atExplicitKey) {
-          storeMappingPair2(state, _result, overridableKeys, keyTag, keyNode, null, _keyLine, _keyLineStart, _keyPos);
-          keyTag = keyNode = valueNode = null;
-        }
-        detected = true;
-        atExplicitKey = true;
-        allowCompact = true;
-      } else if (atExplicitKey) {
-        atExplicitKey = false;
-        allowCompact = true;
-      } else {
-        throwError2(state, "incomplete explicit mapping pair; a key node is missed; or followed by a non-tabulated empty line");
-      }
-      state.position += 1;
-      ch = following;
-    } else {
-      _keyLine = state.line;
-      _keyLineStart = state.lineStart;
-      _keyPos = state.position;
-      if (!composeNode2(state, flowIndent, CONTEXT_FLOW_OUT2, false, true)) {
-        break;
-      }
-      if (state.line === _line) {
-        ch = state.input.charCodeAt(state.position);
-        while (is_WHITE_SPACE2(ch)) {
-          ch = state.input.charCodeAt(++state.position);
-        }
-        if (ch === 58) {
-          ch = state.input.charCodeAt(++state.position);
-          if (!is_WS_OR_EOL2(ch)) {
-            throwError2(state, "a whitespace character is expected after the key-value separator within a block mapping");
-          }
-          if (atExplicitKey) {
-            storeMappingPair2(state, _result, overridableKeys, keyTag, keyNode, null, _keyLine, _keyLineStart, _keyPos);
-            keyTag = keyNode = valueNode = null;
-          }
-          detected = true;
-          atExplicitKey = false;
-          allowCompact = false;
-          keyTag = state.tag;
-          keyNode = state.result;
-        } else if (detected) {
-          throwError2(state, "can not read an implicit mapping pair; a colon is missed");
-        } else {
-          state.tag = _tag;
-          state.anchor = _anchor;
-          return true;
-        }
-      } else if (detected) {
-        throwError2(state, "can not read a block mapping entry; a multiline key may not be an implicit key");
-      } else {
-        state.tag = _tag;
-        state.anchor = _anchor;
-        return true;
-      }
-    }
-    if (state.line === _line || state.lineIndent > nodeIndent) {
-      if (atExplicitKey) {
-        _keyLine = state.line;
-        _keyLineStart = state.lineStart;
-        _keyPos = state.position;
-      }
-      if (composeNode2(state, nodeIndent, CONTEXT_BLOCK_OUT2, true, allowCompact)) {
-        if (atExplicitKey) {
-          keyNode = state.result;
-        } else {
-          valueNode = state.result;
-        }
-      }
-      if (!atExplicitKey) {
-        storeMappingPair2(state, _result, overridableKeys, keyTag, keyNode, valueNode, _keyLine, _keyLineStart, _keyPos);
-        keyTag = keyNode = valueNode = null;
-      }
-      skipSeparationSpace2(state, true, -1);
-      ch = state.input.charCodeAt(state.position);
-    }
-    if ((state.line === _line || state.lineIndent > nodeIndent) && ch !== 0) {
-      throwError2(state, "bad indentation of a mapping entry");
-    } else if (state.lineIndent < nodeIndent) {
-      break;
-    }
-  }
-  if (atExplicitKey) {
-    storeMappingPair2(state, _result, overridableKeys, keyTag, keyNode, null, _keyLine, _keyLineStart, _keyPos);
-  }
-  if (detected) {
-    state.tag = _tag;
-    state.anchor = _anchor;
-    state.kind = "mapping";
-    state.result = _result;
-  }
-  return detected;
-}
-function readTagProperty2(state) {
-  var _position, isVerbatim = false, isNamed = false, tagHandle, tagName, ch;
-  ch = state.input.charCodeAt(state.position);
-  if (ch !== 33) return false;
-  if (state.tag !== null) {
-    throwError2(state, "duplication of a tag property");
-  }
-  ch = state.input.charCodeAt(++state.position);
-  if (ch === 60) {
-    isVerbatim = true;
-    ch = state.input.charCodeAt(++state.position);
-  } else if (ch === 33) {
-    isNamed = true;
-    tagHandle = "!!";
-    ch = state.input.charCodeAt(++state.position);
-  } else {
-    tagHandle = "!";
-  }
-  _position = state.position;
-  if (isVerbatim) {
-    do {
-      ch = state.input.charCodeAt(++state.position);
-    } while (ch !== 0 && ch !== 62);
-    if (state.position < state.length) {
-      tagName = state.input.slice(_position, state.position);
-      ch = state.input.charCodeAt(++state.position);
-    } else {
-      throwError2(state, "unexpected end of the stream within a verbatim tag");
-    }
-  } else {
-    while (ch !== 0 && !is_WS_OR_EOL2(ch)) {
-      if (ch === 33) {
-        if (!isNamed) {
-          tagHandle = state.input.slice(_position - 1, state.position + 1);
-          if (!PATTERN_TAG_HANDLE2.test(tagHandle)) {
-            throwError2(state, "named tag handle cannot contain such characters");
-          }
-          isNamed = true;
-          _position = state.position + 1;
-        } else {
-          throwError2(state, "tag suffix cannot contain exclamation marks");
-        }
-      }
-      ch = state.input.charCodeAt(++state.position);
-    }
-    tagName = state.input.slice(_position, state.position);
-    if (PATTERN_FLOW_INDICATORS2.test(tagName)) {
-      throwError2(state, "tag suffix cannot contain flow indicator characters");
-    }
-  }
-  if (tagName && !PATTERN_TAG_URI2.test(tagName)) {
-    throwError2(state, "tag name cannot contain such characters: " + tagName);
-  }
-  try {
-    tagName = decodeURIComponent(tagName);
-  } catch (err) {
-    throwError2(state, "tag name is malformed: " + tagName);
-  }
-  if (isVerbatim) {
-    state.tag = tagName;
-  } else if (_hasOwnProperty$12.call(state.tagMap, tagHandle)) {
-    state.tag = state.tagMap[tagHandle] + tagName;
-  } else if (tagHandle === "!") {
-    state.tag = "!" + tagName;
-  } else if (tagHandle === "!!") {
-    state.tag = "tag:yaml.org,2002:" + tagName;
-  } else {
-    throwError2(state, 'undeclared tag handle "' + tagHandle + '"');
-  }
-  return true;
-}
-function readAnchorProperty2(state) {
-  var _position, ch;
-  ch = state.input.charCodeAt(state.position);
-  if (ch !== 38) return false;
-  if (state.anchor !== null) {
-    throwError2(state, "duplication of an anchor property");
-  }
-  ch = state.input.charCodeAt(++state.position);
-  _position = state.position;
-  while (ch !== 0 && !is_WS_OR_EOL2(ch) && !is_FLOW_INDICATOR2(ch)) {
-    ch = state.input.charCodeAt(++state.position);
-  }
-  if (state.position === _position) {
-    throwError2(state, "name of an anchor node must contain at least one character");
-  }
-  state.anchor = state.input.slice(_position, state.position);
-  return true;
-}
-function readAlias2(state) {
-  var _position, alias, ch;
-  ch = state.input.charCodeAt(state.position);
-  if (ch !== 42) return false;
-  ch = state.input.charCodeAt(++state.position);
-  _position = state.position;
-  while (ch !== 0 && !is_WS_OR_EOL2(ch) && !is_FLOW_INDICATOR2(ch)) {
-    ch = state.input.charCodeAt(++state.position);
-  }
-  if (state.position === _position) {
-    throwError2(state, "name of an alias node must contain at least one character");
-  }
-  alias = state.input.slice(_position, state.position);
-  if (!_hasOwnProperty$12.call(state.anchorMap, alias)) {
-    throwError2(state, 'unidentified alias "' + alias + '"');
-  }
-  state.result = state.anchorMap[alias];
-  skipSeparationSpace2(state, true, -1);
-  return true;
-}
-function composeNode2(state, parentIndent, nodeContext, allowToSeek, allowCompact) {
-  var allowBlockStyles, allowBlockScalars, allowBlockCollections, indentStatus = 1, atNewLine = false, hasContent = false, typeIndex, typeQuantity, typeList, type3, flowIndent, blockIndent;
-  if (state.listener !== null) {
-    state.listener("open", state);
-  }
-  state.tag = null;
-  state.anchor = null;
-  state.kind = null;
-  state.result = null;
-  allowBlockStyles = allowBlockScalars = allowBlockCollections = CONTEXT_BLOCK_OUT2 === nodeContext || CONTEXT_BLOCK_IN2 === nodeContext;
-  if (allowToSeek) {
-    if (skipSeparationSpace2(state, true, -1)) {
-      atNewLine = true;
-      if (state.lineIndent > parentIndent) {
-        indentStatus = 1;
-      } else if (state.lineIndent === parentIndent) {
-        indentStatus = 0;
-      } else if (state.lineIndent < parentIndent) {
-        indentStatus = -1;
-      }
-    }
-  }
-  if (indentStatus === 1) {
-    while (readTagProperty2(state) || readAnchorProperty2(state)) {
-      if (skipSeparationSpace2(state, true, -1)) {
-        atNewLine = true;
-        allowBlockCollections = allowBlockStyles;
-        if (state.lineIndent > parentIndent) {
-          indentStatus = 1;
-        } else if (state.lineIndent === parentIndent) {
-          indentStatus = 0;
-        } else if (state.lineIndent < parentIndent) {
-          indentStatus = -1;
-        }
-      } else {
-        allowBlockCollections = false;
-      }
-    }
-  }
-  if (allowBlockCollections) {
-    allowBlockCollections = atNewLine || allowCompact;
-  }
-  if (indentStatus === 1 || CONTEXT_BLOCK_OUT2 === nodeContext) {
-    if (CONTEXT_FLOW_IN2 === nodeContext || CONTEXT_FLOW_OUT2 === nodeContext) {
-      flowIndent = parentIndent;
-    } else {
-      flowIndent = parentIndent + 1;
-    }
-    blockIndent = state.position - state.lineStart;
-    if (indentStatus === 1) {
-      if (allowBlockCollections && (readBlockSequence2(state, blockIndent) || readBlockMapping2(state, blockIndent, flowIndent)) || readFlowCollection2(state, flowIndent)) {
-        hasContent = true;
-      } else {
-        if (allowBlockScalars && readBlockScalar2(state, flowIndent) || readSingleQuotedScalar2(state, flowIndent) || readDoubleQuotedScalar2(state, flowIndent)) {
-          hasContent = true;
-        } else if (readAlias2(state)) {
-          hasContent = true;
-          if (state.tag !== null || state.anchor !== null) {
-            throwError2(state, "alias node should not have any properties");
-          }
-        } else if (readPlainScalar2(state, flowIndent, CONTEXT_FLOW_IN2 === nodeContext)) {
-          hasContent = true;
-          if (state.tag === null) {
-            state.tag = "?";
-          }
-        }
-        if (state.anchor !== null) {
-          state.anchorMap[state.anchor] = state.result;
-        }
-      }
-    } else if (indentStatus === 0) {
-      hasContent = allowBlockCollections && readBlockSequence2(state, blockIndent);
-    }
-  }
-  if (state.tag === null) {
-    if (state.anchor !== null) {
-      state.anchorMap[state.anchor] = state.result;
-    }
-  } else if (state.tag === "?") {
-    if (state.result !== null && state.kind !== "scalar") {
-      throwError2(state, 'unacceptable node kind for !<?> tag; it should be "scalar", not "' + state.kind + '"');
-    }
-    for (typeIndex = 0, typeQuantity = state.implicitTypes.length; typeIndex < typeQuantity; typeIndex += 1) {
-      type3 = state.implicitTypes[typeIndex];
-      if (type3.resolve(state.result)) {
-        state.result = type3.construct(state.result);
-        state.tag = type3.tag;
-        if (state.anchor !== null) {
-          state.anchorMap[state.anchor] = state.result;
-        }
-        break;
-      }
-    }
-  } else if (state.tag !== "!") {
-    if (_hasOwnProperty$12.call(state.typeMap[state.kind || "fallback"], state.tag)) {
-      type3 = state.typeMap[state.kind || "fallback"][state.tag];
-    } else {
-      type3 = null;
-      typeList = state.typeMap.multi[state.kind || "fallback"];
-      for (typeIndex = 0, typeQuantity = typeList.length; typeIndex < typeQuantity; typeIndex += 1) {
-        if (state.tag.slice(0, typeList[typeIndex].tag.length) === typeList[typeIndex].tag) {
-          type3 = typeList[typeIndex];
-          break;
-        }
-      }
-    }
-    if (!type3) {
-      throwError2(state, "unknown tag !<" + state.tag + ">");
-    }
-    if (state.result !== null && type3.kind !== state.kind) {
-      throwError2(state, "unacceptable node kind for !<" + state.tag + '> tag; it should be "' + type3.kind + '", not "' + state.kind + '"');
-    }
-    if (!type3.resolve(state.result, state.tag)) {
-      throwError2(state, "cannot resolve a node with !<" + state.tag + "> explicit tag");
-    } else {
-      state.result = type3.construct(state.result, state.tag);
-      if (state.anchor !== null) {
-        state.anchorMap[state.anchor] = state.result;
-      }
-    }
-  }
-  if (state.listener !== null) {
-    state.listener("close", state);
-  }
-  return state.tag !== null || state.anchor !== null || hasContent;
-}
-function readDocument2(state) {
-  var documentStart = state.position, _position, directiveName, directiveArgs, hasDirectives = false, ch;
-  state.version = null;
-  state.checkLineBreaks = state.legacy;
-  state.tagMap = /* @__PURE__ */ Object.create(null);
-  state.anchorMap = /* @__PURE__ */ Object.create(null);
-  while ((ch = state.input.charCodeAt(state.position)) !== 0) {
-    skipSeparationSpace2(state, true, -1);
-    ch = state.input.charCodeAt(state.position);
-    if (state.lineIndent > 0 || ch !== 37) {
-      break;
-    }
-    hasDirectives = true;
-    ch = state.input.charCodeAt(++state.position);
-    _position = state.position;
-    while (ch !== 0 && !is_WS_OR_EOL2(ch)) {
-      ch = state.input.charCodeAt(++state.position);
-    }
-    directiveName = state.input.slice(_position, state.position);
-    directiveArgs = [];
-    if (directiveName.length < 1) {
-      throwError2(state, "directive name must not be less than one character in length");
-    }
-    while (ch !== 0) {
-      while (is_WHITE_SPACE2(ch)) {
-        ch = state.input.charCodeAt(++state.position);
-      }
-      if (ch === 35) {
-        do {
-          ch = state.input.charCodeAt(++state.position);
-        } while (ch !== 0 && !is_EOL2(ch));
-        break;
-      }
-      if (is_EOL2(ch)) break;
-      _position = state.position;
-      while (ch !== 0 && !is_WS_OR_EOL2(ch)) {
-        ch = state.input.charCodeAt(++state.position);
-      }
-      directiveArgs.push(state.input.slice(_position, state.position));
-    }
-    if (ch !== 0) readLineBreak2(state);
-    if (_hasOwnProperty$12.call(directiveHandlers2, directiveName)) {
-      directiveHandlers2[directiveName](state, directiveName, directiveArgs);
-    } else {
-      throwWarning2(state, 'unknown document directive "' + directiveName + '"');
-    }
-  }
-  skipSeparationSpace2(state, true, -1);
-  if (state.lineIndent === 0 && state.input.charCodeAt(state.position) === 45 && state.input.charCodeAt(state.position + 1) === 45 && state.input.charCodeAt(state.position + 2) === 45) {
-    state.position += 3;
-    skipSeparationSpace2(state, true, -1);
-  } else if (hasDirectives) {
-    throwError2(state, "directives end mark is expected");
-  }
-  composeNode2(state, state.lineIndent - 1, CONTEXT_BLOCK_OUT2, false, true);
-  skipSeparationSpace2(state, true, -1);
-  if (state.checkLineBreaks && PATTERN_NON_ASCII_LINE_BREAKS2.test(state.input.slice(documentStart, state.position))) {
-    throwWarning2(state, "non-ASCII line breaks are interpreted as content");
-  }
-  state.documents.push(state.result);
-  if (state.position === state.lineStart && testDocumentSeparator2(state)) {
-    if (state.input.charCodeAt(state.position) === 46) {
-      state.position += 3;
-      skipSeparationSpace2(state, true, -1);
-    }
-    return;
-  }
-  if (state.position < state.length - 1) {
-    throwError2(state, "end of the stream or a document separator is expected");
-  } else {
-    return;
-  }
-}
-function loadDocuments2(input, options) {
-  input = String(input);
-  options = options || {};
-  if (input.length !== 0) {
-    if (input.charCodeAt(input.length - 1) !== 10 && input.charCodeAt(input.length - 1) !== 13) {
-      input += "\n";
-    }
-    if (input.charCodeAt(0) === 65279) {
-      input = input.slice(1);
-    }
-  }
-  var state = new State$12(input, options);
-  var nullpos = input.indexOf("\0");
-  if (nullpos !== -1) {
-    state.position = nullpos;
-    throwError2(state, "null byte is not allowed in input");
-  }
-  state.input += "\0";
-  while (state.input.charCodeAt(state.position) === 32) {
-    state.lineIndent += 1;
-    state.position += 1;
-  }
-  while (state.position < state.length - 1) {
-    readDocument2(state);
-  }
-  return state.documents;
-}
-function loadAll$12(input, iterator, options) {
-  if (iterator !== null && typeof iterator === "object" && typeof options === "undefined") {
-    options = iterator;
-    iterator = null;
-  }
-  var documents = loadDocuments2(input, options);
-  if (typeof iterator !== "function") {
-    return documents;
-  }
-  for (var index = 0, length = documents.length; index < length; index += 1) {
-    iterator(documents[index]);
-  }
-}
-function load$12(input, options) {
-  var documents = loadDocuments2(input, options);
-  if (documents.length === 0) {
-    return void 0;
-  } else if (documents.length === 1) {
-    return documents[0];
-  }
-  throw new exception2("expected a single document in the stream, but found more");
-}
-var loadAll_12 = loadAll$12;
-var load_12 = load$12;
-var loader2 = {
-  loadAll: loadAll_12,
-  load: load_12
-};
-var _toString2 = Object.prototype.toString;
-var _hasOwnProperty2 = Object.prototype.hasOwnProperty;
-var CHAR_BOM2 = 65279;
-var CHAR_TAB2 = 9;
-var CHAR_LINE_FEED2 = 10;
-var CHAR_CARRIAGE_RETURN2 = 13;
-var CHAR_SPACE2 = 32;
-var CHAR_EXCLAMATION2 = 33;
-var CHAR_DOUBLE_QUOTE2 = 34;
-var CHAR_SHARP2 = 35;
-var CHAR_PERCENT2 = 37;
-var CHAR_AMPERSAND2 = 38;
-var CHAR_SINGLE_QUOTE2 = 39;
-var CHAR_ASTERISK2 = 42;
-var CHAR_COMMA2 = 44;
-var CHAR_MINUS2 = 45;
-var CHAR_COLON2 = 58;
-var CHAR_EQUALS2 = 61;
-var CHAR_GREATER_THAN2 = 62;
-var CHAR_QUESTION2 = 63;
-var CHAR_COMMERCIAL_AT2 = 64;
-var CHAR_LEFT_SQUARE_BRACKET2 = 91;
-var CHAR_RIGHT_SQUARE_BRACKET2 = 93;
-var CHAR_GRAVE_ACCENT2 = 96;
-var CHAR_LEFT_CURLY_BRACKET2 = 123;
-var CHAR_VERTICAL_LINE2 = 124;
-var CHAR_RIGHT_CURLY_BRACKET2 = 125;
-var ESCAPE_SEQUENCES2 = {};
-ESCAPE_SEQUENCES2[0] = "\\0";
-ESCAPE_SEQUENCES2[7] = "\\a";
-ESCAPE_SEQUENCES2[8] = "\\b";
-ESCAPE_SEQUENCES2[9] = "\\t";
-ESCAPE_SEQUENCES2[10] = "\\n";
-ESCAPE_SEQUENCES2[11] = "\\v";
-ESCAPE_SEQUENCES2[12] = "\\f";
-ESCAPE_SEQUENCES2[13] = "\\r";
-ESCAPE_SEQUENCES2[27] = "\\e";
-ESCAPE_SEQUENCES2[34] = '\\"';
-ESCAPE_SEQUENCES2[92] = "\\\\";
-ESCAPE_SEQUENCES2[133] = "\\N";
-ESCAPE_SEQUENCES2[160] = "\\_";
-ESCAPE_SEQUENCES2[8232] = "\\L";
-ESCAPE_SEQUENCES2[8233] = "\\P";
-var DEPRECATED_BOOLEANS_SYNTAX2 = [
-  "y",
-  "Y",
-  "yes",
-  "Yes",
-  "YES",
-  "on",
-  "On",
-  "ON",
-  "n",
-  "N",
-  "no",
-  "No",
-  "NO",
-  "off",
-  "Off",
-  "OFF"
-];
-var DEPRECATED_BASE60_SYNTAX2 = /^[-+]?[0-9_]+(?::[0-9_]+)+(?:\.[0-9_]*)?$/;
-function compileStyleMap2(schema3, map3) {
-  var result, keys, index, length, tag, style, type3;
-  if (map3 === null) return {};
-  result = {};
-  keys = Object.keys(map3);
-  for (index = 0, length = keys.length; index < length; index += 1) {
-    tag = keys[index];
-    style = String(map3[tag]);
-    if (tag.slice(0, 2) === "!!") {
-      tag = "tag:yaml.org,2002:" + tag.slice(2);
-    }
-    type3 = schema3.compiledTypeMap["fallback"][tag];
-    if (type3 && _hasOwnProperty2.call(type3.styleAliases, style)) {
-      style = type3.styleAliases[style];
-    }
-    result[tag] = style;
-  }
-  return result;
-}
-function encodeHex2(character) {
-  var string, handle, length;
-  string = character.toString(16).toUpperCase();
-  if (character <= 255) {
-    handle = "x";
-    length = 2;
-  } else if (character <= 65535) {
-    handle = "u";
-    length = 4;
-  } else if (character <= 4294967295) {
-    handle = "U";
-    length = 8;
-  } else {
-    throw new exception2("code point within a string may not be greater than 0xFFFFFFFF");
-  }
-  return "\\" + handle + common3.repeat("0", length - string.length) + string;
-}
-var QUOTING_TYPE_SINGLE2 = 1;
-var QUOTING_TYPE_DOUBLE2 = 2;
-function State2(options) {
-  this.schema = options["schema"] || _default2;
-  this.indent = Math.max(1, options["indent"] || 2);
-  this.noArrayIndent = options["noArrayIndent"] || false;
-  this.skipInvalid = options["skipInvalid"] || false;
-  this.flowLevel = common3.isNothing(options["flowLevel"]) ? -1 : options["flowLevel"];
-  this.styleMap = compileStyleMap2(this.schema, options["styles"] || null);
-  this.sortKeys = options["sortKeys"] || false;
-  this.lineWidth = options["lineWidth"] || 80;
-  this.noRefs = options["noRefs"] || false;
-  this.noCompatMode = options["noCompatMode"] || false;
-  this.condenseFlow = options["condenseFlow"] || false;
-  this.quotingType = options["quotingType"] === '"' ? QUOTING_TYPE_DOUBLE2 : QUOTING_TYPE_SINGLE2;
-  this.forceQuotes = options["forceQuotes"] || false;
-  this.replacer = typeof options["replacer"] === "function" ? options["replacer"] : null;
-  this.implicitTypes = this.schema.compiledImplicit;
-  this.explicitTypes = this.schema.compiledExplicit;
-  this.tag = null;
-  this.result = "";
-  this.duplicates = [];
-  this.usedDuplicates = null;
-}
-function indentString2(string, spaces) {
-  var ind = common3.repeat(" ", spaces), position = 0, next = -1, result = "", line, length = string.length;
-  while (position < length) {
-    next = string.indexOf("\n", position);
-    if (next === -1) {
-      line = string.slice(position);
-      position = length;
-    } else {
-      line = string.slice(position, next + 1);
-      position = next + 1;
-    }
-    if (line.length && line !== "\n") result += ind;
-    result += line;
-  }
-  return result;
-}
-function generateNextLine2(state, level) {
-  return "\n" + common3.repeat(" ", state.indent * level);
-}
-function testImplicitResolving2(state, str3) {
-  var index, length, type3;
-  for (index = 0, length = state.implicitTypes.length; index < length; index += 1) {
-    type3 = state.implicitTypes[index];
-    if (type3.resolve(str3)) {
-      return true;
-    }
-  }
-  return false;
-}
-function isWhitespace2(c) {
-  return c === CHAR_SPACE2 || c === CHAR_TAB2;
-}
-function isPrintable2(c) {
-  return 32 <= c && c <= 126 || 161 <= c && c <= 55295 && c !== 8232 && c !== 8233 || 57344 <= c && c <= 65533 && c !== CHAR_BOM2 || 65536 <= c && c <= 1114111;
-}
-function isNsCharOrWhitespace2(c) {
-  return isPrintable2(c) && c !== CHAR_BOM2 && c !== CHAR_CARRIAGE_RETURN2 && c !== CHAR_LINE_FEED2;
-}
-function isPlainSafe2(c, prev, inblock) {
-  var cIsNsCharOrWhitespace = isNsCharOrWhitespace2(c);
-  var cIsNsChar = cIsNsCharOrWhitespace && !isWhitespace2(c);
-  return (
-    // ns-plain-safe
-    (inblock ? (
-      // c = flow-in
-      cIsNsCharOrWhitespace
-    ) : cIsNsCharOrWhitespace && c !== CHAR_COMMA2 && c !== CHAR_LEFT_SQUARE_BRACKET2 && c !== CHAR_RIGHT_SQUARE_BRACKET2 && c !== CHAR_LEFT_CURLY_BRACKET2 && c !== CHAR_RIGHT_CURLY_BRACKET2) && c !== CHAR_SHARP2 && !(prev === CHAR_COLON2 && !cIsNsChar) || isNsCharOrWhitespace2(prev) && !isWhitespace2(prev) && c === CHAR_SHARP2 || prev === CHAR_COLON2 && cIsNsChar
-  );
-}
-function isPlainSafeFirst2(c) {
-  return isPrintable2(c) && c !== CHAR_BOM2 && !isWhitespace2(c) && c !== CHAR_MINUS2 && c !== CHAR_QUESTION2 && c !== CHAR_COLON2 && c !== CHAR_COMMA2 && c !== CHAR_LEFT_SQUARE_BRACKET2 && c !== CHAR_RIGHT_SQUARE_BRACKET2 && c !== CHAR_LEFT_CURLY_BRACKET2 && c !== CHAR_RIGHT_CURLY_BRACKET2 && c !== CHAR_SHARP2 && c !== CHAR_AMPERSAND2 && c !== CHAR_ASTERISK2 && c !== CHAR_EXCLAMATION2 && c !== CHAR_VERTICAL_LINE2 && c !== CHAR_EQUALS2 && c !== CHAR_GREATER_THAN2 && c !== CHAR_SINGLE_QUOTE2 && c !== CHAR_DOUBLE_QUOTE2 && c !== CHAR_PERCENT2 && c !== CHAR_COMMERCIAL_AT2 && c !== CHAR_GRAVE_ACCENT2;
-}
-function isPlainSafeLast2(c) {
-  return !isWhitespace2(c) && c !== CHAR_COLON2;
-}
-function codePointAt2(string, pos) {
-  var first = string.charCodeAt(pos), second;
-  if (first >= 55296 && first <= 56319 && pos + 1 < string.length) {
-    second = string.charCodeAt(pos + 1);
-    if (second >= 56320 && second <= 57343) {
-      return (first - 55296) * 1024 + second - 56320 + 65536;
-    }
-  }
-  return first;
-}
-function needIndentIndicator2(string) {
-  var leadingSpaceRe = /^\n* /;
-  return leadingSpaceRe.test(string);
-}
-var STYLE_PLAIN2 = 1;
-var STYLE_SINGLE2 = 2;
-var STYLE_LITERAL2 = 3;
-var STYLE_FOLDED2 = 4;
-var STYLE_DOUBLE2 = 5;
-function chooseScalarStyle2(string, singleLineOnly, indentPerLevel, lineWidth, testAmbiguousType, quotingType, forceQuotes, inblock) {
-  var i;
-  var char = 0;
-  var prevChar = null;
-  var hasLineBreak = false;
-  var hasFoldableLine = false;
-  var shouldTrackWidth = lineWidth !== -1;
-  var previousLineBreak = -1;
-  var plain = isPlainSafeFirst2(codePointAt2(string, 0)) && isPlainSafeLast2(codePointAt2(string, string.length - 1));
-  if (singleLineOnly || forceQuotes) {
-    for (i = 0; i < string.length; char >= 65536 ? i += 2 : i++) {
-      char = codePointAt2(string, i);
-      if (!isPrintable2(char)) {
-        return STYLE_DOUBLE2;
-      }
-      plain = plain && isPlainSafe2(char, prevChar, inblock);
-      prevChar = char;
-    }
-  } else {
-    for (i = 0; i < string.length; char >= 65536 ? i += 2 : i++) {
-      char = codePointAt2(string, i);
-      if (char === CHAR_LINE_FEED2) {
-        hasLineBreak = true;
-        if (shouldTrackWidth) {
-          hasFoldableLine = hasFoldableLine || // Foldable line = too long, and not more-indented.
-          i - previousLineBreak - 1 > lineWidth && string[previousLineBreak + 1] !== " ";
-          previousLineBreak = i;
-        }
-      } else if (!isPrintable2(char)) {
-        return STYLE_DOUBLE2;
-      }
-      plain = plain && isPlainSafe2(char, prevChar, inblock);
-      prevChar = char;
-    }
-    hasFoldableLine = hasFoldableLine || shouldTrackWidth && (i - previousLineBreak - 1 > lineWidth && string[previousLineBreak + 1] !== " ");
-  }
-  if (!hasLineBreak && !hasFoldableLine) {
-    if (plain && !forceQuotes && !testAmbiguousType(string)) {
-      return STYLE_PLAIN2;
-    }
-    return quotingType === QUOTING_TYPE_DOUBLE2 ? STYLE_DOUBLE2 : STYLE_SINGLE2;
-  }
-  if (indentPerLevel > 9 && needIndentIndicator2(string)) {
-    return STYLE_DOUBLE2;
-  }
-  if (!forceQuotes) {
-    return hasFoldableLine ? STYLE_FOLDED2 : STYLE_LITERAL2;
-  }
-  return quotingType === QUOTING_TYPE_DOUBLE2 ? STYLE_DOUBLE2 : STYLE_SINGLE2;
-}
-function writeScalar2(state, string, level, iskey, inblock) {
-  state.dump = function() {
-    if (string.length === 0) {
-      return state.quotingType === QUOTING_TYPE_DOUBLE2 ? '""' : "''";
-    }
-    if (!state.noCompatMode) {
-      if (DEPRECATED_BOOLEANS_SYNTAX2.indexOf(string) !== -1 || DEPRECATED_BASE60_SYNTAX2.test(string)) {
-        return state.quotingType === QUOTING_TYPE_DOUBLE2 ? '"' + string + '"' : "'" + string + "'";
-      }
-    }
-    var indent = state.indent * Math.max(1, level);
-    var lineWidth = state.lineWidth === -1 ? -1 : Math.max(Math.min(state.lineWidth, 40), state.lineWidth - indent);
-    var singleLineOnly = iskey || state.flowLevel > -1 && level >= state.flowLevel;
-    function testAmbiguity(string2) {
-      return testImplicitResolving2(state, string2);
-    }
-    switch (chooseScalarStyle2(
-      string,
-      singleLineOnly,
-      state.indent,
-      lineWidth,
-      testAmbiguity,
-      state.quotingType,
-      state.forceQuotes && !iskey,
-      inblock
-    )) {
-      case STYLE_PLAIN2:
-        return string;
-      case STYLE_SINGLE2:
-        return "'" + string.replace(/'/g, "''") + "'";
-      case STYLE_LITERAL2:
-        return "|" + blockHeader2(string, state.indent) + dropEndingNewline2(indentString2(string, indent));
-      case STYLE_FOLDED2:
-        return ">" + blockHeader2(string, state.indent) + dropEndingNewline2(indentString2(foldString2(string, lineWidth), indent));
-      case STYLE_DOUBLE2:
-        return '"' + escapeString2(string) + '"';
-      default:
-        throw new exception2("impossible error: invalid scalar style");
-    }
-  }();
-}
-function blockHeader2(string, indentPerLevel) {
-  var indentIndicator = needIndentIndicator2(string) ? String(indentPerLevel) : "";
-  var clip = string[string.length - 1] === "\n";
-  var keep = clip && (string[string.length - 2] === "\n" || string === "\n");
-  var chomp = keep ? "+" : clip ? "" : "-";
-  return indentIndicator + chomp + "\n";
-}
-function dropEndingNewline2(string) {
-  return string[string.length - 1] === "\n" ? string.slice(0, -1) : string;
-}
-function foldString2(string, width) {
-  var lineRe = /(\n+)([^\n]*)/g;
-  var result = function() {
-    var nextLF = string.indexOf("\n");
-    nextLF = nextLF !== -1 ? nextLF : string.length;
-    lineRe.lastIndex = nextLF;
-    return foldLine2(string.slice(0, nextLF), width);
-  }();
-  var prevMoreIndented = string[0] === "\n" || string[0] === " ";
-  var moreIndented;
-  var match;
-  while (match = lineRe.exec(string)) {
-    var prefix = match[1], line = match[2];
-    moreIndented = line[0] === " ";
-    result += prefix + (!prevMoreIndented && !moreIndented && line !== "" ? "\n" : "") + foldLine2(line, width);
-    prevMoreIndented = moreIndented;
-  }
-  return result;
-}
-function foldLine2(line, width) {
-  if (line === "" || line[0] === " ") return line;
-  var breakRe = / [^ ]/g;
-  var match;
-  var start = 0, end, curr = 0, next = 0;
-  var result = "";
-  while (match = breakRe.exec(line)) {
-    next = match.index;
-    if (next - start > width) {
-      end = curr > start ? curr : next;
-      result += "\n" + line.slice(start, end);
-      start = end + 1;
-    }
-    curr = next;
-  }
-  result += "\n";
-  if (line.length - start > width && curr > start) {
-    result += line.slice(start, curr) + "\n" + line.slice(curr + 1);
-  } else {
-    result += line.slice(start);
-  }
-  return result.slice(1);
-}
-function escapeString2(string) {
-  var result = "";
-  var char = 0;
-  var escapeSeq;
-  for (var i = 0; i < string.length; char >= 65536 ? i += 2 : i++) {
-    char = codePointAt2(string, i);
-    escapeSeq = ESCAPE_SEQUENCES2[char];
-    if (!escapeSeq && isPrintable2(char)) {
-      result += string[i];
-      if (char >= 65536) result += string[i + 1];
-    } else {
-      result += escapeSeq || encodeHex2(char);
-    }
-  }
-  return result;
-}
-function writeFlowSequence2(state, level, object) {
-  var _result = "", _tag = state.tag, index, length, value;
-  for (index = 0, length = object.length; index < length; index += 1) {
-    value = object[index];
-    if (state.replacer) {
-      value = state.replacer.call(object, String(index), value);
-    }
-    if (writeNode2(state, level, value, false, false) || typeof value === "undefined" && writeNode2(state, level, null, false, false)) {
-      if (_result !== "") _result += "," + (!state.condenseFlow ? " " : "");
-      _result += state.dump;
-    }
-  }
-  state.tag = _tag;
-  state.dump = "[" + _result + "]";
-}
-function writeBlockSequence2(state, level, object, compact) {
-  var _result = "", _tag = state.tag, index, length, value;
-  for (index = 0, length = object.length; index < length; index += 1) {
-    value = object[index];
-    if (state.replacer) {
-      value = state.replacer.call(object, String(index), value);
-    }
-    if (writeNode2(state, level + 1, value, true, true, false, true) || typeof value === "undefined" && writeNode2(state, level + 1, null, true, true, false, true)) {
-      if (!compact || _result !== "") {
-        _result += generateNextLine2(state, level);
-      }
-      if (state.dump && CHAR_LINE_FEED2 === state.dump.charCodeAt(0)) {
-        _result += "-";
-      } else {
-        _result += "- ";
-      }
-      _result += state.dump;
-    }
-  }
-  state.tag = _tag;
-  state.dump = _result || "[]";
-}
-function writeFlowMapping2(state, level, object) {
-  var _result = "", _tag = state.tag, objectKeyList = Object.keys(object), index, length, objectKey, objectValue, pairBuffer;
-  for (index = 0, length = objectKeyList.length; index < length; index += 1) {
-    pairBuffer = "";
-    if (_result !== "") pairBuffer += ", ";
-    if (state.condenseFlow) pairBuffer += '"';
-    objectKey = objectKeyList[index];
-    objectValue = object[objectKey];
-    if (state.replacer) {
-      objectValue = state.replacer.call(object, objectKey, objectValue);
-    }
-    if (!writeNode2(state, level, objectKey, false, false)) {
-      continue;
-    }
-    if (state.dump.length > 1024) pairBuffer += "? ";
-    pairBuffer += state.dump + (state.condenseFlow ? '"' : "") + ":" + (state.condenseFlow ? "" : " ");
-    if (!writeNode2(state, level, objectValue, false, false)) {
-      continue;
-    }
-    pairBuffer += state.dump;
-    _result += pairBuffer;
-  }
-  state.tag = _tag;
-  state.dump = "{" + _result + "}";
-}
-function writeBlockMapping2(state, level, object, compact) {
-  var _result = "", _tag = state.tag, objectKeyList = Object.keys(object), index, length, objectKey, objectValue, explicitPair, pairBuffer;
-  if (state.sortKeys === true) {
-    objectKeyList.sort();
-  } else if (typeof state.sortKeys === "function") {
-    objectKeyList.sort(state.sortKeys);
-  } else if (state.sortKeys) {
-    throw new exception2("sortKeys must be a boolean or a function");
-  }
-  for (index = 0, length = objectKeyList.length; index < length; index += 1) {
-    pairBuffer = "";
-    if (!compact || _result !== "") {
-      pairBuffer += generateNextLine2(state, level);
-    }
-    objectKey = objectKeyList[index];
-    objectValue = object[objectKey];
-    if (state.replacer) {
-      objectValue = state.replacer.call(object, objectKey, objectValue);
-    }
-    if (!writeNode2(state, level + 1, objectKey, true, true, true)) {
-      continue;
-    }
-    explicitPair = state.tag !== null && state.tag !== "?" || state.dump && state.dump.length > 1024;
-    if (explicitPair) {
-      if (state.dump && CHAR_LINE_FEED2 === state.dump.charCodeAt(0)) {
-        pairBuffer += "?";
-      } else {
-        pairBuffer += "? ";
-      }
-    }
-    pairBuffer += state.dump;
-    if (explicitPair) {
-      pairBuffer += generateNextLine2(state, level);
-    }
-    if (!writeNode2(state, level + 1, objectValue, true, explicitPair)) {
-      continue;
-    }
-    if (state.dump && CHAR_LINE_FEED2 === state.dump.charCodeAt(0)) {
-      pairBuffer += ":";
-    } else {
-      pairBuffer += ": ";
-    }
-    pairBuffer += state.dump;
-    _result += pairBuffer;
-  }
-  state.tag = _tag;
-  state.dump = _result || "{}";
-}
-function detectType2(state, object, explicit) {
-  var _result, typeList, index, length, type3, style;
-  typeList = explicit ? state.explicitTypes : state.implicitTypes;
-  for (index = 0, length = typeList.length; index < length; index += 1) {
-    type3 = typeList[index];
-    if ((type3.instanceOf || type3.predicate) && (!type3.instanceOf || typeof object === "object" && object instanceof type3.instanceOf) && (!type3.predicate || type3.predicate(object))) {
-      if (explicit) {
-        if (type3.multi && type3.representName) {
-          state.tag = type3.representName(object);
-        } else {
-          state.tag = type3.tag;
-        }
-      } else {
-        state.tag = "?";
-      }
-      if (type3.represent) {
-        style = state.styleMap[type3.tag] || type3.defaultStyle;
-        if (_toString2.call(type3.represent) === "[object Function]") {
-          _result = type3.represent(object, style);
-        } else if (_hasOwnProperty2.call(type3.represent, style)) {
-          _result = type3.represent[style](object, style);
-        } else {
-          throw new exception2("!<" + type3.tag + '> tag resolver accepts not "' + style + '" style');
-        }
-        state.dump = _result;
-      }
-      return true;
-    }
-  }
-  return false;
-}
-function writeNode2(state, level, object, block, compact, iskey, isblockseq) {
-  state.tag = null;
-  state.dump = object;
-  if (!detectType2(state, object, false)) {
-    detectType2(state, object, true);
-  }
-  var type3 = _toString2.call(state.dump);
-  var inblock = block;
-  var tagStr;
-  if (block) {
-    block = state.flowLevel < 0 || state.flowLevel > level;
-  }
-  var objectOrArray = type3 === "[object Object]" || type3 === "[object Array]", duplicateIndex, duplicate;
-  if (objectOrArray) {
-    duplicateIndex = state.duplicates.indexOf(object);
-    duplicate = duplicateIndex !== -1;
-  }
-  if (state.tag !== null && state.tag !== "?" || duplicate || state.indent !== 2 && level > 0) {
-    compact = false;
-  }
-  if (duplicate && state.usedDuplicates[duplicateIndex]) {
-    state.dump = "*ref_" + duplicateIndex;
-  } else {
-    if (objectOrArray && duplicate && !state.usedDuplicates[duplicateIndex]) {
-      state.usedDuplicates[duplicateIndex] = true;
-    }
-    if (type3 === "[object Object]") {
-      if (block && Object.keys(state.dump).length !== 0) {
-        writeBlockMapping2(state, level, state.dump, compact);
-        if (duplicate) {
-          state.dump = "&ref_" + duplicateIndex + state.dump;
-        }
-      } else {
-        writeFlowMapping2(state, level, state.dump);
-        if (duplicate) {
-          state.dump = "&ref_" + duplicateIndex + " " + state.dump;
-        }
-      }
-    } else if (type3 === "[object Array]") {
-      if (block && state.dump.length !== 0) {
-        if (state.noArrayIndent && !isblockseq && level > 0) {
-          writeBlockSequence2(state, level - 1, state.dump, compact);
-        } else {
-          writeBlockSequence2(state, level, state.dump, compact);
-        }
-        if (duplicate) {
-          state.dump = "&ref_" + duplicateIndex + state.dump;
-        }
-      } else {
-        writeFlowSequence2(state, level, state.dump);
-        if (duplicate) {
-          state.dump = "&ref_" + duplicateIndex + " " + state.dump;
-        }
-      }
-    } else if (type3 === "[object String]") {
-      if (state.tag !== "?") {
-        writeScalar2(state, state.dump, level, iskey, inblock);
-      }
-    } else if (type3 === "[object Undefined]") {
-      return false;
-    } else {
-      if (state.skipInvalid) return false;
-      throw new exception2("unacceptable kind of an object to dump " + type3);
-    }
-    if (state.tag !== null && state.tag !== "?") {
-      tagStr = encodeURI(
-        state.tag[0] === "!" ? state.tag.slice(1) : state.tag
-      ).replace(/!/g, "%21");
-      if (state.tag[0] === "!") {
-        tagStr = "!" + tagStr;
-      } else if (tagStr.slice(0, 18) === "tag:yaml.org,2002:") {
-        tagStr = "!!" + tagStr.slice(18);
-      } else {
-        tagStr = "!<" + tagStr + ">";
-      }
-      state.dump = tagStr + " " + state.dump;
-    }
-  }
-  return true;
-}
-function getDuplicateReferences2(object, state) {
-  var objects = [], duplicatesIndexes = [], index, length;
-  inspectNode2(object, objects, duplicatesIndexes);
-  for (index = 0, length = duplicatesIndexes.length; index < length; index += 1) {
-    state.duplicates.push(objects[duplicatesIndexes[index]]);
-  }
-  state.usedDuplicates = new Array(length);
-}
-function inspectNode2(object, objects, duplicatesIndexes) {
-  var objectKeyList, index, length;
-  if (object !== null && typeof object === "object") {
-    index = objects.indexOf(object);
-    if (index !== -1) {
-      if (duplicatesIndexes.indexOf(index) === -1) {
-        duplicatesIndexes.push(index);
-      }
-    } else {
-      objects.push(object);
-      if (Array.isArray(object)) {
-        for (index = 0, length = object.length; index < length; index += 1) {
-          inspectNode2(object[index], objects, duplicatesIndexes);
-        }
-      } else {
-        objectKeyList = Object.keys(object);
-        for (index = 0, length = objectKeyList.length; index < length; index += 1) {
-          inspectNode2(object[objectKeyList[index]], objects, duplicatesIndexes);
-        }
-      }
-    }
-  }
-}
-function dump$12(input, options) {
-  options = options || {};
-  var state = new State2(options);
-  if (!state.noRefs) getDuplicateReferences2(input, state);
-  var value = input;
-  if (state.replacer) {
-    value = state.replacer.call({ "": value }, "", value);
-  }
-  if (writeNode2(state, 0, value, true, true)) return state.dump + "\n";
-  return "";
-}
-var dump_12 = dump$12;
-var dumper2 = {
-  dump: dump_12
-};
-function renamed2(from, to) {
-  return function() {
-    throw new Error("Function yaml." + from + " is removed in js-yaml 4. Use yaml." + to + " instead, which is now safe by default.");
-  };
-}
-var Type2 = type2;
-var Schema2 = schema2;
-var FAILSAFE_SCHEMA2 = failsafe2;
-var JSON_SCHEMA2 = json2;
-var CORE_SCHEMA2 = core2;
-var DEFAULT_SCHEMA2 = _default2;
-var load3 = loader2.load;
-var loadAll2 = loader2.loadAll;
-var dump2 = dumper2.dump;
-var YAMLException2 = exception2;
-var types2 = {
-  binary: binary2,
-  float: float2,
-  map: map2,
-  null: _null2,
-  pairs: pairs2,
-  set: set2,
-  timestamp: timestamp2,
-  bool: bool2,
-  int: int2,
-  merge: merge2,
-  omap: omap2,
-  seq: seq2,
-  str: str2
-};
-var safeLoad2 = renamed2("safeLoad", "load");
-var safeLoadAll2 = renamed2("safeLoadAll", "loadAll");
-var safeDump2 = renamed2("safeDump", "dump");
-var jsYaml2 = {
-  Type: Type2,
-  Schema: Schema2,
-  FAILSAFE_SCHEMA: FAILSAFE_SCHEMA2,
-  JSON_SCHEMA: JSON_SCHEMA2,
-  CORE_SCHEMA: CORE_SCHEMA2,
-  DEFAULT_SCHEMA: DEFAULT_SCHEMA2,
-  load: load3,
-  loadAll: loadAll2,
-  dump: dump2,
-  YAMLException: YAMLException2,
-  types: types2,
-  safeLoad: safeLoad2,
-  safeLoadAll: safeLoadAll2,
-  safeDump: safeDump2
-};
-
-// lib/repo-registry/src/io.ts
 var IDENTITY = "repo-registry.yml";
 var LOCAL = "repo-registry.local.yml";
 function readYaml(file, fallback) {
-  if (!fs5.existsSync(file)) return fallback;
+  if (!fs5.existsSync(file))
+    return fallback;
   try {
-    return jsYaml2.load(fs5.readFileSync(file, "utf8")) ?? fallback;
+    return index_vite_proxy_tmp_default.load(fs5.readFileSync(file, "utf8")) ?? fallback;
   } catch (cause) {
     throw new Error(`failed to parse ${file}: ${cause}`);
   }
@@ -23082,21 +20265,25 @@ function readRegistry({ root }) {
   return { repos: id.repos ?? {}, repoGroups: id.repo_groups ?? {}, localPaths: local.paths ?? {} };
 }
 function writeIdentity({ root, repos, repoGroups }) {
-  atomicWrite(path6.join(root, IDENTITY), jsYaml2.dump({ repos, repo_groups: repoGroups }, { indent: 2, lineWidth: 80, noRefs: true }));
+  atomicWrite(path6.join(root, IDENTITY), index_vite_proxy_tmp_default.dump({ repos, repo_groups: repoGroups }, { indent: 2, lineWidth: 80, noRefs: true }));
 }
 function writeLocal({ root, localPaths }) {
-  atomicWrite(path6.join(root, LOCAL), jsYaml2.dump({ paths: localPaths }, { indent: 2, noRefs: true }));
+  atomicWrite(path6.join(root, LOCAL), index_vite_proxy_tmp_default.dump({ paths: localPaths }, { indent: 2, noRefs: true }));
   ensureLocalGitignored({ root });
 }
-function ensureLocalGitignored({ root }) {
+function ensureGitignored({ root, entry }) {
   const gi = path6.join(root, ".gitignore");
   const existing = fs5.existsSync(gi) ? fs5.readFileSync(gi, "utf8") : "";
-  if (existing.split(/\r?\n/).includes(LOCAL)) return;
-  const next = existing && !existing.endsWith("\n") ? existing + "\n" + LOCAL + "\n" : existing + LOCAL + "\n";
+  if (existing.split(/\r?\n/).includes(entry))
+    return;
+  const next = existing && !existing.endsWith("\n") ? existing + "\n" + entry + "\n" : existing + entry + "\n";
   atomicWrite(gi, next);
 }
+function ensureLocalGitignored({ root }) {
+  ensureGitignored({ root, entry: LOCAL });
+}
 
-// lib/repo-registry/src/validate.ts
+// lib/repo-registry/dist/validate.js
 function isSlug(name) {
   return /^[a-z0-9]+(-[a-z0-9]+)*$/.test(name);
 }
@@ -23106,16 +20293,18 @@ function assertUniqueName(reg, name) {
   }
 }
 
-// lib/repo-registry/src/resolve.ts
+// lib/repo-registry/dist/resolve.js
 function resolveRepoPath(reg, name) {
   const local = reg.localPaths[name];
-  if (local) return { name, bound: true, path: local, hint: null };
+  if (local)
+    return { name, bound: true, path: local, hint: null };
   return { name, bound: false, path: null, hint: `run \`radorch repo bind ${name} <path>\`` };
 }
 
-// lib/repo-registry/src/mutations.ts
+// lib/repo-registry/dist/mutations.js
 function addRepo({ root, name, identity: identity2, localPath }) {
-  if (!isSlug(name)) throw new Error(`name '${name}' is not a valid slug`);
+  if (!isSlug(name))
+    throw new Error(`name '${name}' is not a valid slug`);
   const reg = readRegistry({ root });
   assertUniqueName(reg, name);
   reg.repos[name] = identity2;
@@ -23137,7 +20326,8 @@ function removeRepo({ root, name }) {
   }
 }
 function createGroup({ root, name, members, description = "" }) {
-  if (!isSlug(name)) throw new Error(`name '${name}' is not a valid slug`);
+  if (!isSlug(name))
+    throw new Error(`name '${name}' is not a valid slug`);
   const reg = readRegistry({ root });
   assertUniqueName(reg, name);
   const group = { description, members: [...members] };
@@ -23147,7 +20337,8 @@ function createGroup({ root, name, members, description = "" }) {
 function addGroupMember({ root, group, repo }) {
   const reg = readRegistry({ root });
   const grp = reg.repoGroups[group];
-  if (!grp) throw new Error(`group '${group}' does not exist`);
+  if (!grp)
+    throw new Error(`group '${group}' does not exist`);
   if (!grp.members.includes(repo)) {
     grp.members.push(repo);
   }
@@ -23156,7 +20347,8 @@ function addGroupMember({ root, group, repo }) {
 function removeGroupMember({ root, group, repo }) {
   const reg = readRegistry({ root });
   const grp = reg.repoGroups[group];
-  if (!grp) return;
+  if (!grp)
+    return;
   grp.members = grp.members.filter((m) => m !== repo);
   writeIdentity({ root, repos: reg.repos, repoGroups: reg.repoGroups });
 }
@@ -23168,23 +20360,29 @@ function deleteGroup({ root, name }) {
 function editRepo({ root, name, description, remote, defaultBranch }) {
   const reg = readRegistry({ root });
   const identity2 = reg.repos[name];
-  if (!identity2) throw new Error(`repo '${name}' does not exist`);
-  if (description !== void 0) identity2.description = description;
-  if (remote !== void 0) identity2.remote = remote;
-  if (defaultBranch !== void 0) identity2.default_branch = defaultBranch;
+  if (!identity2)
+    throw new Error(`repo '${name}' does not exist`);
+  if (description !== void 0)
+    identity2.description = description;
+  if (remote !== void 0)
+    identity2.remote = remote;
+  if (defaultBranch !== void 0)
+    identity2.default_branch = defaultBranch;
   writeIdentity({ root, repos: reg.repos, repoGroups: reg.repoGroups });
   return identity2;
 }
 function bindRepo({ root, name, localPath }) {
   const reg = readRegistry({ root });
-  if (!(name in reg.repos)) throw new Error(`repo '${name}' does not exist`);
+  if (!(name in reg.repos))
+    throw new Error(`repo '${name}' does not exist`);
   reg.localPaths[name] = localPath;
   writeLocal({ root, localPaths: reg.localPaths });
 }
 function editGroup({ root, name, description }) {
   const reg = readRegistry({ root });
   const grp = reg.repoGroups[name];
-  if (!grp) throw new Error(`group '${name}' does not exist`);
+  if (!grp)
+    throw new Error(`group '${name}' does not exist`);
   grp.description = description;
   writeIdentity({ root, repos: reg.repos, repoGroups: reg.repoGroups });
 }
@@ -23769,7 +20967,7 @@ async function runStart(opts) {
     );
   }
   const uiDir = opts.env["RADORCH_UI_DIR"] ?? path9.join(resolveInstallRoot(), "ui");
-  const serverJs = path9.join(uiDir, "server.js");
+  const serverJs = path9.join(uiDir, "ui", "server.js");
   const spawnFn = opts._spawn ?? spawn;
   const env2 = {
     ...opts.env,
@@ -23874,15 +21072,24 @@ function gitCommit(opts) {
   } catch (e) {
     const err = e;
     const text = err.stderr || err.stdout || err.message || "";
-    const isNothing3 = text.includes("nothing to commit") || err.stdout && err.stdout.includes("nothing to commit") || err.message.includes("nothing to commit");
+    const isNothing = text.includes("nothing to commit") || err.stdout && err.stdout.includes("nothing to commit") || err.message.includes("nothing to commit");
     return {
       committed: false,
       pushed: false,
       commitHash: null,
       upstreamConfigured: false,
-      error: isNothing3 ? "nothing to commit" : text.trim() || err.message.trim(),
-      errorType: isNothing3 ? "nothing_to_commit" : "commit_failed"
+      error: isNothing ? "nothing to commit" : text.trim() || err.message.trim(),
+      errorType: isNothing ? "nothing_to_commit" : "commit_failed"
     };
+  }
+  let hasOrigin = true;
+  try {
+    exec2("git", ["remote", "get-url", "origin"], { cwd: opts.worktreePath, encoding: "utf8" });
+  } catch {
+    hasOrigin = false;
+  }
+  if (!hasOrigin) {
+    return { committed: true, pushed: false, commitHash, upstreamConfigured: false, error: null, errorType: null };
   }
   try {
     exec2("git", ["push"], { cwd: opts.worktreePath, encoding: "utf8" });
@@ -23920,7 +21127,7 @@ function gitCommit(opts) {
 }
 var gitCommitCommand = defineCommand({
   name: "git-commit",
-  description: "Commit changes in the worktree and push to origin",
+  description: "Commit changes in the worktree and push to origin when a remote is configured",
   args: {
     "worktree-path": { description: "Absolute path to the worktree to commit from", required: true },
     message: { description: "Commit message body (used as the -m argument to git commit)", required: true }
@@ -24119,15 +21326,15 @@ function getRemotes(exec2) {
   } catch {
     out = "";
   }
-  const map3 = /* @__PURE__ */ new Map();
+  const map = /* @__PURE__ */ new Map();
   for (const line of out.split("\n").filter((l) => l.includes("(fetch)"))) {
     const parts = line.split("	");
     if (parts.length < 2) continue;
     const name = parts[0].trim();
     const url = parts[1].replace(/\s*\(fetch\)\s*$/, "").trim();
-    if (name) map3.set(name, normalizeRemote(url));
+    if (name) map.set(name, normalizeRemote(url));
   }
-  return map3;
+  return map;
 }
 function selectRemote(remotes) {
   if (remotes.size === 0) throw new UserError("no remote configured for this repository");
@@ -24484,6 +21691,10 @@ function isSourceControlInitialized(state) {
   const sc = state?.pipeline?.source_control;
   return !!sc && typeof sc === "object" && !Array.isArray(sc) && typeof sc.auto_commit === "string" && sc.auto_commit !== "" && typeof sc.auto_pr === "string" && sc.auto_pr !== "";
 }
+function readProjectType(state) {
+  const pt = state?.project?.project_type;
+  return pt === "side-project" ? "side-project" : "standard";
+}
 function projectContext(opts = {}) {
   const exec2 = opts.exec ?? ((f, a, o) => execFileSync5(f, a, { ...o, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }));
   const repoRootRaw = String(exec2("git", ["rev-parse", "--show-toplevel"])).trim();
@@ -24527,12 +21738,15 @@ function projectContext(opts = {}) {
   }
   let projectDir = null;
   let sourceControlInitialized = null;
+  let projectType = "standard";
   if (opts.projectName) {
     projectDir = path11.join(projectsBasePath, opts.projectName);
     const stateJson = path11.join(projectDir, "state.json");
     if (fs10.existsSync(stateJson)) {
       try {
-        sourceControlInitialized = isSourceControlInitialized(JSON.parse(fs10.readFileSync(stateJson, "utf8")));
+        const parsed = JSON.parse(fs10.readFileSync(stateJson, "utf8"));
+        sourceControlInitialized = isSourceControlInitialized(parsed);
+        projectType = readProjectType(parsed);
       } catch {
         sourceControlInitialized = false;
       }
@@ -24552,7 +21766,8 @@ function projectContext(opts = {}) {
     configAutoPr,
     remoteUrl,
     projectDir,
-    sourceControlInitialized
+    sourceControlInitialized,
+    projectType
   };
 }
 var projectContextCommand = defineCommand({
@@ -24650,11 +21865,611 @@ var projectFindCommand = defineCommand({
   }
 });
 
+// cli/src/commands/project/list.ts
+init_command();
+init_paths();
+
+// lib/work-graph/dist/service.js
+import path16 from "node:path";
+
+// lib/work-graph/dist/types.js
+var PROJECTION_SCHEMA = "work-graph/v1";
+
+// lib/work-graph/dist/store.js
+init_js_yaml();
+import fs12 from "node:fs";
+import path13 from "node:path";
+var STORE_FILE = "work-graph.yml";
+var CURRENT_VERSION = 1;
+var GraphIndex = class {
+  root;
+  constructor(root) {
+    this.root = root;
+  }
+  get file() {
+    return path13.join(this.root, STORE_FILE);
+  }
+  read() {
+    if (!fs12.existsSync(this.file)) {
+      return { version: CURRENT_VERSION, rev: 0, groups: {}, edges: [] };
+    }
+    let raw;
+    try {
+      raw = index_vite_proxy_tmp_default.load(fs12.readFileSync(this.file, "utf8"));
+    } catch (cause) {
+      throw new Error(`failed to parse ${this.file}: ${cause}`);
+    }
+    const obj = raw ?? {};
+    return {
+      version: obj.version ?? CURRENT_VERSION,
+      rev: obj.rev ?? 0,
+      groups: obj.groups ?? {},
+      edges: obj.edges ?? []
+    };
+  }
+  // A stale `expectedRev` is an anticipated compare-and-swap conflict, so it is returned as a
+  // value (and nothing is written). Genuine fs faults (temp write / rename) still throw — no
+  // caller can recover from them.
+  write(graph, expectedRev) {
+    const current = this.read();
+    if (current.rev !== expectedRev) {
+      return { ok: false, error: { code: "stale_revision", message: `stale revision: expected ${expectedRev} but store is at ${current.rev}` } };
+    }
+    const next = {
+      version: CURRENT_VERSION,
+      rev: expectedRev + 1,
+      groups: graph.groups,
+      edges: graph.edges
+    };
+    const tmp = this.file + ".tmp";
+    fs12.mkdirSync(path13.dirname(this.file), { recursive: true });
+    fs12.writeFileSync(tmp, index_vite_proxy_tmp_default.dump({ version: next.version, rev: next.rev, groups: next.groups, edges: next.edges }, { indent: 2, lineWidth: 80, noRefs: true }), "utf8");
+    fs12.renameSync(tmp, this.file);
+    return { ok: true, data: next };
+  }
+};
+
+// lib/work-graph/dist/derive/status.js
+function mapStatus(raw) {
+  switch (raw) {
+    case "completed":
+      return "done";
+    case "failed":
+    case "halted":
+      return "blocked";
+    case "skipped":
+      return "skipped";
+    case "in_progress":
+      return "in_progress";
+    case "not_started":
+      return "not_started";
+    default:
+      return "unknown";
+  }
+}
+function combineStatuses(statuses) {
+  const resolvable = statuses.filter((s) => s !== "unknown");
+  if (resolvable.length === 0)
+    return "unknown";
+  if (resolvable.some((s) => s === "blocked"))
+    return "blocked";
+  const hasInProgress = resolvable.some((s) => s === "in_progress");
+  const effective = resolvable.map((s) => s === "skipped" ? "done" : s);
+  const hasDone = effective.some((s) => s === "done");
+  const hasNotStarted = effective.some((s) => s === "not_started");
+  if (hasInProgress || hasDone && hasNotStarted)
+    return "in_progress";
+  if (effective.every((s) => s === "done"))
+    return "done";
+  if (effective.every((s) => s === "not_started"))
+    return "not_started";
+  return "unknown";
+}
+function rollupProjectStatus(state) {
+  const nodes = state?.graph?.nodes;
+  if (!nodes || typeof nodes !== "object")
+    return "unknown";
+  return combineStatuses(Object.values(nodes).map((n) => mapStatus(n?.status)));
+}
+
+// lib/work-graph/dist/graph.js
+var WorkGraph = class {
+  nodes = /* @__PURE__ */ new Map();
+  edges = [];
+  danglingEdges = [];
+  constructor(nodes, edges) {
+    for (const n of nodes)
+      this.nodes.set(n.id, n);
+    for (const e of edges) {
+      if (this.nodes.has(e.from) && this.nodes.has(e.to))
+        this.edges.push(e);
+      else
+        this.danglingEdges.push(e);
+    }
+    for (const n of this.nodes.values())
+      if (n.kind === "group")
+        n.status = this.rollupStatus(n.id);
+  }
+  allNodes() {
+    return [...this.nodes.values()];
+  }
+  node(id) {
+    return this.nodes.get(id) ?? null;
+  }
+  children(id) {
+    return this.edges.filter((e) => e.type === "contains" && e.from === id).map((e) => this.nodes.get(e.to)).filter((n) => !!n);
+  }
+  parents(id) {
+    return this.edges.filter((e) => e.type === "contains" && e.to === id).map((e) => this.nodes.get(e.from)).filter((n) => !!n);
+  }
+  related(id, type) {
+    return this.edges.filter((e) => e.type !== "contains" && (e.from === id || e.to === id) && (!type || e.type === type));
+  }
+  rollupStatus(id) {
+    const n = this.nodes.get(id);
+    if (!n)
+      return "unknown";
+    if (n.kind === "project")
+      return n.status;
+    return combineStatuses(this.children(id).map((c) => this.rollupStatus(c.id)));
+  }
+};
+
+// lib/work-graph/dist/derive/projects.js
+import fs14 from "node:fs";
+import path15 from "node:path";
+
+// lib/work-graph/dist/derive/worktrees.js
+import fs13 from "node:fs";
+import path14 from "node:path";
+import { execFileSync as execFileSync7 } from "node:child_process";
+var defaultExec = (file, args, opts) => execFileSync7(file, args, { cwd: opts.cwd, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] });
+function listWorktrees(exec2, cwd) {
+  const out = /* @__PURE__ */ new Map();
+  let text = "";
+  try {
+    text = exec2("git", ["worktree", "list", "--porcelain"], { cwd });
+  } catch {
+    return out;
+  }
+  let cur = null;
+  for (const line of text.split("\n")) {
+    if (line.startsWith("worktree ")) {
+      cur = path14.resolve(line.slice("worktree ".length).trim());
+      out.set(cur, null);
+    } else if (line.startsWith("branch ") && cur)
+      out.set(cur, line.slice("branch ".length).trim().replace("refs/heads/", ""));
+    else if (line.trim() === "")
+      cur = null;
+  }
+  return out;
+}
+function resolveWorktrees(projectName, deps) {
+  const exec2 = deps.exec ?? defaultExec;
+  const statePath = path14.join(deps.projectsDir, projectName, "state.json");
+  if (!fs13.existsSync(statePath))
+    return [];
+  let sc;
+  try {
+    sc = JSON.parse(fs13.readFileSync(statePath, "utf8"))?.pipeline?.source_control;
+  } catch {
+    return [];
+  }
+  if (!sc || typeof sc !== "object")
+    return [];
+  const sharedName = typeof sc.worktree_name === "string" && sc.worktree_name !== "" ? sc.worktree_name : null;
+  const worktreeName = sharedName ?? projectName;
+  const repoResolvedVia = sharedName !== null && sharedName !== projectName ? "shared-worktree-name" : "convention";
+  if (Array.isArray(sc.repos) && sc.repos.length > 0) {
+    return sc.repos.map((r) => {
+      const wtPath2 = path14.join(deps.worktreesDir, worktreeName, r.name);
+      const live2 = listWorktrees(exec2, wtPath2);
+      const key2 = path14.resolve(wtPath2);
+      return { repo: r.name, path: wtPath2, branch: live2.get(key2) ?? null, exists: live2.has(key2), resolvedVia: repoResolvedVia };
+    });
+  }
+  const wtPath = typeof sc.worktree_path === "string" ? sc.worktree_path : null;
+  if (!wtPath)
+    return [];
+  const live = listWorktrees(exec2, wtPath);
+  const key = path14.resolve(wtPath);
+  return [{ repo: path14.basename(wtPath), path: wtPath, branch: typeof sc.branch === "string" ? sc.branch : null, exists: live.has(key), resolvedVia: "git" }];
+}
+
+// lib/work-graph/dist/derive/projects.js
+function listProjectNames(projectsDir) {
+  if (!fs14.existsSync(projectsDir))
+    return [];
+  return fs14.readdirSync(projectsDir, { withFileTypes: true }).filter((d) => d.isDirectory() && !d.name.startsWith("_")).map((d) => d.name).sort((a, b) => a.localeCompare(b));
+}
+function projectExists(projectsDir, name) {
+  return fs14.existsSync(path15.join(projectsDir, name));
+}
+function readState2(dir) {
+  const file = path15.join(dir, "state.json");
+  if (!fs14.existsSync(file))
+    return null;
+  try {
+    return JSON.parse(fs14.readFileSync(file, "utf8"));
+  } catch {
+    return null;
+  }
+}
+function scanDocs(dir, name) {
+  const docs = { others: [] };
+  const slots = {
+    [`${name}-BRAINSTORMING.md`]: "brainstorming",
+    [`${name}-REQUIREMENTS.md`]: "requirements",
+    [`${name}-MASTER-PLAN.md`]: "masterPlan"
+  };
+  for (const entry of fs14.readdirSync(dir, { withFileTypes: true })) {
+    if (!entry.isFile() || entry.name === "state.json")
+      continue;
+    const slot = slots[entry.name];
+    if (slot)
+      docs[slot] = entry.name;
+    else
+      docs.others.push(entry.name);
+  }
+  docs.others.sort((a, b) => a.localeCompare(b));
+  return docs;
+}
+function deriveProject(name, deps) {
+  const dir = path15.join(deps.projectsDir, name);
+  if (!fs14.existsSync(dir))
+    return null;
+  const state = readState2(dir);
+  const sc = state?.pipeline?.source_control;
+  return {
+    id: name,
+    kind: "project",
+    name,
+    status: state ? rollupProjectStatus(state) : "unknown",
+    dir,
+    tier: state?.pipeline?.current_tier ?? null,
+    projectType: state?.project?.project_type === "side-project" ? "side-project" : "standard",
+    sourceControlInitialized: !!sc && typeof sc === "object" && !Array.isArray(sc),
+    docs: scanDocs(dir, name),
+    worktrees: resolveWorktrees(name, deps)
+  };
+}
+
+// lib/work-graph/dist/ids.js
+function slugify2(name) {
+  return name.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+}
+function groupId(name) {
+  return `group:${slugify2(name)}`;
+}
+
+// lib/work-graph/dist/validate.js
+function wouldCreateCycle(edges, edge) {
+  if (edge.from === edge.to)
+    return true;
+  const adj = /* @__PURE__ */ new Map();
+  for (const e of edges)
+    if (e.type === "contains") {
+      if (!adj.has(e.from))
+        adj.set(e.from, []);
+      adj.get(e.from).push(e.to);
+    }
+  const stack = [edge.to];
+  const seen = /* @__PURE__ */ new Set();
+  while (stack.length) {
+    const cur = stack.pop();
+    if (cur === edge.from)
+      return true;
+    if (seen.has(cur))
+      continue;
+    seen.add(cur);
+    for (const next of adj.get(cur) ?? [])
+      stack.push(next);
+  }
+  return false;
+}
+function validateNewEdge(ctx, edge) {
+  if (!ctx.nodeExists(edge.from))
+    return { code: "validation", message: `edge 'from' references a missing node: ${edge.from}` };
+  if (!ctx.nodeExists(edge.to))
+    return { code: "validation", message: `edge 'to' references a missing node: ${edge.to}` };
+  if (ctx.edges.some((e) => e.type === edge.type && e.from === edge.from && e.to === edge.to)) {
+    return { code: "validation", message: `duplicate edge ${edge.type} ${edge.from}->${edge.to}` };
+  }
+  if (edge.type === "contains") {
+    if (ctx.edges.some((e) => e.type === "contains" && e.to === edge.to)) {
+      return { code: "validation", message: `node '${edge.to}' already has a parent (single-parent containment)` };
+    }
+    if (wouldCreateCycle(ctx.edges, edge)) {
+      return { code: "validation", message: `containment edge ${edge.from}->${edge.to} would create a cycle` };
+    }
+  }
+  return null;
+}
+function validateNewGroupId(ctx, id) {
+  if (ctx.groups[id])
+    return { code: "validation", message: `group id '${id}' already exists` };
+  return null;
+}
+
+// lib/work-graph/dist/reconcile.js
+function pruneEdges(edges, nodeExists) {
+  const kept = [];
+  const removed = [];
+  for (const e of edges) {
+    if (nodeExists(e.from) && nodeExists(e.to))
+      kept.push(e);
+    else
+      removed.push(e);
+  }
+  return { kept, removed };
+}
+
+// lib/work-graph/dist/service.js
+var WorkGraphService = class {
+  opts;
+  index;
+  constructor(opts) {
+    this.opts = opts;
+    this.index = new GraphIndex(opts.root);
+  }
+  projectsDir() {
+    return path16.join(this.opts.root, "projects");
+  }
+  worktreesDir() {
+    return path16.join(this.opts.root, "worktrees");
+  }
+  compose() {
+    const stored = this.index.read();
+    const deps = { projectsDir: this.projectsDir(), worktreesDir: this.worktreesDir(), exec: this.opts.exec };
+    const projects = listProjectNames(this.projectsDir()).map((n) => deriveProject(n, deps)).filter((p) => !!p);
+    const groups = Object.entries(stored.groups).map(([id, g]) => ({ id, kind: "group", name: g.name, description: g.description, status: "unknown" }));
+    return { graph: new WorkGraph([...groups, ...projects], stored.edges) };
+  }
+  getGraph(scope) {
+    const { graph } = this.compose();
+    let nodes = graph.allNodes();
+    let edges = graph.edges;
+    if (scope?.rootId) {
+      const keep = this.descendants(graph, scope.rootId, scope.depth ?? Infinity);
+      nodes = nodes.filter((n) => keep.has(n.id));
+      edges = edges.filter((e) => keep.has(e.from) && keep.has(e.to));
+    }
+    return { schema: PROJECTION_SCHEMA, nodes, edges, danglingEdges: graph.danglingEdges };
+  }
+  descendants(graph, rootId, depth) {
+    const keep = /* @__PURE__ */ new Set([rootId]);
+    const walk = (id, d) => {
+      if (d <= 0)
+        return;
+      for (const c of graph.children(id)) {
+        keep.add(c.id);
+        walk(c.id, d - 1);
+      }
+    };
+    walk(rootId, depth);
+    return keep;
+  }
+  getNode(id) {
+    return this.compose().graph.node(id);
+  }
+  listProjects(filter) {
+    const { graph } = this.compose();
+    let projects = graph.allNodes().filter((n) => n.kind === "project");
+    if (filter?.status)
+      projects = projects.filter((p) => p.status === filter.status);
+    if (filter?.groupId) {
+      const members = new Set(graph.children(filter.groupId).map((c) => c.id));
+      projects = projects.filter((p) => members.has(p.id));
+    }
+    return projects;
+  }
+  listGroups() {
+    return this.compose().graph.allNodes().filter((n) => n.kind === "group");
+  }
+  resolveWorktrees(projectId) {
+    return resolveWorktrees(projectId, { projectsDir: this.projectsDir(), worktreesDir: this.worktreesDir(), exec: this.opts.exec });
+  }
+  nodeExists(id) {
+    return this.index.read().groups[id] !== void 0 || projectExists(this.projectsDir(), id);
+  }
+  validationCtx(stored) {
+    return { groups: stored.groups, edges: stored.edges, nodeExists: (id) => this.nodeExists(id) };
+  }
+  createGroup(input) {
+    if (!input.description?.trim())
+      return { ok: false, error: { code: "validation", message: "a non-empty description is required" } };
+    const stored = this.index.read();
+    const id = groupId(input.name);
+    const idError = validateNewGroupId(this.validationCtx(stored), id);
+    if (idError)
+      return { ok: false, error: idError };
+    stored.groups[id] = { name: input.name, description: input.description.trim() };
+    if (input.parentId) {
+      const edge = { type: "contains", from: input.parentId, to: id };
+      const edgeError = validateNewEdge({ groups: stored.groups, edges: stored.edges, nodeExists: (x) => x === id || this.nodeExists(x) }, edge);
+      if (edgeError)
+        return { ok: false, error: edgeError };
+      stored.edges.push(edge);
+    }
+    const written = this.index.write(stored, stored.rev);
+    if (!written.ok)
+      return written;
+    return { ok: true, data: { node: { id, kind: "group", name: input.name, description: input.description.trim(), status: "unknown" }, rev: written.data.rev } };
+  }
+  updateGroup(id, patch) {
+    const stored = this.index.read();
+    const g = stored.groups[id];
+    if (!g)
+      return { ok: false, error: { code: "validation", message: `group '${id}' does not exist` } };
+    if (patch.description !== void 0 && !patch.description.trim())
+      return { ok: false, error: { code: "validation", message: "a non-empty description is required" } };
+    if (patch.name !== void 0)
+      g.name = patch.name;
+    if (patch.description !== void 0)
+      g.description = patch.description.trim();
+    const written = this.index.write(stored, stored.rev);
+    if (!written.ok)
+      return written;
+    return { ok: true, data: { node: { id, kind: "group", name: g.name, description: g.description, status: "unknown" }, rev: written.data.rev } };
+  }
+  deleteGroup(id) {
+    const stored = this.index.read();
+    if (!stored.groups[id])
+      return { ok: false, error: { code: "validation", message: `group '${id}' does not exist` } };
+    delete stored.groups[id];
+    stored.edges = stored.edges.filter((e) => e.from !== id && e.to !== id);
+    const written = this.index.write(stored, stored.rev);
+    if (!written.ok)
+      return written;
+    return { ok: true, data: { rev: written.data.rev } };
+  }
+  addMember(groupId_, nodeId) {
+    return this.addEdge({ type: "contains", from: groupId_, to: nodeId });
+  }
+  removeMember(groupId_, nodeId) {
+    return this.removeEdge({ type: "contains", from: groupId_, to: nodeId });
+  }
+  addEdge(edge) {
+    const stored = this.index.read();
+    const error = validateNewEdge(this.validationCtx(stored), edge);
+    if (error)
+      return { ok: false, error };
+    stored.edges.push(edge);
+    const written = this.index.write(stored, stored.rev);
+    if (!written.ok)
+      return written;
+    return { ok: true, data: { edge, rev: written.data.rev } };
+  }
+  removeEdge(edge) {
+    const stored = this.index.read();
+    stored.edges = stored.edges.filter((e) => !(e.type === edge.type && e.from === edge.from && e.to === edge.to));
+    const written = this.index.write(stored, stored.rev);
+    if (!written.ok)
+      return written;
+    return { ok: true, data: { rev: written.data.rev } };
+  }
+  link(from, to, type) {
+    return this.addEdge({ type, from, to });
+  }
+  unlink(from, to, type) {
+    return this.removeEdge({ type, from, to });
+  }
+  prune() {
+    const stored = this.index.read();
+    const { kept, removed } = pruneEdges(stored.edges, (id) => this.nodeExists(id));
+    if (removed.length === 0)
+      return { ok: true, data: { removed: [], rev: stored.rev } };
+    stored.edges = kept;
+    const written = this.index.write(stored, stored.rev);
+    if (!written.ok)
+      return written;
+    return { ok: true, data: { removed, rev: written.data.rev } };
+  }
+};
+
+// cli/src/commands/project/lean.ts
+function toLeanProject(p, graph) {
+  const group = graph.edges.find((e) => e.type === "contains" && e.to === p.id)?.from;
+  const related = {};
+  for (const e of graph.edges) {
+    if (e.type === "contains") continue;
+    if (e.from === p.id) related[e.type] = e.to;
+    else if (e.to === p.id) {
+      const bucket = e.type === "spawned-from" ? "spawned" : `${e.type}-by`;
+      if (!related[bucket]) related[bucket] = [];
+      related[bucket].push(e.from);
+    }
+  }
+  const lean = {
+    name: p.name,
+    status: p.status,
+    tier: p.tier,
+    sourceControlInitialized: p.sourceControlInitialized,
+    dir: p.dir,
+    docs: p.docs,
+    worktrees: p.worktrees.map((w) => ({ repo: w.repo, path: w.path, branch: w.branch, exists: w.exists })),
+    related
+  };
+  if (p.projectType === "side-project") lean.projectType = "side-project";
+  if (group) lean.group = group.replace(/^group:/, "");
+  return lean;
+}
+function renderProjectTable(projects) {
+  const rows = projects.map((p) => `${p.name}	${p.status}	${p.tier ?? "-"}`);
+  return ["NAME	STATUS	TIER", ...rows].join("\n");
+}
+function renderProjectCard(p) {
+  const lines = [`${p.name}  [${p.status}] tier=${p.tier ?? "-"}`, `dir: ${p.dir}`];
+  if (p.group) lines.push(`group: ${p.group}`);
+  for (const w of p.worktrees) lines.push(`worktree ${w.repo}: ${w.path} (${w.branch ?? "detached"}) exists=${w.exists}`);
+  return lines.join("\n");
+}
+
+// cli/src/commands/project/list.ts
+var projectListCommand = defineCommand({
+  name: "project-list",
+  description: "List projects; --status in_progress returns the active set",
+  args: {},
+  flags: {
+    status: { description: "Filter by rolled-up status (e.g. in_progress for the active set)", type: "string" },
+    group: { description: "Filter to members of a group id", type: "string" }
+  },
+  handler: async ({ flags, ctx }) => {
+    const svc = new WorkGraphService({ root: userDataPaths().root });
+    const projects = svc.listProjects({ status: flags.status, groupId: flags.group });
+    if (!ctx.ux.json) ctx.stderr.write(renderProjectTable(projects) + "\n");
+    return { projects: projects.map((p) => ({ name: p.name, status: p.status, tier: p.tier, sourceControlInitialized: p.sourceControlInitialized })) };
+  }
+});
+
+// cli/src/commands/project/show.ts
+init_command();
+init_errors2();
+init_paths();
+var projectShowCommand = defineCommand({
+  name: "project-show",
+  description: "Show one project: status, tier, dir, worktrees, docs, and relationships",
+  args: { id: { description: "Project id (folder name) to show", required: true } },
+  flags: {},
+  handler: async ({ args, ctx }) => {
+    if (!args.id) throw new UserError("--id is required");
+    const svc = new WorkGraphService({ root: userDataPaths().root });
+    const node = svc.getNode(args.id);
+    if (!node || node.kind !== "project") throw new UserError(`project '${args.id}' was not found`);
+    const lean = toLeanProject(node, svc.getGraph());
+    if (!ctx.ux.json) ctx.stderr.write(renderProjectCard(lean) + "\n");
+    return lean;
+  }
+});
+
+// cli/src/commands/project/worktrees.ts
+init_command();
+init_errors2();
+init_paths();
+function buildWorktreesResult(name, refs) {
+  return { name, worktrees: refs.map((w) => ({ repo: w.repo, path: w.path, branch: w.branch, exists: w.exists })) };
+}
+var projectWorktreesCommand = defineCommand({
+  name: "project-worktrees",
+  description: "Show a project's resolved worktrees (repo, path, branch, exists)",
+  args: { id: { description: "Project id (folder name) whose worktrees to resolve", required: true } },
+  flags: {},
+  handler: async ({ args, ctx }) => {
+    if (!args.id) throw new UserError("--id is required");
+    const refs = new WorkGraphService({ root: userDataPaths().root }).resolveWorktrees(args.id);
+    const result = buildWorktreesResult(args.id, refs);
+    if (!ctx.ux.json) {
+      ctx.stderr.write(result.worktrees.map((w) => `${w.repo}	${w.path}	${w.branch ?? "-"}	exists=${w.exists}`).join("\n") + "\n");
+    }
+    return result;
+  }
+});
+
 // cli/src/commands/worktree/create.ts
 init_command();
 init_errors2();
-import path13 from "node:path";
-import { execFileSync as execFileSync7 } from "node:child_process";
+import path17 from "node:path";
+import { execFileSync as execFileSync8 } from "node:child_process";
 function deriveRemoteUrl2(raw) {
   if (!raw) return "";
   const ssh = raw.match(/^git@github\.com:(.+?)(?:\.git)?$/);
@@ -24670,7 +22485,7 @@ function classify(stderr) {
   return "unknown";
 }
 function worktreeCreate(opts) {
-  const exec2 = opts.exec ?? ((f, a, o) => execFileSync7(f, a, { ...o, stdio: ["ignore", "pipe", "pipe"] }));
+  const exec2 = opts.exec ?? ((f, a, o) => execFileSync8(f, a, { ...o, stdio: ["ignore", "pipe", "pipe"] }));
   try {
     exec2(
       "git",
@@ -24708,7 +22523,7 @@ function worktreeCreate(opts) {
   const compareUrl = remoteUrl ? `${remoteUrl}/compare/${baseShort}...${opts.branch}` : "";
   return {
     created: true,
-    worktreePath: path13.resolve(opts.worktreePath),
+    worktreePath: path17.resolve(opts.worktreePath),
     branch: opts.branch,
     baseBranch: opts.baseBranch,
     pushed,
@@ -24758,7 +22573,7 @@ var worktreeCreateCommand = defineCommand({
 init_command();
 init_errors2();
 import os5 from "node:os";
-import path14 from "node:path";
+import path18 from "node:path";
 import { spawn as defaultSpawn } from "node:child_process";
 var LAUNCH_AGENTS = ["claude", "copilot", "vscode", "terminal"];
 var VALID_PERMISSION_MODES = ["default", "acceptEdits", "bypassPermissions", "auto", "dontAsk", "plan"];
@@ -24820,7 +22635,7 @@ function worktreeLaunch(opts) {
   const platform = opts.platform ?? process.platform;
   const spawn2 = opts.spawn ?? defaultSpawn;
   const repaired = repairMsysPrompt(opts.prompt);
-  const addDir = path14.join(os5.homedir(), ".radorc", "projects");
+  const addDir = path18.join(os5.homedir(), ".radorc", "projects");
   let agentArgs = [];
   if (opts.agent === "claude") {
     agentArgs = buildClaudeArgs(repaired ?? "", opts.permissionMode ?? "auto", addDir);
@@ -24905,13 +22720,74 @@ var worktreeLaunchCommand = defineCommand({
   }
 });
 
+// cli/src/commands/side-project/init.ts
+init_command();
+init_errors2();
+init_paths();
+import fs15 from "node:fs";
+import path19 from "node:path";
+import { execFileSync as execFileSync9 } from "node:child_process";
+var SEED_MESSAGE = "chore: initialize side-project";
+function sideProjectInit(opts) {
+  const exec2 = opts.exec ?? ((f, a, o) => execFileSync9(f, a, { ...o, stdio: ["ignore", "pipe", "pipe"] }));
+  const ensure = opts.ensureGitignored ?? ensureGitignored;
+  const mkdirp = opts.mkdirp ?? ((dir) => fs15.mkdirSync(dir, { recursive: true }));
+  const repoPath = path19.join(opts.root, SIDE_PROJECTS_DIRNAME, opts.project);
+  try {
+    mkdirp(repoPath);
+    exec2("git", ["init", "-b", "main"], { cwd: repoPath, encoding: "utf8" });
+  } catch (e) {
+    const err = e;
+    return {
+      created: false,
+      repoPath: path19.resolve(repoPath),
+      branch: "main",
+      seedCommitMessage: SEED_MESSAGE,
+      error: (err.stderr || err.message || "").trim(),
+      errorType: "init_failed"
+    };
+  }
+  try {
+    exec2("git", ["commit", "-m", SEED_MESSAGE, "--allow-empty"], { cwd: repoPath, encoding: "utf8" });
+  } catch (e) {
+    const err = e;
+    return {
+      created: false,
+      repoPath: path19.resolve(repoPath),
+      branch: "main",
+      seedCommitMessage: SEED_MESSAGE,
+      error: (err.stderr || err.message || "").trim(),
+      errorType: "commit_failed"
+    };
+  }
+  ensure({ root: opts.root, entry: "side-projects/" });
+  return { created: true, repoPath: path19.resolve(repoPath), branch: "main", seedCommitMessage: SEED_MESSAGE, error: null, errorType: null };
+}
+var sideProjectInitCommand = defineCommand({
+  name: "side-project-init",
+  description: "Provision a local-only side-project git repo (git init + seed commit) under ~/.radorc/side-projects and return its path",
+  args: { project: { description: "Project name; resolves the repo at ~/.radorc/side-projects/<project>/", required: true } },
+  flags: {},
+  handler: async ({ args }) => {
+    const project = args.project;
+    if (!project) throw new UserError("--project is required");
+    return sideProjectInit({ project, root: userDataPaths().root });
+  },
+  mapResult: (r) => {
+    if (!r.created) {
+      return { ok: false, error: { type: "user_error", message: r.error ?? "side-project init failed", errorType: r.errorType, repoPath: r.repoPath }, exit_code: 2 };
+    }
+    return { ok: true, data: r, exit_code: 0 };
+  }
+});
+
 // cli/src/commands/plan/explode.ts
 init_command();
 init_errors2();
 
 // cli/src/lib/explode-master-plan.ts
-import * as fs12 from "node:fs";
-import * as path15 from "node:path";
+import * as fs16 from "node:fs";
+import * as path20 from "node:path";
 var ParseError = class extends Error {
   line;
   expected;
@@ -24932,10 +22808,10 @@ var ParseError = class extends Error {
     };
   }
 };
-function readDocument3(docPath) {
+function readDocument(docPath) {
   let raw;
   try {
-    raw = fs12.readFileSync(docPath, "utf-8");
+    raw = fs16.readFileSync(docPath, "utf-8");
   } catch (err) {
     if (isEnoent(err)) return null;
     throw err;
@@ -24956,10 +22832,10 @@ function readDocument3(docPath) {
 function isEnoent(err) {
   return err !== null && typeof err === "object" && err.code === "ENOENT";
 }
-function readState2(projectDir) {
-  const statePath = path15.join(projectDir, "state.json");
+function readState3(projectDir) {
+  const statePath = path20.join(projectDir, "state.json");
   try {
-    const raw = fs12.readFileSync(statePath, "utf-8");
+    const raw = fs16.readFileSync(statePath, "utf-8");
     return JSON.parse(raw);
   } catch (err) {
     if (isEnoent(err)) return null;
@@ -24967,14 +22843,14 @@ function readState2(projectDir) {
   }
 }
 function writeState(projectDir, state) {
-  fs12.mkdirSync(projectDir, { recursive: true });
-  const statePath = path15.join(projectDir, "state.json");
-  const tmpPath = path15.join(projectDir, "state.json.tmp");
+  fs16.mkdirSync(projectDir, { recursive: true });
+  const statePath = path20.join(projectDir, "state.json");
+  const tmpPath = path20.join(projectDir, "state.json.tmp");
   try {
-    fs12.writeFileSync(tmpPath, JSON.stringify(state, null, 2), "utf-8");
-    fs12.renameSync(tmpPath, statePath);
+    fs16.writeFileSync(tmpPath, JSON.stringify(state, null, 2), "utf-8");
+    fs16.renameSync(tmpPath, statePath);
   } catch (err) {
-    fs12.rmSync(tmpPath, { force: true });
+    fs16.rmSync(tmpPath, { force: true });
     throw err;
   }
 }
@@ -25002,7 +22878,7 @@ function computeFrontmatterOffset(raw) {
 function parseMasterPlan(masterPlanPath2) {
   let raw;
   try {
-    raw = fs12.readFileSync(masterPlanPath2, "utf-8");
+    raw = fs16.readFileSync(masterPlanPath2, "utf-8");
   } catch (err) {
     const code2 = err?.code;
     if (code2 === "ENOENT") {
@@ -25016,7 +22892,7 @@ function parseMasterPlan(masterPlanPath2) {
     throw err;
   }
   const frontmatterOffset = computeFrontmatterOffset(raw);
-  const doc = readDocument3(masterPlanPath2);
+  const doc = readDocument(masterPlanPath2);
   if (doc === null) {
     throw new ParseError({
       line: 1,
@@ -25037,6 +22913,7 @@ function parseMasterPlan(masterPlanPath2) {
     if (currentTask !== null) {
       currentTask.body = currentBodyLines.join("\n").trimEnd();
       currentTask.requirementTags = extractRequirementTags(currentTask.body);
+      currentTask.targetRepos = extractTargetRepos(currentTask.body);
       currentPhase.tasks.push(currentTask);
       currentTask = null;
       currentBodyLines = [];
@@ -25123,7 +23000,9 @@ function parseMasterPlan(masterPlanPath2) {
         taskIndex,
         title: (title ?? "").trim(),
         requirementTags: [],
-        body: ""
+        targetRepos: [],
+        body: "",
+        startLine: lineNumber
       };
       continue;
     }
@@ -25138,6 +23017,41 @@ function parseMasterPlan(masterPlanPath2) {
     currentBodyLines.push(line);
   }
   flushPhase();
+  const sealRaw = Array.isArray(frontmatter.repos) ? frontmatter.repos : [];
+  const seal = new Set(sealRaw.map(String));
+  if (seal.size > 0) {
+    for (const phase of phases) {
+      for (const task of phase.tasks) {
+        const hasLine = /\*\*Target repos:\*\*/.test(task.body);
+        if (!hasLine) {
+          throw new ParseError({
+            line: task.startLine,
+            expected: 'a "**Target repos:**" line on every task',
+            found: `task ${task.id} with no Target repos line`,
+            message: `Task ${task.id} is missing its "**Target repos:**" line`
+          });
+        }
+        if (task.targetRepos.length === 0) {
+          throw new ParseError({
+            line: task.startLine,
+            expected: 'at least one repo name on the "**Target repos:**" line',
+            found: `task ${task.id} with an empty Target repos line`,
+            message: `Task ${task.id} has a present-but-empty "**Target repos:**" line`
+          });
+        }
+        for (const r of task.targetRepos) {
+          if (!seal.has(r)) {
+            throw new ParseError({
+              line: task.startLine,
+              expected: `each task repo to be within the sealed repos: [${[...seal].join(", ")}]`,
+              found: `task ${task.id} names "${r}"`,
+              message: `Task ${task.id} names repo "${r}" which is not in the Master Plan's sealed repos:`
+            });
+          }
+        }
+      }
+    }
+  }
   if (phases.length === 0) {
     throw new ParseError({
       line: frontmatterOffset + 1,
@@ -25161,6 +23075,21 @@ function extractRequirementTags(body) {
   }
   return Array.from(tags);
 }
+function extractTargetRepos(body) {
+  const repos = [];
+  const seen = /* @__PURE__ */ new Set();
+  const lineMatch = body.match(/\*\*Target repos:\*\*[ \t]*([^\n]*)/);
+  if (lineMatch) {
+    const items = (lineMatch[1] ?? "").split(/[,\s]+/).map((s) => s.trim()).filter(Boolean);
+    for (const item of items) {
+      if (!seen.has(item)) {
+        seen.add(item);
+        repos.push(item);
+      }
+    }
+  }
+  return repos;
+}
 function titleToFilenameSlug(title) {
   const cleaned = title.trim().toUpperCase().replace(/[^A-Z0-9]+/g, "-").replace(/^-+|-+$/g, "");
   return cleaned || "UNTITLED";
@@ -25174,6 +23103,19 @@ function taskFilename(projectName, task) {
   const tidx = String(task.taskIndex).padStart(2, "0");
   return `${projectName}-TASK-P${pidx}-T${tidx}-${titleToFilenameSlug(task.title)}.md`;
 }
+function unionTaskRepos(phase) {
+  const repos = [];
+  const seen = /* @__PURE__ */ new Set();
+  for (const task of phase.tasks) {
+    for (const r of task.targetRepos) {
+      if (!seen.has(r)) {
+        seen.add(r);
+        repos.push(r);
+      }
+    }
+  }
+  return repos;
+}
 function buildPhaseFrontmatter(opts) {
   return {
     project: opts.projectName,
@@ -25181,6 +23123,7 @@ function buildPhaseFrontmatter(opts) {
     title: opts.phase.title,
     status: "active",
     tasks: opts.phase.tasks.map((t) => ({ id: `T${String(t.taskIndex).padStart(2, "0")}`, title: t.title })),
+    repos: unionTaskRepos(opts.phase),
     author: "explosion-script",
     created: opts.createdIso,
     type: "phase_plan"
@@ -25194,6 +23137,7 @@ function buildTaskFrontmatter(opts) {
     title: opts.task.title,
     status: "pending",
     requirement_tags: opts.task.requirementTags,
+    repos: opts.task.targetRepos,
     author: "explosion-script",
     created: opts.createdIso,
     type: "task_handoff"
@@ -25239,25 +23183,25 @@ function renderTaskBody(task) {
 }
 function hasContents(dir) {
   try {
-    const entries = fs12.readdirSync(dir);
+    const entries = fs16.readdirSync(dir);
     return entries.length > 0;
   } catch {
     return false;
   }
 }
 function moveContentsTo(srcDir, destDir) {
-  if (!fs12.existsSync(srcDir)) return;
-  fs12.mkdirSync(destDir, { recursive: true });
-  for (const entry of fs12.readdirSync(srcDir)) {
-    const srcPath = path15.join(srcDir, entry);
-    const destPath = path15.join(destDir, entry);
+  if (!fs16.existsSync(srcDir)) return;
+  fs16.mkdirSync(destDir, { recursive: true });
+  for (const entry of fs16.readdirSync(srcDir)) {
+    const srcPath = path20.join(srcDir, entry);
+    const destPath = path20.join(destDir, entry);
     try {
-      fs12.renameSync(srcPath, destPath);
+      fs16.renameSync(srcPath, destPath);
     } catch (err) {
       const code2 = err?.code;
       if (code2 === "EXDEV" || code2 === "EPERM" || code2 === "ENOTEMPTY") {
-        fs12.cpSync(srcPath, destPath, { recursive: true });
-        fs12.rmSync(srcPath, { recursive: true, force: true });
+        fs16.cpSync(srcPath, destPath, { recursive: true });
+        fs16.rmSync(srcPath, { recursive: true, force: true });
       } else {
         throw err;
       }
@@ -25267,29 +23211,29 @@ function moveContentsTo(srcDir, destDir) {
 function makeBackupDir(projectDir, nowIso) {
   const iso = nowIso ?? (/* @__PURE__ */ new Date()).toISOString();
   const stamp = iso.replace(/[:.]/g, "-");
-  return path15.join(projectDir, "backups", stamp);
+  return path20.join(projectDir, "backups", stamp);
 }
 function explodeMasterPlan(opts) {
   const { projectDir, masterPlanPath: masterPlanPath2, projectName } = opts;
   const nowIso = opts.nowIso ?? (/* @__PURE__ */ new Date()).toISOString();
   const parsed = parseMasterPlan(masterPlanPath2);
-  const phasesDir = path15.join(projectDir, "phases");
-  const tasksDir = path15.join(projectDir, "tasks");
+  const phasesDir = path20.join(projectDir, "phases");
+  const tasksDir = path20.join(projectDir, "tasks");
   let backupDir = null;
   const phasesHas = hasContents(phasesDir);
   const tasksHas = hasContents(tasksDir);
   if (phasesHas || tasksHas) {
     backupDir = makeBackupDir(projectDir, nowIso);
-    if (phasesHas) moveContentsTo(phasesDir, path15.join(backupDir, "phases"));
-    if (tasksHas) moveContentsTo(tasksDir, path15.join(backupDir, "tasks"));
+    if (phasesHas) moveContentsTo(phasesDir, path20.join(backupDir, "phases"));
+    if (tasksHas) moveContentsTo(tasksDir, path20.join(backupDir, "tasks"));
   }
-  fs12.mkdirSync(phasesDir, { recursive: true });
-  fs12.mkdirSync(tasksDir, { recursive: true });
+  fs16.mkdirSync(phasesDir, { recursive: true });
+  fs16.mkdirSync(tasksDir, { recursive: true });
   const emittedPhaseFiles = [];
   const emittedTaskFiles = [];
   for (const phase of parsed.phases) {
     const fname = phaseFilename(projectName, phase);
-    const fpath = path15.join(phasesDir, fname);
+    const fpath = path20.join(phasesDir, fname);
     const frontmatter = buildPhaseFrontmatter({ projectName, phase, createdIso: nowIso });
     if (phase.tasks.length > 0) {
       const err = validateFrontmatterPhaseCreated(frontmatter);
@@ -25299,18 +23243,21 @@ function explodeMasterPlan(opts) {
         );
       }
     }
-    fs12.writeFileSync(fpath, renderDoc(frontmatter, renderPhaseBody(phase)), "utf-8");
+    fs16.writeFileSync(fpath, renderDoc(frontmatter, renderPhaseBody(phase)), "utf-8");
     emittedPhaseFiles.push(fpath);
     for (const task of phase.tasks) {
       const tname = taskFilename(projectName, task);
-      const tpath = path15.join(tasksDir, tname);
+      const tpath = path20.join(tasksDir, tname);
       const tfront = buildTaskFrontmatter({ projectName, task, createdIso: nowIso });
-      fs12.writeFileSync(tpath, renderDoc(tfront, renderTaskBody(task)), "utf-8");
+      fs16.writeFileSync(tpath, renderDoc(tfront, renderTaskBody(task)), "utf-8");
       emittedTaskFiles.push(tpath);
     }
   }
-  const state = readState2(projectDir);
+  const state = readState3(projectDir);
   if (state !== null) {
+    const fmType = parsed.frontmatter["project-type"];
+    const projectType = fmType === "side-project" ? "side-project" : "standard";
+    state.project = { ...state.project ?? {}, project_type: projectType };
     seedIterations(state, parsed, projectName, emittedPhaseFiles, emittedTaskFiles, projectDir);
     writeState(projectDir, state);
   }
@@ -25321,8 +23268,8 @@ function explodeMasterPlan(opts) {
   };
 }
 function toRelativeDocPath(absPath, projectDir) {
-  const rel = path15.relative(projectDir, absPath);
-  return rel.split(path15.sep).join("/");
+  const rel = path20.relative(projectDir, absPath);
+  return rel.split(path20.sep).join("/");
 }
 function seedIterations(state, parsed, _projectName, emittedPhaseFiles, emittedTaskFiles, projectDir) {
   let phaseLoop = state.graph.nodes["phase_loop"];
@@ -25349,13 +23296,14 @@ function seedIterations(state, parsed, _projectName, emittedPhaseFiles, emittedT
     for (let j = 0; j < phase.tasks.length; j++) {
       const taskFileAbs = emittedTaskFiles[taskFilePointer++] ?? null;
       const taskFile = taskFileAbs !== null ? toRelativeDocPath(taskFileAbs, projectDir) : null;
+      const task = phase.tasks[j];
       taskLoopIterations.push({
         index: j,
         status: "not_started",
         nodes: {},
         corrective_tasks: [],
         doc_path: taskFile,
-        commit_hash: null
+        repos: task.targetRepos.map((name) => ({ name, commit_hash: null }))
       });
     }
     const taskLoop = {
@@ -25369,7 +23317,7 @@ function seedIterations(state, parsed, _projectName, emittedPhaseFiles, emittedT
       nodes: { task_loop: taskLoop },
       corrective_tasks: [],
       doc_path: phaseFile,
-      commit_hash: null
+      repos: unionTaskRepos(phase).map((name) => ({ name, commit_hash: null }))
     };
     phaseLoop.iterations.push(phaseEntry);
   }
@@ -25427,6 +23375,750 @@ var planExplodeCommand = defineCommand({
   }
 });
 
+// cli/src/commands/migrate/index.ts
+init_command();
+init_errors2();
+init_paths();
+import * as fs18 from "node:fs";
+import * as path22 from "node:path";
+
+// cli/src/commands/migrate/migrate.ts
+init_version();
+import * as fs17 from "node:fs";
+import * as path21 from "node:path";
+
+// cli/src/lib/pipeline-engine/migrations/steps.ts
+var import_ajv = __toESM(require_ajv(), 1);
+
+// cli/src/lib/pipeline-engine/schemas/legacy/orchestration-state-v5.schema.json
+var orchestration_state_v5_schema_default = {
+  $schema: "http://json-schema.org/draft-07/schema#",
+  $id: "orchestration-state-v5",
+  title: "Orchestration State v5",
+  description: "Canonical schema for the orchestration system's v5 state format.",
+  type: "object",
+  additionalProperties: false,
+  required: ["$schema", "project", "config", "pipeline", "graph"],
+  properties: {
+    $schema: {
+      title: "Schema Version",
+      description: "Schema version identifier. Must be orchestration-state-v5.",
+      const: "orchestration-state-v5"
+    },
+    project: {
+      title: "Project Metadata",
+      description: "Core project identity and timestamps.",
+      type: "object",
+      additionalProperties: false,
+      required: ["name", "created", "updated"],
+      properties: {
+        name: {
+          title: "Project Name",
+          description: "Unique project identifier derived from the project directory name.",
+          type: "string"
+        },
+        created: {
+          title: "Created Timestamp",
+          description: "ISO 8601 timestamp when the project was initialized.",
+          type: "string"
+        },
+        updated: {
+          title: "Updated Timestamp",
+          description: "ISO 8601 timestamp of the last state mutation.",
+          type: "string"
+        }
+      }
+    },
+    config: {
+      title: "Project Configuration",
+      description: "Static configuration values set at project initialization.",
+      type: "object",
+      additionalProperties: false,
+      required: ["gate_mode", "limits", "source_control"],
+      properties: {
+        gate_mode: {
+          title: "Gate Mode",
+          description: "Default human gate frequency. Values: ask, task, phase, autonomous.",
+          type: "string",
+          enum: ["ask", "task", "phase", "autonomous"]
+        },
+        limits: {
+          title: "Execution Limits",
+          description: "Safeguard limits for the execution pipeline.",
+          type: "object",
+          additionalProperties: false,
+          required: [
+            "max_phases",
+            "max_tasks_per_phase",
+            "max_retries_per_task",
+            "max_consecutive_review_rejections"
+          ],
+          properties: {
+            max_phases: {
+              title: "Max Phases",
+              description: "Maximum number of phases allowed per pipeline run.",
+              type: "integer",
+              minimum: 1
+            },
+            max_tasks_per_phase: {
+              title: "Max Tasks Per Phase",
+              description: "Maximum number of tasks allowed in a single phase.",
+              type: "integer",
+              minimum: 1
+            },
+            max_retries_per_task: {
+              title: "Max Retries Per Task",
+              description: "Maximum number of retry attempts per task.",
+              type: "integer",
+              minimum: 0
+            },
+            max_consecutive_review_rejections: {
+              title: "Max Consecutive Review Rejections",
+              description: "Maximum number of consecutive review rejections before the pipeline halts.",
+              type: "integer",
+              minimum: 0
+            }
+          }
+        },
+        source_control: {
+          title: "Source Control Configuration",
+          description: "Default source control settings for the project.",
+          type: "object",
+          additionalProperties: false,
+          required: ["auto_commit", "auto_pr"],
+          properties: {
+            auto_commit: {
+              title: "Auto Commit Mode",
+              description: "Controls when commits are made automatically. Values: ask, always, never.",
+              type: "string",
+              enum: ["ask", "always", "never"]
+            },
+            auto_pr: {
+              title: "Auto PR Mode",
+              description: "Controls when pull requests are created automatically. Values: ask, always, never.",
+              type: "string",
+              enum: ["ask", "always", "never"]
+            }
+          }
+        }
+      }
+    },
+    pipeline: {
+      title: "Pipeline Section",
+      description: "Current pipeline execution state including tier, source control, and halt information.",
+      allOf: [{ $ref: "#/definitions/PipelineSection" }]
+    },
+    graph: {
+      title: "Graph State",
+      description: "DAG execution state including the template, current position, and all node states.",
+      allOf: [{ $ref: "#/definitions/GraphState" }]
+    }
+  },
+  definitions: {
+    NodeStatus: {
+      title: "Node Status",
+      description: "Execution status of a node. Values: not_started, in_progress, completed, failed, halted, skipped.",
+      type: "string",
+      enum: ["not_started", "in_progress", "completed", "failed", "halted", "skipped"]
+    },
+    GraphStatus: {
+      title: "Graph Status",
+      description: "Execution status of the graph. Values: not_started, in_progress, completed, halted.",
+      type: "string",
+      enum: ["not_started", "in_progress", "completed", "halted"]
+    },
+    NodesRecord: {
+      title: "Nodes Record",
+      description: "A map of node IDs to their NodeState. Keys are string node identifiers.",
+      type: "object",
+      additionalProperties: {
+        title: "Node State Entry",
+        description: "The state of a single node, discriminated by the kind field.",
+        $ref: "#/definitions/NodeState"
+      }
+    },
+    NodeState: {
+      title: "Node State",
+      description: "Discriminated union of all possible node state variants, discriminated by the kind field.",
+      oneOf: [
+        { $ref: "#/definitions/StepNodeState" },
+        { $ref: "#/definitions/GateNodeState" },
+        { $ref: "#/definitions/ConditionalNodeState" },
+        { $ref: "#/definitions/ParallelNodeState" },
+        { $ref: "#/definitions/ForEachPhaseNodeState" },
+        { $ref: "#/definitions/ForEachTaskNodeState" }
+      ]
+    },
+    StepNodeState: {
+      title: "Step Node State",
+      description: "State for a step node that executes an action and tracks its document output.",
+      type: "object",
+      additionalProperties: false,
+      required: ["kind", "status", "doc_path", "retries"],
+      properties: {
+        kind: {
+          title: "Node Kind",
+          description: "Discriminant for the step node variant. Must be 'step'.",
+          const: "step"
+        },
+        status: {
+          title: "Node Status",
+          description: "Current execution status of this node.",
+          $ref: "#/definitions/NodeStatus"
+        },
+        doc_path: {
+          title: "Document Path",
+          description: "Path to the output document produced by this step, or null if not yet created.",
+          oneOf: [
+            { type: "string" },
+            { type: "null" }
+          ]
+        },
+        retries: {
+          title: "Retry Count",
+          description: "Number of retry attempts taken for this step.",
+          type: "integer",
+          minimum: 0
+        },
+        verdict: {
+          title: "Verdict",
+          description: "Review verdict for this step, or null if not yet reviewed.",
+          oneOf: [
+            { type: "string" },
+            { type: "null" }
+          ]
+        },
+        last_parse_error: {
+          title: "Last Parse Error",
+          description: "Structured error info from the most recent failed Master Plan parse attempt by the explosion script. Populated on explosion_failed, cleared on explosion_completed. Used by the planner's recovery branch to self-correct.",
+          oneOf: [
+            {
+              type: "object",
+              additionalProperties: false,
+              required: ["line", "expected", "found", "message"],
+              properties: {
+                line: { type: "integer", minimum: 1 },
+                expected: { type: "string" },
+                found: { type: "string" },
+                message: { type: "string" }
+              }
+            },
+            { type: "null" }
+          ]
+        },
+        parse_retry_count: {
+          title: "Parse Retry Count",
+          description: "Number of times the explosion script's parser has rejected the planner's Master Plan output for this node. Reset to 0 on explosion_completed. Hardcoded cap of 3 enforced in the explosion_failed mutation handler.",
+          oneOf: [
+            { type: "integer", minimum: 0 },
+            { type: "null" }
+          ]
+        }
+      }
+    },
+    GateNodeState: {
+      title: "Gate Node State",
+      description: "State for a gate node that pauses pipeline execution for human approval.",
+      type: "object",
+      additionalProperties: false,
+      required: ["kind", "status", "gate_active"],
+      properties: {
+        kind: {
+          title: "Node Kind",
+          description: "Discriminant for the gate node variant. Must be 'gate'.",
+          const: "gate"
+        },
+        status: {
+          title: "Node Status",
+          description: "Current execution status of this node.",
+          $ref: "#/definitions/NodeStatus"
+        },
+        gate_active: {
+          title: "Gate Active",
+          description: "When true, the gate is currently blocking pipeline execution awaiting human approval.",
+          type: "boolean"
+        }
+      }
+    },
+    ConditionalNodeState: {
+      title: "Conditional Node State",
+      description: "State for a conditional node that routes execution based on an evaluated condition.",
+      type: "object",
+      additionalProperties: false,
+      required: ["kind", "status", "branch_taken"],
+      properties: {
+        kind: {
+          title: "Node Kind",
+          description: "Discriminant for the conditional node variant. Must be 'conditional'.",
+          const: "conditional"
+        },
+        status: {
+          title: "Node Status",
+          description: "Current execution status of this node.",
+          $ref: "#/definitions/NodeStatus"
+        },
+        branch_taken: {
+          title: "Branch Taken",
+          description: "Which branch was selected after condition evaluation: 'true', 'false', or null if not yet evaluated.",
+          oneOf: [
+            { type: "string", enum: ["true", "false"] },
+            { type: "null" }
+          ]
+        }
+      }
+    },
+    ParallelNodeState: {
+      title: "Parallel Node State",
+      description: "State for a parallel node that executes multiple child nodes concurrently or serially.",
+      type: "object",
+      additionalProperties: false,
+      required: ["kind", "status", "nodes"],
+      properties: {
+        kind: {
+          title: "Node Kind",
+          description: "Discriminant for the parallel node variant. Must be 'parallel'.",
+          const: "parallel"
+        },
+        status: {
+          title: "Node Status",
+          description: "Current execution status of this node.",
+          $ref: "#/definitions/NodeStatus"
+        },
+        nodes: {
+          title: "Child Nodes",
+          description: "Map of child node IDs to their execution state.",
+          $ref: "#/definitions/NodesRecord"
+        }
+      }
+    },
+    ForEachPhaseNodeState: {
+      title: "For-Each-Phase Node State",
+      description: "State for a for_each_phase node that iterates over all phases defined in the master plan.",
+      type: "object",
+      additionalProperties: false,
+      required: ["kind", "status", "iterations"],
+      properties: {
+        kind: {
+          title: "Node Kind",
+          description: "Discriminant for the for_each_phase node variant. Must be 'for_each_phase'.",
+          const: "for_each_phase"
+        },
+        status: {
+          title: "Node Status",
+          description: "Current execution status of this node.",
+          $ref: "#/definitions/NodeStatus"
+        },
+        iterations: {
+          title: "Phase Iterations",
+          description: "Ordered list of phase iteration entries, one per phase in the master plan.",
+          type: "array",
+          items: {
+            title: "Phase Iteration Entry",
+            description: "State for a single phase iteration.",
+            $ref: "#/definitions/IterationEntry"
+          }
+        }
+      }
+    },
+    ForEachTaskNodeState: {
+      title: "For-Each-Task Node State",
+      description: "State for a for_each_task node that iterates over all tasks in the current phase.",
+      type: "object",
+      additionalProperties: false,
+      required: ["kind", "status", "iterations"],
+      properties: {
+        kind: {
+          title: "Node Kind",
+          description: "Discriminant for the for_each_task node variant. Must be 'for_each_task'.",
+          const: "for_each_task"
+        },
+        status: {
+          title: "Node Status",
+          description: "Current execution status of this node.",
+          $ref: "#/definitions/NodeStatus"
+        },
+        iterations: {
+          title: "Task Iterations",
+          description: "Ordered list of task iteration entries, one per task in the current phase.",
+          type: "array",
+          items: {
+            title: "Task Iteration Entry",
+            description: "State for a single task iteration.",
+            $ref: "#/definitions/IterationEntry"
+          }
+        }
+      }
+    },
+    IterationEntry: {
+      title: "Iteration Entry",
+      description: "State for a single phase or task iteration within a for-each node.",
+      type: "object",
+      additionalProperties: false,
+      required: ["index", "status", "nodes", "corrective_tasks", "commit_hash"],
+      properties: {
+        index: {
+          title: "Iteration Index",
+          description: "0-based iteration index.",
+          type: "integer",
+          minimum: 0
+        },
+        status: {
+          title: "Iteration Status",
+          description: "Current execution status of this iteration.",
+          $ref: "#/definitions/NodeStatus"
+        },
+        nodes: {
+          title: "Iteration Nodes",
+          description: "Map of node IDs to their execution state for this iteration.",
+          $ref: "#/definitions/NodesRecord"
+        },
+        corrective_tasks: {
+          title: "Corrective Tasks",
+          description: "Ordered list of corrective task entries injected during this iteration.",
+          type: "array",
+          items: {
+            title: "Corrective Task Entry",
+            description: "State for a single corrective task injected into this iteration.",
+            $ref: "#/definitions/CorrectiveTaskEntry"
+          }
+        },
+        doc_path: {
+          title: "Iteration Doc Path",
+          description: "Relative path to the authoring doc for this iteration (phase plan or task handoff). Optional; absent on iterations that have not yet been authored.",
+          type: ["string", "null"]
+        },
+        commit_hash: {
+          title: "Commit Hash",
+          description: "Per-task commit hash set by the COMMIT_COMPLETED mutation, or null if no commit has been made for this iteration.",
+          oneOf: [
+            { type: "string" },
+            { type: "null" }
+          ]
+        }
+      }
+    },
+    CorrectiveTaskEntry: {
+      title: "Corrective Task Entry",
+      description: "State for a corrective task injected into the pipeline after a review rejection.",
+      type: "object",
+      additionalProperties: false,
+      required: ["index", "reason", "injected_after", "status", "nodes", "commit_hash"],
+      properties: {
+        index: {
+          title: "Corrective Task Index",
+          description: "1-based corrective attempt number within this iteration.",
+          type: "integer",
+          minimum: 1
+        },
+        reason: {
+          title: "Injection Reason",
+          description: "Human-readable explanation of why this corrective task was injected.",
+          type: "string"
+        },
+        injected_after: {
+          title: "Injected After",
+          description: "Node ID of the node that triggered the corrective task injection (e.g., 'code_review').",
+          type: "string"
+        },
+        status: {
+          title: "Corrective Task Status",
+          description: "Current execution status of this corrective task.",
+          $ref: "#/definitions/NodeStatus"
+        },
+        nodes: {
+          title: "Corrective Task Nodes",
+          description: "Map of node IDs to their execution state for this corrective task.",
+          $ref: "#/definitions/NodesRecord"
+        },
+        doc_path: {
+          title: "Corrective Task Doc Path",
+          description: "Relative path to the corrective task handoff doc. Optional; absent on entries that have not yet been authored.",
+          type: ["string", "null"]
+        },
+        commit_hash: {
+          title: "Commit Hash",
+          description: "Per-corrective-task commit hash set by the COMMIT_COMPLETED mutation, or null if no commit has been made for this corrective task.",
+          oneOf: [
+            { type: "string" },
+            { type: "null" }
+          ]
+        }
+      }
+    },
+    SourceControlState: {
+      title: "Source Control State",
+      description: "Source control configuration and runtime state for the project. Does not include commit_hash (tracked per-iteration instead).",
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "branch",
+        "base_branch",
+        "worktree_path",
+        "auto_commit",
+        "auto_pr",
+        "remote_url",
+        "compare_url",
+        "pr_url"
+      ],
+      properties: {
+        branch: {
+          title: "Feature Branch",
+          description: "Git branch name used for the project's code changes.",
+          type: "string"
+        },
+        base_branch: {
+          title: "Base Branch",
+          description: "Git branch to merge into when the pull request is created.",
+          type: "string"
+        },
+        worktree_path: {
+          title: "Worktree Path",
+          description: "Absolute path to the git worktree directory for this project.",
+          type: "string"
+        },
+        auto_commit: {
+          title: "Auto Commit Mode",
+          description: "Controls when commits are made automatically. Values: ask, always, never.",
+          type: "string",
+          enum: ["ask", "always", "never"]
+        },
+        auto_pr: {
+          title: "Auto PR Mode",
+          description: "Controls when pull requests are created automatically. Values: ask, always, never.",
+          type: "string",
+          enum: ["ask", "always", "never"]
+        },
+        remote_url: {
+          title: "Remote URL",
+          description: "URL of the remote repository, or null if not configured.",
+          oneOf: [
+            { type: "string" },
+            { type: "null" }
+          ]
+        },
+        compare_url: {
+          title: "Compare URL",
+          description: "URL to compare the feature branch against base branch, or null if not yet available.",
+          oneOf: [
+            { type: "string" },
+            { type: "null" }
+          ]
+        },
+        pr_url: {
+          title: "Pull Request URL",
+          description: "URL of the created pull request, or null if not yet created.",
+          oneOf: [
+            { type: "string" },
+            { type: "null" }
+          ]
+        }
+      }
+    },
+    PipelineSection: {
+      title: "Pipeline Section",
+      description: "Current pipeline execution state including tier, source control configuration, and halt information.",
+      type: "object",
+      additionalProperties: false,
+      required: ["gate_mode", "source_control", "current_tier", "halt_reason"],
+      properties: {
+        gate_mode: {
+          title: "Gate Mode Override",
+          description: "Human gate frequency override for this project, or null to use config default. Values: task, phase, autonomous.",
+          oneOf: [
+            { type: "string", enum: ["task", "phase", "autonomous"] },
+            { type: "null" }
+          ]
+        },
+        source_control: {
+          title: "Source Control State",
+          description: "Source control runtime state for this project, or null if not yet initialized.",
+          oneOf: [
+            { $ref: "#/definitions/SourceControlState" },
+            { type: "null" }
+          ]
+        },
+        current_tier: {
+          title: "Current Tier",
+          description: "Active pipeline tier. Values: planning, execution, review, halted.",
+          type: "string",
+          enum: ["planning", "execution", "review", "halted"]
+        },
+        halt_reason: {
+          title: "Halt Reason",
+          description: "Human-readable reason why the pipeline halted, or null if the pipeline is not halted.",
+          oneOf: [
+            { type: "string" },
+            { type: "null" }
+          ]
+        }
+      }
+    },
+    GraphState: {
+      title: "Graph State",
+      description: "DAG execution state including the pipeline template, current node position, and all node states.",
+      type: "object",
+      additionalProperties: false,
+      required: ["template_id", "status", "current_node_path", "nodes"],
+      properties: {
+        template_id: {
+          title: "Template ID",
+          description: "Identifier of the pipeline template being executed.",
+          type: "string"
+        },
+        status: {
+          title: "Graph Status",
+          description: "Current execution status of the entire graph.",
+          $ref: "#/definitions/GraphStatus"
+        },
+        current_node_path: {
+          title: "Current Node Path",
+          description: "Dot/bracket path to the currently active node for observability (e.g., 'phase_loop[1].task_loop[2].code_review'), or null if no node is active.",
+          oneOf: [
+            { type: "string" },
+            { type: "null" }
+          ]
+        },
+        nodes: {
+          title: "Root Nodes",
+          description: "Map of root-level node IDs to their execution state.",
+          $ref: "#/definitions/NodesRecord"
+        }
+      }
+    }
+  }
+};
+
+// cli/src/lib/pipeline-engine/migrations/steps.ts
+init_version();
+var v5Validate = new import_ajv.Ajv({ allErrors: true }).compile(orchestration_state_v5_schema_default);
+function wrapEntry(e) {
+  const hash = e["commit_hash"] ?? null;
+  delete e["commit_hash"];
+  e["repos"] = [{ name: "", commit_hash: hash }];
+}
+function migrateV5ToV6(input) {
+  if (!v5Validate(input)) {
+    throw new Error("migrate v5\u2192v6: input does not validate against the archived v5 schema");
+  }
+  const s = structuredClone(input);
+  const graph = s["graph"];
+  const nodes = graph?.["nodes"];
+  const phaseLoop = nodes?.["phase_loop"];
+  const phaseIters = phaseLoop?.["iterations"] ?? [];
+  for (const phaseIter of phaseIters) {
+    wrapEntry(phaseIter);
+    for (const ct of phaseIter["corrective_tasks"] ?? []) {
+      wrapEntry(ct);
+    }
+    const taskNodes = phaseIter["nodes"];
+    const taskLoop = taskNodes?.["task_loop"];
+    const taskIters = taskLoop?.["iterations"] ?? [];
+    for (const taskIter of taskIters) {
+      wrapEntry(taskIter);
+      for (const ct of taskIter["corrective_tasks"] ?? []) {
+        wrapEntry(ct);
+      }
+    }
+  }
+  s["$schema"] = CURRENT_SCHEMA_VERSION;
+  return s;
+}
+var MIGRATION_LADDER = [
+  { from: "orchestration-state-v5", to: "orchestration-state-v6", migrate: migrateV5ToV6 }
+];
+
+// cli/src/commands/migrate/migrate.ts
+init_schema_validator();
+function migrateProject(opts) {
+  const { projectDir, dryRun } = opts;
+  const statePath = path21.join(projectDir, "state.json");
+  const raw = fs17.readFileSync(statePath, "utf8");
+  const state = JSON.parse(raw);
+  const currentSchema = state["$schema"] ?? "";
+  if (currentSchema === CURRENT_SCHEMA_VERSION) {
+    return { migrated: false };
+  }
+  const fromVersion = currentSchema;
+  let value = state;
+  const startIdx = MIGRATION_LADDER.findIndex((step) => step.from === fromVersion);
+  if (startIdx === -1) {
+    throw new Error(`migrate: no migration step found starting from schema '${fromVersion}'`);
+  }
+  const stepsToApply = MIGRATION_LADDER.slice(startIdx);
+  for (const step of stepsToApply) {
+    if (value["$schema"] !== step.from) {
+      throw new Error(`migrate: expected schema '${step.from}' but state has '${value["$schema"]}'`);
+    }
+    value = step.migrate(value);
+  }
+  const errors = validateStateSchema(value);
+  if (errors.length > 0) {
+    throw new Error(`migrate: post-migration validation failed:
+${errors.join("\n")}`);
+  }
+  const toVersion = CURRENT_SCHEMA_VERSION;
+  if (dryRun) {
+    return { migrated: true, from: fromVersion, to: toVersion, backupPath: null };
+  }
+  const iso = (/* @__PURE__ */ new Date()).toISOString().replace(/[:.]/g, "-");
+  const backupPath = `${statePath}.bak-${iso}`;
+  fs17.writeFileSync(backupPath, raw, "utf8");
+  fs17.writeFileSync(statePath, JSON.stringify(value, null, 2), "utf8");
+  return { migrated: true, from: fromVersion, to: toVersion, backupPath };
+}
+
+// cli/src/commands/migrate/index.ts
+var migrateCommand = defineCommand({
+  name: "migrate",
+  description: "Migrate a project state.json to the current schema version",
+  args: {
+    project: { description: "Project name (directory under ~/.radorc/projects)" }
+  },
+  flags: {
+    all: { description: "Migrate all projects found under the projects root", type: "boolean" },
+    "dry-run": { description: "Report what would be migrated without writing", type: "boolean" }
+  },
+  handler: async ({ args, flags }) => {
+    const projectsRoot = userDataPaths().projects;
+    const dryRun = Boolean(flags["dry-run"]);
+    const all = Boolean(flags["all"]);
+    if (!all && !args["project"]) {
+      throw new UserError("<project> argument is required unless --all is specified");
+    }
+    if (all) {
+      if (!fs18.existsSync(projectsRoot)) {
+        throw new UserError(`Projects root does not exist: ${projectsRoot}`);
+      }
+      const entries = fs18.readdirSync(projectsRoot, { withFileTypes: true }).filter((d) => d.isDirectory() && !d.name.startsWith("_"));
+      const results = [];
+      for (const entry of entries) {
+        const projectDir2 = path22.join(projectsRoot, entry.name);
+        const statePath = path22.join(projectDir2, "state.json");
+        if (!fs18.existsSync(statePath)) continue;
+        try {
+          const result2 = migrateProject({ projectDir: projectDir2, dryRun });
+          results.push({ project: entry.name, result: result2 });
+        } catch (err) {
+          throw new Error(`migrate failed for project '${entry.name}': ${err instanceof Error ? err.message : String(err)}`);
+        }
+      }
+      return { results };
+    }
+    const projectName = args["project"];
+    const projectDir = path22.join(projectsRoot, projectName);
+    if (!fs18.existsSync(path22.join(projectDir, "state.json"))) {
+      throw new UserError(`No state.json found for project '${projectName}' at ${projectDir}`);
+    }
+    const result = migrateProject({ projectDir, dryRun });
+    return { results: [{ project: projectName, result }] };
+  },
+  mapResult: (r) => ({
+    ok: true,
+    data: r,
+    exit_code: 0
+  })
+});
+
 // cli/src/commands/skill/list.ts
 init_command();
 init_skill_manifest();
@@ -25472,7 +24164,7 @@ function parseParseErrorFlag(raw) {
 
 // cli/src/commands/pipeline/signal.ts
 function makeDefaultIO() {
-  return { readState: readState3, writeState: writeState2, readConfig, readDocument: readDocument4, ensureDirectories };
+  return { readState: readState4, writeState: writeState2, readConfig, readDocument: readDocument2, ensureDirectories };
 }
 async function pipelineSignal(input) {
   const io = input.io ?? makeDefaultIO();
@@ -25790,6 +24482,175 @@ var groupShowCommand = defineCommand({
   }
 });
 
+// cli/src/commands/project-group/create.ts
+init_command();
+init_errors2();
+init_paths();
+function runGroupCreate({ root, name, description, parent }) {
+  if (!description?.trim()) throw new UserError("a non-empty --description is required to create a project-group");
+  const r = new WorkGraphService({ root }).createGroup({ name, description, parentId: parent });
+  if (!r.ok) throw new UserError(r.error.message);
+  return r.data;
+}
+var groupCreateCommand2 = defineCommand({
+  name: "project-group-create",
+  description: "Create a project-group",
+  args: { name: { description: "Name for the new project-group", required: true } },
+  flags: {
+    description: { description: "What this group scopes and why an agent would look here (required)", type: "string" },
+    parent: { description: "Optional parent group id to nest this group under", type: "string" }
+  },
+  handler: async ({ args, flags, ctx }) => {
+    if (!args.name) throw new UserError("--name is required");
+    const out = runGroupCreate({ root: userDataPaths().root, name: args.name, description: flags.description, parent: flags.parent });
+    if (!ctx.ux.json) ctx.stderr.write(`\u2713 created ${out.node.id} (rev ${out.rev})
+`);
+    return out;
+  }
+});
+
+// cli/src/commands/project-group/edit.ts
+init_command();
+init_errors2();
+init_paths();
+function runGroupEdit({ root, group, name, description }) {
+  if (name === void 0 && description === void 0) {
+    throw new UserError("no editable field flag supplied");
+  }
+  if (description !== void 0 && !description.trim()) {
+    throw new UserError("--description cannot be empty");
+  }
+  const patch = {};
+  if (name !== void 0) patch.name = name;
+  if (description !== void 0) patch.description = description.trim();
+  const r = new WorkGraphService({ root }).updateGroup(group, patch);
+  if (!r.ok) throw new UserError(r.error.message);
+  return r.data;
+}
+var groupEditCommand2 = defineCommand({
+  name: "project-group-edit",
+  description: "Edit a project-group's name or description",
+  args: {
+    group: { description: "Id of the project-group to edit", required: true }
+  },
+  flags: {
+    name: { description: "New display name", type: "string" },
+    description: { description: "New description (the scoping rationale; cannot be blank)", type: "string" }
+  },
+  handler: async ({ args, flags, ctx: _ctx }) => {
+    if (!args.group) throw new UserError("--group is required");
+    const root = userDataPaths().root;
+    return runGroupEdit({ root, group: args.group, name: flags.name, description: flags.description });
+  }
+});
+
+// cli/src/commands/project-group/members.ts
+init_command();
+init_errors2();
+init_paths();
+function runGroupAdd({ root, group, member }) {
+  const r = new WorkGraphService({ root }).addMember(group, member);
+  if (!r.ok) throw new UserError(r.error.message);
+  return r.data;
+}
+function runGroupRemove({ root, group, member }) {
+  const r = new WorkGraphService({ root }).removeMember(group, member);
+  if (!r.ok) throw new UserError(r.error.message);
+  return r.data;
+}
+var groupAddCommand2 = defineCommand({
+  name: "project-group-add",
+  description: "Add a project or sub-group to a group",
+  args: {
+    group: { description: "Id of the project-group", required: true },
+    member: { description: "Id of the project or sub-group to add", required: true }
+  },
+  flags: {},
+  handler: async ({ args }) => {
+    if (!args.group) throw new UserError("--group is required");
+    if (!args.member) throw new UserError("--member is required");
+    const root = userDataPaths().root;
+    return runGroupAdd({ root, group: args.group, member: args.member });
+  }
+});
+var groupRemoveCommand2 = defineCommand({
+  name: "project-group-remove",
+  description: "Remove a project or sub-group from a group",
+  args: {
+    group: { description: "Id of the project-group", required: true },
+    member: { description: "Id of the project or sub-group to remove", required: true }
+  },
+  flags: {},
+  handler: async ({ args }) => {
+    if (!args.group) throw new UserError("--group is required");
+    if (!args.member) throw new UserError("--member is required");
+    const root = userDataPaths().root;
+    return runGroupRemove({ root, group: args.group, member: args.member });
+  }
+});
+
+// cli/src/commands/project-group/delete.ts
+init_command();
+init_errors2();
+init_paths();
+function runGroupDelete({ root, group }) {
+  const r = new WorkGraphService({ root }).deleteGroup(group);
+  if (!r.ok) throw new UserError(r.error.message);
+  return r.data;
+}
+var groupDeleteCommand2 = defineCommand({
+  name: "project-group-delete",
+  description: "Delete a project-group without removing its member projects",
+  args: {
+    group: { description: "Id of the project-group to delete", required: true }
+  },
+  flags: {},
+  handler: async ({ args }) => {
+    if (!args.group) throw new UserError("--group is required");
+    const root = userDataPaths().root;
+    return runGroupDelete({ root, group: args.group });
+  }
+});
+
+// cli/src/commands/project-group/list-show.ts
+init_command();
+init_errors2();
+init_paths();
+function runGroupList({ root }) {
+  const groups = new WorkGraphService({ root }).listGroups();
+  return { groups };
+}
+function runGroupShow({ root, group }) {
+  const node = new WorkGraphService({ root }).getNode(group);
+  if (!node || node.kind !== "group") {
+    throw new UserError(`'${group}' is not a registered project-group`);
+  }
+  return { node };
+}
+var groupListCommand2 = defineCommand({
+  name: "project-group-list",
+  description: "List all project-groups",
+  args: {},
+  flags: {},
+  handler: async ({ ctx: _ctx }) => {
+    const root = userDataPaths().root;
+    return runGroupList({ root });
+  }
+});
+var groupShowCommand2 = defineCommand({
+  name: "project-group-show",
+  description: "Show details of a project-group",
+  args: {
+    group: { description: "Id of the project-group to show", required: true }
+  },
+  flags: {},
+  handler: async ({ args }) => {
+    if (!args.group) throw new UserError("--group is required");
+    const root = userDataPaths().root;
+    return runGroupShow({ root, group: args.group });
+  }
+});
+
 // cli/src/commands/where.ts
 init_paths();
 var WHERE_NAMES = {
@@ -25913,6 +24774,107 @@ var sessionContextCommand = defineCommand({
   }
 });
 
+// cli/src/commands/graph/show.ts
+init_command();
+init_errors2();
+init_paths();
+function parseDepth(raw) {
+  if (raw === void 0) return void 0;
+  if (!/^\d+$/.test(raw.trim())) {
+    throw new UserError("--depth must be a non-negative number");
+  }
+  return Number(raw.trim());
+}
+function runGraphShow({ root, rootId, depth }) {
+  try {
+    const svc = new WorkGraphService({ root });
+    return { data: svc.getGraph({ rootId, depth }) };
+  } catch (e) {
+    throw new UserError(e instanceof Error ? e.message : String(e));
+  }
+}
+var graphShowCommand = defineCommand({
+  name: "graph-show",
+  description: "Show the work-graph projection",
+  args: {},
+  flags: {
+    root: { description: "Scope by root node id", type: "string" },
+    depth: { description: "Traversal depth when scoping by root", type: "string" }
+  },
+  handler: async ({ flags, ctx: _ctx }) => {
+    const { root } = userDataPaths();
+    const depth = parseDepth(flags.depth);
+    return runGraphShow({ root, rootId: flags.root, depth });
+  }
+});
+
+// cli/src/commands/graph/link.ts
+init_command();
+init_errors2();
+init_paths();
+function runGraphLink({ root, from, to, type }) {
+  const r = new WorkGraphService({ root }).link(from, to, type);
+  if (!r.ok) throw new UserError(r.error.message);
+  return r.data;
+}
+function runGraphUnlink({ root, from, to, type }) {
+  const r = new WorkGraphService({ root }).unlink(from, to, type);
+  if (!r.ok) throw new UserError(r.error.message);
+  return r.data;
+}
+var graphLinkCommand = defineCommand({
+  name: "graph-link",
+  description: "Add a relationship edge between two nodes",
+  args: {
+    from: { description: "Source node id (project id or group id)", required: true },
+    to: { description: "Target node id (project id or group id)", required: true }
+  },
+  flags: {
+    type: { description: "Edge type. Known: spawned-from (side missions), follows (iteration series). Unknown types are accepted and rendered generically.", type: "string" }
+  },
+  handler: async ({ args, flags, ctx }) => {
+    if (!args.from || !args.to || !flags.type) throw new UserError("--from, --to, and --type are required");
+    const out = runGraphLink({ root: userDataPaths().root, from: args.from, to: args.to, type: flags.type });
+    if (!ctx.ux.json) ctx.stderr.write(`\u2713 linked ${out.edge.from} -[${out.edge.type}]-> ${out.edge.to} (rev ${out.rev})
+`);
+    return out;
+  }
+});
+var graphUnlinkCommand = defineCommand({
+  name: "graph-unlink",
+  description: "Remove a relationship edge between two nodes",
+  args: {
+    from: { description: "Source node id (project id or group id)", required: true },
+    to: { description: "Target node id (project id or group id)", required: true }
+  },
+  flags: {
+    type: { description: "Edge type to remove. Known: spawned-from (side missions), follows (iteration series). Unknown types are accepted.", type: "string" }
+  },
+  handler: async ({ args, flags, ctx: _ctx }) => {
+    if (!args.from || !args.to || !flags.type) throw new UserError("--from, --to, and --type are required");
+    return runGraphUnlink({ root: userDataPaths().root, from: args.from, to: args.to, type: flags.type });
+  }
+});
+
+// cli/src/commands/graph/prune.ts
+init_command();
+init_errors2();
+init_paths();
+function runGraphPrune({ root }) {
+  const r = new WorkGraphService({ root }).prune();
+  if (!r.ok) throw new UserError(r.error.message);
+  return r.data;
+}
+var graphPruneCommand = defineCommand({
+  name: "graph-prune",
+  description: "Remove dangling edges from the work-graph",
+  args: {},
+  flags: {},
+  handler: async ({ ctx: _ctx }) => {
+    return runGraphPrune({ root: userDataPaths().root });
+  }
+});
+
 // cli/src/cli.ts
 function buildProgram(version) {
   const program3 = new Command("radorch");
@@ -26005,6 +24967,52 @@ function buildProgram(version) {
     const argv = process.argv.slice(4);
     await runCommand(groupEditCommand, { argv, env: process.env, isTTY: Boolean(process.stdin.isTTY), stderr: process.stderr });
   });
+  const projectGroup = program3.command("project-group").description("Project-group structure operations");
+  projectGroup.command("create").description(groupCreateCommand2.description).helpOption(false).allowUnknownOption().allowExcessArguments(true).action(async () => {
+    const argv = process.argv.slice(4);
+    await runCommand(groupCreateCommand2, { argv, env: process.env, isTTY: Boolean(process.stdin.isTTY), stderr: process.stderr });
+  });
+  projectGroup.command("add").description(groupAddCommand2.description).helpOption(false).allowUnknownOption().allowExcessArguments(true).action(async () => {
+    const argv = process.argv.slice(4);
+    await runCommand(groupAddCommand2, { argv, env: process.env, isTTY: Boolean(process.stdin.isTTY), stderr: process.stderr });
+  });
+  projectGroup.command("remove").description(groupRemoveCommand2.description).helpOption(false).allowUnknownOption().allowExcessArguments(true).action(async () => {
+    const argv = process.argv.slice(4);
+    await runCommand(groupRemoveCommand2, { argv, env: process.env, isTTY: Boolean(process.stdin.isTTY), stderr: process.stderr });
+  });
+  projectGroup.command("delete").description(groupDeleteCommand2.description).helpOption(false).allowUnknownOption().allowExcessArguments(true).action(async () => {
+    const argv = process.argv.slice(4);
+    await runCommand(groupDeleteCommand2, { argv, env: process.env, isTTY: Boolean(process.stdin.isTTY), stderr: process.stderr });
+  });
+  projectGroup.command("list").description(groupListCommand2.description).helpOption(false).allowUnknownOption().allowExcessArguments(true).action(async () => {
+    const argv = process.argv.slice(4);
+    await runCommand(groupListCommand2, { argv, env: process.env, isTTY: Boolean(process.stdin.isTTY), stderr: process.stderr });
+  });
+  projectGroup.command("show").description(groupShowCommand2.description).helpOption(false).allowUnknownOption().allowExcessArguments(true).action(async () => {
+    const argv = process.argv.slice(4);
+    await runCommand(groupShowCommand2, { argv, env: process.env, isTTY: Boolean(process.stdin.isTTY), stderr: process.stderr });
+  });
+  projectGroup.command("edit").description(groupEditCommand2.description).helpOption(false).allowUnknownOption().allowExcessArguments(true).action(async () => {
+    const argv = process.argv.slice(4);
+    await runCommand(groupEditCommand2, { argv, env: process.env, isTTY: Boolean(process.stdin.isTTY), stderr: process.stderr });
+  });
+  const graph = program3.command("graph").description("Work-graph structure, relationships, and upkeep");
+  graph.command("show").description(graphShowCommand.description).helpOption(false).allowUnknownOption().allowExcessArguments(true).action(async () => {
+    const argv = process.argv.slice(4);
+    await runCommand(graphShowCommand, { argv, env: process.env, isTTY: Boolean(process.stdin.isTTY), stderr: process.stderr });
+  });
+  graph.command("link").description(graphLinkCommand.description).helpOption(false).allowUnknownOption().allowExcessArguments(true).action(async () => {
+    const argv = process.argv.slice(4);
+    await runCommand(graphLinkCommand, { argv, env: process.env, isTTY: Boolean(process.stdin.isTTY), stderr: process.stderr });
+  });
+  graph.command("unlink").description(graphUnlinkCommand.description).helpOption(false).allowUnknownOption().allowExcessArguments(true).action(async () => {
+    const argv = process.argv.slice(4);
+    await runCommand(graphUnlinkCommand, { argv, env: process.env, isTTY: Boolean(process.stdin.isTTY), stderr: process.stderr });
+  });
+  graph.command("prune").description(graphPruneCommand.description).helpOption(false).allowUnknownOption().allowExcessArguments(true).action(async () => {
+    const argv = process.argv.slice(4);
+    await runCommand(graphPruneCommand, { argv, env: process.env, isTTY: Boolean(process.stdin.isTTY), stderr: process.stderr });
+  });
   const project = program3.command("project").description("Project state read operations");
   project.command("context").description(projectContextCommand.description).helpOption(false).allowUnknownOption().allowExcessArguments(true).action(async () => {
     const argv = process.argv.slice(4);
@@ -26013,6 +25021,18 @@ function buildProgram(version) {
   project.command("find").description(projectFindCommand.description).helpOption(false).allowUnknownOption().allowExcessArguments(true).action(async () => {
     const argv = process.argv.slice(4);
     await runCommand(projectFindCommand, { argv, env: process.env, isTTY: Boolean(process.stdin.isTTY), stderr: process.stderr });
+  });
+  project.command("list").description(projectListCommand.description).helpOption(false).allowUnknownOption().allowExcessArguments(true).action(async () => {
+    const argv = process.argv.slice(4);
+    await runCommand(projectListCommand, { argv, env: process.env, isTTY: Boolean(process.stdin.isTTY), stderr: process.stderr });
+  });
+  project.command("show").description(projectShowCommand.description).helpOption(false).allowUnknownOption().allowExcessArguments(true).action(async () => {
+    const argv = process.argv.slice(4);
+    await runCommand(projectShowCommand, { argv, env: process.env, isTTY: Boolean(process.stdin.isTTY), stderr: process.stderr });
+  });
+  project.command("worktrees").description(projectWorktreesCommand.description).helpOption(false).allowUnknownOption().allowExcessArguments(true).action(async () => {
+    const argv = process.argv.slice(4);
+    await runCommand(projectWorktreesCommand, { argv, env: process.env, isTTY: Boolean(process.stdin.isTTY), stderr: process.stderr });
   });
   const worktree = program3.command("worktree").description("Worktree lifecycle operations");
   worktree.command("create").description(worktreeCreateCommand.description).helpOption(false).allowUnknownOption().allowExcessArguments(true).action(async () => {
@@ -26023,10 +25043,19 @@ function buildProgram(version) {
     const argv = process.argv.slice(4);
     await runCommand(worktreeLaunchCommand, { argv, env: process.env, isTTY: Boolean(process.stdin.isTTY), stderr: process.stderr });
   });
+  const sideProject = program3.command("side-project").description("Side-project (local-only repo) lifecycle operations");
+  sideProject.command("init").description(sideProjectInitCommand.description).helpOption(false).allowUnknownOption().allowExcessArguments(true).action(async () => {
+    const argv = process.argv.slice(4);
+    await runCommand(sideProjectInitCommand, { argv, env: process.env, isTTY: Boolean(process.stdin.isTTY), stderr: process.stderr });
+  });
   const plan = program3.command("plan").description("Master Plan operations");
   plan.command("explode").description(planExplodeCommand.description).helpOption(false).allowUnknownOption().allowExcessArguments(true).action(async () => {
     const argv = process.argv.slice(4);
     await runCommand(planExplodeCommand, { argv, env: process.env, isTTY: Boolean(process.stdin.isTTY), stderr: process.stderr });
+  });
+  program3.command("migrate").description(migrateCommand.description).helpOption(false).allowUnknownOption().allowExcessArguments(true).action(async () => {
+    const argv = process.argv.slice(3);
+    await runCommand(migrateCommand, { argv, env: process.env, isTTY: Boolean(process.stdin.isTTY), stderr: process.stderr });
   });
   const skill = program3.command("skill").description("Repository skill catalog operations");
   skill.command("list").description(skillListCommand.description).helpOption(false).allowUnknownOption().allowExcessArguments(true).action(async () => {
@@ -26073,8 +25102,5 @@ program2.parseAsync(process.argv).catch((err) => {
 /*! Bundled license information:
 
 js-yaml/dist/js-yaml.mjs:
-  (*! js-yaml 4.1.1 https://github.com/nodeca/js-yaml @license MIT *)
-
-js-yaml/dist/js-yaml.mjs:
-  (*! js-yaml 4.1.1 https://github.com/nodeca/js-yaml @license MIT *)
+  (*! js-yaml 4.2.0 https://github.com/nodeca/js-yaml @license MIT *)
 */
