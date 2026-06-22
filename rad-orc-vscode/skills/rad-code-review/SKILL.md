@@ -8,11 +8,13 @@ user-invocable: false
 
 Three modes. Identify yours from the spawn context fields you received, then follow the matching workflow file end-to-end. Each mode's workflow is fully self-contained — do not load any other review doc or cross-reference between modes.
 
+Each mode emits **one combined review document** per scope, regardless of how many repos the task, phase, or project touches. The `## Scope` section contains one sub-block per repo; the `## Repo Boundary Check` section judges repo-level containment across all repos. Per-requirement audit rows are not attributed to individual repos — a requirement is evaluated holistically across all repos' diffs.
+
 | Your context includes…                                       | Mode  | Scope                                                          | Status Enum                     | Workflow                                               | Template                                               |
 |--------------------------------------------------------------|-------|----------------------------------------------------------------|---------------------------------|--------------------------------------------------------|--------------------------------------------------------|
-| `task_number` (and `task_id`, `head_sha`)                    | Task  | The task's diff vs. its Task Handoff contract                  | `on-track \| drift \| regression` | [task-review/workflow.md](./task-review/workflow.md)   | [task-review/template.md](./task-review/template.md)   |
-| `phase_first_sha` (and `phase_head_sha`)                     | Phase | The phase's cumulative diff vs. its Phase Plan contract        | `on-track \| drift \| regression` | [phase-review/workflow.md](./phase-review/workflow.md) | [phase-review/template.md](./phase-review/template.md) |
-| `project_base_sha` (and `project_head_sha`); no task / phase | Final | The project's cumulative diff vs. the Requirements doc         | `met \| missing`                 | [final-review/workflow.md](./final-review/workflow.md) | [final-review/template.md](./final-review/template.md) |
+| `task_number` (and `task_id`, `repos[]` each with `head_sha`) | Task  | Each repo's diff vs. its Task Handoff contract slice           | `on-track \| drift \| regression` | [task-review/workflow.md](./task-review/workflow.md)   | [task-review/template.md](./task-review/template.md)   |
+| `phase_first_sha` (and `phase_head_sha`, `repos[]`)          | Phase | Each repo's cumulative diff vs. its Phase Plan contract slice  | `on-track \| drift \| regression` | [phase-review/workflow.md](./phase-review/workflow.md) | [phase-review/template.md](./phase-review/template.md) |
+| `project_base_sha` (and `project_head_sha`, `repos[]`); no task / phase | Final | Each repo's cumulative diff; requirements judged holistically across all repos | `met \| missing` | [final-review/workflow.md](./final-review/workflow.md) | [final-review/template.md](./final-review/template.md) |
 
 Every mode writes a per-requirement audit table. Verdict enum is unchanged across all three: `approved | changes_requested | rejected`. Each workflow runs the conformance pass first, then a lean quality sweep; findings merge and highest severity wins.
 
@@ -26,6 +28,15 @@ These rules apply to **every** review mode. Violations invalidate the review.
 4. **Positive observations never cushion deferred or silent behavior.** If the code silently does nothing where a requirement is deferred to a later task, that is a carry-forward note or quality finding — not a positive.
 5. **Verdicts cite the driving finding.** An `approved` verdict cites "no findings ≥ low severity, all audit rows on-track". A `changes_requested` verdict names the finding ID(s) that drove it.
 6. **Ran it yourself.** Test counts, build status, and diff stats come from commands you executed in this review session, not from any upstream report.
+
+## Worktree Safety Charter
+
+These rules apply to **every** review mode. Review runs inside the project's live git worktree; leaving HEAD detached there causes the orchestrator's next commit to land off-branch and be silently orphaned.
+
+1. **Never detach HEAD in the live worktree.** Do not run `git checkout <sha>`, `git switch --detach`, or anything that moves HEAD off the current branch.
+2. **Get baselines read-only.** Obtain historical content for comparison via `git diff <a>..<b>`, `git diff --stat <a>..<b>`, or `git show <sha>:<path>` — none of these move HEAD.
+3. **Build or inspect an old commit in a throwaway worktree.** If you must build/run at an earlier commit, use `git worktree add <tmp-dir> <sha>` and remove it when done — never check out the old commit in the live worktree.
+4. **If a checkout is ever unavoidable, restore the branch in a `finally`.** Capture the branch first with `git symbolic-ref --short HEAD`, and `git checkout <branch>` before returning, even on error.
 
 ## Finding-ID Scheme
 

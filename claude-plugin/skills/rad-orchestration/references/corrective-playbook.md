@@ -148,6 +148,8 @@ Before marking any finding as `decline`, scan:
 
 If the scan shows this task's contract owed the piece, change the disposition to `action`. If the piece legitimately belongs to a future phase or task, decline with the cross-artifact rationale in the Reason column.
 
+**Repo-dimension note (FR-19).** When a finding flags work that landed outside the task's declared `**Target repos:**`, apply the same cross-artifact scan with a repo lens: if the coder touched a repo not listed in the handoff's `**Target repos:**`, first check whether the Master Plan or a sibling Task Handoff assigns that repo-level change to a different task or phase. If a legitimate owner exists elsewhere, that is a pivot — decline with the repo rationale. If no legitimate owner exists and the change was required to satisfy the task's inlined requirement, that is overreach — action it as drift, bounding the corrective to the declared target repos.
+
 ### Action when
 
 Disposition is `action` when **all** of the following hold:
@@ -230,6 +232,38 @@ Same self-contained preamble-then-steps shape as task scope. The preamble descri
 ### Signaling
 
 After authoring the addendum and (when applicable) the corrective handoff, signal `phase_review_completed --doc-path <path-to-phase-review-doc>`. The pipeline reads the phase review doc's frontmatter — `effective_outcome` and `corrective_handoff_path` — to birth the corrective or advance the pipeline normally.
+
+---
+
+## Verify Before Echo (corrective commit signals)
+
+**Scope:** mutating signals on a phase-corrective (or task-corrective) commit
+path — specifically `commit_completed`. Not all signals; only the mutating
+corrective commit echo.
+
+When the pipeline returns `invoke_source_control_commit` and you are about to
+signal `commit_completed`, the `--phase`/`--task` you echo come from
+`data.context`. On a corrective path that context can be stale. Before emitting
+the mutating signal:
+
+1. **Read `state.json`.** Locate the node(s) carrying `status: in_progress`.
+2. **Confirm the active node.** On a phase-scope corrective the active node is
+   the last entry of the active phase's `corrective_tasks` (its `commit`
+   sub-node is `in_progress`); the echoed context should carry that phase's
+   identity with the phase-scope task sentinel (`task_number: null`,
+   `task_id: "P{NN}-PHASE"`).
+3. **Confirm the identifiers address that node.** If `--phase`/`--task` do not
+   resolve to the `in_progress` node, **do not emit `commit_completed`.**
+   Inspect and correct first — re-derive the correct identifiers from the
+   markers, or re-signal `start` (non-mutating) to let the engine recompute
+   the action context.
+4. **Never echo a context you have flagged as stale into a mutation.** A
+   finalized commit hash is immutable; a stale echo that addresses the wrong
+   node will be rejected by the engine with `ok: false`, but the rule is to
+   catch it before the signal, not rely on the engine's catch net.
+
+This is a standing rule: a future orchestrator agent facing the same
+stale-context signal halts and verifies rather than echoing into a mutation.
 
 ---
 

@@ -2938,6 +2938,7 @@ function userDataPaths(opts = {}) {
     templates: path.join(root, "templates"),
     ui: path.join(root, "ui"),
     projects: path.join(root, "projects"),
+    telemetry: path.join(root, "telemetry"),
     logs: path.join(root, "logs"),
     installLog: path.join(root, "logs", "install.log"),
     uiPidFile: path.join(root, "runtime", "ui.pid")
@@ -3026,6 +3027,7 @@ function removeManifestFiles(manifest, opts = {}) {
   const paths = userDataPaths(opts);
   const rootResolved = path5.resolve(paths.root);
   const projectsResolved = path5.resolve(paths.projects);
+  const telemetryResolved = path5.resolve(paths.telemetry);
   const isUnder = (parent, child) => {
     const rel = path5.relative(parent, child);
     return rel !== "" && !rel.startsWith("..") && !path5.isAbsolute(rel);
@@ -3045,9 +3047,10 @@ function removeManifestFiles(manifest, opts = {}) {
     const dest = path5.resolve(entry.destinationPath.replaceAll("${RAD_HOME}", paths.root));
     if (!isUnder(rootResolved, dest)) continue;
     if (dest === projectsResolved || isUnder(projectsResolved, dest)) continue;
+    if (dest === telemetryResolved || isUnder(telemetryResolved, dest)) continue;
     if (fs5.existsSync(dest)) fs5.rmSync(dest, { force: true });
     let parent = path5.dirname(dest);
-    while (isUnder(rootResolved, parent) && parent !== projectsResolved) {
+    while (isUnder(rootResolved, parent) && parent !== projectsResolved && parent !== telemetryResolved) {
       touched.add(parent);
       parent = path5.dirname(parent);
     }
