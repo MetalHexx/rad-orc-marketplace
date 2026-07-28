@@ -1,6 +1,12 @@
-## Commit Mode
+# Creating Commits
 
-**1. Build the commit message** from the spawn prompt. Derive the prefix from the task title or type (first match):
+Commit your task's work when the spawn prompt directs you to. You commit in your own worktree, on your own task branch, with raw `git`.
+
+**Batch your git calls.** Every shell call re-reads your whole context, and you commit at the end of a task when that context is largest — so a one-call-per-line commit ceremony is one of the most expensive things you do. Chain the git commands into as few calls as possible (`&&` one-liners below). The only call that must stand alone is the pre-commit branch gate (step 3): you have to read its output before deciding whether to commit at all.
+
+## 1. Build the commit message
+
+Derive the prefix from the task's title or type (first keyword match):
 
 | Keywords | Prefix |
 |----------|--------|
@@ -11,58 +17,55 @@
 | doc, docs, documentation | `docs` |
 | *(no match)* | `chore` |
 
-For a multi-repo task, compose **one** commit message header in a single pass:
+Format the header as `{prefix}({taskId}): {title}`. Follow it with a blank line and 2–4 prose lines summarizing the change.  Follow conventional commit style.
 
-Format: `{prefix}({taskId}): {title}`
-Optional body: blank line then 2–4 prose lines from the task description.
+## 2. Stage deliberately
 
-**2. Pre-commit HEAD check (per repo).** The spawn context supplies each repo as `{name, path, branch}`. Before committing, confirm the live worktree HEAD is attached to that intended `branch`:
+Stage exactly your task's change — never secrets, build artifacts, `node_modules` or vendored deps, or unrelated files. Review what you are about to commit before you commit it.
+
+## 3. Confirm you are on the intended branch (pre-commit gate)
+
+Before committing, confirm the worktree HEAD is attached to your task branch:
 
     git -C "<path>" symbolic-ref --short -q HEAD
 
-- Output equals the intended `branch` → include the repo in the commit.
-- Command fails (HEAD detached) or prints a different branch → do **not** commit that repo; emit the off-branch escalation (below) for it instead.
+- Output equals the intended branch → proceed.
+- Command fails (detached HEAD) or prints a different branch → **do not commit.** Stop and raise a Blocked report naming the observed vs. intended branch. A commit on the wrong branch is the one source-control mistake that is expensive to unwind — never guess past it.
 
-**3. Run (fan-out across all repos in one command):**
-```
-node "${COPILOT_VSCODE_PLUGIN_ROOT}/skills/rad-orchestration/scripts/radorch.mjs" git commit \
-  --repos '[{"name":"<repo>","path":"<worktree-abs-path>","message":"<commit-message>"}, ...]'
-```
+## 4. Stage, commit, and verify — one chained call
 
-Where `--repos` is the JSON array of per-repo objects (each carrying `name`, `path`, and `message`). The CLI commits every repo in a single pass and returns a structured per-repo result array.
+Stage, commit, and confirm the result in a single call rather than four:
 
-**4. Parse the envelope on stdout. The `data.repos` field is a per-repo array. Relay the entire array into one array-shaped `commit_completed` signal:**
-````
-## Commit Result
-```json
-{
-  "repos": <data.repos>
-}
-```
-````
+    git -C "<path>" add <paths> \
+      && git -C "<path>" commit -m "<message>" \
+      && git -C "<path>" rev-parse --short HEAD \
+      && git -C "<path>" symbolic-ref --short -q HEAD
 
-Each entry in `data.repos` carries: `{ "name": "<repo>", "committed": <bool>, "commitHash": "<hash-or-null>", "pushed": <bool> }`.
+The last two lines echo your new commit hash and confirm HEAD is still attached to the branch. If HEAD is detached after the commit, or the branch did not advance, raise a Blocked report instead of reporting a normal result.
 
-A partial-success commit (commit landed but push failed) is still envelope-success (`ok: true`); the failure surfaces via `pushed=false` on the affected repo entry. Treat committed repos as commit successes regardless of push outcome.
+## 5. Push — only if the worktree has a remote
 
-A remote-less repo (such as a side-project) also returns `ok: true` with `pushed=false`. This is expected — the commit succeeded and there is simply no remote to push to. Do not treat it as a failure.
+Push in one call, but skip cleanly when there is no remote — an absent `origin` must **exit zero** (an expected skip), not return a non-zero status that an agent could misread as a real failure and escalate:
 
-A `committed: false` entry means the repo was skipped (e.g., no changes). This is a clean skip — relay it as-is in the array; the mutation ignores it without error.
+    if git -C "<path>" remote get-url origin >/dev/null 2>&1; then
+        git -C "<path>" push -u origin <branch>
+    else
+        echo "no origin remote — commit stays local (expected, not a failure)"
+    fi
 
-**Post-commit advancement check (per committed repo).** For each repo that returned `committed: true`, confirm HEAD is still attached to its branch and the branch advanced to the new commit:
+- Has an `origin` → the push runs. `-u` sets upstream on a new branch and is harmless on a branch already tracking its remote. A genuine push failure still exits non-zero, so a real problem is never masked.
+- No `origin` (a side-project worktree) → the push is skipped with a message and a zero exit. That is expected, not a failure.
 
-    git -C "<path>" symbolic-ref --short -q HEAD   # still equals the intended branch
-    git -C "<path>" rev-parse --short HEAD          # equals the commitHash just returned
+Never force-push and never rewrite history.
 
-If HEAD is detached after the commit, or the branch ref did not advance to the new commit, replace that repo's normal commit row with the off-branch escalation (below). A remote-less `pushed:false` or a no-change `committed:false` skip is **not** an off-branch condition — leave those relayed as-is.
+## 6. Report your result
 
-**Off-branch escalation (per repo).** When the pre- or post-commit HEAD check fails for a repo, do not relay a normal commit row for it — relay a distinct, loud escalation so the orchestrator halts:
+Report your commit so the orchestrator can record it — one row per repo, plus the branch you committed on:
 
-    ## Off-Branch Escalation — <repo>
-    { "repo": "<repo>", "off_branch": true, "expected_branch": "<branch>",
-      "observed_head": "detached at <sha>" | "on <other-branch>",
-      "commit_created_off_branch": <bool> }
+    { "name": "<repo>", "committed": true, "commitHash": "<hash>", "pushed": <true|false> }
 
-This is not a `commit_completed` success row and carries no recordable hash. Halt the fan-out and surface every off-branch repo by name.
+- `commitHash` is **required** when `committed` is `true` — downstream review scopes its diff to it.
+- `pushed` is `true` only if you pushed; `false` for a remote-less worktree.
+- Nothing to commit (no changes in scope) → report `committed: false` with `commitHash: null`. That is a clean skip.
 
-PR Mode is never invoked for a side-project (`auto_pr: never`). A side-project has no remote and therefore no pull-request surface; skip the PR step entirely when the project kind is `side-project`.
+State the branch alongside the row; this is important to ensure a smooth process.

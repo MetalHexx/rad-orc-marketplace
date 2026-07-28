@@ -4,10 +4,10 @@ When and how to consult past projects to inform the current brainstorm.
 
 ## When to Activate
 
-Don't scan the project directory by default. Activate when the conversation signals a connection to past work:
+Don't look for projects by default — only when the conversation signals a connection to an existing series or active project. Examples:
 
-- User names a specific project (e.g., "like we did in DAG-VIEW")
-- User references a domain keyword that maps to known projects (e.g., "installer", "pipeline", "schema")
+- User names a specific project (e.g., "like we did in USER-AUTH-2", "last time we built the installer")
+- User references a domain keyword that maps to known projects (e.g., "installer", "pipeline", "schema", "auth")
 - User says something like "building on X", "continuation of", "next iteration"
 - The idea clearly overlaps with a domain you know has prior projects
 
@@ -16,6 +16,8 @@ Use judgment. If the brainstorm is clearly greenfield with no prior context, ski
 ## Finding Candidates
 
 > **Check `/rad-project` first.** If the conversation signals a connection to an existing series or active project, call `/rad-project` (`project show <name>` or `project list`) before dispatching an Explore subagent. The work-graph gives you live status and relationships instantly. Only fall through to the Explore subagent scan below when you need document *content* that `/rad-project` doesn't surface.
+
+## Can't locate with /rad-project?
 
 Dispatch an **Explore** subagent to scan `~/.radorc/projects`. Instruct it to:
 
@@ -30,9 +32,8 @@ For each candidate, read the single richest document available, in this priority
 
 | Priority | Document | Why |
 |----------|----------|-----|
-| 1 | `{NAME}-REQUIREMENTS.md` | Goals, non-goals, FRs/NFRs, key constraints — densest signal |
+| 1 | `{NAME}-REQUIREMENTS.md` | Goals, non-goals, grouped requirements, key constraints — densest signal |
 | 2 | `{NAME}-MASTER-PLAN.md`   | Phasing + per-task plan, requirement-ID coverage |
-| 3 | `{NAME}-BRAINSTORMING.md` | Early-stage framing, useful for in-progress series |
 | — | `{NAME}-ERROR-LOG.md`     | What went wrong — avoid repeating mistakes |
 
 Stop at the first document that exists for each project. Don't read multiple docs per project unless you need to cross-reference.

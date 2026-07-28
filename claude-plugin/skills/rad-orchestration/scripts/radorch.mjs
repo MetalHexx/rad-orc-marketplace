@@ -1203,8 +1203,8 @@ var require_command = __commonJS({
   "node_modules/commander/lib/command.js"(exports) {
     var EventEmitter = __require("node:events").EventEmitter;
     var childProcess = __require("node:child_process");
-    var path42 = __require("node:path");
-    var fs35 = __require("node:fs");
+    var path44 = __require("node:path");
+    var fs38 = __require("node:fs");
     var process5 = __require("node:process");
     var { Argument: Argument2, humanReadableArgName } = require_argument();
     var { CommanderError: CommanderError2 } = require_error();
@@ -2198,7 +2198,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * @param {string} subcommandName
        */
       _checkForMissingExecutable(executableFile, executableDir, subcommandName) {
-        if (fs35.existsSync(executableFile)) return;
+        if (fs38.existsSync(executableFile)) return;
         const executableDirMessage = executableDir ? `searched for local subcommand relative to directory '${executableDir}'` : "no directory for search for local subcommand, use .executableDir() to supply a custom directory";
         const executableMissing = `'${executableFile}' does not exist
  - if '${subcommandName}' is not meant to be an executable command, remove description parameter from '.command()' and use '.description()' instead
@@ -2216,11 +2216,11 @@ Expecting one of '${allowedValues.join("', '")}'`);
         let launchWithNode = false;
         const sourceExt = [".js", ".ts", ".tsx", ".mjs", ".cjs"];
         function findFile(baseDir, baseName) {
-          const localBin = path42.resolve(baseDir, baseName);
-          if (fs35.existsSync(localBin)) return localBin;
-          if (sourceExt.includes(path42.extname(baseName))) return void 0;
+          const localBin = path44.resolve(baseDir, baseName);
+          if (fs38.existsSync(localBin)) return localBin;
+          if (sourceExt.includes(path44.extname(baseName))) return void 0;
           const foundExt = sourceExt.find(
-            (ext) => fs35.existsSync(`${localBin}${ext}`)
+            (ext) => fs38.existsSync(`${localBin}${ext}`)
           );
           if (foundExt) return `${localBin}${foundExt}`;
           return void 0;
@@ -2232,21 +2232,21 @@ Expecting one of '${allowedValues.join("', '")}'`);
         if (this._scriptPath) {
           let resolvedScriptPath;
           try {
-            resolvedScriptPath = fs35.realpathSync(this._scriptPath);
+            resolvedScriptPath = fs38.realpathSync(this._scriptPath);
           } catch {
             resolvedScriptPath = this._scriptPath;
           }
-          executableDir = path42.resolve(
-            path42.dirname(resolvedScriptPath),
+          executableDir = path44.resolve(
+            path44.dirname(resolvedScriptPath),
             executableDir
           );
         }
         if (executableDir) {
           let localFile = findFile(executableDir, executableFile);
           if (!localFile && !subcommand._executableFile && this._scriptPath) {
-            const legacyName = path42.basename(
+            const legacyName = path44.basename(
               this._scriptPath,
-              path42.extname(this._scriptPath)
+              path44.extname(this._scriptPath)
             );
             if (legacyName !== this._name) {
               localFile = findFile(
@@ -2257,7 +2257,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
           }
           executableFile = localFile || executableFile;
         }
-        launchWithNode = sourceExt.includes(path42.extname(executableFile));
+        launchWithNode = sourceExt.includes(path44.extname(executableFile));
         let proc;
         if (process5.platform !== "win32") {
           if (launchWithNode) {
@@ -3172,7 +3172,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * @return {Command}
        */
       nameFromFilename(filename) {
-        this._name = path42.basename(filename, path42.extname(filename));
+        this._name = path44.basename(filename, path44.extname(filename));
         return this;
       }
       /**
@@ -3186,9 +3186,9 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * @param {string} [path]
        * @return {(string|null|Command)}
        */
-      executableDir(path43) {
-        if (path43 === void 0) return this._executableDir;
-        this._executableDir = path43;
+      executableDir(path45) {
+        if (path45 === void 0) return this._executableDir;
+        this._executableDir = path45;
         return this;
       }
       /**
@@ -9324,7 +9324,7 @@ var init_types2 = __esm({
 });
 
 // lib/work-graph/dist/store.js
-import fs10 from "node:fs";
+import fs11 from "node:fs";
 import path11 from "node:path";
 var STORE_FILE, CURRENT_VERSION, GraphIndex;
 var init_store = __esm({
@@ -9342,12 +9342,12 @@ var init_store = __esm({
         return path11.join(this.root, STORE_FILE);
       }
       read() {
-        if (!fs10.existsSync(this.file)) {
+        if (!fs11.existsSync(this.file)) {
           return { version: CURRENT_VERSION, rev: 0, groups: {}, edges: [] };
         }
         let raw;
         try {
-          raw = index_vite_proxy_tmp_default.load(fs10.readFileSync(this.file, "utf8"));
+          raw = index_vite_proxy_tmp_default.load(fs11.readFileSync(this.file, "utf8"));
         } catch (cause) {
           throw new Error(`failed to parse ${this.file}: ${cause}`);
         }
@@ -9374,9 +9374,9 @@ var init_store = __esm({
           edges: graph.edges
         };
         const tmp = this.file + ".tmp";
-        fs10.mkdirSync(path11.dirname(this.file), { recursive: true });
-        fs10.writeFileSync(tmp, index_vite_proxy_tmp_default.dump({ version: next.version, rev: next.rev, groups: next.groups, edges: next.edges }, { indent: 2, lineWidth: 80, noRefs: true }), "utf8");
-        fs10.renameSync(tmp, this.file);
+        fs11.mkdirSync(path11.dirname(this.file), { recursive: true });
+        fs11.writeFileSync(tmp, index_vite_proxy_tmp_default.dump({ version: next.version, rev: next.rev, groups: next.groups, edges: next.edges }, { indent: 2, lineWidth: 80, noRefs: true }), "utf8");
+        fs11.renameSync(tmp, this.file);
         return { ok: true, data: next };
       }
     };
@@ -9482,9 +9482,9 @@ var init_graph = __esm({
 });
 
 // lib/work-graph/dist/derive/worktrees.js
-import fs11 from "node:fs";
+import fs12 from "node:fs";
 import path12 from "node:path";
-import { execFileSync as execFileSync5 } from "node:child_process";
+import { execFileSync as execFileSync3 } from "node:child_process";
 function listWorktrees(exec2, cwd) {
   const out = /* @__PURE__ */ new Map();
   let text = "";
@@ -9508,11 +9508,11 @@ function listWorktrees(exec2, cwd) {
 function resolveWorktrees(projectName, deps) {
   const exec2 = deps.exec ?? defaultExec;
   const statePath = path12.join(deps.projectsDir, projectName, "state.json");
-  if (!fs11.existsSync(statePath))
+  if (!fs12.existsSync(statePath))
     return [];
   let state;
   try {
-    state = JSON.parse(fs11.readFileSync(statePath, "utf8"));
+    state = JSON.parse(fs12.readFileSync(statePath, "utf8"));
   } catch {
     return [];
   }
@@ -9554,27 +9554,27 @@ var defaultExec;
 var init_worktrees = __esm({
   "lib/work-graph/dist/derive/worktrees.js"() {
     "use strict";
-    defaultExec = (file, args, opts) => execFileSync5(file, args, { cwd: opts.cwd, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] });
+    defaultExec = (file, args, opts) => execFileSync3(file, args, { cwd: opts.cwd, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] });
   }
 });
 
 // lib/work-graph/dist/derive/projects.js
-import fs12 from "node:fs";
+import fs13 from "node:fs";
 import path13 from "node:path";
 function listProjectNames(projectsDir) {
-  if (!fs12.existsSync(projectsDir))
+  if (!fs13.existsSync(projectsDir))
     return [];
-  return fs12.readdirSync(projectsDir, { withFileTypes: true }).filter((d) => d.isDirectory() && !d.name.startsWith("_")).map((d) => d.name).sort((a, b) => a.localeCompare(b));
+  return fs13.readdirSync(projectsDir, { withFileTypes: true }).filter((d) => d.isDirectory() && !d.name.startsWith("_")).map((d) => d.name).sort((a, b) => a.localeCompare(b));
 }
 function projectExists(projectsDir, name) {
-  return fs12.existsSync(path13.join(projectsDir, name));
+  return fs13.existsSync(path13.join(projectsDir, name));
 }
 function readState(dir) {
   const file = path13.join(dir, "state.json");
-  if (!fs12.existsSync(file))
+  if (!fs13.existsSync(file))
     return null;
   try {
-    return JSON.parse(fs12.readFileSync(file, "utf8"));
+    return JSON.parse(fs13.readFileSync(file, "utf8"));
   } catch {
     return null;
   }
@@ -9586,7 +9586,7 @@ function scanDocs(dir, name) {
     [`${name}-REQUIREMENTS.md`]: "requirements",
     [`${name}-MASTER-PLAN.md`]: "masterPlan"
   };
-  for (const entry of fs12.readdirSync(dir, { withFileTypes: true })) {
+  for (const entry of fs13.readdirSync(dir, { withFileTypes: true })) {
     if (!entry.isFile() || entry.name === "state.json")
       continue;
     const slot = slots[entry.name];
@@ -9600,7 +9600,7 @@ function scanDocs(dir, name) {
 }
 function deriveProject(name, deps) {
   const dir = path13.join(deps.projectsDir, name);
-  if (!fs12.existsSync(dir))
+  if (!fs13.existsSync(dir))
     return null;
   const state = readState(dir);
   const sc = state?.pipeline?.source_control;
@@ -9626,9 +9626,9 @@ var init_projects = __esm({
 });
 
 // lib/work-graph/dist/derive/locate.js
-import fs13 from "node:fs";
+import fs14 from "node:fs";
 import path14 from "node:path";
-import { execFileSync as execFileSync6 } from "node:child_process";
+import { execFileSync as execFileSync4 } from "node:child_process";
 function within(parent, child) {
   const rel = path14.relative(path14.resolve(parent), path14.resolve(child));
   return rel === "" || !rel.startsWith("..") && !path14.isAbsolute(rel);
@@ -9656,10 +9656,10 @@ function listWorktrees2(exec2, cwd) {
 }
 function resolvedWorktreeName(projectsDir, projectName) {
   const statePath = path14.join(projectsDir, projectName, "state.json");
-  if (!fs13.existsSync(statePath))
+  if (!fs14.existsSync(statePath))
     return projectName;
   try {
-    const sc = JSON.parse(fs13.readFileSync(statePath, "utf8"))?.pipeline?.source_control;
+    const sc = JSON.parse(fs14.readFileSync(statePath, "utf8"))?.pipeline?.source_control;
     const shared = typeof sc?.worktree_name === "string" && sc.worktree_name !== "" ? sc.worktree_name : null;
     return shared ?? projectName;
   } catch {
@@ -9667,9 +9667,9 @@ function resolvedWorktreeName(projectsDir, projectName) {
   }
 }
 function listProjectNames2(projectsDir) {
-  if (!fs13.existsSync(projectsDir))
+  if (!fs14.existsSync(projectsDir))
     return [];
-  return fs13.readdirSync(projectsDir, { withFileTypes: true }).filter((d) => d.isDirectory() && !d.name.startsWith("_")).map((d) => d.name);
+  return fs14.readdirSync(projectsDir, { withFileTypes: true }).filter((d) => d.isDirectory() && !d.name.startsWith("_")).map((d) => d.name);
 }
 function locate(cwd, deps) {
   const exec2 = deps.exec ?? defaultExec2;
@@ -9716,7 +9716,7 @@ var defaultExec2;
 var init_locate = __esm({
   "lib/work-graph/dist/derive/locate.js"() {
     "use strict";
-    defaultExec2 = (file, args, opts) => execFileSync6(file, args, { cwd: opts.cwd, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] });
+    defaultExec2 = (file, args, opts) => execFileSync4(file, args, { cwd: opts.cwd, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] });
   }
 });
 
@@ -10017,9 +10017,9 @@ var init_version = __esm({
   }
 });
 
-// node_modules/ajv/dist/compile/codegen/code.js
+// cli/node_modules/ajv/dist/compile/codegen/code.js
 var require_code = __commonJS({
-  "node_modules/ajv/dist/compile/codegen/code.js"(exports) {
+  "cli/node_modules/ajv/dist/compile/codegen/code.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.regexpCode = exports.getEsmExportName = exports.getProperty = exports.safeStringify = exports.stringify = exports.strConcat = exports.addCodeArg = exports.str = exports._ = exports.nil = exports._Code = exports.Name = exports.IDENTIFIER = exports._CodeOrName = void 0;
@@ -10171,9 +10171,9 @@ var require_code = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/codegen/scope.js
+// cli/node_modules/ajv/dist/compile/codegen/scope.js
 var require_scope = __commonJS({
-  "node_modules/ajv/dist/compile/codegen/scope.js"(exports) {
+  "cli/node_modules/ajv/dist/compile/codegen/scope.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.ValueScope = exports.ValueScopeName = exports.Scope = exports.varKinds = exports.UsedValueState = void 0;
@@ -10316,9 +10316,9 @@ var require_scope = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/codegen/index.js
+// cli/node_modules/ajv/dist/compile/codegen/index.js
 var require_codegen = __commonJS({
-  "node_modules/ajv/dist/compile/codegen/index.js"(exports) {
+  "cli/node_modules/ajv/dist/compile/codegen/index.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.or = exports.and = exports.not = exports.CodeGen = exports.operators = exports.varKinds = exports.ValueScopeName = exports.ValueScope = exports.Scope = exports.Name = exports.regexpCode = exports.stringify = exports.getProperty = exports.nil = exports.strConcat = exports.str = exports._ = void 0;
@@ -11036,9 +11036,9 @@ var require_codegen = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/util.js
+// cli/node_modules/ajv/dist/compile/util.js
 var require_util = __commonJS({
-  "node_modules/ajv/dist/compile/util.js"(exports) {
+  "cli/node_modules/ajv/dist/compile/util.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.checkStrictMode = exports.getErrorPath = exports.Type = exports.useFunc = exports.setEvaluated = exports.evaluatedPropsToName = exports.mergeEvaluated = exports.eachItem = exports.unescapeJsonPointer = exports.escapeJsonPointer = exports.escapeFragment = exports.unescapeFragment = exports.schemaRefOrVal = exports.schemaHasRulesButRef = exports.schemaHasRules = exports.checkUnknownRules = exports.alwaysValidSchema = exports.toHash = void 0;
@@ -11203,9 +11203,9 @@ var require_util = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/names.js
+// cli/node_modules/ajv/dist/compile/names.js
 var require_names = __commonJS({
-  "node_modules/ajv/dist/compile/names.js"(exports) {
+  "cli/node_modules/ajv/dist/compile/names.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -11242,9 +11242,9 @@ var require_names = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/errors.js
+// cli/node_modules/ajv/dist/compile/errors.js
 var require_errors = __commonJS({
-  "node_modules/ajv/dist/compile/errors.js"(exports) {
+  "cli/node_modules/ajv/dist/compile/errors.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.extendErrors = exports.resetErrorsCount = exports.reportExtraError = exports.reportError = exports.keyword$DataError = exports.keywordError = void 0;
@@ -11364,9 +11364,9 @@ var require_errors = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/validate/boolSchema.js
+// cli/node_modules/ajv/dist/compile/validate/boolSchema.js
 var require_boolSchema = __commonJS({
-  "node_modules/ajv/dist/compile/validate/boolSchema.js"(exports) {
+  "cli/node_modules/ajv/dist/compile/validate/boolSchema.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.boolOrEmptySchema = exports.topBoolOrEmptySchema = void 0;
@@ -11415,9 +11415,9 @@ var require_boolSchema = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/rules.js
+// cli/node_modules/ajv/dist/compile/rules.js
 var require_rules = __commonJS({
-  "node_modules/ajv/dist/compile/rules.js"(exports) {
+  "cli/node_modules/ajv/dist/compile/rules.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getRules = exports.isJSONType = void 0;
@@ -11446,9 +11446,9 @@ var require_rules = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/validate/applicability.js
+// cli/node_modules/ajv/dist/compile/validate/applicability.js
 var require_applicability = __commonJS({
-  "node_modules/ajv/dist/compile/validate/applicability.js"(exports) {
+  "cli/node_modules/ajv/dist/compile/validate/applicability.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.shouldUseRule = exports.shouldUseGroup = exports.schemaHasRulesForType = void 0;
@@ -11469,9 +11469,9 @@ var require_applicability = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/validate/dataType.js
+// cli/node_modules/ajv/dist/compile/validate/dataType.js
 var require_dataType = __commonJS({
-  "node_modules/ajv/dist/compile/validate/dataType.js"(exports) {
+  "cli/node_modules/ajv/dist/compile/validate/dataType.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.reportTypeError = exports.checkDataTypes = exports.checkDataType = exports.coerceAndCheckDataType = exports.getJSONTypes = exports.getSchemaTypes = exports.DataType = void 0;
@@ -11653,9 +11653,9 @@ var require_dataType = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/validate/defaults.js
+// cli/node_modules/ajv/dist/compile/validate/defaults.js
 var require_defaults = __commonJS({
-  "node_modules/ajv/dist/compile/validate/defaults.js"(exports) {
+  "cli/node_modules/ajv/dist/compile/validate/defaults.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.assignDefaults = void 0;
@@ -11690,9 +11690,9 @@ var require_defaults = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/code.js
+// cli/node_modules/ajv/dist/vocabularies/code.js
 var require_code2 = __commonJS({
-  "node_modules/ajv/dist/vocabularies/code.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/code.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.validateUnion = exports.validateArray = exports.usePattern = exports.callValidateCode = exports.schemaProperties = exports.allSchemaProperties = exports.noPropertyInData = exports.propertyInData = exports.isOwnProperty = exports.hasPropFunc = exports.reportMissingProp = exports.checkMissingProp = exports.checkReportMissingProp = void 0;
@@ -11823,9 +11823,9 @@ var require_code2 = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/validate/keyword.js
+// cli/node_modules/ajv/dist/compile/validate/keyword.js
 var require_keyword = __commonJS({
-  "node_modules/ajv/dist/compile/validate/keyword.js"(exports) {
+  "cli/node_modules/ajv/dist/compile/validate/keyword.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.validateKeywordUsage = exports.validSchemaType = exports.funcKeywordCode = exports.macroKeywordCode = void 0;
@@ -11941,9 +11941,9 @@ var require_keyword = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/validate/subschema.js
+// cli/node_modules/ajv/dist/compile/validate/subschema.js
 var require_subschema = __commonJS({
-  "node_modules/ajv/dist/compile/validate/subschema.js"(exports) {
+  "cli/node_modules/ajv/dist/compile/validate/subschema.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.extendSubschemaMode = exports.extendSubschemaData = exports.getSubschema = void 0;
@@ -12059,9 +12059,9 @@ var require_fast_deep_equal = __commonJS({
   }
 });
 
-// node_modules/json-schema-traverse/index.js
+// cli/node_modules/json-schema-traverse/index.js
 var require_json_schema_traverse = __commonJS({
-  "node_modules/json-schema-traverse/index.js"(exports, module) {
+  "cli/node_modules/json-schema-traverse/index.js"(exports, module) {
     "use strict";
     var traverse = module.exports = function(schema, opts, cb) {
       if (typeof opts == "function") {
@@ -12147,9 +12147,9 @@ var require_json_schema_traverse = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/resolve.js
+// cli/node_modules/ajv/dist/compile/resolve.js
 var require_resolve = __commonJS({
-  "node_modules/ajv/dist/compile/resolve.js"(exports) {
+  "cli/node_modules/ajv/dist/compile/resolve.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getSchemaRefs = exports.resolveUrl = exports.normalizeId = exports._getFullPath = exports.getFullPath = exports.inlineRef = void 0;
@@ -12303,9 +12303,9 @@ var require_resolve = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/validate/index.js
+// cli/node_modules/ajv/dist/compile/validate/index.js
 var require_validate = __commonJS({
-  "node_modules/ajv/dist/compile/validate/index.js"(exports) {
+  "cli/node_modules/ajv/dist/compile/validate/index.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getData = exports.KeywordCxt = exports.validateFunctionCode = void 0;
@@ -12811,9 +12811,9 @@ var require_validate = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/runtime/validation_error.js
+// cli/node_modules/ajv/dist/runtime/validation_error.js
 var require_validation_error = __commonJS({
-  "node_modules/ajv/dist/runtime/validation_error.js"(exports) {
+  "cli/node_modules/ajv/dist/runtime/validation_error.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var ValidationError2 = class extends Error {
@@ -12827,9 +12827,9 @@ var require_validation_error = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/ref_error.js
+// cli/node_modules/ajv/dist/compile/ref_error.js
 var require_ref_error = __commonJS({
-  "node_modules/ajv/dist/compile/ref_error.js"(exports) {
+  "cli/node_modules/ajv/dist/compile/ref_error.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var resolve_1 = require_resolve();
@@ -12844,9 +12844,9 @@ var require_ref_error = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/index.js
+// cli/node_modules/ajv/dist/compile/index.js
 var require_compile = __commonJS({
-  "node_modules/ajv/dist/compile/index.js"(exports) {
+  "cli/node_modules/ajv/dist/compile/index.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.resolveSchema = exports.getCompilingSchema = exports.resolveRef = exports.compileSchema = exports.SchemaEnv = void 0;
@@ -13068,9 +13068,9 @@ var require_compile = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/refs/data.json
+// cli/node_modules/ajv/dist/refs/data.json
 var require_data = __commonJS({
-  "node_modules/ajv/dist/refs/data.json"(exports, module) {
+  "cli/node_modules/ajv/dist/refs/data.json"(exports, module) {
     module.exports = {
       $id: "https://raw.githubusercontent.com/ajv-validator/ajv/master/lib/refs/data.json#",
       description: "Meta-schema for $data reference (JSON AnySchema extension proposal)",
@@ -13087,9 +13087,9 @@ var require_data = __commonJS({
   }
 });
 
-// node_modules/fast-uri/lib/utils.js
+// cli/node_modules/fast-uri/lib/utils.js
 var require_utils = __commonJS({
-  "node_modules/fast-uri/lib/utils.js"(exports, module) {
+  "cli/node_modules/fast-uri/lib/utils.js"(exports, module) {
     "use strict";
     var isUUID = RegExp.prototype.test.bind(/^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$/iu);
     var isIPv4 = RegExp.prototype.test.bind(/^(?:(?:25[0-5]|2[0-4]\d|1\d{2}|[1-9]\d|\d)\.){3}(?:25[0-5]|2[0-4]\d|1\d{2}|[1-9]\d|\d)$/u);
@@ -13213,8 +13213,8 @@ var require_utils = __commonJS({
       }
       return ind;
     }
-    function removeDotSegments(path42) {
-      let input = path42;
+    function removeDotSegments(path44) {
+      let input = path44;
       const output = [];
       let nextSlash = -1;
       let len = 0;
@@ -13400,9 +13400,9 @@ var require_utils = __commonJS({
   }
 });
 
-// node_modules/fast-uri/lib/schemes.js
+// cli/node_modules/fast-uri/lib/schemes.js
 var require_schemes = __commonJS({
-  "node_modules/fast-uri/lib/schemes.js"(exports, module) {
+  "cli/node_modules/fast-uri/lib/schemes.js"(exports, module) {
     "use strict";
     var { isUUID } = require_utils();
     var URN_REG = /([\da-z][\d\-a-z]{0,31}):((?:[\w!$'()*+,\-.:;=@]|%[\da-f]{2})+)/iu;
@@ -13466,8 +13466,8 @@ var require_schemes = __commonJS({
         wsComponent.secure = void 0;
       }
       if (wsComponent.resourceName) {
-        const [path42, query] = wsComponent.resourceName.split("?");
-        wsComponent.path = path42 && path42 !== "/" ? path42 : void 0;
+        const [path44, query] = wsComponent.resourceName.split("?");
+        wsComponent.path = path44 && path44 !== "/" ? path44 : void 0;
         wsComponent.query = query;
         wsComponent.resourceName = void 0;
       }
@@ -13610,9 +13610,9 @@ var require_schemes = __commonJS({
   }
 });
 
-// node_modules/fast-uri/index.js
+// cli/node_modules/fast-uri/index.js
 var require_fast_uri = __commonJS({
-  "node_modules/fast-uri/index.js"(exports, module) {
+  "cli/node_modules/fast-uri/index.js"(exports, module) {
     "use strict";
     var { normalizeIPv6, removeDotSegments, recomposeAuthority, normalizePercentEncoding, normalizePathEncoding, escapePreservingEscapes, reescapeHostDelimiters, isIPv4, nonSimpleDomain } = require_utils();
     var { SCHEMES, getSchemeHandler } = require_schemes();
@@ -13896,9 +13896,9 @@ var require_fast_uri = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/runtime/uri.js
+// cli/node_modules/ajv/dist/runtime/uri.js
 var require_uri = __commonJS({
-  "node_modules/ajv/dist/runtime/uri.js"(exports) {
+  "cli/node_modules/ajv/dist/runtime/uri.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var uri = require_fast_uri();
@@ -13907,9 +13907,9 @@ var require_uri = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/core.js
+// cli/node_modules/ajv/dist/core.js
 var require_core2 = __commonJS({
-  "node_modules/ajv/dist/core.js"(exports) {
+  "cli/node_modules/ajv/dist/core.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.CodeGen = exports.Name = exports.nil = exports.stringify = exports.str = exports._ = exports.KeywordCxt = void 0;
@@ -14518,9 +14518,9 @@ var require_core2 = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/core/id.js
+// cli/node_modules/ajv/dist/vocabularies/core/id.js
 var require_id = __commonJS({
-  "node_modules/ajv/dist/vocabularies/core/id.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/core/id.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var def = {
@@ -14533,9 +14533,9 @@ var require_id = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/core/ref.js
+// cli/node_modules/ajv/dist/vocabularies/core/ref.js
 var require_ref = __commonJS({
-  "node_modules/ajv/dist/vocabularies/core/ref.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/core/ref.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.callRef = exports.getValidate = void 0;
@@ -14655,9 +14655,9 @@ var require_ref = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/core/index.js
+// cli/node_modules/ajv/dist/vocabularies/core/index.js
 var require_core3 = __commonJS({
-  "node_modules/ajv/dist/vocabularies/core/index.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/core/index.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var id_1 = require_id();
@@ -14676,9 +14676,9 @@ var require_core3 = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/limitNumber.js
+// cli/node_modules/ajv/dist/vocabularies/validation/limitNumber.js
 var require_limitNumber = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/limitNumber.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/validation/limitNumber.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -14708,9 +14708,9 @@ var require_limitNumber = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/multipleOf.js
+// cli/node_modules/ajv/dist/vocabularies/validation/multipleOf.js
 var require_multipleOf = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/multipleOf.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/validation/multipleOf.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -14736,9 +14736,9 @@ var require_multipleOf = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/runtime/ucs2length.js
+// cli/node_modules/ajv/dist/runtime/ucs2length.js
 var require_ucs2length = __commonJS({
-  "node_modules/ajv/dist/runtime/ucs2length.js"(exports) {
+  "cli/node_modules/ajv/dist/runtime/ucs2length.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     function ucs2length(str) {
@@ -14762,9 +14762,9 @@ var require_ucs2length = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/limitLength.js
+// cli/node_modules/ajv/dist/vocabularies/validation/limitLength.js
 var require_limitLength = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/limitLength.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/validation/limitLength.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -14794,9 +14794,9 @@ var require_limitLength = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/pattern.js
+// cli/node_modules/ajv/dist/vocabularies/validation/pattern.js
 var require_pattern = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/pattern.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/validation/pattern.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -14831,9 +14831,9 @@ var require_pattern = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/limitProperties.js
+// cli/node_modules/ajv/dist/vocabularies/validation/limitProperties.js
 var require_limitProperties = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/limitProperties.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/validation/limitProperties.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -14860,9 +14860,9 @@ var require_limitProperties = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/required.js
+// cli/node_modules/ajv/dist/vocabularies/validation/required.js
 var require_required = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/required.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/validation/required.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -14942,9 +14942,9 @@ var require_required = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/limitItems.js
+// cli/node_modules/ajv/dist/vocabularies/validation/limitItems.js
 var require_limitItems = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/limitItems.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/validation/limitItems.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -14971,9 +14971,9 @@ var require_limitItems = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/runtime/equal.js
+// cli/node_modules/ajv/dist/runtime/equal.js
 var require_equal = __commonJS({
-  "node_modules/ajv/dist/runtime/equal.js"(exports) {
+  "cli/node_modules/ajv/dist/runtime/equal.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var equal = require_fast_deep_equal();
@@ -14982,9 +14982,9 @@ var require_equal = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/uniqueItems.js
+// cli/node_modules/ajv/dist/vocabularies/validation/uniqueItems.js
 var require_uniqueItems = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/uniqueItems.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/validation/uniqueItems.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var dataType_1 = require_dataType();
@@ -15049,9 +15049,9 @@ var require_uniqueItems = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/const.js
+// cli/node_modules/ajv/dist/vocabularies/validation/const.js
 var require_const = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/const.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/validation/const.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -15078,9 +15078,9 @@ var require_const = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/enum.js
+// cli/node_modules/ajv/dist/vocabularies/validation/enum.js
 var require_enum = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/enum.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/validation/enum.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -15127,9 +15127,9 @@ var require_enum = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/index.js
+// cli/node_modules/ajv/dist/vocabularies/validation/index.js
 var require_validation = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/index.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/validation/index.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var limitNumber_1 = require_limitNumber();
@@ -15165,9 +15165,9 @@ var require_validation = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/additionalItems.js
+// cli/node_modules/ajv/dist/vocabularies/applicator/additionalItems.js
 var require_additionalItems = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/additionalItems.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/applicator/additionalItems.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.validateAdditionalItems = void 0;
@@ -15218,9 +15218,9 @@ var require_additionalItems = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/items.js
+// cli/node_modules/ajv/dist/vocabularies/applicator/items.js
 var require_items = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/items.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/applicator/items.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.validateTuple = void 0;
@@ -15275,9 +15275,9 @@ var require_items = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/prefixItems.js
+// cli/node_modules/ajv/dist/vocabularies/applicator/prefixItems.js
 var require_prefixItems = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/prefixItems.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/applicator/prefixItems.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var items_1 = require_items();
@@ -15292,9 +15292,9 @@ var require_prefixItems = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/items2020.js
+// cli/node_modules/ajv/dist/vocabularies/applicator/items2020.js
 var require_items2020 = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/items2020.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/applicator/items2020.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -15327,9 +15327,9 @@ var require_items2020 = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/contains.js
+// cli/node_modules/ajv/dist/vocabularies/applicator/contains.js
 var require_contains = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/contains.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/applicator/contains.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -15421,9 +15421,9 @@ var require_contains = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/dependencies.js
+// cli/node_modules/ajv/dist/vocabularies/applicator/dependencies.js
 var require_dependencies = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/dependencies.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/applicator/dependencies.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.validateSchemaDeps = exports.validatePropertyDeps = exports.error = void 0;
@@ -15515,9 +15515,9 @@ var require_dependencies = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/propertyNames.js
+// cli/node_modules/ajv/dist/vocabularies/applicator/propertyNames.js
 var require_propertyNames = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/propertyNames.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/applicator/propertyNames.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -15558,9 +15558,9 @@ var require_propertyNames = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/additionalProperties.js
+// cli/node_modules/ajv/dist/vocabularies/applicator/additionalProperties.js
 var require_additionalProperties = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/additionalProperties.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/applicator/additionalProperties.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -15664,9 +15664,9 @@ var require_additionalProperties = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/properties.js
+// cli/node_modules/ajv/dist/vocabularies/applicator/properties.js
 var require_properties = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/properties.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/applicator/properties.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var validate_1 = require_validate();
@@ -15722,9 +15722,9 @@ var require_properties = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/patternProperties.js
+// cli/node_modules/ajv/dist/vocabularies/applicator/patternProperties.js
 var require_patternProperties = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/patternProperties.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/applicator/patternProperties.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -15796,9 +15796,9 @@ var require_patternProperties = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/not.js
+// cli/node_modules/ajv/dist/vocabularies/applicator/not.js
 var require_not = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/not.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/applicator/not.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var util_1 = require_util();
@@ -15827,9 +15827,9 @@ var require_not = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/anyOf.js
+// cli/node_modules/ajv/dist/vocabularies/applicator/anyOf.js
 var require_anyOf = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/anyOf.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/applicator/anyOf.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -15844,9 +15844,9 @@ var require_anyOf = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/oneOf.js
+// cli/node_modules/ajv/dist/vocabularies/applicator/oneOf.js
 var require_oneOf = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/oneOf.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/applicator/oneOf.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -15902,9 +15902,9 @@ var require_oneOf = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/allOf.js
+// cli/node_modules/ajv/dist/vocabularies/applicator/allOf.js
 var require_allOf = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/allOf.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/applicator/allOf.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var util_1 = require_util();
@@ -15929,9 +15929,9 @@ var require_allOf = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/if.js
+// cli/node_modules/ajv/dist/vocabularies/applicator/if.js
 var require_if = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/if.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/applicator/if.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -15998,9 +15998,9 @@ var require_if = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/thenElse.js
+// cli/node_modules/ajv/dist/vocabularies/applicator/thenElse.js
 var require_thenElse = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/thenElse.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/applicator/thenElse.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var util_1 = require_util();
@@ -16016,9 +16016,9 @@ var require_thenElse = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/index.js
+// cli/node_modules/ajv/dist/vocabularies/applicator/index.js
 var require_applicator = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/index.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/applicator/index.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var additionalItems_1 = require_additionalItems();
@@ -16064,9 +16064,9 @@ var require_applicator = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/format/format.js
+// cli/node_modules/ajv/dist/vocabularies/format/format.js
 var require_format = __commonJS({
-  "node_modules/ajv/dist/vocabularies/format/format.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/format/format.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -16154,9 +16154,9 @@ var require_format = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/format/index.js
+// cli/node_modules/ajv/dist/vocabularies/format/index.js
 var require_format2 = __commonJS({
-  "node_modules/ajv/dist/vocabularies/format/index.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/format/index.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var format_1 = require_format();
@@ -16165,9 +16165,9 @@ var require_format2 = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/metadata.js
+// cli/node_modules/ajv/dist/vocabularies/metadata.js
 var require_metadata = __commonJS({
-  "node_modules/ajv/dist/vocabularies/metadata.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/metadata.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.contentVocabulary = exports.metadataVocabulary = void 0;
@@ -16188,9 +16188,9 @@ var require_metadata = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/draft7.js
+// cli/node_modules/ajv/dist/vocabularies/draft7.js
 var require_draft7 = __commonJS({
-  "node_modules/ajv/dist/vocabularies/draft7.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/draft7.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var core_1 = require_core3();
@@ -16210,9 +16210,9 @@ var require_draft7 = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/discriminator/types.js
+// cli/node_modules/ajv/dist/vocabularies/discriminator/types.js
 var require_types = __commonJS({
-  "node_modules/ajv/dist/vocabularies/discriminator/types.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/discriminator/types.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.DiscrError = void 0;
@@ -16224,9 +16224,9 @@ var require_types = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/discriminator/index.js
+// cli/node_modules/ajv/dist/vocabularies/discriminator/index.js
 var require_discriminator = __commonJS({
-  "node_modules/ajv/dist/vocabularies/discriminator/index.js"(exports) {
+  "cli/node_modules/ajv/dist/vocabularies/discriminator/index.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -16329,9 +16329,9 @@ var require_discriminator = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/refs/json-schema-draft-07.json
+// cli/node_modules/ajv/dist/refs/json-schema-draft-07.json
 var require_json_schema_draft_07 = __commonJS({
-  "node_modules/ajv/dist/refs/json-schema-draft-07.json"(exports, module) {
+  "cli/node_modules/ajv/dist/refs/json-schema-draft-07.json"(exports, module) {
     module.exports = {
       $schema: "http://json-schema.org/draft-07/schema#",
       $id: "http://json-schema.org/draft-07/schema#",
@@ -16486,9 +16486,9 @@ var require_json_schema_draft_07 = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/ajv.js
+// cli/node_modules/ajv/dist/ajv.js
 var require_ajv = __commonJS({
-  "node_modules/ajv/dist/ajv.js"(exports, module) {
+  "cli/node_modules/ajv/dist/ajv.js"(exports, module) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.MissingRefError = exports.ValidationError = exports.CodeGen = exports.Name = exports.nil = exports.stringify = exports.str = exports._ = exports.KeywordCxt = exports.Ajv = void 0;
@@ -16623,33 +16623,12 @@ var init_orchestration_state_v6_schema = __esm({
               type: "object",
               additionalProperties: false,
               required: [
-                "max_phases",
-                "max_tasks_per_phase",
-                "max_retries_per_task",
-                "max_consecutive_review_rejections"
+                "max_retries_per_task"
               ],
               properties: {
-                max_phases: {
-                  title: "Max Phases",
-                  description: "Maximum number of phases allowed per pipeline run.",
-                  type: "integer",
-                  minimum: 1
-                },
-                max_tasks_per_phase: {
-                  title: "Max Tasks Per Phase",
-                  description: "Maximum number of tasks allowed in a single phase.",
-                  type: "integer",
-                  minimum: 1
-                },
                 max_retries_per_task: {
                   title: "Max Retries Per Task",
                   description: "Maximum number of retry attempts per task.",
-                  type: "integer",
-                  minimum: 0
-                },
-                max_consecutive_review_rejections: {
-                  title: "Max Consecutive Review Rejections",
-                  description: "Maximum number of consecutive review rejections before the pipeline halts.",
                   type: "integer",
                   minimum: 0
                 }
@@ -16975,6 +16954,12 @@ var init_orchestration_state_v6_schema = __esm({
                   commit_hash: { oneOf: [{ type: "string" }, { type: "null" }] }
                 }
               }
+            },
+            complexity: {
+              title: "Task Complexity",
+              description: "Authoring complexity signal for task iterations (simple|standard|complex). Absent on phase iterations.",
+              type: "string",
+              enum: ["simple", "standard", "complex"]
             }
           }
         },
@@ -17013,7 +16998,12 @@ var init_orchestration_state_v6_schema = __esm({
             },
             doc_path: {
               title: "Corrective Task Doc Path",
-              description: "Relative path to the corrective task handoff doc. Optional; absent on entries that have not yet been authored.",
+              description: "Relative path to the ORIGINAL scope doc (task handoff or phase plan) this corrective re-runs against \u2014 copied from the hosting iteration at birth and immutable. Optional; absent on entries that have not yet been authored.",
+              type: ["string", "null"]
+            },
+            review_report_path: {
+              title: "Review Report Path",
+              description: "Relative path to the review report that requested this corrective (the completing review's doc_path). Optional; null when unavailable.",
               type: ["string", "null"]
             },
             repos: {
@@ -17183,37 +17173,37 @@ function instancePathToDotNotation(instancePath) {
 }
 function formatSchemaError(error) {
   const basePath = instancePathToDotNotation(error.instancePath);
-  let path42;
+  let path44;
   let problem;
   switch (error.keyword) {
     case "required": {
       const missing = error.params["missingProperty"];
-      path42 = basePath ? `${basePath}.${missing}` : missing;
+      path44 = basePath ? `${basePath}.${missing}` : missing;
       problem = "required field missing";
       break;
     }
     case "type": {
       const expected = error.params["type"];
       const actual = error.data === null ? "null" : typeof error.data;
-      path42 = basePath;
+      path44 = basePath;
       problem = `expected ${expected}, got ${actual}`;
       break;
     }
     case "enum": {
       const allowedValues = error.params["allowedValues"];
-      path42 = basePath;
+      path44 = basePath;
       problem = `invalid value ${JSON.stringify(error.data)} \u2014 must be one of: ${allowedValues.join(", ")}`;
       break;
     }
     case "const": {
       const expectedValue = error.params["allowedValue"];
-      path42 = basePath;
+      path44 = basePath;
       problem = `expected ${JSON.stringify(expectedValue)}, got ${JSON.stringify(error.data)}`;
       break;
     }
     case "additionalProperties": {
       const additionalProp = error.params["additionalProperty"];
-      path42 = basePath ? `${basePath}.${additionalProp}` : additionalProp;
+      path44 = basePath ? `${basePath}.${additionalProp}` : additionalProp;
       problem = "unexpected field";
       if (additionalProp === "commit_hash" && basePath.startsWith("pipeline.source_control")) {
         problem += " \u2014 global commit_hash was removed in v5; per-repo commit_hash is now recorded in the repos array on each IterationEntry (v6)";
@@ -17222,15 +17212,15 @@ function formatSchemaError(error) {
     }
     case "minimum": {
       const limit = error.params["limit"];
-      path42 = basePath;
+      path44 = basePath;
       problem = `value must be >= ${limit}`;
       break;
     }
     default:
-      path42 = basePath;
+      path44 = basePath;
       problem = error.message ?? "validation failed";
   }
-  return `[schema] ${path42}: ${problem}`;
+  return `[schema] ${path44}: ${problem}`;
 }
 function normalizePipelineSourceControl(state) {
   const sc = state.pipeline?.source_control;
@@ -17256,113 +17246,6 @@ var init_schema_validator = __esm({
     import_ajv2 = __toESM(require_ajv(), 1);
     init_orchestration_state_v6_schema();
     validateFn = null;
-  }
-});
-
-// cli/src/lib/skill-manifest.ts
-import { readdirSync as readdirSync3, readFileSync as readFileSync3 } from "node:fs";
-import path25 from "node:path";
-function* walkSkillFiles(root) {
-  const stack = [root];
-  while (stack.length) {
-    const dir = stack.pop();
-    let entries;
-    try {
-      entries = readdirSync3(dir, { withFileTypes: true });
-    } catch {
-      continue;
-    }
-    for (const e of entries) {
-      if (e.isDirectory()) {
-        if (EXCLUDED_DIRS.has(e.name)) continue;
-        stack.push(path25.join(dir, e.name));
-      } else if (e.isFile() && e.name === "SKILL.md") {
-        yield path25.join(dir, e.name);
-      }
-    }
-  }
-}
-function parseFrontmatter(text) {
-  if (!text.startsWith("---")) return { error: "no frontmatter block" };
-  const end = text.indexOf("\n---", 3);
-  if (end === -1) return { error: "frontmatter not terminated" };
-  const raw = text.slice(3, end);
-  const fm = {};
-  for (const rawLine of raw.split(/\r?\n/)) {
-    const line = rawLine.replace(/\s+$/, "");
-    if (!line || line.startsWith("#")) continue;
-    const m = line.match(/^([a-zA-Z_][a-zA-Z0-9_-]*)\s*:\s*(.*)$/);
-    if (!m) return { error: `malformed line: ${line}` };
-    const rawValue = m[2].trim();
-    const wasQuoted = rawValue.length >= 2 && (rawValue.startsWith('"') && rawValue.endsWith('"') || rawValue.startsWith("'") && rawValue.endsWith("'"));
-    let value;
-    if (wasQuoted) value = rawValue.slice(1, -1);
-    else if (rawValue === "true") value = true;
-    else if (rawValue === "false") value = false;
-    else value = rawValue;
-    fm[m[1]] = value;
-  }
-  return { frontmatter: fm };
-}
-function buildSkillManifest(opts) {
-  const warn = opts.warn ?? ((msg) => process.stderr.write(msg + "\n"));
-  const out = [];
-  for (const file of walkSkillFiles(opts.repoRoot)) {
-    let text;
-    try {
-      text = readFileSync3(file, "utf8");
-    } catch (err) {
-      warn(`warn: ${file}: ${err.message}`);
-      continue;
-    }
-    const parsed = parseFrontmatter(text);
-    if (parsed.error) {
-      warn(`warn: ${file}: ${parsed.error}`);
-      continue;
-    }
-    const fm = parsed.frontmatter;
-    const name = fm["name"];
-    const description = fm["description"];
-    if (typeof name !== "string" || !name) {
-      warn(`warn: ${file}: missing name`);
-      continue;
-    }
-    if (typeof description !== "string" || !description) {
-      warn(`warn: ${file}: missing description`);
-      continue;
-    }
-    if (name.startsWith("rad-")) continue;
-    if (fm["disable-model-invocation"] === true) continue;
-    out.push({ name, description, path: path25.resolve(file) });
-  }
-  out.sort((a, b) => a.name.localeCompare(b.name));
-  return out;
-}
-function buildSkillManifestPerRepo(opts) {
-  const { repos, warn } = opts;
-  const combined = [];
-  for (const repo of repos) {
-    const entries = buildSkillManifest({ repoRoot: repo.root, warn });
-    for (const entry of entries) {
-      combined.push({ ...entry, repo: repo.name });
-    }
-  }
-  combined.sort((a, b) => a.name.localeCompare(b.name));
-  return combined;
-}
-var EXCLUDED_DIRS;
-var init_skill_manifest = __esm({
-  "cli/src/lib/skill-manifest.ts"() {
-    "use strict";
-    EXCLUDED_DIRS = /* @__PURE__ */ new Set([
-      "node_modules",
-      ".git",
-      "dist",
-      "build",
-      "out",
-      "coverage",
-      "prompt-tests"
-    ]);
   }
 });
 
@@ -17403,7 +17286,6 @@ var init_constants = __esm({
     });
     NEXT_ACTIONS = Object.freeze({
       // Planning agent spawns
-      SPAWN_REQUIREMENTS: "spawn_requirements",
       SPAWN_MASTER_PLAN: "spawn_master_plan",
       // Planning scripts
       EXPLODE_MASTER_PLAN: "explode_master_plan",
@@ -17419,7 +17301,6 @@ var init_constants = __esm({
       SPAWN_PHASE_REVIEWER: "spawn_phase_reviewer",
       SPAWN_FINAL_REVIEWER: "spawn_final_reviewer",
       // Source control
-      INVOKE_SOURCE_CONTROL_COMMIT: "invoke_source_control_commit",
       INVOKE_SOURCE_CONTROL_PR: "invoke_source_control_pr",
       // Terminal states
       DISPLAY_HALTED: "display_halted",
@@ -17427,7 +17308,6 @@ var init_constants = __esm({
     });
     EVENTS = Object.freeze({
       // ── Planning step events ──────────────────────────────────────────────
-      REQUIREMENTS_COMPLETED: "requirements_completed",
       MASTER_PLAN_COMPLETED: "master_plan_completed",
       EXPLOSION_COMPLETED: "explosion_completed",
       EXPLOSION_FAILED: "explosion_failed",
@@ -17444,7 +17324,6 @@ var init_constants = __esm({
       // ── Final review events ───────────────────────────────────────────────
       FINAL_REVIEW_COMPLETED: "final_review_completed",
       // ── Source control events ─────────────────────────────────────────────
-      COMMIT_COMPLETED: "commit_completed",
       PR_REQUESTED: "pr_requested",
       PR_CREATED: "pr_created",
       // ── Out-of-band events ────────────────────────────────────────────────
@@ -17622,7 +17501,7 @@ var init_template_validator = __esm({
 });
 
 // cli/src/lib/pipeline-engine/template-loader.ts
-import * as fs20 from "node:fs";
+import * as fs21 from "node:fs";
 import * as path26 from "node:path";
 function buildEventIndex(nodes, parentPath) {
   const index = /* @__PURE__ */ new Map();
@@ -17696,7 +17575,7 @@ function buildEventIndex(nodes, parentPath) {
 function loadTemplate(templatePath) {
   let raw;
   try {
-    raw = fs20.readFileSync(templatePath, "utf-8");
+    raw = fs21.readFileSync(templatePath, "utf-8");
   } catch (err) {
     if (err !== null && typeof err === "object" && err.code === "ENOENT") {
       throw new Error(`Template file not found: ${templatePath}`);
@@ -17753,7 +17632,7 @@ var init_template_loader = __esm({
 });
 
 // cli/src/lib/pipeline-engine/template-resolver.ts
-import * as fs21 from "node:fs";
+import * as fs22 from "node:fs";
 import * as path27 from "node:path";
 function resolveTemplateName(state, cliTemplateName, config, projectDir, templatesDir) {
   let templateName;
@@ -17777,14 +17656,14 @@ function resolveTemplateName(state, cliTemplateName, config, projectDir, templat
 }
 function resolveTemplatePath(templateName, projectDir, templatesDir) {
   const projectLocalPath = path27.join(projectDir, "template.yml");
-  if (fs21.existsSync(projectLocalPath)) {
+  if (fs22.existsSync(projectLocalPath)) {
     return { path: path27.resolve(projectLocalPath), isProjectLocal: true };
   }
   return { path: path27.join(templatesDir, templateName + ".yml"), isProjectLocal: false };
 }
 function snapshotTemplate(globalTemplatePath, projectDir) {
-  fs21.mkdirSync(projectDir, { recursive: true });
-  fs21.copyFileSync(globalTemplatePath, path27.join(projectDir, "template.yml"));
+  fs22.mkdirSync(projectDir, { recursive: true });
+  fs22.copyFileSync(globalTemplatePath, path27.join(projectDir, "template.yml"));
 }
 var CONFIG_SENTINEL_REMAP;
 var init_template_resolver = __esm({
@@ -17851,13 +17730,6 @@ var init_frontmatter_validators = __esm({
   "cli/src/lib/pipeline-engine/frontmatter-validators.ts"() {
     "use strict";
     VALIDATION_RULES = {
-      requirements_completed: [
-        {
-          field: "requirement_count",
-          validate: (v) => typeof v === "number" && Number.isInteger(v) && v > 0,
-          expected: "a positive integer"
-        }
-      ],
       plan_approved: [
         {
           field: "total_phases",
@@ -17880,102 +17752,34 @@ var init_frontmatter_validators = __esm({
           expected: "a non-empty array"
         }
       ],
-      // Iter 10 — conditional orchestrator-mediation contract. `verdict` is the
-      // reviewer's raw verdict; when it is `changes_requested`, the orchestrator's
-      // mediation addendum MUST supply `orchestrator_mediated`, `effective_outcome`,
-      // and (iff effective_outcome is `changes_requested`) `corrective_handoff_path`.
-      // When verdict is `approved` or `rejected`, all three mediation fields must
-      // be absent. See ok-write-the-plan-vast-thacker.md for the contract rationale.
+      // PO-4 — the reviewer's raw `verdict` is the sole routing input. A coder
+      // self-mediates its own review, so there is no orchestrator-authored
+      // mediation contract: the validator only enforces that the reviewer supplied
+      // a recognized verdict. The mutation layer (`mutations.ts`
+      // CODE_REVIEW_COMPLETED) routes corrective birth / halt off that raw verdict.
       code_review_completed: [
         {
           field: "verdict",
           // Validate the raw verdict is exactly one of the three allowed values —
           // no trimming, no case normalization. A typo or stray whitespace
-          // (e.g., "approved ") would otherwise slip past the conditional
-          // mediation rules (which gate on exact-string match of
-          // 'changes_requested') and surface as a later runtime halt from the
-          // mutation's unknown-verdict branch instead of a structured frontmatter
-          // error. Fail early here with a clear field-specific message so the
-          // operator can fix the frontmatter and re-signal the event.
+          // (e.g., "approved ") is caught here with a clear field-specific message
+          // rather than surfacing later as the mutation's unknown-verdict halt, so
+          // the operator can fix the frontmatter and re-signal the event.
           validate: (v) => typeof v === "string" && (v === "approved" || v === "changes_requested" || v === "rejected"),
           expected: "one of 'approved', 'changes_requested', 'rejected'"
-        },
-        // verdict === 'changes_requested' branch — mediation fields required
-        {
-          field: "orchestrator_mediated",
-          validate: (v) => v === true,
-          expected: "true (orchestrator mediation required for changes_requested verdicts)",
-          when: (fm) => fm.verdict === "changes_requested"
-        },
-        {
-          field: "effective_outcome",
-          validate: (v) => v === "approved" || v === "changes_requested",
-          expected: "'approved' or 'changes_requested'",
-          when: (fm) => fm.verdict === "changes_requested"
-        },
-        // When effective_outcome is changes_requested, corrective_handoff_path is
-        // OPTIONAL. Absence is the orchestrator's budget-exhausted halt signal —
-        // the mutation reads effective_outcome=changes_requested + no handoff path
-        // as "orchestrator declined to author a handoff because budget is blown"
-        // and converts it into a clean pipeline halt. When supplied, the path must
-        // be a non-empty string (whitespace-only is rejected).
-        {
-          field: "corrective_handoff_path",
-          validate: (v) => typeof v === "string" && v.trim().length > 0,
-          expected: "a non-empty string when supplied",
-          when: (fm) => fm.verdict === "changes_requested" && fm.effective_outcome === "changes_requested" && fm.corrective_handoff_path !== void 0 && fm.corrective_handoff_path !== null
-        },
-        {
-          field: "corrective_handoff_path",
-          validate: () => true,
-          expected: "absent (must be omitted when effective_outcome is approved)",
-          when: (fm) => fm.verdict === "changes_requested" && fm.effective_outcome === "approved",
-          mustBeAbsent: true
-        },
-        // verdict ∈ {'approved','rejected'} branch — mediation fields must be absent
-        {
-          field: "orchestrator_mediated",
-          validate: () => true,
-          expected: "absent (only permitted on changes_requested verdicts)",
-          when: (fm) => fm.verdict === "approved" || fm.verdict === "rejected",
-          mustBeAbsent: true
-        },
-        {
-          field: "effective_outcome",
-          validate: () => true,
-          expected: "absent (only permitted on changes_requested verdicts)",
-          when: (fm) => fm.verdict === "approved" || fm.verdict === "rejected",
-          mustBeAbsent: true
-        },
-        {
-          field: "corrective_handoff_path",
-          validate: () => true,
-          expected: "absent (only permitted on changes_requested verdicts)",
-          when: (fm) => fm.verdict === "approved" || fm.verdict === "rejected",
-          mustBeAbsent: true
         }
       ],
-      // Iter 11 — conditional orchestrator-mediation contract (parallels iter-10
-      // code_review_completed). `verdict` is the reviewer's raw verdict; when it is
-      // `changes_requested`, the orchestrator's mediation addendum MUST supply
-      // `orchestrator_mediated`, `effective_outcome`, and (iff effective_outcome is
-      // `changes_requested`) `corrective_handoff_path`. When verdict is `approved`
-      // or `rejected`, all three mediation fields must be absent. The mutation
-      // layer is `mutations.ts` PHASE_REVIEW_COMPLETED; the operator-facing write
-      // surface + judgment rubric lives in
-      // `harness-files/skills/rad-orchestration/references/corrective-playbook.md`
-      // (Phase-Scope Mediation section).
+      // PO-4 — phase review carries a raw `verdict` (sole routing input, as with
+      // code_review_completed) plus `exit_criteria_met`. No orchestrator-mediation
+      // fields are checked; the mutation layer (`mutations.ts`
+      // PHASE_REVIEW_COMPLETED) routes corrective birth / halt off the raw verdict.
       phase_review_completed: [
         {
           field: "verdict",
           // Validate the raw verdict is exactly one of the three allowed values —
-          // no trimming, no case normalization. A typo or stray whitespace
-          // (e.g., "approved ") would otherwise slip past the conditional
-          // mediation rules (which gate on exact-string match of
-          // 'changes_requested') and surface as a later runtime halt from the
-          // mutation's unknown-verdict branch instead of a structured frontmatter
-          // error. Fail early here with a clear field-specific message so the
-          // operator can fix the frontmatter and re-signal the event.
+          // no trimming, no case normalization. A typo or stray whitespace is
+          // caught here with a clear field-specific message rather than surfacing
+          // later as the mutation's unknown-verdict halt.
           validate: (v) => typeof v === "string" && (v === "approved" || v === "changes_requested" || v === "rejected"),
           expected: "one of 'approved', 'changes_requested', 'rejected'"
         },
@@ -17983,71 +17787,11 @@ var init_frontmatter_validators = __esm({
           field: "exit_criteria_met",
           validate: (v) => v !== void 0 && v !== null,
           expected: "a defined value"
-        },
-        // verdict === 'changes_requested' branch — mediation fields required
-        {
-          field: "orchestrator_mediated",
-          validate: (v) => v === true,
-          expected: "true (orchestrator mediation required for changes_requested verdicts)",
-          when: (fm) => fm.verdict === "changes_requested"
-        },
-        {
-          field: "effective_outcome",
-          validate: (v) => v === "approved" || v === "changes_requested",
-          expected: "'approved' or 'changes_requested'",
-          when: (fm) => fm.verdict === "changes_requested"
-        },
-        // When effective_outcome is changes_requested, corrective_handoff_path is
-        // OPTIONAL. Absence is the orchestrator's budget-exhausted halt signal —
-        // the mutation reads effective_outcome=changes_requested + no handoff path
-        // as "orchestrator declined to author a handoff because budget is blown"
-        // and converts it into a clean pipeline halt. When supplied, the path must
-        // be a non-empty string (whitespace-only is rejected).
-        {
-          field: "corrective_handoff_path",
-          validate: (v) => typeof v === "string" && v.trim().length > 0,
-          expected: "a non-empty string when supplied",
-          when: (fm) => fm.verdict === "changes_requested" && fm.effective_outcome === "changes_requested" && fm.corrective_handoff_path !== void 0 && fm.corrective_handoff_path !== null
-        },
-        {
-          field: "corrective_handoff_path",
-          validate: () => true,
-          expected: "absent (must be omitted when effective_outcome is approved)",
-          when: (fm) => fm.verdict === "changes_requested" && fm.effective_outcome === "approved",
-          mustBeAbsent: true
-        },
-        // verdict ∈ {'approved','rejected'} branch — mediation fields must be absent
-        {
-          field: "orchestrator_mediated",
-          validate: () => true,
-          expected: "absent (only permitted on changes_requested verdicts)",
-          when: (fm) => fm.verdict === "approved" || fm.verdict === "rejected",
-          mustBeAbsent: true
-        },
-        {
-          field: "effective_outcome",
-          validate: () => true,
-          expected: "absent (only permitted on changes_requested verdicts)",
-          when: (fm) => fm.verdict === "approved" || fm.verdict === "rejected",
-          mustBeAbsent: true
-        },
-        {
-          field: "corrective_handoff_path",
-          validate: () => true,
-          expected: "absent (only permitted on changes_requested verdicts)",
-          when: (fm) => fm.verdict === "approved" || fm.verdict === "rejected",
-          mustBeAbsent: true
         }
       ],
-      // Iter 12 — final_review_completed verdict enum check. Final-review
-      // corrective cycles are out of scope (final review is strict-verdict-only;
-      // no orchestrator mediation is wired for it). The validator enforces that
-      // the reviewer always supplies a valid verdict; mediation fields
-      // (`orchestrator_mediated`, `effective_outcome`, `corrective_handoff_path`)
-      // are not checked here because they are not part of the final-review
-      // contract. A future iteration that wires final-review mediation can extend
-      // this rule set with conditional mediation-field rules parallel to the
-      // iter-10 code_review_completed + iter-11 phase_review_completed shape.
+      // final_review_completed verdict enum check. Final-review corrective cycles
+      // are out of scope (final review is strict-verdict-only). The validator
+      // enforces that the reviewer always supplies a valid verdict.
       final_review_completed: [
         {
           field: "verdict",
@@ -18060,7 +17804,7 @@ var init_frontmatter_validators = __esm({
 });
 
 // cli/src/lib/pipeline-engine/pre-reads.ts
-import { join as join6, isAbsolute } from "node:path";
+import { join as join5, isAbsolute } from "node:path";
 function extractMasterPlanDocPath(state) {
   if (typeof state !== "object" || state === null) return void 0;
   const s = state;
@@ -18085,10 +17829,10 @@ function preRead(event, context, readDocument3, projectDir, state, entry) {
         }
       };
     }
-    context = { ...context, doc_path: isAbsolute(derived) ? derived : join6(projectDir, derived) };
+    context = { ...context, doc_path: isAbsolute(derived) ? derived : join5(projectDir, derived) };
   }
   if (event === "plan_approved" && context.doc_path) {
-    const resolvedPath2 = isAbsolute(context.doc_path) ? context.doc_path : join6(projectDir, context.doc_path);
+    const resolvedPath2 = isAbsolute(context.doc_path) ? context.doc_path : join5(projectDir, context.doc_path);
     const doc2 = readDocument3(resolvedPath2);
     if (doc2 === null) {
       return {
@@ -18131,7 +17875,7 @@ function preRead(event, context, readDocument3, projectDir, state, entry) {
       }
     };
   }
-  const resolvedPath = isAbsolute(context.doc_path) ? context.doc_path : join6(projectDir, context.doc_path);
+  const resolvedPath = isAbsolute(context.doc_path) ? context.doc_path : join5(projectDir, context.doc_path);
   const doc = readDocument3(resolvedPath);
   if (doc === null) {
     return {
@@ -18199,8 +17943,7 @@ var init_scaffold = __esm({
 });
 
 // cli/src/lib/pipeline-engine/context-enrichment.ts
-import { execFileSync as execFileSync10 } from "node:child_process";
-import path28 from "node:path";
+import { execFileSync as execFileSync8 } from "node:child_process";
 function validateBaseShaChronology(commits, ordinal, repoName) {
   if (commits.length === 0) return null;
   const base = commits[0];
@@ -18214,51 +17957,6 @@ function validateBaseShaChronology(commits, ordinal, repoName) {
     }
   }
   return null;
-}
-function buildRepositorySkillsBlock(state) {
-  let repos = [];
-  try {
-    const paths = userDataPaths();
-    const wgs = new WorkGraphService({ root: paths.root, worktreesDir: paths.worktrees, sideProjectsDir: paths.sideProjects });
-    const projectId = state.project?.name ?? "";
-    const refs = wgs.resolveWorktrees(projectId);
-    if (refs.length > 0) {
-      repos = refs.map((ref) => ({ name: ref.repo, root: ref.path }));
-    }
-  } catch {
-  }
-  if (repos.length === 0) {
-    try {
-      const paths = userDataPaths();
-      const located = new WorkGraphService({ root: paths.root, worktreesDir: paths.worktrees, sideProjectsDir: paths.sideProjects }).locate(process.cwd());
-      if (located.kind === "worktree" && located.worktree_name && located.repo) {
-        repos = [{ name: located.repo, root: path28.join(paths.worktrees, located.worktree_name, located.repo) }];
-      }
-    } catch {
-    }
-    if (repos.length === 0) {
-      repos = [{ name: "", root: process.cwd() }];
-    }
-  }
-  let arr;
-  try {
-    arr = buildSkillManifestPerRepo({ repos });
-  } catch (err) {
-    console.warn(
-      `context-enrichment: buildSkillManifestPerRepo failed (${err.message}); emitting empty repository_skills_block`
-    );
-    return "";
-  }
-  if (!Array.isArray(arr) || arr.length === 0) return "";
-  const json = JSON.stringify(arr, null, 2);
-  return `
-
-## Repository Skills Available
-
-${json}
-
-Entries above are a catalog. Each entry carries a \`repo\` field identifying which repository the skill belongs to \u2014 use it to target repo-specific guidance when inlining skill conventions into tasks. Read a listed path **only when** its description matches the work you are about to plan \u2014 skip the rest to avoid token waste. Any \`SKILL.md\` you encounter outside this catalog (e.g., via Grep/Glob) was filtered on purpose; do not Read it.
-`;
 }
 function formatPhaseId(phaseNumber) {
   return `P${String(phaseNumber).padStart(2, "0")}`;
@@ -18321,6 +18019,27 @@ function resolveActiveTaskIndex(state, phaseIndex) {
     `Cannot resolve active task in phase ${phaseIndex}: no task is in_progress, no task carries an active corrective, and no task is not_started. State is unresolved \u2014 refusing to default to task 1. Pass --task <N> to specify explicitly.`
   );
 }
+function correctiveReportFields(entry) {
+  const fields = { corrective_index: entry.index };
+  const reportPath = entry.review_report_path;
+  if (typeof reportPath === "string" && reportPath.trim().length > 0) {
+    fields.review_report_path = reportPath;
+  }
+  return fields;
+}
+function resolveRequirementsDoc(projectName) {
+  try {
+    const paths = userDataPaths();
+    const project = new WorkGraphService({
+      root: paths.root,
+      worktreesDir: paths.worktrees,
+      sideProjectsDir: paths.sideProjects
+    }).listProjects().find((p) => p.id === projectName);
+    return project?.docs.requirements ?? null;
+  } catch {
+    return null;
+  }
+}
 function buildReposArray(state, perRepoSha) {
   const scRepos = state.pipeline.source_control?.repos ?? [];
   const resolvedPaths = {};
@@ -18353,22 +18072,7 @@ function buildReposArray(state, perRepoSha) {
 function enrichActionContext(input) {
   const { action, walkerContext, state } = input;
   if (action in PLANNING_SPAWN_STEPS) {
-    const repository_skills_block = buildRepositorySkillsBlock(state);
-    const base = {
-      ...walkerContext,
-      step: PLANNING_SPAWN_STEPS[action],
-      repository_skills_block
-    };
-    if (action === "spawn_master_plan") {
-      return {
-        ...base,
-        limits: {
-          max_phases: input.config.limits.max_phases,
-          max_tasks_per_phase: input.config.limits.max_tasks_per_phase
-        }
-      };
-    }
-    return base;
+    return { ...walkerContext, step: PLANNING_SPAWN_STEPS[action] };
   }
   if (PHASE_LEVEL_ACTIONS.has(action)) {
     const phaseNumber = resolveActivePhaseIndex(state);
@@ -18384,13 +18088,14 @@ function enrichActionContext(input) {
       const firstTaskRepos = firstTask?.repos ?? [];
       const lastTaskFinalCorrective = lastTask?.corrective_tasks.slice().reverse().find((ct) => ct.repos.some((r) => r.commit_hash != null));
       const lastTaskRepos = lastTaskFinalCorrective?.repos ?? lastTask?.repos ?? [];
-      const correctiveFields = phaseIter && phaseIter.corrective_tasks.length > 0 ? { is_correction: true, corrective_index: phaseIter.corrective_tasks.length } : {};
+      const lastPhaseCorrective = phaseIter && phaseIter.corrective_tasks.length > 0 ? phaseIter.corrective_tasks[phaseIter.corrective_tasks.length - 1] : void 0;
+      const correctiveFields = lastPhaseCorrective ? { is_correction: true, corrective_index: lastPhaseCorrective.index } : {};
       const repos = buildReposArray(state).map((entry) => ({
         ...entry,
         phase_first_sha: firstTaskRepos.find((fr) => fr.name === entry.name)?.commit_hash ?? null,
         phase_head_sha: lastTaskRepos.slice().reverse().find((lr) => lr.name === entry.name && lr.commit_hash != null)?.commit_hash ?? null
       }));
-      return { ...base, repos, ...correctiveFields };
+      return { ...base, repos, phase_plan_doc: phaseIter?.doc_path ?? null, ...correctiveFields };
     }
     return base;
   }
@@ -18423,12 +18128,16 @@ function enrichActionContext(input) {
       }
       const phaseLoop = state.graph.nodes["phase_loop"];
       const phaseIter = phaseLoop?.iterations[phaseNumber - 1];
+      const taskLoopForComplexity = phaseIter?.nodes["task_loop"];
+      const complexity = taskLoopForComplexity?.iterations[taskNumber - 1]?.complexity ?? "standard";
+      const scForCommit = state.pipeline.source_control;
+      const should_commit = scForCommit != null && scForCommit.auto_commit !== "never";
       const phaseCTs = phaseIter?.corrective_tasks ?? [];
       const activePhaseCorrective = phaseCTs.length > 0 ? phaseCTs[phaseCTs.length - 1] : void 0;
       if (activePhaseCorrective && (activePhaseCorrective.status === "not_started" || activePhaseCorrective.status === "in_progress")) {
         const phaseCorrectiveDoc = activePhaseCorrective.doc_path;
         if (typeof phaseCorrectiveDoc === "string" && phaseCorrectiveDoc.trim().length > 0) {
-          return { ...base, handoff_doc: phaseCorrectiveDoc, repos };
+          return { ...base, handoff_doc: phaseCorrectiveDoc, repos, complexity, should_commit, ...correctiveReportFields(activePhaseCorrective) };
         }
       }
       const taskLoop = phaseIter?.nodes["task_loop"];
@@ -18438,15 +18147,17 @@ function enrichActionContext(input) {
       if (activeCorrective && (activeCorrective.status === "not_started" || activeCorrective.status === "in_progress")) {
         const correctiveDoc = activeCorrective.doc_path;
         if (typeof correctiveDoc === "string" && correctiveDoc.trim().length > 0) {
-          return { ...base, handoff_doc: correctiveDoc, repos };
+          return { ...base, handoff_doc: correctiveDoc, repos, complexity, should_commit, ...correctiveReportFields(activeCorrective) };
         }
       }
       const handoff_doc = taskIter?.doc_path ?? "";
-      return { ...base, handoff_doc, repos };
+      return { ...base, handoff_doc, repos, complexity, should_commit };
     }
     if (action === "spawn_code_reviewer") {
       const phaseLoop = state.graph.nodes["phase_loop"];
       const phaseIter = phaseLoop?.iterations[phaseNumber - 1];
+      const taskLoopForComplexity = phaseIter?.nodes["task_loop"];
+      const complexity = taskLoopForComplexity?.iterations[taskNumber - 1]?.complexity ?? "standard";
       const phaseCTs = phaseIter?.corrective_tasks ?? [];
       const activePhaseCorrective = phaseCTs.slice().reverse().find(
         (ct) => ct.status === "in_progress" || ct.status === "not_started"
@@ -18456,8 +18167,10 @@ function enrichActionContext(input) {
         return {
           ...base,
           repos: buildReposArray(state, (r) => sourceRepos2.find((sr) => sr.name === r.name)?.commit_hash ?? null),
+          complexity,
+          handoff_doc: phaseIter?.doc_path ?? null,
           is_correction: true,
-          corrective_index: activePhaseCorrective.index
+          ...correctiveReportFields(activePhaseCorrective)
         };
       }
       const taskLoop = phaseIter?.nodes["task_loop"];
@@ -18467,42 +18180,16 @@ function enrichActionContext(input) {
         (ct) => ct.status === "in_progress" || ct.status === "not_started"
       );
       const sourceRepos = activeCorrective ? activeCorrective.repos : taskIter?.repos ?? [];
-      const correctiveFields = activeCorrective ? { is_correction: true, corrective_index: activeCorrective.index } : {};
+      const correctiveFields = activeCorrective ? { is_correction: true, ...correctiveReportFields(activeCorrective) } : {};
       return {
         ...base,
         repos: buildReposArray(state, (r) => sourceRepos.find((sr) => sr.name === r.name)?.commit_hash ?? null),
+        complexity,
+        handoff_doc: taskIter?.doc_path ?? null,
         ...correctiveFields
       };
     }
     return base;
-  }
-  if (action === "invoke_source_control_commit") {
-    const phaseNumber = resolveActivePhaseIndex(state);
-    const taskNumber = resolveActiveTaskIndex(state, phaseNumber);
-    const phase_id = formatPhaseId(phaseNumber);
-    let task_number = taskNumber;
-    let task_id = formatTaskId(phaseNumber, taskNumber);
-    const phaseLoopForSentinel = state.graph.nodes["phase_loop"];
-    const phaseIterForSentinel = phaseLoopForSentinel?.iterations[phaseNumber - 1];
-    const phaseCorrectives = phaseIterForSentinel?.corrective_tasks ?? [];
-    const phaseCorrectiveActive = phaseCorrectives.length > 0 && (phaseCorrectives[phaseCorrectives.length - 1].status === "not_started" || phaseCorrectives[phaseCorrectives.length - 1].status === "in_progress");
-    if (phaseCorrectiveActive) {
-      task_number = null;
-      task_id = `${phase_id}-PHASE`;
-    }
-    const scReposForCommit = state.pipeline.source_control?.repos ?? [];
-    const repos = buildReposArray(state).map((r) => ({
-      ...r,
-      base_branch: scReposForCommit.find((sc) => sc.name === r.name)?.base_branch ?? null
-    }));
-    return {
-      ...walkerContext,
-      phase_number: phaseNumber,
-      phase_id,
-      task_number,
-      task_id,
-      repos
-    };
   }
   if (action === "invoke_source_control_pr") {
     const scReposForPr = state.pipeline.source_control?.repos ?? [];
@@ -18564,7 +18251,7 @@ function enrichActionContext(input) {
         const repoPath = entry.path || process.cwd();
         let ordinal = /* @__PURE__ */ new Map();
         try {
-          const stdout = execFileSync10("git", ["rev-list", "--topo-order", "--reverse", "HEAD"], {
+          const stdout = execFileSync8("git", ["rev-list", "--topo-order", "--reverse", "HEAD"], {
             cwd: repoPath,
             encoding: "utf8",
             maxBuffer: 10 * 1024 * 1024
@@ -18594,9 +18281,13 @@ function enrichActionContext(input) {
         project_head_sha: commits.length > 0 ? commits[commits.length - 1] : null
       };
     });
+    const requirements_doc = resolveRequirementsDoc(state.project.name);
+    const phase_plan_paths = phaseIterations.map((pi) => pi.doc_path ?? null);
     return {
       ...walkerContext,
-      repos
+      repos,
+      requirements_doc,
+      phase_plan_paths
     };
   }
   if (EMPTY_CONTEXT_ACTIONS.has(action)) {
@@ -18614,11 +18305,9 @@ var PLANNING_SPAWN_STEPS, PHASE_LEVEL_ACTIONS, TASK_LEVEL_ACTIONS, EMPTY_CONTEXT
 var init_context_enrichment = __esm({
   "cli/src/lib/pipeline-engine/context-enrichment.ts"() {
     "use strict";
-    init_skill_manifest();
     init_paths();
     init_dist11();
     PLANNING_SPAWN_STEPS = {
-      spawn_requirements: "requirements",
       spawn_master_plan: "master_plan"
     };
     PHASE_LEVEL_ACTIONS = /* @__PURE__ */ new Set([
@@ -18643,7 +18332,7 @@ function assertHashWritable(entry, incoming) {
   const existing = entry.commit_hash;
   if (existing != null && incoming != null && existing !== incoming) {
     throw new Error(
-      `commit_completed refused: would overwrite a finalized commit_hash ('${existing}' \u2192 '${incoming}') on an already-recorded node. A finalized commit hash is immutable; the incoming signal addresses the wrong node or carries a stale context.`
+      `task_completed refused: would overwrite a finalized commit_hash ('${existing}' \u2192 '${incoming}') on an already-recorded entry. A finalized commit hash is immutable; the incoming signal addresses the wrong entry or carries a stale context.`
     );
   }
 }
@@ -18652,14 +18341,14 @@ function applyPerRepoCommitHashes(repos, signalRepos, mutations_applied, label) 
     if (!row.committed) {
       if (row.commitHash != null) {
         throw new Error(
-          `commit_completed refused: repo '${row.name}' carries commitHash '${row.commitHash}' but committed is false/absent. A committed row must set committed:true \u2014 relay the rad-orc:source-control agent's result array verbatim (every field of each row, including committed).`
+          `task_completed refused: repo '${row.name}' carries commitHash '${row.commitHash}' but committed is false/absent. A committed row must set committed:true \u2014 relay the coder's result array verbatim (every field of each row, including committed).`
         );
       }
       continue;
     }
     if (row.commitHash == null || row.commitHash === "") {
       throw new Error(
-        `commit_completed refused: repo '${row.name}' reports committed:true but carries no commit hash (commitHash is ${row.commitHash === "" ? "empty" : "null"}). A committed repo must report its commit hash \u2014 relay the rad-orc:source-control agent's result array verbatim (every field of each row, including commitHash).`
+        `task_completed refused: repo '${row.name}' reports committed:true but carries no commit hash (commitHash is ${row.commitHash === "" ? "empty" : "null"}). A committed repo must report its commit hash \u2014 relay the coder's result array verbatim (every field of each row, including commitHash).`
       );
     }
     let entry = repos.find((r) => r.name === row.name);
@@ -18670,6 +18359,19 @@ function applyPerRepoCommitHashes(repos, signalRepos, mutations_applied, label) 
     assertHashWritable(entry, row.commitHash);
     entry.commit_hash = row.commitHash;
     mutations_applied.push(`set ${label}[name=${row.name}].commit_hash = ${row.commitHash ?? "null"}`);
+  }
+}
+function assertReposOnBranch(state, signalRepos, reportedBranch) {
+  if (reportedBranch === void 0 || reportedBranch === "") return;
+  const scRepos = state.pipeline.source_control?.repos ?? [];
+  for (const row of signalRepos) {
+    if (!row.committed) continue;
+    const intended = scRepos.find((sc) => sc.name === row.name)?.branch;
+    if (intended != null && intended !== "" && reportedBranch !== intended) {
+      throw new Error(
+        `task_completed refused: repo '${row.name}' reports a commit on branch '${reportedBranch}' but its intended task branch is '${intended}'. A commit off the intended branch is refused at record time \u2014 the coder commits on its own task branch in its own worktree.`
+      );
+    }
   }
 }
 function resolveNodeState(state, nodeId, scope, phase, task) {
@@ -18737,6 +18439,40 @@ function findTaskLoopBodyDefs(template) {
   }
   return [];
 }
+function buildCorrectiveBirth(params) {
+  const { correctiveTasks, maxRetries, scopeDocPath, reviewReportPath, injectedAfter, reason, template } = params;
+  if (typeof scopeDocPath !== "string" || scopeDocPath.trim().length === 0) {
+    throw new Error(
+      `buildCorrectiveBirth: scopeDocPath is empty \u2014 every iteration is seeded with a doc_path at explosion, so an empty scope doc is an engine bug (not operator-recoverable). injected_after=${injectedAfter}.`
+    );
+  }
+  const correctiveCount = correctiveTasks.length;
+  if (correctiveCount >= maxRetries) {
+    return {
+      ok: false,
+      haltReason: `Corrective retry budget exhausted (corrective_tasks.length=${correctiveCount}, max_retries_per_task=${maxRetries}). No further corrective task will be injected \u2014 the pipeline halts for manual intervention.`
+    };
+  }
+  const bodyDefs = findTaskLoopBodyDefs(template);
+  if (bodyDefs.length === 0) {
+    throw new Error("findTaskLoopBodyDefs: no for_each_task body found in template");
+  }
+  const nodes = {};
+  for (const bodyDef of bodyDefs) {
+    nodes[bodyDef.id] = scaffoldNodeState(bodyDef);
+  }
+  const entry = {
+    index: correctiveCount + 1,
+    reason,
+    injected_after: injectedAfter,
+    status: "not_started",
+    nodes,
+    doc_path: scopeDocPath,
+    review_report_path: typeof reviewReportPath === "string" && reviewReportPath.trim().length > 0 ? reviewReportPath : null,
+    repos: []
+  };
+  return { ok: true, entry };
+}
 function resolveHostingIteration(state, phase, task) {
   const phaseIter = resolvePhaseIteration(state, phase);
   const phaseCTs = phaseIter.corrective_tasks;
@@ -18760,7 +18496,6 @@ var init_mutations2 = __esm({
     init_context_enrichment();
     mutationRegistry = /* @__PURE__ */ new Map();
     planningCompletedSteps = [
-      [EVENTS.REQUIREMENTS_COMPLETED, "requirements"],
       [EVENTS.MASTER_PLAN_COMPLETED, "master_plan"]
     ];
     for (const [eventName, nodeId] of planningCompletedSteps) {
@@ -18914,13 +18649,8 @@ Pass --phase <N> to specify an existing phase explicitly.`
       node.doc_path = docPath;
       mutations_applied.push(`set phase_review.doc_path = ${docPath ?? "null"}`);
       const rawVerdict = context.verdict ?? null;
-      const effectiveOutcome = context.effective_outcome;
-      const correctiveHandoffPath = context.corrective_handoff_path;
-      const orchestratorMediated = context.orchestrator_mediated;
-      const mediationActive = rawVerdict === REVIEW_VERDICTS.CHANGES_REQUESTED && orchestratorMediated === true && effectiveOutcome !== void 0 && effectiveOutcome !== null;
-      const verdictForState = mediationActive ? effectiveOutcome : rawVerdict;
-      node.verdict = verdictForState;
-      mutations_applied.push(`set phase_review.verdict = ${verdictForState ?? "null"}`);
+      node.verdict = rawVerdict;
+      mutations_applied.push(`set phase_review.verdict = ${rawVerdict ?? "null"}`);
       if (rawVerdict !== null && !VALID_VERDICTS.has(rawVerdict)) {
         cloned.graph.status = "halted";
         cloned.pipeline.halt_reason = `Unrecognized verdict '${rawVerdict}' in phase_review_completed`;
@@ -18932,53 +18662,33 @@ Pass --phase <N> to specify an existing phase explicitly.`
           ]
         };
       }
-      const routingVerdict = verdictForState;
-      if (routingVerdict === REVIEW_VERDICTS.CHANGES_REQUESTED) {
+      if (rawVerdict === REVIEW_VERDICTS.CHANGES_REQUESTED) {
         const iteration = resolvePhaseIteration(cloned, phase);
-        const correctiveCount = iteration.corrective_tasks.length;
-        const maxRetries = config.limits.max_retries_per_task;
-        const trimmedHandoffPath = typeof correctiveHandoffPath === "string" ? correctiveHandoffPath.trim() : "";
-        const hasHandoffPath = trimmedHandoffPath.length > 0;
-        if (!hasHandoffPath) {
-          iteration.status = "halted";
-          cloned.graph.status = "halted";
-          cloned.pipeline.halt_reason = `phase_review_completed: effective_outcome=changes_requested with no corrective_handoff_path. Possible causes: (1) budget exhausted (phase corrective_tasks.length=${correctiveCount}, max_retries_per_task=${maxRetries}) \u2014 this is the expected halt per the corrective-playbook; (2) orchestrator omitted the handoff path in error \u2014 check the review addendum.`;
-          mutations_applied.push("set phase_iteration.status = halted (effective_outcome=changes_requested, no handoff)");
-          mutations_applied.push("set graph.status = halted");
-          mutations_applied.push("set pipeline.halt_reason (budget-exhausted halt signal)");
-          return { state: cloned, mutations_applied };
-        }
-        if (correctiveCount >= maxRetries) {
-          iteration.status = "halted";
-          cloned.graph.status = "halted";
-          cloned.pipeline.halt_reason = `Retry budget exhausted for phase (max_retries_per_task=${maxRetries}) but a corrective_handoff_path was supplied. The orchestrator must not author a corrective handoff on exhaustion \u2014 this is a contract violation.`;
-          mutations_applied.push("set phase_iteration.status = halted (retry budget exhausted; handoff path supplied)");
-          mutations_applied.push("set graph.status = halted");
-          mutations_applied.push("set pipeline.halt_reason (budget exhausted with supplied handoff path)");
-          return { state: cloned, mutations_applied };
-        }
-        const bodyDefs = findTaskLoopBodyDefs(template);
-        if (bodyDefs.length === 0) {
-          throw new Error("findTaskLoopBodyDefs: no for_each_task body found in template");
-        }
-        const nodes = {};
-        for (const bodyDef of bodyDefs) {
-          nodes[bodyDef.id] = scaffoldNodeState(bodyDef);
-        }
-        const entry = {
-          index: correctiveCount + 1,
+        const birth = buildCorrectiveBirth({
+          correctiveTasks: iteration.corrective_tasks,
+          maxRetries: config.limits.max_retries_per_task,
+          scopeDocPath: iteration.doc_path,
+          reviewReportPath: context.doc_path ?? null,
+          injectedAfter: "phase_review",
           reason: context.reason ?? "Phase review requested changes",
-          injected_after: "phase_review",
-          status: "not_started",
-          nodes,
-          doc_path: trimmedHandoffPath,
-          repos: []
-        };
+          template
+        });
+        if (!birth.ok) {
+          iteration.status = "halted";
+          cloned.graph.status = "halted";
+          cloned.pipeline.halt_reason = birth.haltReason;
+          mutations_applied.push("set phase_iteration.status = halted (corrective budget exhausted)");
+          mutations_applied.push("set graph.status = halted");
+          mutations_applied.push("set pipeline.halt_reason (corrective budget exhausted)");
+          return { state: cloned, mutations_applied };
+        }
+        const entry = birth.entry;
         iteration.corrective_tasks.push(entry);
         mutations_applied.push(`injected phase corrective task ${entry.index} (changes_requested)`);
-        mutations_applied.push(`set phase_corrective_task[${entry.index}].doc_path = ${trimmedHandoffPath}`);
+        mutations_applied.push(`set phase_corrective_task[${entry.index}].doc_path = ${entry.doc_path}`);
+        mutations_applied.push(`set phase_corrective_task[${entry.index}].review_report_path = ${entry.review_report_path ?? "null"}`);
         mutations_applied.push(`phase corrective_tasks.length = ${iteration.corrective_tasks.length}`);
-      } else if (routingVerdict === REVIEW_VERDICTS.REJECTED) {
+      } else if (rawVerdict === REVIEW_VERDICTS.REJECTED) {
         const iteration = resolvePhaseIteration(cloned, phase);
         iteration.status = "halted";
         cloned.graph.status = "halted";
@@ -18986,10 +18696,6 @@ Pass --phase <N> to specify an existing phase explicitly.`
         mutations_applied.push("set phase_iteration.status = halted (rejected verdict)");
         mutations_applied.push("set graph.status = halted");
         mutations_applied.push("set pipeline.halt_reason (reviewer rejected verdict)");
-      } else if (rawVerdict === REVIEW_VERDICTS.CHANGES_REQUESTED && routingVerdict !== REVIEW_VERDICTS.CHANGES_REQUESTED && routingVerdict !== REVIEW_VERDICTS.APPROVED) {
-        throw new Error(
-          "phase_review_completed: raw verdict=changes_requested without a valid effective_outcome. The orchestrator mediation contract was bypassed \u2014 ensure the review doc carries orchestrator_mediated=true and effective_outcome \u2208 {approved, changes_requested}."
-        );
       }
       return { state: cloned, mutations_applied };
     });
@@ -19024,7 +18730,58 @@ Pass --task <N> to specify the task explicitly.`
         const node = resolveNodeState(cloned, "task_executor", "task", phase, task);
         node.status = "completed";
         mutations_applied.push("set task_executor.status = completed");
-      } catch {
+        const signalRepos = context.repos ?? [];
+        const sc = cloned.pipeline.source_control;
+        const commitExpected = sc != null && sc.auto_commit !== "never";
+        if (commitExpected && signalRepos.length === 0) {
+          throw new Error(
+            `task_completed refused: commit is enabled (auto_commit != never) but no per-repo result payload was relayed (repos[] is missing or empty). The signal must carry the coder's commit result array via --repos '<json>'; advancing without it would record zero commit hashes.`
+          );
+        }
+        if (!commitExpected && signalRepos.length > 0) {
+          throw new Error(
+            `task_completed refused: commit is disabled (source_control is unset or auto_commit=never) but a per-repo result payload was relayed (repos[] is non-empty). In no-commit mode the signal must carry no --repos payload; refusing to record commit hashes for a task that was not directed to commit.`
+          );
+        }
+        if (signalRepos.length > 0) {
+          assertReposOnBranch(cloned, signalRepos, context.branch);
+          const phaseIteration = resolvePhaseIteration(cloned, phase);
+          const activePhaseCorrective = phaseIteration.corrective_tasks.slice().reverse().find(
+            (ct) => ct.status === "in_progress" || ct.status === "not_started"
+          );
+          if (activePhaseCorrective) {
+            applyPerRepoCommitHashes(
+              activePhaseCorrective.repos,
+              signalRepos,
+              mutations_applied,
+              `phase_corrective_task[${activePhaseCorrective.index}].repos`
+            );
+          } else {
+            const taskIteration = resolveTaskIteration(cloned, phase, task);
+            const activeCorrective = taskIteration.corrective_tasks.slice().reverse().find(
+              (ct) => ct.status === "in_progress" || ct.status === "not_started"
+            );
+            if (activeCorrective) {
+              applyPerRepoCommitHashes(
+                activeCorrective.repos,
+                signalRepos,
+                mutations_applied,
+                `corrective_task[${activeCorrective.index}].repos`
+              );
+            } else {
+              applyPerRepoCommitHashes(
+                taskIteration.repos,
+                signalRepos,
+                mutations_applied,
+                `task_iteration[${taskIteration.index}].repos`
+              );
+            }
+          }
+        }
+      } catch (err) {
+        if (err instanceof Error && /task_completed refused/i.test(err.message)) {
+          throw err;
+        }
         if (context.phase === void 0) {
           const phaseLoopNode = cloned.graph.nodes["phase_loop"];
           const hasInProgressPhase = phaseLoopNode?.iterations?.some((it) => it.status === "in_progress");
@@ -19092,13 +18849,8 @@ Pass --phase <N> and/or --task <N> to specify explicitly.`
       node.doc_path = docPath;
       mutations_applied.push(`set code_review.doc_path = ${docPath ?? "null"}`);
       const rawVerdict = context.verdict ?? null;
-      const effectiveOutcome = context.effective_outcome;
-      const correctiveHandoffPath = context.corrective_handoff_path;
-      const orchestratorMediated = context.orchestrator_mediated;
-      const mediationActive = rawVerdict === REVIEW_VERDICTS.CHANGES_REQUESTED && orchestratorMediated === true && effectiveOutcome !== void 0 && effectiveOutcome !== null;
-      const verdictForState = mediationActive ? effectiveOutcome : rawVerdict;
-      node.verdict = verdictForState;
-      mutations_applied.push(`set code_review.verdict = ${verdictForState ?? "null"}`);
+      node.verdict = rawVerdict;
+      mutations_applied.push(`set code_review.verdict = ${rawVerdict ?? "null"}`);
       if (rawVerdict !== null && !VALID_VERDICTS.has(rawVerdict)) {
         cloned.graph.status = "halted";
         cloned.pipeline.halt_reason = `Unrecognized verdict '${rawVerdict}' in code_review_completed`;
@@ -19110,8 +18862,7 @@ Pass --phase <N> and/or --task <N> to specify explicitly.`
           ]
         };
       }
-      const routingVerdict = verdictForState;
-      if (routingVerdict === REVIEW_VERDICTS.CHANGES_REQUESTED) {
+      if (rawVerdict === REVIEW_VERDICTS.CHANGES_REQUESTED) {
         const { iteration, scope } = resolveHostingIteration(cloned, phase, task);
         const existingCorrectives = iteration.corrective_tasks;
         if (existingCorrectives.length > 0) {
@@ -19123,50 +18874,31 @@ Pass --phase <N> and/or --task <N> to specify explicitly.`
             );
           }
         }
-        const correctiveCount = iteration.corrective_tasks.length;
-        const maxRetries = config.limits.max_retries_per_task;
-        const trimmedHandoffPath = typeof correctiveHandoffPath === "string" ? correctiveHandoffPath.trim() : "";
-        const hasHandoffPath = trimmedHandoffPath.length > 0;
-        if (!hasHandoffPath) {
-          iteration.status = "halted";
-          cloned.graph.status = "halted";
-          cloned.pipeline.halt_reason = `code_review_completed: effective_outcome=changes_requested with no corrective_handoff_path. Possible causes: (1) budget exhausted (corrective_tasks.length=${correctiveCount}, max_retries_per_task=${maxRetries}, scope=${scope}) \u2014 this is the expected halt per the corrective-playbook; (2) orchestrator omitted the handoff path in error \u2014 check the review addendum.`;
-          mutations_applied.push(`set ${scope}_iteration.status = halted (effective_outcome=changes_requested, no handoff, scope=${scope})`);
-          mutations_applied.push("set graph.status = halted");
-          mutations_applied.push("set pipeline.halt_reason (budget-exhausted halt signal)");
-          return { state: cloned, mutations_applied };
-        }
-        if (correctiveCount >= maxRetries) {
-          iteration.status = "halted";
-          cloned.graph.status = "halted";
-          cloned.pipeline.halt_reason = `Retry budget exhausted for ${scope} (max_retries_per_task=${maxRetries}) but a corrective_handoff_path was supplied. The orchestrator must not author a corrective handoff on exhaustion \u2014 this is a contract violation.`;
-          mutations_applied.push(`set ${scope}_iteration.status = halted (retry budget exhausted; handoff path supplied, scope=${scope})`);
-          mutations_applied.push("set graph.status = halted");
-          mutations_applied.push("set pipeline.halt_reason (budget exhausted with supplied handoff path)");
-          return { state: cloned, mutations_applied };
-        }
-        const bodyDefs = findTaskLoopBodyDefs(template);
-        if (bodyDefs.length === 0) {
-          throw new Error("findTaskLoopBodyDefs: no for_each_task body found in template");
-        }
-        const nodes = {};
-        for (const bodyDef of bodyDefs) {
-          nodes[bodyDef.id] = scaffoldNodeState(bodyDef);
-        }
-        const entry = {
-          index: correctiveCount + 1,
+        const birth = buildCorrectiveBirth({
+          correctiveTasks: iteration.corrective_tasks,
+          maxRetries: config.limits.max_retries_per_task,
+          scopeDocPath: iteration.doc_path,
+          reviewReportPath: context.doc_path ?? null,
+          injectedAfter: "code_review",
           reason: context.reason ?? "Code review requested changes",
-          injected_after: "code_review",
-          status: "not_started",
-          nodes,
-          doc_path: trimmedHandoffPath,
-          repos: []
-        };
+          template
+        });
+        if (!birth.ok) {
+          iteration.status = "halted";
+          cloned.graph.status = "halted";
+          cloned.pipeline.halt_reason = birth.haltReason;
+          mutations_applied.push(`set ${scope}_iteration.status = halted (corrective budget exhausted, scope=${scope})`);
+          mutations_applied.push("set graph.status = halted");
+          mutations_applied.push("set pipeline.halt_reason (corrective budget exhausted)");
+          return { state: cloned, mutations_applied };
+        }
+        const entry = birth.entry;
         iteration.corrective_tasks.push(entry);
         mutations_applied.push(`injected corrective task ${entry.index} (changes_requested, scope=${scope})`);
-        mutations_applied.push(`set corrective_task[${entry.index}].doc_path = ${trimmedHandoffPath}`);
+        mutations_applied.push(`set corrective_task[${entry.index}].doc_path = ${entry.doc_path}`);
+        mutations_applied.push(`set corrective_task[${entry.index}].review_report_path = ${entry.review_report_path ?? "null"}`);
         mutations_applied.push(`corrective_tasks.length = ${iteration.corrective_tasks.length} (scope=${scope})`);
-      } else if (routingVerdict === REVIEW_VERDICTS.REJECTED) {
+      } else if (rawVerdict === REVIEW_VERDICTS.REJECTED) {
         const { iteration, scope } = resolveHostingIteration(cloned, phase, task);
         iteration.status = "halted";
         cloned.graph.status = "halted";
@@ -19174,10 +18906,6 @@ Pass --phase <N> and/or --task <N> to specify explicitly.`
         mutations_applied.push(`set ${scope === "phase" ? "phase_iteration" : "task_iteration"}.status = halted (rejected verdict, scope=${scope})`);
         mutations_applied.push("set graph.status = halted");
         mutations_applied.push("set pipeline.halt_reason (reviewer rejected verdict)");
-      } else if (rawVerdict === REVIEW_VERDICTS.CHANGES_REQUESTED && routingVerdict !== REVIEW_VERDICTS.CHANGES_REQUESTED && routingVerdict !== REVIEW_VERDICTS.APPROVED) {
-        throw new Error(
-          "code_review_completed: raw verdict=changes_requested without a valid effective_outcome. The orchestrator mediation contract was bypassed \u2014 ensure the review doc carries orchestrator_mediated=true and effective_outcome \u2208 {approved, changes_requested}."
-        );
       }
       return { state: cloned, mutations_applied };
     });
@@ -19209,103 +18937,6 @@ Pass --phase <N> and/or --task <N> to specify explicitly.`
         mutations_applied.push("set pipeline.current_tier = review");
       }
       return { state: cloned, mutations_applied };
-    });
-    mutationRegistry.set(EVENTS.COMMIT_COMPLETED, (state, context, _config, _template) => {
-      const cloned = structuredClone(state);
-      const mutations_applied = [];
-      let phase = context.phase;
-      if (phase === void 0) {
-        try {
-          phase = resolveActivePhaseIndex(cloned);
-        } catch {
-          throw new Error(
-            `Cannot apply mutation for "commit_completed": no active phase could be resolved from state.
-Either no phase is currently in_progress, or multiple phases are in_progress simultaneously.
-Pass --phase <N> to specify the phase explicitly.`
-          );
-        }
-      }
-      let task = context.task;
-      if (task === void 0) {
-        try {
-          task = resolveActiveTaskIndex(cloned, phase);
-        } catch {
-          throw new Error(
-            `Cannot apply mutation for "commit_completed": no active task could be resolved from state for phase ${phase}.
-Either no task is currently in_progress, or multiple tasks are in_progress simultaneously.
-Pass --task <N> to specify the task explicitly.`
-          );
-        }
-      }
-      try {
-        const node = resolveNodeState(cloned, "commit", "task", phase, task);
-        node.status = "completed";
-        mutations_applied.push("set commit.status = completed");
-        const signalRepos = context.repos ?? [];
-        if (signalRepos.length === 0) {
-          throw new Error(
-            `commit_completed refused: no per-repo result payload (repos[] is missing or empty). The commit signal must relay the rad-orc:source-control agent's result array via --repos '<json>'; advancing without it would complete the commit step recording zero commit hashes.`
-          );
-        }
-        const phaseIteration = resolvePhaseIteration(cloned, phase);
-        const activePhaseCorrective = phaseIteration.corrective_tasks.slice().reverse().find(
-          (ct) => ct.status === "in_progress" || ct.status === "not_started"
-        );
-        if (activePhaseCorrective) {
-          applyPerRepoCommitHashes(
-            activePhaseCorrective.repos,
-            signalRepos,
-            mutations_applied,
-            `phase_corrective_task[${activePhaseCorrective.index}].repos`
-          );
-          return { state: cloned, mutations_applied };
-        }
-        const taskIteration = resolveTaskIteration(cloned, phase, task);
-        const activeCorrective = taskIteration.corrective_tasks.slice().reverse().find(
-          (ct) => ct.status === "in_progress" || ct.status === "not_started"
-        );
-        if (activeCorrective) {
-          applyPerRepoCommitHashes(
-            activeCorrective.repos,
-            signalRepos,
-            mutations_applied,
-            `corrective_task[${activeCorrective.index}].repos`
-          );
-        } else {
-          applyPerRepoCommitHashes(
-            taskIteration.repos,
-            signalRepos,
-            mutations_applied,
-            `task_iteration[${taskIteration.index}].repos`
-          );
-        }
-        return { state: cloned, mutations_applied };
-      } catch (err) {
-        if (err instanceof Error && /commit_completed refused|immutable|overwrite|already recorded|finalized/i.test(err.message)) {
-          throw err;
-        }
-        if (context.phase === void 0) {
-          const phaseLoopNode = cloned.graph.nodes["phase_loop"];
-          const hasInProgressPhase = phaseLoopNode?.iterations?.some((it) => it.status === "in_progress");
-          if (hasInProgressPhase) {
-            throw new Error(
-              `Cannot apply mutation for "commit_completed": no active task could be resolved from state for phase ${phase}.
-Either no task is currently in_progress, or multiple tasks are in_progress simultaneously.
-Pass --task <N> to specify the task explicitly.`
-            );
-          }
-          throw new Error(
-            `Cannot apply mutation for "commit_completed": no active phase could be resolved from state.
-Either no phase is currently in_progress, or multiple phases are in_progress simultaneously.
-Pass --phase <N> to specify the phase explicitly.`
-          );
-        }
-        throw new Error(
-          `Cannot apply mutation for "commit_completed": no active task could be resolved from state for phase ${phase}.
-Either no task is currently in_progress, or multiple tasks are in_progress simultaneously.
-Pass --task <N> to specify the task explicitly.`
-        );
-      }
     });
     mutationRegistry.set(EVENTS.PR_REQUESTED, (state, _context, _config, _template) => {
       const cloned = structuredClone(state);
@@ -19436,14 +19067,14 @@ Pass --task <N> to specify the task explicitly.`
 });
 
 // cli/src/lib/pipeline-engine/condition-evaluator.ts
-function resolveDotPath(obj, path42) {
-  const segments = path42.split(".");
+function resolveDotPath(obj, path44) {
+  const segments = path44.split(".");
   let current = obj;
   for (let i = 0; i < segments.length; i++) {
     if (current === void 0 || current === null) {
       const blame = i === 0 ? "<root>" : segments[i - 1];
       throw new Error(
-        `Cannot resolve path '${path42}': segment '${blame}' resolved to ${typeof current}`
+        `Cannot resolve path '${path44}': segment '${blame}' resolved to ${typeof current}`
       );
     }
     current = current[segments[i]];
@@ -19529,8 +19160,8 @@ function checkDependencies(dependsOn, nodes) {
   });
 }
 function resolveStateRef(ref, graphState) {
-  const path42 = ref.startsWith("$.") ? ref.slice(2) : ref;
-  const segments = path42.split(".");
+  const path44 = ref.startsWith("$.") ? ref.slice(2) : ref;
+  const segments = path44.split(".");
   let current = graphState;
   for (const segment of segments) {
     if (current === null || current === void 0 || typeof current !== "object") {
@@ -19817,8 +19448,7 @@ function walkNodes(nodeDefs, nodes, config, state, readDocument3, currentIterati
           if (typeof totalValue !== "number" || !Number.isInteger(totalValue) || totalValue <= 0) {
             return null;
           }
-          const cappedTotal = Math.min(totalValue, config.limits.max_phases);
-          for (let i = 0; i < cappedTotal; i++) {
+          for (let i = 0; i < totalValue; i++) {
             const iterationNodes = {};
             for (const bodyDef of fepDef.body) {
               iterationNodes[bodyDef.id] = scaffoldNodeState(bodyDef);
@@ -19863,8 +19493,7 @@ function walkNodes(nodeDefs, nodes, config, state, readDocument3, currentIterati
             fetState.status = NODE_STATUSES.COMPLETED;
             continue;
           }
-          const cappedLength = Math.min(tasksValue.length, config.limits.max_tasks_per_phase);
-          for (let i = 0; i < cappedLength; i++) {
+          for (let i = 0; i < tasksValue.length; i++) {
             const iterationNodes = {};
             for (const bodyDef of fetDef.body) {
               iterationNodes[bodyDef.id] = scaffoldNodeState(bodyDef);
@@ -19957,6 +19586,46 @@ var init_dag_walker = __esm({
   }
 });
 
+// cli/src/lib/pipeline-engine/resolve-doc-paths.ts
+import * as path28 from "node:path";
+function resolveScalar(value, projectDir) {
+  if (path28.isAbsolute(value)) return value;
+  return path28.join(projectDir, value);
+}
+function resolveDocPaths(context, projectDir) {
+  const result = { ...context };
+  for (const field of DOC_PATH_SCALAR_FIELDS) {
+    if (!Object.prototype.hasOwnProperty.call(result, field)) continue;
+    const value = result[field];
+    if (typeof value === "string") {
+      result[field] = resolveScalar(value, projectDir);
+    } else if (value === null) {
+      result[field] = null;
+    }
+  }
+  for (const field of DOC_PATH_ARRAY_FIELDS) {
+    if (!Object.prototype.hasOwnProperty.call(result, field)) continue;
+    const value = result[field];
+    if (Array.isArray(value)) {
+      result[field] = value.map((el) => typeof el === "string" ? resolveScalar(el, projectDir) : el);
+    }
+  }
+  return result;
+}
+var DOC_PATH_SCALAR_FIELDS, DOC_PATH_ARRAY_FIELDS;
+var init_resolve_doc_paths = __esm({
+  "cli/src/lib/pipeline-engine/resolve-doc-paths.ts"() {
+    "use strict";
+    DOC_PATH_SCALAR_FIELDS = [
+      "handoff_doc",
+      "review_report_path",
+      "phase_plan_doc",
+      "requirements_doc"
+    ];
+    DOC_PATH_ARRAY_FIELDS = ["phase_plan_paths"];
+  }
+});
+
 // cli/src/lib/pipeline-engine/action-event-loader.ts
 function parseActionEventFile(text, filename) {
   const fnMatch = FILENAME_RE.exec(filename);
@@ -20021,11 +19690,11 @@ var init_action_event_loader = __esm({
 });
 
 // cli/src/lib/pipeline-engine/composer.ts
-import fs22 from "node:fs";
+import fs23 from "node:fs";
 import path29 from "node:path";
 function readBodyIfExists(filePath, filename, kind) {
-  if (!fs22.existsSync(filePath)) return null;
-  const text = fs22.readFileSync(filePath, "utf8");
+  if (!fs23.existsSync(filePath)) return null;
+  const text = fs23.readFileSync(filePath, "utf8");
   const parsed = parseActionEventFile(text, filename);
   if (parsed.kind !== kind) {
     throw new Error(`Catalog file '${filePath}' parsed kind '${parsed.kind}' but kind '${kind}' expected.`);
@@ -20033,8 +19702,8 @@ function readBodyIfExists(filePath, filename, kind) {
   return parsed.body;
 }
 function readEvent(filePath, filename) {
-  if (!fs22.existsSync(filePath)) return null;
-  const text = fs22.readFileSync(filePath, "utf8");
+  if (!fs23.existsSync(filePath)) return null;
+  const text = fs23.readFileSync(filePath, "utf8");
   const parsed = parseActionEventFile(text, filename);
   if (parsed.kind !== "event") {
     throw new Error(`Catalog file '${filePath}' expected to be an event but kind was '${parsed.kind}'.`);
@@ -20042,7 +19711,7 @@ function readEvent(filePath, filename) {
   return { body: parsed.body, fm: parsed.frontmatter };
 }
 function validateCustomSlot(customFile, catalogFile, customFilename, catalogFilename, kind, catalogRoot) {
-  if (fs22.existsSync(customFile) && !fs22.existsSync(catalogFile)) {
+  if (fs23.existsSync(customFile) && !fs23.existsSync(catalogFile)) {
     throw new Error(
       `Composer validation: custom '${customFilename}' references unknown ${kind} \u2014 expected catalog file '${catalogFilename}' under '${catalogRoot}'.`
     );
@@ -20054,8 +19723,8 @@ function makeCustomReader(overlay) {
       const v = overlay[overlayKey];
       return v === "" ? null : v;
     }
-    if (!fs22.existsSync(filePath)) return null;
-    return fs22.readFileSync(filePath, "utf8");
+    if (!fs23.existsSync(filePath)) return null;
+    return fs23.readFileSync(filePath, "utf8");
   };
 }
 function deriveSignalLine(eventName, fm) {
@@ -20217,7 +19886,7 @@ var init_composer = __esm({
 });
 
 // cli/src/lib/pipeline-engine/validator.ts
-function validateState(_previousState, proposedState, config, template, opts = {}) {
+function validateState(_previousState, proposedState, _config, template, opts = {}) {
   const { checkCursorHonesty = true } = opts;
   return [
     ...validateStateSchema(proposedState),
@@ -20228,7 +19897,6 @@ function validateState(_previousState, proposedState, config, template, opts = {
     ...checkIterationIndices(proposedState.graph.nodes, "graph.nodes"),
     ...checkCompletedParentChildren(proposedState.graph.nodes, "graph.nodes"),
     ...checkCorrectiveEntriesTerminal(proposedState.graph.nodes, "graph.nodes"),
-    ...checkIterationLimits(proposedState, config),
     ...checkNodeKindMatchesTemplate(proposedState, template),
     ...checkStatusTransitions(_previousState, proposedState),
     ...checkImmutableCommitHash(_previousState, proposedState),
@@ -20241,10 +19909,10 @@ function checkGraphStatus(state) {
   }
   return [];
 }
-function checkNodeStatuses(nodes, path42) {
+function checkNodeStatuses(nodes, path44) {
   const errors = [];
   for (const [id, node] of Object.entries(nodes)) {
-    const nodePath = `${path42}.${id}`;
+    const nodePath = `${path44}.${id}`;
     if (!validNodeStatuses.has(node.status)) {
       errors.push(`Invalid node status '${node.status}' at ${nodePath}`);
     }
@@ -20265,10 +19933,10 @@ function checkNodeStatuses(nodes, path42) {
   }
   return errors;
 }
-function checkIterationIndices(nodes, path42) {
+function checkIterationIndices(nodes, path44) {
   const errors = [];
   for (const [id, node] of Object.entries(nodes)) {
-    const nodePath = `${path42}.${id}`;
+    const nodePath = `${path44}.${id}`;
     if (node.kind === "for_each_phase" || node.kind === "for_each_task") {
       for (let i = 0; i < node.iterations.length; i++) {
         const iter = node.iterations[i];
@@ -20290,10 +19958,10 @@ function checkIterationIndices(nodes, path42) {
   }
   return errors;
 }
-function checkCompletedParentChildren(nodes, path42) {
+function checkCompletedParentChildren(nodes, path44) {
   const errors = [];
   for (const [id, node] of Object.entries(nodes)) {
-    const nodePath = `${path42}.${id}`;
+    const nodePath = `${path44}.${id}`;
     if (node.kind === "for_each_phase" || node.kind === "for_each_task") {
       if (node.status === "completed") {
         for (const iter of node.iterations) {
@@ -20319,30 +19987,30 @@ function checkCompletedParentChildren(nodes, path42) {
   }
   return errors;
 }
-function findInProgressNodes(nodes, path42, parentPath) {
+function findInProgressNodes(nodes, path44, parentPath) {
   const errors = [];
   for (const [id, node] of Object.entries(nodes)) {
     if (node.status === "in_progress") {
-      errors.push(`Node '${path42}.${id}' is in_progress but parent '${parentPath}' is completed`);
+      errors.push(`Node '${path44}.${id}' is in_progress but parent '${parentPath}' is completed`);
     }
     if (node.kind === "for_each_phase" || node.kind === "for_each_task") {
       for (const iter of node.iterations) {
-        errors.push(...findInProgressNodes(iter.nodes, `${path42}.${id}.iterations[${iter.index}].nodes`, parentPath));
+        errors.push(...findInProgressNodes(iter.nodes, `${path44}.${id}.iterations[${iter.index}].nodes`, parentPath));
         for (const ct of iter.corrective_tasks) {
-          errors.push(...findInProgressNodes(ct.nodes, `${path42}.${id}.iterations[${iter.index}].corrective_tasks[${ct.index}].nodes`, parentPath));
+          errors.push(...findInProgressNodes(ct.nodes, `${path44}.${id}.iterations[${iter.index}].corrective_tasks[${ct.index}].nodes`, parentPath));
         }
       }
     }
     if (node.kind === "parallel") {
-      errors.push(...findInProgressNodes(node.nodes, `${path42}.${id}.nodes`, parentPath));
+      errors.push(...findInProgressNodes(node.nodes, `${path44}.${id}.nodes`, parentPath));
     }
   }
   return errors;
 }
-function checkCorrectiveEntriesTerminal(nodes, path42) {
+function checkCorrectiveEntriesTerminal(nodes, path44) {
   const errors = [];
   for (const [id, node] of Object.entries(nodes)) {
-    const nodePath = `${path42}.${id}`;
+    const nodePath = `${path44}.${id}`;
     if (node.kind === "for_each_phase" || node.kind === "for_each_task") {
       for (const iter of node.iterations) {
         if (iter.status === "completed") {
@@ -20363,10 +20031,10 @@ function checkCorrectiveEntriesTerminal(nodes, path42) {
   }
   return errors;
 }
-function checkCorrectiveTaskStructure(nodes, path42) {
+function checkCorrectiveTaskStructure(nodes, path44) {
   const errors = [];
   for (const [id, node] of Object.entries(nodes)) {
-    const nodePath = `${path42}.${id}`;
+    const nodePath = `${path44}.${id}`;
     if (node.kind === "for_each_phase" || node.kind === "for_each_task") {
       for (const iter of node.iterations) {
         for (const ct of iter.corrective_tasks) {
@@ -20381,55 +20049,25 @@ function checkCorrectiveTaskStructure(nodes, path42) {
   }
   return errors;
 }
-function validateCorrectiveEntry(ct, path42) {
+function validateCorrectiveEntry(ct, path44) {
   const errors = [];
   if (typeof ct.index !== "number" || ct.index < 1) {
-    errors.push(`Corrective task at ${path42} has invalid index: ${ct.index} (must be >= 1)`);
+    errors.push(`Corrective task at ${path44} has invalid index: ${ct.index} (must be >= 1)`);
   }
   if (typeof ct.reason !== "string" || ct.reason.length === 0) {
-    errors.push(`Corrective task at ${path42} has empty or missing reason`);
+    errors.push(`Corrective task at ${path44} has empty or missing reason`);
   }
   if (typeof ct.injected_after !== "string" || ct.injected_after.length === 0) {
-    errors.push(`Corrective task at ${path42} has empty or missing injected_after`);
+    errors.push(`Corrective task at ${path44} has empty or missing injected_after`);
   }
   if (!validNodeStatuses.has(ct.status)) {
-    errors.push(`Corrective task at ${path42} has invalid status: '${ct.status}'`);
+    errors.push(`Corrective task at ${path44} has invalid status: '${ct.status}'`);
   }
   if (!ct.nodes || typeof ct.nodes !== "object") {
-    errors.push(`Corrective task at ${path42} has missing or invalid nodes`);
+    errors.push(`Corrective task at ${path44} has missing or invalid nodes`);
   } else if (ct.injected_after !== "phase_review" && Object.keys(ct.nodes).length === 0) {
-    errors.push(`Corrective task at ${path42} has empty or missing nodes`);
+    errors.push(`Corrective task at ${path44} has empty or missing nodes`);
   }
-  return errors;
-}
-function checkIterationLimits(state, config) {
-  const errors = [];
-  const limits = config.limits;
-  function walk(nodes, path42) {
-    for (const [id, node] of Object.entries(nodes)) {
-      const nodePath = `${path42}.${id}`;
-      if (node.kind === "for_each_phase") {
-        if (node.iterations.length > limits.max_phases) {
-          errors.push(`${nodePath} has ${node.iterations.length} iterations, exceeding max_phases limit of ${limits.max_phases}`);
-        }
-        for (const iter of node.iterations) {
-          walk(iter.nodes, `${nodePath}.iterations[${iter.index}].nodes`);
-        }
-      }
-      if (node.kind === "for_each_task") {
-        if (node.iterations.length > limits.max_tasks_per_phase) {
-          errors.push(`${nodePath} has ${node.iterations.length} iterations, exceeding max_tasks_per_phase limit of ${limits.max_tasks_per_phase}`);
-        }
-        for (const iter of node.iterations) {
-          walk(iter.nodes, `${nodePath}.iterations[${iter.index}].nodes`);
-        }
-      }
-      if (node.kind === "parallel") {
-        walk(node.nodes, `${nodePath}.nodes`);
-      }
-    }
-  }
-  walk(state.graph.nodes, "graph.nodes");
   return errors;
 }
 function collectNodeDefKinds(nodes, map) {
@@ -20451,9 +20089,9 @@ function checkNodeKindMatchesTemplate(state, template) {
   const errors = [];
   const templateKindMap = /* @__PURE__ */ new Map();
   collectNodeDefKinds(template.nodes, templateKindMap);
-  function walkStateNodes(nodes, path42) {
+  function walkStateNodes(nodes, path44) {
     for (const [id, node] of Object.entries(nodes)) {
-      const nodePath = `${path42}.${id}`;
+      const nodePath = `${path44}.${id}`;
       const templateKind = templateKindMap.get(id);
       if (templateKind !== void 0 && node.kind !== templateKind) {
         errors.push(`Node '${id}' has kind '${node.kind}' but template defines kind '${templateKind}'`);
@@ -20491,7 +20129,7 @@ function checkImmutableCommitHash(previousState, proposedState) {
   function repoHash(entry) {
     return entry?.repos && entry.repos.length > 0 ? entry.repos[0].commit_hash : null;
   }
-  function compare(prev, curr, path42) {
+  function compare(prev, curr, path44) {
     for (const [id, currNode] of Object.entries(curr)) {
       const prevNode = prev[id];
       if (!prevNode) continue;
@@ -20503,7 +20141,7 @@ function checkImmutableCommitHash(previousState, proposedState) {
           const before = repoHash(prevIter);
           const after = repoHash(currIter);
           if (before != null && after != null && before !== after) {
-            errors.push(`Immutable commit_hash violation at ${path42}.${id}.iterations[${currIter.index}]: '${before}' \u2192 '${after}'`);
+            errors.push(`Immutable commit_hash violation at ${path44}.${id}.iterations[${currIter.index}]: '${before}' \u2192 '${after}'`);
           }
           for (const currCt of currIter.corrective_tasks) {
             const prevCt = prevIter.corrective_tasks.find((ct) => ct.index === currCt.index);
@@ -20511,22 +20149,22 @@ function checkImmutableCommitHash(previousState, proposedState) {
             const ctBefore = repoHash(prevCt);
             const ctAfter = repoHash(currCt);
             if (ctBefore != null && ctAfter != null && ctBefore !== ctAfter) {
-              errors.push(`Immutable commit_hash violation at ${path42}.${id}.iterations[${currIter.index}].corrective_tasks[${currCt.index}]: '${ctBefore}' \u2192 '${ctAfter}'`);
+              errors.push(`Immutable commit_hash violation at ${path44}.${id}.iterations[${currIter.index}].corrective_tasks[${currCt.index}]: '${ctBefore}' \u2192 '${ctAfter}'`);
             }
-            compare(prevCt.nodes, currCt.nodes, `${path42}.${id}.iterations[${currIter.index}].corrective_tasks[${currCt.index}].nodes`);
+            compare(prevCt.nodes, currCt.nodes, `${path44}.${id}.iterations[${currIter.index}].corrective_tasks[${currCt.index}].nodes`);
           }
-          compare(prevIter.nodes, currIter.nodes, `${path42}.${id}.iterations[${currIter.index}].nodes`);
+          compare(prevIter.nodes, currIter.nodes, `${path44}.${id}.iterations[${currIter.index}].nodes`);
         }
       }
       if (currNode.kind === "parallel" && prevNode.kind === "parallel") {
-        compare(prevNode.nodes, currNode.nodes, `${path42}.${id}.nodes`);
+        compare(prevNode.nodes, currNode.nodes, `${path44}.${id}.nodes`);
       }
     }
   }
   compare(previousState.graph.nodes, proposedState.graph.nodes, "graph.nodes");
   return errors;
 }
-function compareNodes(prevNodes, currNodes, path42, errors) {
+function compareNodes(prevNodes, currNodes, path44, errors) {
   for (const [id, currNode] of Object.entries(currNodes)) {
     const prevNode = prevNodes[id];
     if (!prevNode) continue;
@@ -20534,7 +20172,7 @@ function compareNodes(prevNodes, currNodes, path42, errors) {
       const allowed = ALLOWED_NODE_TRANSITIONS.get(prevNode.status);
       if (allowed && allowed.size === 0) {
         errors.push(
-          `Illegal status transition at ${path42}.${id}: '${prevNode.status}' \u2192 '${currNode.status}'`
+          `Illegal status transition at ${path44}.${id}: '${prevNode.status}' \u2192 '${currNode.status}'`
         );
       }
     }
@@ -20542,21 +20180,21 @@ function compareNodes(prevNodes, currNodes, path42, errors) {
       for (const currIter of currNode.iterations) {
         const prevIter = prevNode.iterations[currIter.index];
         if (!prevIter) continue;
-        compareNodes(prevIter.nodes, currIter.nodes, `${path42}.${id}.iterations[${currIter.index}].nodes`, errors);
+        compareNodes(prevIter.nodes, currIter.nodes, `${path44}.${id}.iterations[${currIter.index}].nodes`, errors);
         for (const currCt of currIter.corrective_tasks) {
           const prevCt = prevIter.corrective_tasks.find((ct) => ct.index === currCt.index);
           if (!prevCt) continue;
           compareNodes(
             prevCt.nodes,
             currCt.nodes,
-            `${path42}.${id}.iterations[${currIter.index}].corrective_tasks[${currCt.index}].nodes`,
+            `${path44}.${id}.iterations[${currIter.index}].corrective_tasks[${currCt.index}].nodes`,
             errors
           );
         }
       }
     }
     if (currNode.kind === "parallel" && prevNode.kind === "parallel") {
-      compareNodes(prevNode.nodes, currNode.nodes, `${path42}.${id}.nodes`, errors);
+      compareNodes(prevNode.nodes, currNode.nodes, `${path44}.${id}.nodes`, errors);
     }
   }
 }
@@ -20583,7 +20221,7 @@ var init_validator = __esm({
 });
 
 // cli/src/lib/pipeline-engine/engine.ts
-import * as fs23 from "node:fs";
+import * as fs24 from "node:fs";
 import * as os5 from "node:os";
 import * as path30 from "node:path";
 function resolveActionEventsRoot() {
@@ -20596,8 +20234,8 @@ function resolveCompletionEvent(actionName, _template) {
   const root = resolveActionEventsRoot();
   const filename = `action.${actionName}.md`;
   const filePath = path30.join(root, filename);
-  if (!fs23.existsSync(filePath)) return void 0;
-  const text = fs23.readFileSync(filePath, "utf8");
+  if (!fs24.existsSync(filePath)) return void 0;
+  const text = fs24.readFileSync(filePath, "utf8");
   const parsed = parseActionEventFile(text, filename);
   if (parsed.kind !== "action") {
     throw new Error(`Catalog file '${filePath}' parsed kind '${parsed.kind}' but action expected.`);
@@ -20607,11 +20245,11 @@ function resolveCompletionEvent(actionName, _template) {
 }
 function isOrphanEvent(eventName) {
   const root = resolveActionEventsRoot();
-  if (!fs23.existsSync(root)) return true;
-  const actionFiles = fs23.readdirSync(root).filter((f) => /^action\..+\.md$/.test(f));
+  if (!fs24.existsSync(root)) return true;
+  const actionFiles = fs24.readdirSync(root).filter((f) => /^action\..+\.md$/.test(f));
   for (const filename of actionFiles) {
     try {
-      const parsed = parseActionEventFile(fs23.readFileSync(path30.join(root, filename), "utf8"), filename);
+      const parsed = parseActionEventFile(fs24.readFileSync(path30.join(root, filename), "utf8"), filename);
       if (parsed.kind !== "action") continue;
       const fm = parsed.frontmatter;
       if (fm.completion_event === eventName) return false;
@@ -20620,8 +20258,9 @@ function isOrphanEvent(eventName) {
   }
   return true;
 }
-function attachPromptIfActionResolved(next, template, firingEvent) {
+function attachPromptIfActionResolved(next, template, firingEvent, projectDir) {
   if (!next) return { action: null, context: {} };
+  next.context = resolveDocPaths(next.context, path30.resolve(projectDir));
   const completion_event = resolveCompletionEvent(next.action, template);
   if (completion_event === void 0) {
     return { action: next.action, context: next.context };
@@ -20682,10 +20321,7 @@ function scaffoldState(template, projectName, config) {
     config: {
       gate_mode: config.human_gates.execution_mode,
       limits: {
-        max_phases: config.limits.max_phases,
-        max_tasks_per_phase: config.limits.max_tasks_per_phase,
-        max_retries_per_task: config.limits.max_retries_per_task,
-        max_consecutive_review_rejections: config.limits.max_consecutive_review_rejections
+        max_retries_per_task: config.limits.max_retries_per_task
       },
       source_control: {
         auto_commit: config.source_control.auto_commit,
@@ -20778,7 +20414,8 @@ function processEvent(event, projectDir, context, io, pathContext, configPath) {
         return attachPromptIfActionResolved(
           nextAction2 ? { action: nextAction2.action, context: enrichedContext } : null,
           template,
-          event
+          event,
+          projectDir
         );
       } else {
         const walkerResult = walkDAG(state, template, config, wrappedReadDocument);
@@ -20802,7 +20439,8 @@ function processEvent(event, projectDir, context, io, pathContext, configPath) {
         return attachPromptIfActionResolved(
           walkerResult ? { action: walkerResult.action, context: enrichedContext } : null,
           template,
-          event
+          event,
+          projectDir
         );
       }
     }
@@ -20865,7 +20503,8 @@ function processEvent(event, projectDir, context, io, pathContext, configPath) {
       return attachPromptIfActionResolved(
         walkerResult ? { action: walkerResult.action, context: enrichedContext } : null,
         template,
-        event
+        event,
+        projectDir
       );
     }
     if (event === "gate_approved") {
@@ -20966,7 +20605,7 @@ function processEvent(event, projectDir, context, io, pathContext, configPath) {
         nextAction = walkerResult;
       }
     }
-    return attachPromptIfActionResolved(nextAction ?? null, template, event);
+    return attachPromptIfActionResolved(nextAction ?? null, template, event, projectDir);
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     return {
@@ -20989,6 +20628,7 @@ var init_engine = __esm({
     init_mutations2();
     init_dag_walker();
     init_context_enrichment();
+    init_resolve_doc_paths();
     init_constants();
     init_composer();
     init_action_event_loader();
@@ -21002,7 +20642,7 @@ var init_engine = __esm({
 });
 
 // cli/src/lib/pipeline-engine/state-io.ts
-import * as fs24 from "node:fs";
+import * as fs25 from "node:fs";
 import * as path31 from "node:path";
 function deepMerge2(target, source) {
   const result = { ...target };
@@ -21026,7 +20666,7 @@ function isEnoent2(err) {
 function readState3(projectDir) {
   const statePath = path31.join(projectDir, "state.json");
   try {
-    const raw = fs24.readFileSync(statePath, "utf-8");
+    const raw = fs25.readFileSync(statePath, "utf-8");
     return JSON.parse(raw);
   } catch (err) {
     if (isEnoent2(err)) return null;
@@ -21034,14 +20674,14 @@ function readState3(projectDir) {
   }
 }
 function writeState2(projectDir, state) {
-  fs24.mkdirSync(projectDir, { recursive: true });
+  fs25.mkdirSync(projectDir, { recursive: true });
   const statePath = path31.join(projectDir, "state.json");
   const tmpPath = path31.join(projectDir, "state.json.tmp");
   try {
-    fs24.writeFileSync(tmpPath, JSON.stringify(state, null, 2), "utf-8");
-    fs24.renameSync(tmpPath, statePath);
+    fs25.writeFileSync(tmpPath, JSON.stringify(state, null, 2), "utf-8");
+    fs25.renameSync(tmpPath, statePath);
   } catch (err) {
-    fs24.rmSync(tmpPath, { force: true });
+    fs25.rmSync(tmpPath, { force: true });
     throw err;
   }
 }
@@ -21060,7 +20700,7 @@ function readConfig(configPath) {
     return base;
   }
   try {
-    const raw = fs24.readFileSync(configPath, "utf-8");
+    const raw = fs25.readFileSync(configPath, "utf-8");
     const parsed = index_vite_proxy_tmp_default.load(raw);
     if (parsed === null || typeof parsed !== "object" || Array.isArray(parsed)) {
       return base;
@@ -21075,7 +20715,7 @@ function readConfig(configPath) {
 function readDocument2(docPath) {
   let raw;
   try {
-    raw = fs24.readFileSync(docPath, "utf-8");
+    raw = fs25.readFileSync(docPath, "utf-8");
   } catch (err) {
     if (isEnoent2(err)) return null;
     throw err;
@@ -21094,9 +20734,9 @@ function readDocument2(docPath) {
   };
 }
 function ensureDirectories(projectDir) {
-  fs24.mkdirSync(projectDir, { recursive: true });
+  fs25.mkdirSync(projectDir, { recursive: true });
   for (const subdir of ["phases", "tasks", "reports", "reviews"]) {
-    fs24.mkdirSync(path31.join(projectDir, subdir), { recursive: true });
+    fs25.mkdirSync(path31.join(projectDir, subdir), { recursive: true });
   }
 }
 var DEFAULT_CONFIG;
@@ -21107,10 +20747,7 @@ var init_state_io = __esm({
     DEFAULT_CONFIG = {
       default_template: "extra-high",
       limits: {
-        max_phases: 10,
-        max_tasks_per_phase: 8,
-        max_retries_per_task: 5,
-        max_consecutive_review_rejections: 3
+        max_retries_per_task: 5
       },
       human_gates: {
         after_planning: true,
@@ -21280,7 +20917,7 @@ __export(compose_exports, {
   composeCommand: () => composeCommand,
   runCompose: () => runCompose
 });
-import fs34 from "node:fs";
+import fs37 from "node:fs";
 function validateMode(raw) {
   if (raw === void 0 || raw === "") return "standalone";
   if (raw !== "standalone" && raw !== "runtime-orphan") {
@@ -21318,7 +20955,7 @@ function readOptionalStdinJson() {
   if (process.stdin.isTTY) return {};
   let raw = "";
   try {
-    raw = fs34.readFileSync(0, "utf8");
+    raw = fs37.readFileSync(0, "utf8");
   } catch {
     return {};
   }
@@ -21953,6 +21590,7 @@ init_command();
 // cli/src/commands/ui/start.ts
 init_paths();
 init_fs_helpers();
+import fs9 from "node:fs";
 import path9 from "node:path";
 
 // cli/src/commands/ui/pid-file.ts
@@ -22003,8 +21641,22 @@ var spawn = nodeSpawn;
 
 // cli/src/commands/ui/start.ts
 init_errors2();
-var PORT_LO = 3e3;
-var PORT_HI = 3010;
+var DEFAULT_UI_PORT = 1337;
+var SCAN_WIDTH = 11;
+function resolveUiPort(root) {
+  const configPath = path9.join(root, "orchestration.yml");
+  if (!fs9.existsSync(configPath)) return DEFAULT_UI_PORT;
+  try {
+    const parsed = parseYaml(fs9.readFileSync(configPath, "utf8"));
+    const port = parsed?.ui?.port;
+    if (typeof port === "number" && Number.isInteger(port) && port >= 1 && port <= 65535) {
+      return port;
+    }
+    return DEFAULT_UI_PORT;
+  } catch {
+    return DEFAULT_UI_PORT;
+  }
+}
 async function runStart(opts) {
   const root = resolveInstallRoot();
   const p = installPaths(root);
@@ -22016,16 +21668,19 @@ async function runStart(opts) {
       return {
         pid: existing.pid,
         port: existing.port,
+        requested_port: existing.port,
         url: `http://localhost:${existing.port}`,
         started_at: existing.started_at
       };
     }
     await removePidFile(p.uiPidFile);
   }
+  const basePort = resolveUiPort(root);
+  const portHi = basePort + SCAN_WIDTH - 1;
   const probe = opts._probePortFree ?? probePortFree;
   let chosenPort = null;
   const tried = [];
-  for (let port = PORT_LO; port <= PORT_HI; port++) {
+  for (let port = basePort; port <= portHi; port++) {
     tried.push(port);
     if (await probe(port)) {
       chosenPort = port;
@@ -22034,7 +21689,7 @@ async function runStart(opts) {
   }
   if (chosenPort === null) {
     throw new UserError(
-      `every port ${PORT_LO}-${PORT_HI} is taken (tried ${tried.join(", ")}); free one and retry`
+      `every port ${basePort}-${portHi} is taken (tried ${tried.join(", ")}); free one and retry`
     );
   }
   const uiDir = opts.env["RADORCH_UI_DIR"] ?? path9.join(resolveInstallRoot(), "ui");
@@ -22060,7 +21715,13 @@ async function runStart(opts) {
   child.unref();
   const started_at = (/* @__PURE__ */ new Date()).toISOString();
   await writePidFile(p.uiPidFile, { pid: child.pid, port: chosenPort, started_at });
-  return { pid: child.pid, port: chosenPort, url: `http://localhost:${chosenPort}`, started_at };
+  return {
+    pid: child.pid,
+    port: chosenPort,
+    requested_port: basePort,
+    url: `http://localhost:${chosenPort}`,
+    started_at
+  };
 }
 
 // cli/src/commands/ui/stop.ts
@@ -22129,316 +21790,12 @@ var uiStatusCommand = defineCommand({
   handler: async () => runStatus()
 });
 
-// cli/src/commands/git/commit.ts
-init_command();
-init_errors2();
-import { execFileSync } from "node:child_process";
-function gitCommit(opts) {
-  const exec2 = opts.exec ?? ((file, args, o) => execFileSync(file, args, o));
-  let commitHash = null;
-  try {
-    exec2("git", ["add", "-A"], { cwd: opts.worktreePath, encoding: "utf8" });
-    exec2("git", ["commit", "-m", opts.message], { cwd: opts.worktreePath, encoding: "utf8" });
-    commitHash = String(exec2("git", ["rev-parse", "--short", "HEAD"], { cwd: opts.worktreePath, encoding: "utf8" })).trim();
-  } catch (e) {
-    const err = e;
-    const text = err.stderr || err.stdout || err.message || "";
-    const isNothing = text.includes("nothing to commit") || err.stdout && err.stdout.includes("nothing to commit") || err.message.includes("nothing to commit");
-    return {
-      committed: false,
-      pushed: false,
-      commitHash: null,
-      upstreamConfigured: false,
-      error: isNothing ? "nothing to commit" : text.trim() || err.message.trim(),
-      errorType: isNothing ? "nothing_to_commit" : "commit_failed"
-    };
-  }
-  let hasOrigin = true;
-  try {
-    exec2("git", ["remote", "get-url", "origin"], { cwd: opts.worktreePath, encoding: "utf8" });
-  } catch {
-    hasOrigin = false;
-  }
-  if (!hasOrigin) {
-    return { committed: true, pushed: false, commitHash, upstreamConfigured: false, error: null, errorType: null };
-  }
-  try {
-    exec2("git", ["push"], { cwd: opts.worktreePath, encoding: "utf8" });
-  } catch (e) {
-    const err = e;
-    const text = err.stderr || err.message || "";
-    if (text.includes("has no upstream branch") || text.includes("no upstream branch")) {
-      try {
-        const branch = String(exec2("git", ["rev-parse", "--abbrev-ref", "HEAD"], { cwd: opts.worktreePath, encoding: "utf8" })).trim();
-        exec2("git", ["push", "--set-upstream", "origin", branch], { cwd: opts.worktreePath, encoding: "utf8" });
-        return { committed: true, pushed: true, commitHash, upstreamConfigured: true, error: null, errorType: null };
-      } catch (retryErr) {
-        const r = retryErr;
-        const rt = r.stderr || r.message || "";
-        return {
-          committed: true,
-          pushed: false,
-          commitHash,
-          upstreamConfigured: false,
-          error: rt.trim() || r.message.trim(),
-          errorType: "push_failed"
-        };
-      }
-    }
-    return {
-      committed: true,
-      pushed: false,
-      commitHash,
-      upstreamConfigured: false,
-      error: text.trim() || err.message.trim(),
-      errorType: "push_failed"
-    };
-  }
-  return { committed: true, pushed: true, commitHash, upstreamConfigured: false, error: null, errorType: null };
-}
-function gitCommitFanOut(opts) {
-  return opts.repos.map((r) => {
-    const res = gitCommit({ worktreePath: r.path, message: r.message, exec: opts.exec });
-    if (res.errorType === "nothing_to_commit") return { name: r.name, committed: false, commitHash: null, pushed: false };
-    if (res.errorType === "commit_failed") throw new UserError(`Commit failed in repo "${r.name}": ${res.error}`);
-    return { name: r.name, committed: res.committed, commitHash: res.commitHash, pushed: res.pushed };
-  });
-}
-var gitCommitCommand = defineCommand({
-  name: "git-commit",
-  description: "Commit changes in the worktree and push to origin when a remote is configured",
-  args: {
-    "worktree-path": { description: "Absolute path to the worktree to commit from", required: false },
-    message: { description: "Commit message body (used as the -m argument to git commit)", required: false }
-  },
-  flags: {
-    repos: { description: "JSON array of {name, path, message} objects for fan-out commits", type: "string" }
-  },
-  handler: async ({ args, flags }) => {
-    const reposJson = flags.repos;
-    if (reposJson) {
-      let repos;
-      try {
-        repos = JSON.parse(reposJson);
-      } catch {
-        throw new UserError("--repos must be a valid JSON array of {name, path, message} objects");
-      }
-      return gitCommitFanOut({ repos });
-    }
-    const wt = args["worktree-path"];
-    const msg = args.message;
-    if (!wt || !msg) throw new UserError("--worktree-path and --message are both required");
-    return gitCommit({ worktreePath: wt, message: msg });
-  }
-});
-
-// cli/src/commands/git/pr.ts
-init_command();
-init_errors2();
-import { execFileSync as execFileSync2 } from "node:child_process";
-import { writeFileSync } from "node:fs";
-import { tmpdir } from "node:os";
-import { join } from "node:path";
-function ghPr(opts) {
-  const exec2 = opts.exec ?? ((file, args, o) => execFileSync2(file, args, o));
-  if (!opts.worktreePath || !opts.branch || !opts.baseBranch || !opts.title) {
-    return {
-      pr_created: false,
-      pr_url: null,
-      pr_number: null,
-      pr_existed: false,
-      error: "precondition_failure",
-      message: "Missing required argument: --worktree-path, --branch, --base-branch, and --title are all required"
-    };
-  }
-  try {
-    exec2("gh", ["auth", "status"], { encoding: "utf8" });
-  } catch (e) {
-    const err = e;
-    const text = err.stderr || err.stdout || err.message || "";
-    const isNotFound = text.includes("ENOENT") || text.includes("not found") || text.includes("not recognized");
-    return {
-      pr_created: false,
-      pr_url: null,
-      pr_number: null,
-      pr_existed: false,
-      error: isNotFound ? "gh_not_found" : "auth_failed",
-      message: text.trim() || err.message.trim()
-    };
-  }
-  let remote = "";
-  try {
-    remote = String(exec2("git", ["remote"], { cwd: opts.worktreePath, encoding: "utf8" })).trim();
-  } catch (e) {
-    const err = e;
-    return {
-      pr_created: false,
-      pr_url: null,
-      pr_number: null,
-      pr_existed: false,
-      error: "no_remote",
-      message: (err.stderr || err.message || "Failed to detect git remote").trim()
-    };
-  }
-  if (!remote) {
-    return {
-      pr_created: false,
-      pr_url: null,
-      pr_number: null,
-      pr_existed: false,
-      error: "no_remote",
-      message: "No git remote configured"
-    };
-  }
-  try {
-    const list = String(exec2("gh", [
-      "pr",
-      "list",
-      "--head",
-      opts.branch,
-      "--base",
-      opts.baseBranch,
-      "--json",
-      "url,number",
-      "--limit",
-      "1"
-    ], { cwd: opts.worktreePath, encoding: "utf8" })).trim();
-    const parsed = JSON.parse(list);
-    if (Array.isArray(parsed) && parsed.length > 0) {
-      return {
-        pr_created: false,
-        pr_url: parsed[0].url,
-        pr_number: parsed[0].number,
-        pr_existed: true,
-        error: null,
-        message: "Existing PR found"
-      };
-    }
-  } catch {
-  }
-  try {
-    const args = ["pr", "create", "--head", opts.branch, "--base", opts.baseBranch, "--title", opts.title];
-    if (opts.bodyFile) args.push("--body-file", opts.bodyFile);
-    const url = String(exec2("gh", args, { cwd: opts.worktreePath, encoding: "utf8" })).trim();
-    const segs = url.split("/");
-    const n = parseInt(segs[segs.length - 1], 10);
-    return {
-      pr_created: true,
-      pr_url: url,
-      pr_number: Number.isNaN(n) ? null : n,
-      pr_existed: false,
-      error: null,
-      message: "PR created successfully"
-    };
-  } catch (e) {
-    const err = e;
-    const text = err.stderr || err.stdout || err.message || "";
-    return {
-      pr_created: false,
-      pr_url: null,
-      pr_number: null,
-      pr_existed: false,
-      error: "creation_failed",
-      message: text.trim() || err.message.trim()
-    };
-  }
-}
-function ghPrFanOut(opts) {
-  const exec2 = opts.exec ?? ((file, args, o) => execFileSync2(file, args, o));
-  const created = [];
-  for (const [i, repo] of opts.repos.entries()) {
-    const bodyFile = join(tmpdir(), `rad-pr-body-${repo.name}-${i}-${Date.now()}.md`);
-    writeFileSync(bodyFile, repo.description, "utf8");
-    const result = ghPr({
-      worktreePath: repo.path,
-      branch: repo.branch,
-      baseBranch: repo.baseBranch,
-      title: repo.title,
-      bodyFile,
-      exec: exec2
-    });
-    if (result.error !== null && !result.pr_existed) {
-      throw new Error(`Failed to create PR for ${repo.name}: ${result.message}`);
-    }
-    if (!result.pr_url) {
-      throw new Error(`PR creation for ${repo.name} returned no URL despite reporting success`);
-    }
-    created.push({
-      name: repo.name,
-      pr_url: result.pr_url,
-      pr_number: result.pr_number
-    });
-  }
-  if (created.length > 1) {
-    for (let i = 0; i < created.length; i++) {
-      const repo = opts.repos[i];
-      const pr = created[i];
-      const siblings = created.filter((_, j) => j !== i);
-      const linkedSection = "\n\n## Linked PRs\n" + siblings.map((s) => `- ${s.name}: ${s.pr_url}`).join("\n");
-      const combinedBody = repo.description + linkedSection;
-      const bodyFile = join(tmpdir(), `rad-pr-xlink-${repo.name}-${i}-${Date.now()}.md`);
-      writeFileSync(bodyFile, combinedBody, "utf8");
-      if (pr.pr_number !== null) {
-        exec2("gh", ["pr", "edit", String(pr.pr_number), "--body-file", bodyFile], {
-          cwd: repo.path,
-          encoding: "utf8"
-        });
-      }
-    }
-  }
-  return created.map((c) => ({ name: c.name, pr_url: c.pr_url }));
-}
-var gitPrCommand = defineCommand({
-  name: "git-pr",
-  description: "Open a GitHub pull request for the worktree branch",
-  args: {
-    "worktree-path": { description: "Absolute path to the worktree containing the branch", required: false },
-    branch: { description: "Head branch name to open the PR from", required: false },
-    "base-branch": { description: "Base branch name to target (typically main)", required: false },
-    title: { description: "PR title \u2014 typically the project name", required: false },
-    "body-file": { description: "Optional absolute path to a markdown file used as the PR description; omitted means the PR opens with no body" },
-    repos: { description: "JSON array of repos [{name, path, branch, baseBranch, title, description}] for multi-repo fan-out" }
-  },
-  flags: {},
-  handler: async ({ args }) => {
-    if (args.repos) {
-      let parsed;
-      try {
-        parsed = JSON.parse(args.repos);
-      } catch (e) {
-        throw new UserError(`--repos must be valid JSON: ${e.message}`);
-      }
-      if (!Array.isArray(parsed)) {
-        throw new UserError("--repos must be a JSON array of {name, path, branch, baseBranch, title, description} objects");
-      }
-      return ghPrFanOut({ repos: parsed });
-    }
-    if (!args["worktree-path"] || !args.branch || !args["base-branch"] || !args.title) {
-      return {
-        pr_created: false,
-        pr_url: null,
-        pr_number: null,
-        pr_existed: false,
-        error: "precondition_failure",
-        message: "Missing required argument: --worktree-path, --branch, --base-branch, and --title are all required"
-      };
-    }
-    return ghPr({
-      worktreePath: args["worktree-path"] ?? "",
-      branch: args.branch ?? "",
-      baseBranch: args["base-branch"] ?? "",
-      title: args.title ?? "",
-      bodyFile: args["body-file"]
-    });
-  }
-});
-
 // cli/src/commands/repo/add.ts
 init_command();
 init_errors2();
 init_paths();
 init_dist10();
-import { execFileSync as execFileSync3 } from "node:child_process";
+import { execFileSync } from "node:child_process";
 import path10 from "node:path";
 
 // cli/src/lib/repo-identity.ts
@@ -22529,7 +21886,7 @@ function samePath(a, b) {
 
 // cli/src/commands/repo/add.ts
 function makeDefaultExec(cwd) {
-  return (file, args) => execFileSync3(file, args, { encoding: "utf8", cwd });
+  return (file, args) => execFileSync(file, args, { encoding: "utf8", cwd });
 }
 function repoAdd(opts) {
   const { root, repoPath, name: nameOverride, description, dryRun } = opts;
@@ -22621,13 +21978,13 @@ init_command();
 init_errors2();
 init_paths();
 init_dist10();
-import fs9 from "node:fs";
-import { execFileSync as execFileSync4 } from "node:child_process";
+import fs10 from "node:fs";
+import { execFileSync as execFileSync2 } from "node:child_process";
 function makeDefaultExec2(cwd) {
-  return (file, args) => execFileSync4(file, args, { encoding: "utf8", cwd });
+  return (file, args) => execFileSync2(file, args, { encoding: "utf8", cwd });
 }
 function repoBind({ root, name, repoPath, exec: exec2 }) {
-  if (!fs9.existsSync(repoPath) || !fs9.statSync(repoPath).isDirectory()) {
+  if (!fs10.existsSync(repoPath) || !fs10.statSync(repoPath).isDirectory()) {
     throw new UserError(`path is not a directory: ${repoPath}`);
   }
   const reg = readRegistry({ root });
@@ -22958,19 +22315,19 @@ init_errors2();
 init_dist10();
 init_paths();
 import path18 from "node:path";
-import fs15 from "node:fs";
-import { execFileSync as execFileSync7 } from "node:child_process";
+import fs16 from "node:fs";
+import { execFileSync as execFileSync5 } from "node:child_process";
 
 // cli/src/lib/project-repos.ts
 init_errors2();
 init_paths();
 import path16 from "node:path";
-import fs14 from "node:fs";
+import fs15 from "node:fs";
 function readProjectReposDefault(project) {
   const projectDir = path16.join(userDataPaths().projects, project);
   let masterPlanPath = null;
   try {
-    const entries = fs14.readdirSync(projectDir);
+    const entries = fs15.readdirSync(projectDir);
     for (const e of entries) {
       if (e.toUpperCase().startsWith(project.toUpperCase() + "-MASTER-PLAN") && e.endsWith(".md")) {
         masterPlanPath = path16.join(projectDir, e);
@@ -22990,7 +22347,7 @@ function readProjectReposDefault(project) {
   if (!masterPlanPath) {
     throw new UserError(`No master plan found for project "${project}" in ${projectDir}`);
   }
-  const raw = fs14.readFileSync(masterPlanPath, "utf-8");
+  const raw = fs15.readFileSync(masterPlanPath, "utf-8");
   const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
   if (!match) {
     throw new UserError(`Master plan at ${masterPlanPath} has no YAML frontmatter`);
@@ -23035,7 +22392,7 @@ function classify(stderr) {
   return "unknown";
 }
 function worktreeCreate(opts) {
-  const exec2 = opts.exec ?? ((f, a, o) => execFileSync7(f, a, { ...o, stdio: ["ignore", "pipe", "pipe"] }));
+  const exec2 = opts.exec ?? ((f, a, o) => execFileSync5(f, a, { ...o, stdio: ["ignore", "pipe", "pipe"] }));
   try {
     exec2(
       "git",
@@ -23159,7 +22516,7 @@ function provisionWorktreesWithDefaults(args) {
     readProjectRepos: readStandardProjectReposDefault,
     resolveClonePath: resolveClonePathDefault,
     defaultBranch: defaultBranchDefault,
-    exists: (p) => fs15.existsSync(p),
+    exists: (p) => fs16.existsSync(p),
     create: worktreeCreate
   });
 }
@@ -23253,7 +22610,7 @@ function buildClaudeArgs(prompt, permissionMode, addDir) {
   return ["claude", "--permission-mode", permissionMode, prompt, "--add-dir", addDir];
 }
 function buildCopilotArgs(prompt, addDir) {
-  return ["copilot", "--agent", "orchestrator", "--add-dir", addDir, "--allow-tool=shell", "-i", prompt];
+  return ["copilot", "--add-dir", addDir, "--allow-tool=shell", "-i", prompt];
 }
 function worktreeLaunch(opts) {
   const platform = opts.platform ?? process.platform;
@@ -23351,9 +22708,9 @@ init_errors2();
 init_dist10();
 init_paths();
 import path20 from "node:path";
-import { execFileSync as execFileSync8 } from "node:child_process";
+import { execFileSync as execFileSync6 } from "node:child_process";
 function removeWorktrees(opts) {
-  const exec2 = opts.exec ?? ((f, a, o) => execFileSync8(f, a, { ...o, stdio: ["ignore", "pipe", "pipe"] }));
+  const exec2 = opts.exec ?? ((f, a, o) => execFileSync6(f, a, { ...o, stdio: ["ignore", "pipe", "pipe"] }));
   const { project, worktreesDir, readProjectRepos, worktreeName, resolveClonePath, dependents } = opts;
   const wtName = worktreeName(project);
   const { repos: allRepos } = readProjectRepos(project);
@@ -23420,14 +22777,14 @@ init_command();
 init_errors2();
 init_paths();
 init_dist10();
-import fs16 from "node:fs";
+import fs17 from "node:fs";
 import path21 from "node:path";
-import { execFileSync as execFileSync9 } from "node:child_process";
+import { execFileSync as execFileSync7 } from "node:child_process";
 var SEED_MESSAGE = "chore: initialize side-project";
 function sideProjectInit(opts) {
-  const exec2 = opts.exec ?? ((f, a, o) => execFileSync9(f, a, { ...o, stdio: ["ignore", "pipe", "pipe"] }));
+  const exec2 = opts.exec ?? ((f, a, o) => execFileSync7(f, a, { ...o, stdio: ["ignore", "pipe", "pipe"] }));
   const ensure = opts.ensureGitignored ?? ensureGitignored;
-  const mkdirp = opts.mkdirp ?? ((dir) => fs16.mkdirSync(dir, { recursive: true }));
+  const mkdirp = opts.mkdirp ?? ((dir) => fs17.mkdirSync(dir, { recursive: true }));
   const repoPath = path21.join(opts.root, SIDE_PROJECTS_DIRNAME, opts.project);
   try {
     mkdirp(repoPath);
@@ -23482,7 +22839,7 @@ init_command();
 init_errors2();
 
 // cli/src/lib/explode-master-plan.ts
-import * as fs17 from "node:fs";
+import * as fs18 from "node:fs";
 import * as path22 from "node:path";
 var ParseError = class extends Error {
   line;
@@ -23507,7 +22864,7 @@ var ParseError = class extends Error {
 function readDocument(docPath) {
   let raw;
   try {
-    raw = fs17.readFileSync(docPath, "utf-8");
+    raw = fs18.readFileSync(docPath, "utf-8");
   } catch (err) {
     if (isEnoent(err)) return null;
     throw err;
@@ -23531,7 +22888,7 @@ function isEnoent(err) {
 function readState2(projectDir) {
   const statePath = path22.join(projectDir, "state.json");
   try {
-    const raw = fs17.readFileSync(statePath, "utf-8");
+    const raw = fs18.readFileSync(statePath, "utf-8");
     return JSON.parse(raw);
   } catch (err) {
     if (isEnoent(err)) return null;
@@ -23539,14 +22896,14 @@ function readState2(projectDir) {
   }
 }
 function writeState(projectDir, state) {
-  fs17.mkdirSync(projectDir, { recursive: true });
+  fs18.mkdirSync(projectDir, { recursive: true });
   const statePath = path22.join(projectDir, "state.json");
   const tmpPath = path22.join(projectDir, "state.json.tmp");
   try {
-    fs17.writeFileSync(tmpPath, JSON.stringify(state, null, 2), "utf-8");
-    fs17.renameSync(tmpPath, statePath);
+    fs18.writeFileSync(tmpPath, JSON.stringify(state, null, 2), "utf-8");
+    fs18.renameSync(tmpPath, statePath);
   } catch (err) {
-    fs17.rmSync(tmpPath, { force: true });
+    fs18.rmSync(tmpPath, { force: true });
     throw err;
   }
 }
@@ -23574,7 +22931,7 @@ function computeFrontmatterOffset(raw) {
 function parseMasterPlan(masterPlanPath) {
   let raw;
   try {
-    raw = fs17.readFileSync(masterPlanPath, "utf-8");
+    raw = fs18.readFileSync(masterPlanPath, "utf-8");
   } catch (err) {
     const code2 = err?.code;
     if (code2 === "ENOENT") {
@@ -23608,7 +22965,8 @@ function parseMasterPlan(masterPlanPath) {
   const flushTask = () => {
     if (currentTask !== null) {
       currentTask.body = currentBodyLines.join("\n").trimEnd();
-      currentTask.requirementTags = extractRequirementTags(currentTask.body);
+      currentTask.complexity = extractComplexity(currentTask.body);
+      currentTask.purpose = extractLeadSentence(currentTask.body);
       currentTask.targetRepos = extractTargetRepos(currentTask.body);
       currentPhase.tasks.push(currentTask);
       currentTask = null;
@@ -23695,7 +23053,8 @@ function parseMasterPlan(masterPlanPath) {
         phaseIndex,
         taskIndex,
         title: (title ?? "").trim(),
-        requirementTags: [],
+        complexity: "standard",
+        purpose: "",
         targetRepos: [],
         body: "",
         startLine: lineNumber
@@ -23718,21 +23077,21 @@ function parseMasterPlan(masterPlanPath) {
   if (seal.size > 0) {
     for (const phase of phases) {
       for (const task of phase.tasks) {
-        const hasLine = /\*\*Target repos:\*\*/.test(task.body);
+        const hasLine = /\*\*Target repo:\*\*/.test(task.body);
         if (!hasLine) {
           throw new ParseError({
             line: task.startLine,
-            expected: 'a "**Target repos:**" line on every task',
-            found: `task ${task.id} with no Target repos line`,
-            message: `Task ${task.id} is missing its "**Target repos:**" line`
+            expected: 'a "**Target repo:**" line on every task',
+            found: `task ${task.id} with no Target repo line`,
+            message: `Task ${task.id} is missing its "**Target repo:**" line`
           });
         }
         if (task.targetRepos.length === 0) {
           throw new ParseError({
             line: task.startLine,
-            expected: 'at least one repo name on the "**Target repos:**" line',
-            found: `task ${task.id} with an empty Target repos line`,
-            message: `Task ${task.id} has a present-but-empty "**Target repos:**" line`
+            expected: 'at least one repo name on the "**Target repo:**" line',
+            found: `task ${task.id} with an empty Target repo line`,
+            message: `Task ${task.id} has a present-but-empty "**Target repo:**" line`
           });
         }
         for (const r of task.targetRepos) {
@@ -23762,19 +23121,30 @@ function parseMasterPlan(masterPlanPath) {
     preamble: preambleLines.join("\n").trimEnd()
   };
 }
-function extractRequirementTags(body) {
-  const tags = /* @__PURE__ */ new Set();
-  const tagLineMatch = body.match(/\*\*Requirements:\*\*\s*([^\n]+)/);
-  if (tagLineMatch) {
-    const items = (tagLineMatch[1] ?? "").split(/[,\s]+/).map((s) => s.trim()).filter(Boolean);
-    for (const item of items) tags.add(item);
+function extractComplexity(body) {
+  const match = body.match(/\*\*Complexity:\*\*[ \t]*([^\n]*)/);
+  const value = (match?.[1] ?? "").trim().toLowerCase();
+  if (value === "simple" || value === "standard" || value === "complex") {
+    return value;
   }
-  return Array.from(tags);
+  return "standard";
+}
+function extractLeadSentence(body) {
+  for (const raw of body.split(/\r?\n/)) {
+    const line = raw.trim();
+    if (line.length === 0) continue;
+    if (/^\*\*[^*]+:\*\*/.test(line)) continue;
+    if (/^\s*[-*]\s/.test(raw)) continue;
+    if (/^#/.test(line)) continue;
+    if (/^```/.test(line)) continue;
+    return line;
+  }
+  return "";
 }
 function extractTargetRepos(body) {
   const repos = [];
   const seen = /* @__PURE__ */ new Set();
-  const lineMatch = body.match(/\*\*Target repos:\*\*[ \t]*([^\n]*)/);
+  const lineMatch = body.match(/\*\*Target repo:\*\*[ \t]*([^\n]*)/);
   if (lineMatch) {
     const items = (lineMatch[1] ?? "").split(/[,\s]+/).map((s) => s.trim()).filter(Boolean);
     for (const item of items) {
@@ -23820,7 +23190,6 @@ function buildPhaseFrontmatter(opts) {
     status: "active",
     tasks: opts.phase.tasks.map((t) => ({ id: `T${String(t.taskIndex).padStart(2, "0")}`, title: t.title })),
     repos: unionTaskRepos(opts.phase),
-    author: "explosion-script",
     created: opts.createdIso,
     type: "phase_plan"
   };
@@ -23832,9 +23201,8 @@ function buildTaskFrontmatter(opts) {
     task: opts.task.taskIndex,
     title: opts.task.title,
     status: "pending",
-    requirement_tags: opts.task.requirementTags,
+    complexity: opts.task.complexity,
     repos: opts.task.targetRepos,
-    author: "explosion-script",
     created: opts.createdIso,
     type: "task_handoff"
   };
@@ -23858,10 +23226,15 @@ function renderPhaseBody(phase) {
   if (phase.tasks.length === 0) {
     sections.push("_(no tasks emitted by explosion script \u2014 phase has no task headings in the Master Plan)_");
   } else {
+    sections.push("| Task | Repo | Complexity | Purpose |", "|---|---|---|---|");
     for (const t of phase.tasks) {
-      const tidx = String(t.taskIndex).padStart(2, "0");
-      sections.push(`- **T${tidx}**: ${t.title}`);
+      const tidx = `T${String(t.taskIndex).padStart(2, "0")}`;
+      const repoCell = t.targetRepos.join(", ");
+      const purposeCell = t.purpose.trim().length > 0 ? t.purpose : "\u2014";
+      sections.push(`| ${tidx} | ${repoCell} | ${t.complexity} | ${purposeCell} |`);
     }
+    const order = phase.tasks.map((t) => `T${String(t.taskIndex).padStart(2, "0")}`).join(" \u2192 ");
+    sections.push("", `**Order:** ${order}`);
   }
   return sections.join("\n");
 }
@@ -23875,29 +23248,30 @@ function renderTaskBody(task) {
   } else {
     sections.push("_(empty body in Master Plan)_");
   }
+  sections.push("", "## Execution Notes", "", "_(none yet \u2014 appended at runtime)_");
   return sections.join("\n");
 }
 function hasContents(dir) {
   try {
-    const entries = fs17.readdirSync(dir);
+    const entries = fs18.readdirSync(dir);
     return entries.length > 0;
   } catch {
     return false;
   }
 }
 function moveContentsTo(srcDir, destDir) {
-  if (!fs17.existsSync(srcDir)) return;
-  fs17.mkdirSync(destDir, { recursive: true });
-  for (const entry of fs17.readdirSync(srcDir)) {
+  if (!fs18.existsSync(srcDir)) return;
+  fs18.mkdirSync(destDir, { recursive: true });
+  for (const entry of fs18.readdirSync(srcDir)) {
     const srcPath = path22.join(srcDir, entry);
     const destPath = path22.join(destDir, entry);
     try {
-      fs17.renameSync(srcPath, destPath);
+      fs18.renameSync(srcPath, destPath);
     } catch (err) {
       const code2 = err?.code;
       if (code2 === "EXDEV" || code2 === "EPERM" || code2 === "ENOTEMPTY") {
-        fs17.cpSync(srcPath, destPath, { recursive: true });
-        fs17.rmSync(srcPath, { recursive: true, force: true });
+        fs18.cpSync(srcPath, destPath, { recursive: true });
+        fs18.rmSync(srcPath, { recursive: true, force: true });
       } else {
         throw err;
       }
@@ -23923,8 +23297,8 @@ function explodeMasterPlan(opts) {
     if (phasesHas) moveContentsTo(phasesDir, path22.join(backupDir, "phases"));
     if (tasksHas) moveContentsTo(tasksDir, path22.join(backupDir, "tasks"));
   }
-  fs17.mkdirSync(phasesDir, { recursive: true });
-  fs17.mkdirSync(tasksDir, { recursive: true });
+  fs18.mkdirSync(phasesDir, { recursive: true });
+  fs18.mkdirSync(tasksDir, { recursive: true });
   const emittedPhaseFiles = [];
   const emittedTaskFiles = [];
   for (const phase of parsed.phases) {
@@ -23939,13 +23313,13 @@ function explodeMasterPlan(opts) {
         );
       }
     }
-    fs17.writeFileSync(fpath, renderDoc(frontmatter, renderPhaseBody(phase)), "utf-8");
+    fs18.writeFileSync(fpath, renderDoc(frontmatter, renderPhaseBody(phase)), "utf-8");
     emittedPhaseFiles.push(fpath);
     for (const task of phase.tasks) {
       const tname = taskFilename(projectName, task);
       const tpath = path22.join(tasksDir, tname);
       const tfront = buildTaskFrontmatter({ projectName, task, createdIso: nowIso });
-      fs17.writeFileSync(tpath, renderDoc(tfront, renderTaskBody(task)), "utf-8");
+      fs18.writeFileSync(tpath, renderDoc(tfront, renderTaskBody(task)), "utf-8");
       emittedTaskFiles.push(tpath);
     }
   }
@@ -23999,7 +23373,8 @@ function seedIterations(state, parsed, _projectName, emittedPhaseFiles, emittedT
         nodes: {},
         corrective_tasks: [],
         doc_path: taskFile,
-        repos: task.targetRepos.map((name) => ({ name, commit_hash: null }))
+        repos: task.targetRepos.map((name) => ({ name, commit_hash: null })),
+        complexity: task.complexity
       });
     }
     const taskLoop = {
@@ -24075,12 +23450,12 @@ var planExplodeCommand = defineCommand({
 init_command();
 init_errors2();
 init_paths();
-import * as fs19 from "node:fs";
+import * as fs20 from "node:fs";
 import * as path24 from "node:path";
 
 // cli/src/commands/migrate/migrate.ts
 init_version();
-import * as fs18 from "node:fs";
+import * as fs19 from "node:fs";
 import * as path23 from "node:path";
 
 // cli/src/lib/pipeline-engine/migrations/steps.ts
@@ -24697,6 +24072,13 @@ function migrateV5ToV6(input) {
     throw new Error("migrate v5\u2192v6: input does not validate against the archived v5 schema");
   }
   const s = structuredClone(input);
+  const config = s["config"];
+  const limits = config?.["limits"];
+  if (limits) {
+    delete limits["max_phases"];
+    delete limits["max_tasks_per_phase"];
+    delete limits["max_consecutive_review_rejections"];
+  }
   const graph = s["graph"];
   const nodes = graph?.["nodes"];
   const phaseLoop = nodes?.["phase_loop"];
@@ -24728,7 +24110,7 @@ init_schema_validator();
 function migrateProject(opts) {
   const { projectDir, dryRun } = opts;
   const statePath = path23.join(projectDir, "state.json");
-  const raw = fs18.readFileSync(statePath, "utf8");
+  const raw = fs19.readFileSync(statePath, "utf8");
   const state = JSON.parse(raw);
   const currentSchema = state["$schema"] ?? "";
   if (currentSchema === CURRENT_SCHEMA_VERSION) {
@@ -24758,8 +24140,8 @@ ${errors.join("\n")}`);
   }
   const iso = (/* @__PURE__ */ new Date()).toISOString().replace(/[:.]/g, "-");
   const backupPath = `${statePath}.bak-${iso}`;
-  fs18.writeFileSync(backupPath, raw, "utf8");
-  fs18.writeFileSync(statePath, JSON.stringify(value, null, 2), "utf8");
+  fs19.writeFileSync(backupPath, raw, "utf8");
+  fs19.writeFileSync(statePath, JSON.stringify(value, null, 2), "utf8");
   return { migrated: true, from: fromVersion, to: toVersion, backupPath };
 }
 
@@ -24782,15 +24164,15 @@ var migrateCommand = defineCommand({
       throw new UserError("<project> argument is required unless --all is specified");
     }
     if (all) {
-      if (!fs19.existsSync(projectsRoot)) {
+      if (!fs20.existsSync(projectsRoot)) {
         throw new UserError(`Projects root does not exist: ${projectsRoot}`);
       }
-      const entries = fs19.readdirSync(projectsRoot, { withFileTypes: true }).filter((d) => d.isDirectory() && !d.name.startsWith("_"));
+      const entries = fs20.readdirSync(projectsRoot, { withFileTypes: true }).filter((d) => d.isDirectory() && !d.name.startsWith("_"));
       const results = [];
       for (const entry of entries) {
         const projectDir2 = path24.join(projectsRoot, entry.name);
         const statePath = path24.join(projectDir2, "state.json");
-        if (!fs19.existsSync(statePath)) continue;
+        if (!fs20.existsSync(statePath)) continue;
         try {
           const result2 = migrateProject({ projectDir: projectDir2, dryRun });
           results.push({ project: entry.name, result: result2 });
@@ -24802,7 +24184,7 @@ var migrateCommand = defineCommand({
     }
     const projectName = args["project"];
     const projectDir = path24.join(projectsRoot, projectName);
-    if (!fs19.existsSync(path24.join(projectDir, "state.json"))) {
+    if (!fs20.existsSync(path24.join(projectDir, "state.json"))) {
       throw new UserError(`No state.json found for project '${projectName}' at ${projectDir}`);
     }
     const result = migrateProject({ projectDir, dryRun });
@@ -24817,7 +24199,97 @@ var migrateCommand = defineCommand({
 
 // cli/src/commands/skill/list.ts
 init_command();
-init_skill_manifest();
+
+// cli/src/lib/skill-manifest.ts
+import { readdirSync as readdirSync3, readFileSync as readFileSync3 } from "node:fs";
+import path25 from "node:path";
+var EXCLUDED_DIRS = /* @__PURE__ */ new Set([
+  "node_modules",
+  ".git",
+  "dist",
+  "build",
+  "out",
+  "coverage",
+  "prompt-tests"
+]);
+function* walkSkillFiles(root) {
+  const stack = [root];
+  while (stack.length) {
+    const dir = stack.pop();
+    let entries;
+    try {
+      entries = readdirSync3(dir, { withFileTypes: true });
+    } catch {
+      continue;
+    }
+    for (const e of entries) {
+      if (e.isDirectory()) {
+        if (EXCLUDED_DIRS.has(e.name)) continue;
+        stack.push(path25.join(dir, e.name));
+      } else if (e.isFile() && e.name === "SKILL.md") {
+        yield path25.join(dir, e.name);
+      }
+    }
+  }
+}
+function parseFrontmatter(text) {
+  if (!text.startsWith("---")) return { error: "no frontmatter block" };
+  const end = text.indexOf("\n---", 3);
+  if (end === -1) return { error: "frontmatter not terminated" };
+  const raw = text.slice(3, end);
+  const fm = {};
+  for (const rawLine of raw.split(/\r?\n/)) {
+    const line = rawLine.replace(/\s+$/, "");
+    if (!line || line.startsWith("#")) continue;
+    const m = line.match(/^([a-zA-Z_][a-zA-Z0-9_-]*)\s*:\s*(.*)$/);
+    if (!m) return { error: `malformed line: ${line}` };
+    const rawValue = m[2].trim();
+    const wasQuoted = rawValue.length >= 2 && (rawValue.startsWith('"') && rawValue.endsWith('"') || rawValue.startsWith("'") && rawValue.endsWith("'"));
+    let value;
+    if (wasQuoted) value = rawValue.slice(1, -1);
+    else if (rawValue === "true") value = true;
+    else if (rawValue === "false") value = false;
+    else value = rawValue;
+    fm[m[1]] = value;
+  }
+  return { frontmatter: fm };
+}
+function buildSkillManifest(opts) {
+  const warn = opts.warn ?? ((msg) => process.stderr.write(msg + "\n"));
+  const out = [];
+  for (const file of walkSkillFiles(opts.repoRoot)) {
+    let text;
+    try {
+      text = readFileSync3(file, "utf8");
+    } catch (err) {
+      warn(`warn: ${file}: ${err.message}`);
+      continue;
+    }
+    const parsed = parseFrontmatter(text);
+    if (parsed.error) {
+      warn(`warn: ${file}: ${parsed.error}`);
+      continue;
+    }
+    const fm = parsed.frontmatter;
+    const name = fm["name"];
+    const description = fm["description"];
+    if (typeof name !== "string" || !name) {
+      warn(`warn: ${file}: missing name`);
+      continue;
+    }
+    if (typeof description !== "string" || !description) {
+      warn(`warn: ${file}: missing description`);
+      continue;
+    }
+    if (name.startsWith("rad-")) continue;
+    if (fm["disable-model-invocation"] === true) continue;
+    out.push({ name, description, path: path25.resolve(file) });
+  }
+  out.sort((a, b) => a.name.localeCompare(b.name));
+  return out;
+}
+
+// cli/src/commands/skill/list.ts
 var skillListCommand = defineCommand({
   name: "skill-list",
   description: "List repository SKILL.md entries eligible for planner-spawn discovery",
@@ -24902,7 +24374,7 @@ var pipelineSignalCommand = defineCommand({
   name: "pipeline-signal",
   description: "Signal a pipeline event and apply the resulting state mutations",
   args: {
-    event: { description: "Pipeline event name (start, master_plan_started, plan_approved, gate_approved, task_completed, commit_completed, pr_created, phase_review_completed, final_review_completed, explosion_failed, \u2026)", required: true },
+    event: { description: "Pipeline event name (start, master_plan_started, plan_approved, gate_approved, task_completed, pr_created, phase_review_completed, final_review_completed, explosion_failed, \u2026)", required: true },
     "project-dir": { description: "Absolute path to the project directory whose state.json the event mutates", required: true }
   },
   flags: {
@@ -24914,9 +24386,6 @@ var pipelineSignalCommand = defineCommand({
     verdict: { description: "Review verdict: approved | changes_requested | rejected", type: "string" },
     branch: { description: "Working branch name for source-control events", type: "string" },
     reason: { description: "Free-text rejection reason for gate_rejected and review failures", type: "string" },
-    "commit-hash": { description: "Commit hash recorded on commit_completed", type: "string" },
-    pushed: { description: "Push outcome flag carried on commit_completed", type: "string" },
-    "compare-url": { description: "Compare URL recorded on commit_completed", type: "string" },
     "pr-url": { description: "PR URL recorded on pr_created", type: "string" },
     template: { description: "Pipeline template id (extra-high | high | medium | low) for the start event", type: "string" },
     step: { description: "Internal step identifier carried by *_started events from the v5 DAG walker", type: "string" },
@@ -24938,9 +24407,6 @@ var pipelineSignalCommand = defineCommand({
     copy("verdict", "verdict");
     copy("gate-type", "gate_type");
     copy("reason", "reason");
-    copy("commit-hash", "commit_hash");
-    copy("pushed", "pushed");
-    copy("compare-url", "compare_url");
     copy("pr-url", "pr_url");
     copy("template", "template");
     if (flags.phase !== void 0) {
@@ -25373,7 +24839,7 @@ init_dist11();
 // cli/src/commands/config/index.ts
 init_command();
 init_paths();
-import fs25 from "node:fs";
+import fs26 from "node:fs";
 import path33 from "node:path";
 function scalar(value, fallback) {
   return value === void 0 || value === null ? fallback : String(value);
@@ -25381,10 +24847,10 @@ function scalar(value, fallback) {
 function readConfig2({ root }) {
   const defaults = { autoCommit: "ask", autoPr: "ask", telemetryEnabled: false };
   const configPath = path33.join(root, "orchestration.yml");
-  if (!fs25.existsSync(configPath)) return defaults;
+  if (!fs26.existsSync(configPath)) return defaults;
   let parsed;
   try {
-    parsed = parseYaml(fs25.readFileSync(configPath, "utf8"));
+    parsed = parseYaml(fs26.readFileSync(configPath, "utf8"));
   } catch {
     return defaults;
   }
@@ -25618,9 +25084,9 @@ function buildSourceControlState(opts) {
 
 // cli/src/commands/source-control/init.ts
 init_paths();
-import fs26 from "node:fs";
+import fs27 from "node:fs";
 import path34 from "node:path";
-import { execFileSync as execFileSync11 } from "node:child_process";
+import { execFileSync as execFileSync9 } from "node:child_process";
 init_state_io();
 init_dist10();
 function sourceControlInit(opts) {
@@ -25702,7 +25168,7 @@ function sourceControlInit(opts) {
   return { ok: true, projectDir };
 }
 function readWorktreeFactsDefault(worktreePath) {
-  if (!fs26.existsSync(worktreePath)) {
+  if (!fs27.existsSync(worktreePath)) {
     return { exists: false };
   }
   let branch = "";
@@ -25711,7 +25177,7 @@ function readWorktreeFactsDefault(worktreePath) {
   let compareUrl = null;
   const exec2 = (file, args, cwd) => {
     try {
-      return String(execFileSync11(file, args, { cwd, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] })).trim();
+      return String(execFileSync9(file, args, { cwd, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] })).trim();
     } catch {
       return "";
     }
@@ -25798,9 +25264,9 @@ var sourceControlInitCommand = defineCommand({
 // cli/src/commands/execute/resolve.ts
 init_command();
 init_paths();
-import fs27 from "node:fs";
+import fs28 from "node:fs";
 import path35 from "node:path";
-import { execFileSync as execFileSync12 } from "node:child_process";
+import { execFileSync as execFileSync10 } from "node:child_process";
 init_dist11();
 init_dist10();
 function unknown(project, reason) {
@@ -25918,7 +25384,7 @@ var executeResolveCommand = defineCommand({
   flags: {},
   handler: async ({ args }) => {
     const paths = userDataPaths();
-    const exec2 = (file, execArgs, opts) => execFileSync12(file, execArgs, { cwd: opts.cwd, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] });
+    const exec2 = (file, execArgs, opts) => execFileSync10(file, execArgs, { cwd: opts.cwd, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] });
     const svc = new WorkGraphService({ root: paths.root, worktreesDir: paths.worktrees, sideProjectsDir: paths.sideProjects, exec: exec2 });
     const registry = readRegistry({ root: paths.root });
     return executeResolve({
@@ -25930,10 +25396,10 @@ var executeResolveCommand = defineCommand({
       // RAW config strings — preserves 'ask' so the skill knows to ask.
       readConfig: () => readConfig2({ root: paths.root }),
       defaultBranch: (repo) => registry.repos[repo]?.default_branch ?? "main",
-      worktreeExists: (worktreeName, repo) => fs27.existsSync(path35.join(paths.worktrees, worktreeName, repo)),
+      worktreeExists: (worktreeName, repo) => fs28.existsSync(path35.join(paths.worktrees, worktreeName, repo)),
       planApproved: (projectDir) => {
         try {
-          const s = JSON.parse(fs27.readFileSync(path35.join(projectDir, "state.json"), "utf8"));
+          const s = JSON.parse(fs28.readFileSync(path35.join(projectDir, "state.json"), "utf8"));
           return s.graph?.nodes?.plan_approval_gate?.status === "completed";
         } catch {
           return false;
@@ -25950,7 +25416,7 @@ var executeResolveCommand = defineCommand({
 init_command();
 init_errors2();
 init_paths();
-import fs28 from "node:fs";
+import fs29 from "node:fs";
 import path36 from "node:path";
 init_approve_plan();
 async function executePrepare(opts) {
@@ -26005,7 +25471,7 @@ var executePrepareCommand = defineCommand({
       autoPr: resolveAutoPr(flags["auto-pr"]),
       readProjectRepos: readProjectReposDefault,
       provision: provisionWorktreesWithDefaults,
-      sideProjectExists: (project) => fs28.existsSync(path36.join(userDataPaths().sideProjects, project, ".git")),
+      sideProjectExists: (project) => fs29.existsSync(path36.join(userDataPaths().sideProjects, project, ".git")),
       sideProjectInit: (project) => sideProjectInit({ project, root: userDataPaths().root }),
       seal: sourceControlInitWithDefaults,
       approvePlan: () => runApprovePlan({ projectDir })
@@ -26045,13 +25511,13 @@ init_paths();
 import { spawn as defaultSpawn2 } from "node:child_process";
 
 // cli/src/commands/telemetry/config.ts
-import fs29 from "node:fs";
+import fs30 from "node:fs";
 import path37 from "node:path";
 function readTelemetryEnabled({ root }) {
   const configPath = path37.join(root, "orchestration.yml");
-  if (!fs29.existsSync(configPath)) return false;
+  if (!fs30.existsSync(configPath)) return false;
   try {
-    const parsed = parseYaml(fs29.readFileSync(configPath, "utf8"));
+    const parsed = parseYaml(fs30.readFileSync(configPath, "utf8"));
     return parsed?.telemetry?.enabled === true;
   } catch {
     return false;
@@ -26059,10 +25525,10 @@ function readTelemetryEnabled({ root }) {
 }
 
 // lib/telemetry/dist/types.js
-var SCHEMA_VERSION = 1;
+var SCHEMA_VERSION = 3;
 
 // lib/telemetry/dist/sink/ndjson-sink.js
-import fs30 from "node:fs";
+import fs31 from "node:fs";
 import path38 from "node:path";
 var NdjsonSink = class {
   opts;
@@ -26073,7 +25539,7 @@ var NdjsonSink = class {
     if (records.length === 0)
       return;
     const dir = path38.join(this.opts.root, "usage");
-    fs30.mkdirSync(dir, { recursive: true });
+    fs31.mkdirSync(dir, { recursive: true });
     const byPartition = /* @__PURE__ */ new Map();
     for (const r of records) {
       const day = r.timestamp.slice(0, 10);
@@ -26081,12 +25547,12 @@ var NdjsonSink = class {
       (byPartition.get(file) ?? byPartition.set(file, []).get(file)).push(JSON.stringify(r));
     }
     for (const [file, lines] of byPartition)
-      fs30.appendFileSync(file, lines.join("\n") + "\n", "utf8");
+      fs31.appendFileSync(file, lines.join("\n") + "\n", "utf8");
   }
 };
 
 // lib/telemetry/dist/checkpoint/file-checkpoint-store.js
-import fs31 from "node:fs";
+import fs32 from "node:fs";
 import path39 from "node:path";
 var FileCheckpointStore = class {
   opts;
@@ -26095,7 +25561,7 @@ var FileCheckpointStore = class {
   }
   dir() {
     const d = path39.join(this.opts.root, "checkpoints");
-    fs31.mkdirSync(d, { recursive: true });
+    fs32.mkdirSync(d, { recursive: true });
     return d;
   }
   file(s) {
@@ -26106,7 +25572,7 @@ var FileCheckpointStore = class {
   }
   seen(sessionId) {
     try {
-      const raw = JSON.parse(fs31.readFileSync(this.file(sessionId), "utf8"));
+      const raw = JSON.parse(fs32.readFileSync(this.file(sessionId), "utf8"));
       return new Set(raw.seen ?? []);
     } catch {
       return /* @__PURE__ */ new Set();
@@ -26116,8 +25582,8 @@ var FileCheckpointStore = class {
     const payload = { sessionId, schemaVersion: SCHEMA_VERSION, updatedAt: (/* @__PURE__ */ new Date()).toISOString(), seen: [...ids] };
     const file = this.file(sessionId);
     const tmp = `${file}.${process.pid}.tmp`;
-    fs31.writeFileSync(tmp, JSON.stringify(payload), "utf8");
-    fs31.renameSync(tmp, file);
+    fs32.writeFileSync(tmp, JSON.stringify(payload), "utf8");
+    fs32.renameSync(tmp, file);
   }
   // The age backstop for a lock whose holder still appears alive — i.e. a wedged
   // worker or a reused PID. It MUST comfortably exceed the worst-case time a real
@@ -26152,9 +25618,9 @@ var FileCheckpointStore = class {
   tryLock(sessionId) {
     const p = this.lockPath(sessionId);
     const acquire = () => {
-      const fd = fs31.openSync(p, "wx");
-      fs31.writeSync(fd, JSON.stringify({ pid: process.pid, acquiredAt: (/* @__PURE__ */ new Date()).toISOString() }));
-      fs31.closeSync(fd);
+      const fd = fs32.openSync(p, "wx");
+      fs32.writeSync(fd, JSON.stringify({ pid: process.pid, acquiredAt: (/* @__PURE__ */ new Date()).toISOString() }));
+      fs32.closeSync(fd);
       return true;
     };
     try {
@@ -26164,12 +25630,12 @@ var FileCheckpointStore = class {
         throw e;
       let raw = "";
       try {
-        raw = fs31.readFileSync(p, "utf8");
+        raw = fs32.readFileSync(p, "utf8");
       } catch {
       }
       if (raw === "" || this.isStaleLock(raw)) {
         try {
-          fs31.unlinkSync(p);
+          fs32.unlinkSync(p);
         } catch {
         }
         try {
@@ -26183,39 +25649,126 @@ var FileCheckpointStore = class {
   }
   unlock(sessionId) {
     try {
-      fs31.unlinkSync(this.lockPath(sessionId));
+      fs32.unlinkSync(this.lockPath(sessionId));
     } catch {
     }
   }
 };
 
 // lib/telemetry/dist/retention.js
-import fs32 from "node:fs";
+import fs34 from "node:fs";
+import path41 from "node:path";
+
+// lib/telemetry/dist/saved-sessions.js
+import fs33 from "node:fs";
 import path40 from "node:path";
+
+// lib/telemetry/dist/transcript-tree.js
+function toSummary(t, file) {
+  return {
+    transcriptId: t.transcriptId,
+    role: t.role,
+    agentType: t.agentType,
+    label: t.label,
+    parentToolUseId: t.parentToolUseId,
+    model: t.model,
+    tokens: t.tokens,
+    toolSummary: t.toolSummary,
+    startedAt: t.startedAt,
+    endedAt: t.endedAt,
+    durationMs: t.durationMs,
+    file,
+    children: []
+  };
+}
+function buildTree(items) {
+  const nodes = items.map(({ transcript, file }) => ({
+    node: toSummary(transcript, file),
+    emits: new Set(transcript.events.filter((e) => e.kind === "tool_call").map((e) => e.tool.toolUseId))
+  }));
+  const owner = /* @__PURE__ */ new Map();
+  for (const { node, emits } of nodes)
+    for (const id of emits)
+      owner.set(id, node);
+  const parentOf = (n) => n.parentToolUseId ? owner.get(n.parentToolUseId) : void 0;
+  const wouldCycle = (parent, node) => {
+    const seen = /* @__PURE__ */ new Set();
+    for (let cur = parent; cur; cur = parentOf(cur)) {
+      if (cur === node)
+        return true;
+      if (seen.has(cur))
+        return false;
+      seen.add(cur);
+    }
+    return false;
+  };
+  const roots = [];
+  for (const { node } of nodes) {
+    const parent = parentOf(node);
+    (parent && !wouldCycle(parent, node) ? parent.children : roots).push(node);
+  }
+  return roots;
+}
+
+// lib/telemetry/dist/saved-sessions.js
+var INDEX_FILE = ".saved-sessions.json";
+function savedIndexPath(root) {
+  return path40.join(root, INDEX_FILE);
+}
+function readSavedIndex(root) {
+  try {
+    const raw = JSON.parse(fs33.readFileSync(savedIndexPath(root), "utf8"));
+    return {
+      version: 1,
+      sessions: Array.isArray(raw.sessions) ? raw.sessions : [],
+      updatedAt: typeof raw.updatedAt === "string" ? raw.updatedAt : ""
+    };
+  } catch {
+    return { version: 1, sessions: [], updatedAt: "" };
+  }
+}
+
+// lib/telemetry/dist/retention.js
 function pruneAgedPartitions(opts) {
-  const usageDir = path40.join(opts.root, "usage");
-  if (!fs32.existsSync(usageDir))
+  const usageDir = path41.join(opts.root, "usage");
+  if (!fs34.existsSync(usageDir))
     return 0;
   const todayUtc = Date.UTC(opts.now.getUTCFullYear(), opts.now.getUTCMonth(), opts.now.getUTCDate());
   const cutoff = todayUtc - opts.maxAgeDays * 864e5;
   let pruned = 0;
   const liveSessions = /* @__PURE__ */ new Set();
-  for (const file of fs32.readdirSync(usageDir)) {
+  const saved = new Set(readSavedIndex(opts.root).sessions.map((s) => s.sessionId));
+  for (const file of fs34.readdirSync(usageDir)) {
     const m = /^usage-(\d{4}-\d{2}-\d{2})-(.+)\.ndjson$/.exec(file);
     if (!m)
       continue;
+    if (saved.has(m[2])) {
+      liveSessions.add(m[2]);
+      continue;
+    }
     if (Date.parse(`${m[1]}T00:00:00Z`) < cutoff) {
-      fs32.unlinkSync(path40.join(usageDir, file));
+      fs34.unlinkSync(path41.join(usageDir, file));
       pruned++;
     } else
       liveSessions.add(m[2]);
   }
-  const ckptDir = path40.join(opts.root, "checkpoints");
-  if (fs32.existsSync(ckptDir)) {
-    for (const file of fs32.readdirSync(ckptDir)) {
+  for (const id of saved)
+    liveSessions.add(id);
+  const ckptDir = path41.join(opts.root, "checkpoints");
+  if (fs34.existsSync(ckptDir)) {
+    for (const file of fs34.readdirSync(ckptDir)) {
       const m = /^(.+)\.json$/.exec(file);
       if (m && !liveSessions.has(m[1])) {
-        fs32.unlinkSync(path40.join(ckptDir, file));
+        fs34.unlinkSync(path41.join(ckptDir, file));
+        pruned++;
+      }
+    }
+  }
+  const txDir = path41.join(opts.root, "transcripts");
+  if (fs34.existsSync(txDir)) {
+    for (const entry of fs34.readdirSync(txDir)) {
+      if (!liveSessions.has(entry)) {
+        fs34.rmSync(path41.join(txDir, entry), { recursive: true, force: true });
         pruned++;
       }
     }
@@ -26224,12 +25777,12 @@ function pruneAgedPartitions(opts) {
 }
 
 // lib/telemetry/dist/adapter/transcript.js
-import fs33 from "node:fs";
-import path41 from "node:path";
+import fs35 from "node:fs";
+import path42 from "node:path";
 function readJsonl(file) {
   let text;
   try {
-    text = fs33.readFileSync(file, "utf8");
+    text = fs35.readFileSync(file, "utf8");
   } catch {
     return [];
   }
@@ -26246,26 +25799,26 @@ function readJsonl(file) {
   return out;
 }
 function subagentPathFor(transcriptPath, agentId) {
-  const dir = path41.dirname(transcriptPath);
-  const base = path41.basename(transcriptPath, ".jsonl");
-  return path41.join(dir, base, "subagents", `agent-${agentId}.jsonl`);
+  const dir = path42.dirname(transcriptPath);
+  const base = path42.basename(transcriptPath, ".jsonl");
+  return path42.join(dir, base, "subagents", `agent-${agentId}.jsonl`);
 }
 function listSubagentTranscripts(transcriptPath) {
-  const dir = path41.join(path41.dirname(transcriptPath), path41.basename(transcriptPath, ".jsonl"), "subagents");
+  const dir = path42.join(path42.dirname(transcriptPath), path42.basename(transcriptPath, ".jsonl"), "subagents");
   try {
-    return fs33.readdirSync(dir).filter((f) => f.endsWith(".jsonl")).map((f) => path41.join(dir, f));
+    return fs35.readdirSync(dir).filter((f) => f.endsWith(".jsonl")).map((f) => path42.join(dir, f));
   } catch {
     return [];
   }
 }
 function metaPathFor(subagentTranscript) {
-  const dir = path41.dirname(subagentTranscript);
-  const base = path41.basename(subagentTranscript, ".jsonl");
-  return path41.join(dir, `${base}.meta.json`);
+  const dir = path42.dirname(subagentTranscript);
+  const base = path42.basename(subagentTranscript, ".jsonl");
+  return path42.join(dir, `${base}.meta.json`);
 }
 function readSubagentMeta(subagentTranscript) {
   try {
-    const raw = JSON.parse(fs33.readFileSync(metaPathFor(subagentTranscript), "utf8"));
+    const raw = JSON.parse(fs35.readFileSync(metaPathFor(subagentTranscript), "utf8"));
     return {
       agentType: typeof raw.agentType === "string" ? raw.agentType : void 0,
       description: typeof raw.description === "string" ? raw.description : void 0,
@@ -26276,7 +25829,7 @@ function readSubagentMeta(subagentTranscript) {
   }
 }
 function agentIdFromTranscript(subagentTranscript) {
-  const base = path41.basename(subagentTranscript, ".jsonl");
+  const base = path42.basename(subagentTranscript, ".jsonl");
   return base.startsWith("agent-") ? base.slice("agent-".length) : "";
 }
 
@@ -26299,16 +25852,38 @@ var ClaudeCodeAdapter = class {
         if (!line.message?.usage || !line.requestId)
           continue;
         const id = this.identity(line);
-        if (seen.has(id))
-          continue;
-        byKey.set(id, { line, file, source, identity: identity2 });
+        const prev = byKey.get(id);
+        if (!prev) {
+          byKey.set(id, { line, file, source, identity: identity2, lines: 1 });
+        } else {
+          prev.lines += 1;
+          if ((line.message.usage.output_tokens ?? 0) >= (prev.line.message.usage.output_tokens ?? 0)) {
+            Object.assign(prev, { line, file, source, identity: identity2 });
+          }
+        }
       }
     }
-    return [...byKey.values()].map(({ line, file, source, identity: identity2 }) => this.toRecord(ev, line, file, source, identity2));
+    const records = [];
+    for (const [id, v] of byKey) {
+      if (seen.has(id) && v.lines < 2)
+        continue;
+      records.push(this.toRecord(ev, v.line, v.file, v.source, v.identity));
+    }
+    return records;
   }
   sourcesFor(ev) {
     if (ev.event === "PostToolUse" && ev.agentId) {
-      return [{ file: ev.agentTranscriptPath ?? subagentPathFor(ev.transcriptPath, ev.agentId), source: "subagent" }];
+      const file = ev.agentTranscriptPath ?? subagentPathFor(ev.transcriptPath, ev.agentId);
+      const meta = !ev.agentType || !ev.toolUseId ? readSubagentMeta(file) : {};
+      return [{
+        file,
+        source: "subagent",
+        identity: {
+          agentId: ev.agentId,
+          agentType: ev.agentType ?? meta.agentType,
+          toolUseId: ev.toolUseId ?? meta.toolUseId
+        }
+      }];
     }
     if (ev.event === "SessionEnd") {
       return [
@@ -26341,15 +25916,15 @@ var ClaudeCodeAdapter = class {
       outputTokens: u.output_tokens ?? 0,
       cacheReadTokens: u.cache_read_input_tokens,
       cacheCreationTokens: u.cache_creation_input_tokens,
+      // 1h-TTL subset of the cache-write total; undefined when the harness omits the
+      // nested breakdown (older transcripts), which the read side treats as all-5m.
+      cacheCreation1hTokens: u.cache_creation?.ephemeral_1h_input_tokens,
       agentType,
+      agentId,
+      toolUseId,
       worktree: worktreeFromCwd(ev.cwd),
       source,
-      pointers: {
-        sourceFile: file,
-        requestId: this.identity(line),
-        agentId,
-        toolUseId
-      }
+      pointers: { sourceFile: file, requestId: this.identity(line) }
       // operation intentionally omitted — dormant until TELEMETRY-4 (AD-9).
     };
   }
@@ -26386,6 +25961,145 @@ var TelemetryCollector = class {
   }
 };
 
+// lib/telemetry/dist/transcript-parser.js
+var BODY_MAX_BYTES = 16 * 1024;
+var BODY_MAX_LINES = 200;
+function truncateBody(raw) {
+  const text = typeof raw === "string" ? raw : JSON.stringify(raw ?? "");
+  const lines = text.split("\n");
+  const overLines = lines.length > BODY_MAX_LINES;
+  const head = overLines ? lines.slice(0, BODY_MAX_LINES).join("\n") : text;
+  if (!overLines && head.length <= BODY_MAX_BYTES)
+    return { text };
+  return { text: head.slice(0, BODY_MAX_BYTES), truncated: true, fullBytes: Buffer.byteLength(text, "utf8") };
+}
+function eventsFromRaw(raw) {
+  const events = [];
+  let seq = 0;
+  for (const r of raw) {
+    const role = r.type === "user" ? "user" : r.type === "assistant" ? "assistant" : void 0;
+    if (!role || !r.message)
+      continue;
+    const ts = r.timestamp ?? "";
+    const blocks = typeof r.message.content === "string" ? [{ type: "text", text: r.message.content }] : Array.isArray(r.message.content) ? r.message.content : [];
+    for (const b of blocks) {
+      if (b.type === "text" && b.text) {
+        events.push({ seq: seq++, timestamp: ts, requestId: r.requestId, kind: "message", role, text: b.text });
+      } else if (b.type === "thinking" && b.thinking) {
+        events.push({ seq: seq++, timestamp: ts, requestId: r.requestId, kind: "thinking", role, text: b.thinking });
+      } else if (b.type === "tool_use" && b.id && b.name) {
+        events.push({ seq: seq++, timestamp: ts, requestId: r.requestId, kind: "tool_call", tool: { name: b.name, input: truncateBody(b.input), toolUseId: b.id } });
+        const op = b.name === "Edit" ? "edit" : b.name === "Write" ? "write" : void 0;
+        const fpath = b.input?.file_path;
+        if (op && fpath)
+          events.push({ seq: seq++, timestamp: ts, requestId: r.requestId, kind: "file_change", file: { path: fpath, op } });
+      } else if (b.type === "tool_result" && b.tool_use_id) {
+        events.push({ seq: seq++, timestamp: ts, requestId: r.requestId, kind: "tool_result", result: { toolUseId: b.tool_use_id, output: truncateBody(b.content), isError: Boolean(b.is_error) } });
+      }
+    }
+  }
+  return events;
+}
+function parseTranscript(file, ctx) {
+  const raw = readJsonl(file);
+  const events = eventsFromRaw(raw);
+  const messages = events.filter((e) => e.kind === "message");
+  const prompt = messages.find((e) => e.role === "user")?.text;
+  const result = [...messages].reverse().find((e) => e.role === "assistant")?.text;
+  const calls = events.filter((e) => e.kind === "tool_call");
+  const byName = {};
+  for (const e of calls)
+    byName[e.tool.name] = (byName[e.tool.name] ?? 0) + 1;
+  const errors = events.filter((e) => e.kind === "tool_result" && e.result?.isError).length;
+  const filesTouched = [...new Set(events.filter((e) => e.kind === "file_change").map((e) => e.file.path))];
+  const model = [...new Set(raw.map((r) => r.message?.model).filter((m) => Boolean(m)))];
+  const winners = /* @__PURE__ */ new Map();
+  raw.forEach((r, i) => {
+    const u = r.message?.usage;
+    if (!u)
+      return;
+    const key = r.requestId ?? r.message?.id ?? `__unkeyed_${i}`;
+    const prev = winners.get(key);
+    if (!prev || (u.output_tokens ?? 0) >= (prev.output_tokens ?? 0))
+      winners.set(key, u);
+  });
+  let tin = 0, tout = 0, tcr = 0, tcc = 0;
+  for (const u of winners.values()) {
+    tin += u.input_tokens ?? 0;
+    tout += u.output_tokens ?? 0;
+    tcr += u.cache_read_input_tokens ?? 0;
+    tcc += u.cache_creation_input_tokens ?? 0;
+  }
+  const stamps = events.map((e) => e.timestamp).filter(Boolean).sort();
+  const startedAt = stamps[0];
+  const endedAt = stamps[stamps.length - 1];
+  const durationMs = startedAt && endedAt ? Date.parse(endedAt) - Date.parse(startedAt) : void 0;
+  return {
+    transcriptId: ctx.transcriptId,
+    sessionId: ctx.sessionId,
+    harness: ctx.harness,
+    role: ctx.role,
+    agentType: ctx.agentType,
+    label: ctx.label,
+    parentToolUseId: ctx.parentToolUseId,
+    model,
+    startedAt,
+    endedAt,
+    durationMs,
+    prompt,
+    result,
+    tokens: { in: tin, out: tout, cacheRead: tcr, cacheCreate: tcc },
+    toolSummary: { total: calls.length, byName, errors },
+    filesTouched,
+    events
+  };
+}
+
+// lib/telemetry/dist/transcript-ingestor.js
+import fs36 from "node:fs";
+import path43 from "node:path";
+var HARNESS = "claude-code";
+function sessionDir(root, sessionId) {
+  return path43.join(root, "transcripts", sessionId);
+}
+function writeAgent(root, sessionId, file, t) {
+  const dir = sessionDir(root, sessionId);
+  fs36.mkdirSync(dir, { recursive: true });
+  fs36.writeFileSync(path43.join(dir, file), JSON.stringify(t));
+}
+function ingestTranscripts(deps) {
+  const { root, signal } = deps;
+  try {
+    if (signal.event === "PostToolUse") {
+      if (!signal.agentId)
+        return;
+      const file = signal.agentTranscriptPath ?? subagentPathFor(signal.transcriptPath, signal.agentId);
+      const parentToolUseId = readSubagentMeta(file).toolUseId ?? signal.toolUseId;
+      const t = parseTranscript(file, { transcriptId: signal.agentId, sessionId: signal.sessionId, harness: HARNESS, role: "subagent", agentType: signal.agentType, parentToolUseId });
+      writeAgent(root, signal.sessionId, `agent-${signal.agentId}.json`, t);
+      return;
+    }
+    const main = parseTranscript(signal.transcriptPath, { transcriptId: signal.sessionId, sessionId: signal.sessionId, harness: HARNESS, role: "main" });
+    writeAgent(root, signal.sessionId, "main.json", main);
+    if (signal.event !== "SessionEnd")
+      return;
+    const items = [{ transcript: main, file: "main.json" }];
+    for (const f of listSubagentTranscripts(signal.transcriptPath)) {
+      const id = agentIdFromTranscript(f);
+      if (!id)
+        continue;
+      const meta = readSubagentMeta(f);
+      const t = parseTranscript(f, { transcriptId: id, sessionId: signal.sessionId, harness: HARNESS, role: "subagent", agentType: meta.agentType, label: meta.description, parentToolUseId: meta.toolUseId });
+      writeAgent(root, signal.sessionId, `agent-${id}.json`, t);
+      items.push({ transcript: t, file: `agent-${id}.json` });
+    }
+    const index = { sessionId: signal.sessionId, harness: HARNESS, createdAt: deps.now.toISOString(), tree: buildTree(items) };
+    fs36.writeFileSync(path43.join(sessionDir(root, signal.sessionId), "index.json"), JSON.stringify(index));
+  } catch (e) {
+    deps.log?.("transcript_ingest_failed", { event: signal.event, sessionId: signal.sessionId, error: e instanceof Error ? e.message : String(e) });
+  }
+}
+
 // cli/src/commands/telemetry/capture.ts
 async function captureCore(deps) {
   const { telemetryRoot, enabled, signal, now, logger } = deps;
@@ -26400,6 +26114,9 @@ async function captureCore(deps) {
       new FileCheckpointStore({ root: telemetryRoot })
     );
     const res = collector.capture(signal);
+    ingestTranscripts({ root: telemetryRoot, signal, now, log: (m, p) => {
+      void logger.debug(m, p);
+    } });
     const pruned = pruneAgedPartitions({ root: telemetryRoot, maxAgeDays: 14, now });
     await logger.info("telemetry_captured", { event: signal.event, sessionId: signal.sessionId, written: res.written, skipped: res.skipped, pruned, locked: res.locked });
     return { enabled: true, sessionId: signal.sessionId, written: res.written, skipped: res.skipped, pruned, locked: res.locked };
@@ -26520,15 +26237,6 @@ function buildProgram(version) {
   ui.command("status").description(uiStatusCommand.description).allowUnknownOption().allowExcessArguments(true).action(async () => {
     const argv = process.argv.slice(4);
     await runCommand(uiStatusCommand, { argv, env: process.env, isTTY: Boolean(process.stdin.isTTY), stderr: process.stderr });
-  });
-  const git = program3.command("git").description("Source control operations");
-  git.command("commit").description(gitCommitCommand.description).helpOption(false).allowUnknownOption().allowExcessArguments(true).action(async () => {
-    const argv = process.argv.slice(4);
-    await runCommand(gitCommitCommand, { argv, env: process.env, isTTY: Boolean(process.stdin.isTTY), stderr: process.stderr });
-  });
-  git.command("pr").description(gitPrCommand.description).helpOption(false).allowUnknownOption().allowExcessArguments(true).action(async () => {
-    const argv = process.argv.slice(4);
-    await runCommand(gitPrCommand, { argv, env: process.env, isTTY: Boolean(process.stdin.isTTY), stderr: process.stderr });
   });
   const repo = program3.command("repo").description("Repo registry operations");
   repo.command("add").description(repoAddCommand.description).helpOption(false).allowUnknownOption().allowExcessArguments(true).action(async () => {
