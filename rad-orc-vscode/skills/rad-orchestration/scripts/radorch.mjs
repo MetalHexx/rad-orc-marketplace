@@ -6606,7 +6606,7 @@ var init_install_json = __esm({
 
 // cli/src/lib/package-version.ts
 function getCliVersion() {
-  return "1.0.0-alpha.9";
+  return "1.0.0-alpha.10";
 }
 var init_package_version = __esm({
   "cli/src/lib/package-version.ts"() {

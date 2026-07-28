@@ -14,13 +14,13 @@
       "name": "rad-orc",
       "source": "copilot-cli-plugin",
       "description": "Rad Orchestration plugin for GitHub Copilot CLI.",
-      "version": "1.0.0-alpha.9"
+      "version": "1.0.0-alpha.10"
     },
     {
       "name": "rad-orc-vscode",
       "source": "rad-orc-vscode",
       "description": "Rad Orchestration plugin for GitHub Copilot in VS Code.",
-      "version": "1.0.0-alpha.9"
+      "version": "1.0.0-alpha.10"
     }
   ]
 }

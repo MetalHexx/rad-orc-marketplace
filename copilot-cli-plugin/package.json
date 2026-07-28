@@ -1,6 +1,6 @@
 {
   "name": "@rad-orchestration/copilot-cli-plugin",
-  "version": "1.0.0-alpha.9",
+  "version": "1.0.0-alpha.10",
   "description": "Source-side wrapper for the Copilot CLI marketplace plugin installer. Never published — npm pack is run against output/ after build.",
   "license": "MIT",
   "type": "module",
