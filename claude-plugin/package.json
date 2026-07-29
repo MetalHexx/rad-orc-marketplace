@@ -1,6 +1,6 @@
 {
   "name": "@rad-orchestration/claude-plugin",
-  "version": "1.0.0-alpha.11",
+  "version": "1.0.0-alpha.12",
   "description": "Source-side wrapper for the Claude marketplace plugin installer. Never published — npm pack is run against output/ after build.",
   "license": "MIT",
   "type": "module",

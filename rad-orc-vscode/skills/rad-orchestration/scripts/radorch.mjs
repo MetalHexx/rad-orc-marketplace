@@ -1203,8 +1203,8 @@ var require_command = __commonJS({
   "node_modules/commander/lib/command.js"(exports) {
     var EventEmitter = __require("node:events").EventEmitter;
     var childProcess = __require("node:child_process");
-    var path44 = __require("node:path");
-    var fs38 = __require("node:fs");
+    var path46 = __require("node:path");
+    var fs40 = __require("node:fs");
     var process5 = __require("node:process");
     var { Argument: Argument2, humanReadableArgName } = require_argument();
     var { CommanderError: CommanderError2 } = require_error();
@@ -2198,7 +2198,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * @param {string} subcommandName
        */
       _checkForMissingExecutable(executableFile, executableDir, subcommandName) {
-        if (fs38.existsSync(executableFile)) return;
+        if (fs40.existsSync(executableFile)) return;
         const executableDirMessage = executableDir ? `searched for local subcommand relative to directory '${executableDir}'` : "no directory for search for local subcommand, use .executableDir() to supply a custom directory";
         const executableMissing = `'${executableFile}' does not exist
  - if '${subcommandName}' is not meant to be an executable command, remove description parameter from '.command()' and use '.description()' instead
@@ -2216,11 +2216,11 @@ Expecting one of '${allowedValues.join("', '")}'`);
         let launchWithNode = false;
         const sourceExt = [".js", ".ts", ".tsx", ".mjs", ".cjs"];
         function findFile(baseDir, baseName) {
-          const localBin = path44.resolve(baseDir, baseName);
-          if (fs38.existsSync(localBin)) return localBin;
-          if (sourceExt.includes(path44.extname(baseName))) return void 0;
+          const localBin = path46.resolve(baseDir, baseName);
+          if (fs40.existsSync(localBin)) return localBin;
+          if (sourceExt.includes(path46.extname(baseName))) return void 0;
           const foundExt = sourceExt.find(
-            (ext) => fs38.existsSync(`${localBin}${ext}`)
+            (ext) => fs40.existsSync(`${localBin}${ext}`)
           );
           if (foundExt) return `${localBin}${foundExt}`;
           return void 0;
@@ -2232,21 +2232,21 @@ Expecting one of '${allowedValues.join("', '")}'`);
         if (this._scriptPath) {
           let resolvedScriptPath;
           try {
-            resolvedScriptPath = fs38.realpathSync(this._scriptPath);
+            resolvedScriptPath = fs40.realpathSync(this._scriptPath);
           } catch {
             resolvedScriptPath = this._scriptPath;
           }
-          executableDir = path44.resolve(
-            path44.dirname(resolvedScriptPath),
+          executableDir = path46.resolve(
+            path46.dirname(resolvedScriptPath),
             executableDir
           );
         }
         if (executableDir) {
           let localFile = findFile(executableDir, executableFile);
           if (!localFile && !subcommand._executableFile && this._scriptPath) {
-            const legacyName = path44.basename(
+            const legacyName = path46.basename(
               this._scriptPath,
-              path44.extname(this._scriptPath)
+              path46.extname(this._scriptPath)
             );
             if (legacyName !== this._name) {
               localFile = findFile(
@@ -2257,7 +2257,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
           }
           executableFile = localFile || executableFile;
         }
-        launchWithNode = sourceExt.includes(path44.extname(executableFile));
+        launchWithNode = sourceExt.includes(path46.extname(executableFile));
         let proc;
         if (process5.platform !== "win32") {
           if (launchWithNode) {
@@ -3172,7 +3172,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * @return {Command}
        */
       nameFromFilename(filename) {
-        this._name = path44.basename(filename, path44.extname(filename));
+        this._name = path46.basename(filename, path46.extname(filename));
         return this;
       }
       /**
@@ -3186,9 +3186,9 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * @param {string} [path]
        * @return {(string|null|Command)}
        */
-      executableDir(path45) {
-        if (path45 === void 0) return this._executableDir;
-        this._executableDir = path45;
+      executableDir(path47) {
+        if (path47 === void 0) return this._executableDir;
+        this._executableDir = path47;
         return this;
       }
       /**
@@ -6606,7 +6606,7 @@ var init_install_json = __esm({
 
 // cli/src/lib/package-version.ts
 function getCliVersion() {
-  return "1.0.0-alpha.11";
+  return "1.0.0-alpha.12";
 }
 var init_package_version = __esm({
   "cli/src/lib/package-version.ts"() {
@@ -13213,8 +13213,8 @@ var require_utils = __commonJS({
       }
       return ind;
     }
-    function removeDotSegments(path44) {
-      let input = path44;
+    function removeDotSegments(path46) {
+      let input = path46;
       const output = [];
       let nextSlash = -1;
       let len = 0;
@@ -13466,8 +13466,8 @@ var require_schemes = __commonJS({
         wsComponent.secure = void 0;
       }
       if (wsComponent.resourceName) {
-        const [path44, query] = wsComponent.resourceName.split("?");
-        wsComponent.path = path44 && path44 !== "/" ? path44 : void 0;
+        const [path46, query] = wsComponent.resourceName.split("?");
+        wsComponent.path = path46 && path46 !== "/" ? path46 : void 0;
         wsComponent.query = query;
         wsComponent.resourceName = void 0;
       }
@@ -17173,37 +17173,37 @@ function instancePathToDotNotation(instancePath) {
 }
 function formatSchemaError(error) {
   const basePath = instancePathToDotNotation(error.instancePath);
-  let path44;
+  let path46;
   let problem;
   switch (error.keyword) {
     case "required": {
       const missing = error.params["missingProperty"];
-      path44 = basePath ? `${basePath}.${missing}` : missing;
+      path46 = basePath ? `${basePath}.${missing}` : missing;
       problem = "required field missing";
       break;
     }
     case "type": {
       const expected = error.params["type"];
       const actual = error.data === null ? "null" : typeof error.data;
-      path44 = basePath;
+      path46 = basePath;
       problem = `expected ${expected}, got ${actual}`;
       break;
     }
     case "enum": {
       const allowedValues = error.params["allowedValues"];
-      path44 = basePath;
+      path46 = basePath;
       problem = `invalid value ${JSON.stringify(error.data)} \u2014 must be one of: ${allowedValues.join(", ")}`;
       break;
     }
     case "const": {
       const expectedValue = error.params["allowedValue"];
-      path44 = basePath;
+      path46 = basePath;
       problem = `expected ${JSON.stringify(expectedValue)}, got ${JSON.stringify(error.data)}`;
       break;
     }
     case "additionalProperties": {
       const additionalProp = error.params["additionalProperty"];
-      path44 = basePath ? `${basePath}.${additionalProp}` : additionalProp;
+      path46 = basePath ? `${basePath}.${additionalProp}` : additionalProp;
       problem = "unexpected field";
       if (additionalProp === "commit_hash" && basePath.startsWith("pipeline.source_control")) {
         problem += " \u2014 global commit_hash was removed in v5; per-repo commit_hash is now recorded in the repos array on each IterationEntry (v6)";
@@ -17212,15 +17212,15 @@ function formatSchemaError(error) {
     }
     case "minimum": {
       const limit = error.params["limit"];
-      path44 = basePath;
+      path46 = basePath;
       problem = `value must be >= ${limit}`;
       break;
     }
     default:
-      path44 = basePath;
+      path46 = basePath;
       problem = error.message ?? "validation failed";
   }
-  return `[schema] ${path44}: ${problem}`;
+  return `[schema] ${path46}: ${problem}`;
 }
 function normalizePipelineSourceControl(state) {
   const sc = state.pipeline?.source_control;
@@ -17468,7 +17468,7 @@ function validateScope(nodes, templateId, errors, warnings) {
     }
   }
 }
-function validateTemplate(template, templateId) {
+function validateTemplate2(template, templateId) {
   if (template.template.status === "deprecated") {
     return { valid: true, errors: [], warnings: [] };
   }
@@ -17501,8 +17501,8 @@ var init_template_validator = __esm({
 });
 
 // cli/src/lib/pipeline-engine/template-loader.ts
-import * as fs21 from "node:fs";
-import * as path26 from "node:path";
+import * as fs23 from "node:fs";
+import * as path28 from "node:path";
 function buildEventIndex(nodes, parentPath) {
   const index = /* @__PURE__ */ new Map();
   for (const node of nodes) {
@@ -17575,7 +17575,7 @@ function buildEventIndex(nodes, parentPath) {
 function loadTemplate(templatePath) {
   let raw;
   try {
-    raw = fs21.readFileSync(templatePath, "utf-8");
+    raw = fs23.readFileSync(templatePath, "utf-8");
   } catch (err) {
     if (err !== null && typeof err === "object" && err.code === "ENOENT") {
       throw new Error(`Template file not found: ${templatePath}`);
@@ -17611,8 +17611,8 @@ function loadTemplate(templatePath) {
   }
   const template = parsed;
   const eventIndex = buildEventIndex(template.nodes, "");
-  const templateId = path26.basename(templatePath, ".yml");
-  const validationResult = validateTemplate(template, templateId);
+  const templateId = path28.basename(templatePath, ".yml");
+  const validationResult = validateTemplate2(template, templateId);
   const throwableErrors = validationResult.errors.filter(
     (e) => e.subtype !== "unreachable_node"
   );
@@ -17632,8 +17632,8 @@ var init_template_loader = __esm({
 });
 
 // cli/src/lib/pipeline-engine/template-resolver.ts
-import * as fs22 from "node:fs";
-import * as path27 from "node:path";
+import * as fs24 from "node:fs";
+import * as path29 from "node:path";
 function resolveTemplateName(state, cliTemplateName, config, projectDir, templatesDir) {
   let templateName;
   let source;
@@ -17655,15 +17655,15 @@ function resolveTemplateName(state, cliTemplateName, config, projectDir, templat
   return { templateName, templatePath, source, isProjectLocal };
 }
 function resolveTemplatePath(templateName, projectDir, templatesDir) {
-  const projectLocalPath = path27.join(projectDir, "template.yml");
-  if (fs22.existsSync(projectLocalPath)) {
-    return { path: path27.resolve(projectLocalPath), isProjectLocal: true };
+  const projectLocalPath = path29.join(projectDir, "template.yml");
+  if (fs24.existsSync(projectLocalPath)) {
+    return { path: path29.resolve(projectLocalPath), isProjectLocal: true };
   }
-  return { path: path27.join(templatesDir, templateName + ".yml"), isProjectLocal: false };
+  return { path: path29.join(templatesDir, templateName + ".yml"), isProjectLocal: false };
 }
 function snapshotTemplate(globalTemplatePath, projectDir) {
-  fs22.mkdirSync(projectDir, { recursive: true });
-  fs22.copyFileSync(globalTemplatePath, path27.join(projectDir, "template.yml"));
+  fs24.mkdirSync(projectDir, { recursive: true });
+  fs24.copyFileSync(globalTemplatePath, path29.join(projectDir, "template.yml"));
 }
 var CONFIG_SENTINEL_REMAP;
 var init_template_resolver = __esm({
@@ -19067,14 +19067,14 @@ Pass --phase <N> and/or --task <N> to specify explicitly.`
 });
 
 // cli/src/lib/pipeline-engine/condition-evaluator.ts
-function resolveDotPath(obj, path44) {
-  const segments = path44.split(".");
+function resolveDotPath(obj, path46) {
+  const segments = path46.split(".");
   let current = obj;
   for (let i = 0; i < segments.length; i++) {
     if (current === void 0 || current === null) {
       const blame = i === 0 ? "<root>" : segments[i - 1];
       throw new Error(
-        `Cannot resolve path '${path44}': segment '${blame}' resolved to ${typeof current}`
+        `Cannot resolve path '${path46}': segment '${blame}' resolved to ${typeof current}`
       );
     }
     current = current[segments[i]];
@@ -19160,8 +19160,8 @@ function checkDependencies(dependsOn, nodes) {
   });
 }
 function resolveStateRef(ref, graphState) {
-  const path44 = ref.startsWith("$.") ? ref.slice(2) : ref;
-  const segments = path44.split(".");
+  const path46 = ref.startsWith("$.") ? ref.slice(2) : ref;
+  const segments = path46.split(".");
   let current = graphState;
   for (const segment of segments) {
     if (current === null || current === void 0 || typeof current !== "object") {
@@ -19587,10 +19587,10 @@ var init_dag_walker = __esm({
 });
 
 // cli/src/lib/pipeline-engine/resolve-doc-paths.ts
-import * as path28 from "node:path";
+import * as path30 from "node:path";
 function resolveScalar(value, projectDir) {
-  if (path28.isAbsolute(value)) return value;
-  return path28.join(projectDir, value);
+  if (path30.isAbsolute(value)) return value;
+  return path30.join(projectDir, value);
 }
 function resolveDocPaths(context, projectDir) {
   const result = { ...context };
@@ -19690,11 +19690,11 @@ var init_action_event_loader = __esm({
 });
 
 // cli/src/lib/pipeline-engine/composer.ts
-import fs23 from "node:fs";
-import path29 from "node:path";
+import fs25 from "node:fs";
+import path31 from "node:path";
 function readBodyIfExists(filePath, filename, kind) {
-  if (!fs23.existsSync(filePath)) return null;
-  const text = fs23.readFileSync(filePath, "utf8");
+  if (!fs25.existsSync(filePath)) return null;
+  const text = fs25.readFileSync(filePath, "utf8");
   const parsed = parseActionEventFile(text, filename);
   if (parsed.kind !== kind) {
     throw new Error(`Catalog file '${filePath}' parsed kind '${parsed.kind}' but kind '${kind}' expected.`);
@@ -19702,8 +19702,8 @@ function readBodyIfExists(filePath, filename, kind) {
   return parsed.body;
 }
 function readEvent(filePath, filename) {
-  if (!fs23.existsSync(filePath)) return null;
-  const text = fs23.readFileSync(filePath, "utf8");
+  if (!fs25.existsSync(filePath)) return null;
+  const text = fs25.readFileSync(filePath, "utf8");
   const parsed = parseActionEventFile(text, filename);
   if (parsed.kind !== "event") {
     throw new Error(`Catalog file '${filePath}' expected to be an event but kind was '${parsed.kind}'.`);
@@ -19711,7 +19711,7 @@ function readEvent(filePath, filename) {
   return { body: parsed.body, fm: parsed.frontmatter };
 }
 function validateCustomSlot(customFile, catalogFile, customFilename, catalogFilename, kind, catalogRoot) {
-  if (fs23.existsSync(customFile) && !fs23.existsSync(catalogFile)) {
+  if (fs25.existsSync(customFile) && !fs25.existsSync(catalogFile)) {
     throw new Error(
       `Composer validation: custom '${customFilename}' references unknown ${kind} \u2014 expected catalog file '${catalogFilename}' under '${catalogRoot}'.`
     );
@@ -19723,8 +19723,8 @@ function makeCustomReader(overlay) {
       const v = overlay[overlayKey];
       return v === "" ? null : v;
     }
-    if (!fs23.existsSync(filePath)) return null;
-    return fs23.readFileSync(filePath, "utf8");
+    if (!fs25.existsSync(filePath)) return null;
+    return fs25.readFileSync(filePath, "utf8");
   };
 }
 function deriveSignalLine(eventName, fm) {
@@ -19756,11 +19756,11 @@ function emit2(sections, startStep) {
 function composeActionPrompt(input) {
   const { actionName, completionEvent, catalogRoot } = input;
   const startStep = input.startStep ?? 1;
-  const customRoot = path29.join(catalogRoot, "custom");
+  const customRoot = path31.join(catalogRoot, "custom");
   const readCustom = makeCustomReader(input.overlay);
   const sections = [];
-  const actionCustomPre = path29.join(customRoot, `action.${actionName}.pre.md`);
-  const actionCatalog = path29.join(catalogRoot, `action.${actionName}.md`);
+  const actionCustomPre = path31.join(customRoot, `action.${actionName}.pre.md`);
+  const actionCatalog = path31.join(catalogRoot, `action.${actionName}.md`);
   validateCustomSlot(
     actionCustomPre,
     actionCatalog,
@@ -19780,9 +19780,9 @@ function composeActionPrompt(input) {
   const actionBodyAdmitted = admit(actionBody);
   if (actionBodyAdmitted !== null) sections.push({ body: actionBodyAdmitted, isOverlay: false });
   if (completionEvent !== null) {
-    const eventCustomPre = path29.join(customRoot, `event.${completionEvent}.pre.md`);
-    const eventCatalog = path29.join(catalogRoot, `event.${completionEvent}.md`);
-    const eventCustomPost = path29.join(customRoot, `event.${completionEvent}.post.md`);
+    const eventCustomPre = path31.join(customRoot, `event.${completionEvent}.pre.md`);
+    const eventCatalog = path31.join(catalogRoot, `event.${completionEvent}.md`);
+    const eventCustomPost = path31.join(customRoot, `event.${completionEvent}.post.md`);
     validateCustomSlot(
       eventCustomPre,
       eventCatalog,
@@ -19817,9 +19817,9 @@ function composeActionPrompt(input) {
 }
 function composeOrphanRuntimeShape(input) {
   const { eventName, catalogRoot, overlay } = input;
-  const customRoot = path29.join(catalogRoot, "custom");
+  const customRoot = path31.join(catalogRoot, "custom");
   const readCustom = makeCustomReader(overlay);
-  const eventCustomPost = path29.join(customRoot, `event.${eventName}.post.md`);
+  const eventCustomPost = path31.join(customRoot, `event.${eventName}.post.md`);
   const post = admit(readCustom(eventCustomPost, `event.${eventName}.post`));
   if (post !== null) {
     return {
@@ -19841,12 +19841,12 @@ ${NEXT_ACTION_PLACEHOLDER}`,
 function composeOrphanEventPrompt(input) {
   const { eventName, catalogRoot, overlay } = input;
   const startStep = input.startStep ?? 1;
-  const customRoot = path29.join(catalogRoot, "custom");
+  const customRoot = path31.join(catalogRoot, "custom");
   const readCustom = makeCustomReader(overlay);
   const sections = [];
-  const eventCatalog = path29.join(catalogRoot, `event.${eventName}.md`);
-  const eventCustomPre = path29.join(customRoot, `event.${eventName}.pre.md`);
-  const eventCustomPost = path29.join(customRoot, `event.${eventName}.post.md`);
+  const eventCatalog = path31.join(catalogRoot, `event.${eventName}.md`);
+  const eventCustomPre = path31.join(customRoot, `event.${eventName}.pre.md`);
+  const eventCustomPost = path31.join(customRoot, `event.${eventName}.post.md`);
   validateCustomSlot(
     eventCustomPre,
     eventCatalog,
@@ -19909,10 +19909,10 @@ function checkGraphStatus(state) {
   }
   return [];
 }
-function checkNodeStatuses(nodes, path44) {
+function checkNodeStatuses(nodes, path46) {
   const errors = [];
   for (const [id, node] of Object.entries(nodes)) {
-    const nodePath = `${path44}.${id}`;
+    const nodePath = `${path46}.${id}`;
     if (!validNodeStatuses.has(node.status)) {
       errors.push(`Invalid node status '${node.status}' at ${nodePath}`);
     }
@@ -19933,10 +19933,10 @@ function checkNodeStatuses(nodes, path44) {
   }
   return errors;
 }
-function checkIterationIndices(nodes, path44) {
+function checkIterationIndices(nodes, path46) {
   const errors = [];
   for (const [id, node] of Object.entries(nodes)) {
-    const nodePath = `${path44}.${id}`;
+    const nodePath = `${path46}.${id}`;
     if (node.kind === "for_each_phase" || node.kind === "for_each_task") {
       for (let i = 0; i < node.iterations.length; i++) {
         const iter = node.iterations[i];
@@ -19958,10 +19958,10 @@ function checkIterationIndices(nodes, path44) {
   }
   return errors;
 }
-function checkCompletedParentChildren(nodes, path44) {
+function checkCompletedParentChildren(nodes, path46) {
   const errors = [];
   for (const [id, node] of Object.entries(nodes)) {
-    const nodePath = `${path44}.${id}`;
+    const nodePath = `${path46}.${id}`;
     if (node.kind === "for_each_phase" || node.kind === "for_each_task") {
       if (node.status === "completed") {
         for (const iter of node.iterations) {
@@ -19987,30 +19987,30 @@ function checkCompletedParentChildren(nodes, path44) {
   }
   return errors;
 }
-function findInProgressNodes(nodes, path44, parentPath) {
+function findInProgressNodes(nodes, path46, parentPath) {
   const errors = [];
   for (const [id, node] of Object.entries(nodes)) {
     if (node.status === "in_progress") {
-      errors.push(`Node '${path44}.${id}' is in_progress but parent '${parentPath}' is completed`);
+      errors.push(`Node '${path46}.${id}' is in_progress but parent '${parentPath}' is completed`);
     }
     if (node.kind === "for_each_phase" || node.kind === "for_each_task") {
       for (const iter of node.iterations) {
-        errors.push(...findInProgressNodes(iter.nodes, `${path44}.${id}.iterations[${iter.index}].nodes`, parentPath));
+        errors.push(...findInProgressNodes(iter.nodes, `${path46}.${id}.iterations[${iter.index}].nodes`, parentPath));
         for (const ct of iter.corrective_tasks) {
-          errors.push(...findInProgressNodes(ct.nodes, `${path44}.${id}.iterations[${iter.index}].corrective_tasks[${ct.index}].nodes`, parentPath));
+          errors.push(...findInProgressNodes(ct.nodes, `${path46}.${id}.iterations[${iter.index}].corrective_tasks[${ct.index}].nodes`, parentPath));
         }
       }
     }
     if (node.kind === "parallel") {
-      errors.push(...findInProgressNodes(node.nodes, `${path44}.${id}.nodes`, parentPath));
+      errors.push(...findInProgressNodes(node.nodes, `${path46}.${id}.nodes`, parentPath));
     }
   }
   return errors;
 }
-function checkCorrectiveEntriesTerminal(nodes, path44) {
+function checkCorrectiveEntriesTerminal(nodes, path46) {
   const errors = [];
   for (const [id, node] of Object.entries(nodes)) {
-    const nodePath = `${path44}.${id}`;
+    const nodePath = `${path46}.${id}`;
     if (node.kind === "for_each_phase" || node.kind === "for_each_task") {
       for (const iter of node.iterations) {
         if (iter.status === "completed") {
@@ -20031,10 +20031,10 @@ function checkCorrectiveEntriesTerminal(nodes, path44) {
   }
   return errors;
 }
-function checkCorrectiveTaskStructure(nodes, path44) {
+function checkCorrectiveTaskStructure(nodes, path46) {
   const errors = [];
   for (const [id, node] of Object.entries(nodes)) {
-    const nodePath = `${path44}.${id}`;
+    const nodePath = `${path46}.${id}`;
     if (node.kind === "for_each_phase" || node.kind === "for_each_task") {
       for (const iter of node.iterations) {
         for (const ct of iter.corrective_tasks) {
@@ -20049,24 +20049,24 @@ function checkCorrectiveTaskStructure(nodes, path44) {
   }
   return errors;
 }
-function validateCorrectiveEntry(ct, path44) {
+function validateCorrectiveEntry(ct, path46) {
   const errors = [];
   if (typeof ct.index !== "number" || ct.index < 1) {
-    errors.push(`Corrective task at ${path44} has invalid index: ${ct.index} (must be >= 1)`);
+    errors.push(`Corrective task at ${path46} has invalid index: ${ct.index} (must be >= 1)`);
   }
   if (typeof ct.reason !== "string" || ct.reason.length === 0) {
-    errors.push(`Corrective task at ${path44} has empty or missing reason`);
+    errors.push(`Corrective task at ${path46} has empty or missing reason`);
   }
   if (typeof ct.injected_after !== "string" || ct.injected_after.length === 0) {
-    errors.push(`Corrective task at ${path44} has empty or missing injected_after`);
+    errors.push(`Corrective task at ${path46} has empty or missing injected_after`);
   }
   if (!validNodeStatuses.has(ct.status)) {
-    errors.push(`Corrective task at ${path44} has invalid status: '${ct.status}'`);
+    errors.push(`Corrective task at ${path46} has invalid status: '${ct.status}'`);
   }
   if (!ct.nodes || typeof ct.nodes !== "object") {
-    errors.push(`Corrective task at ${path44} has missing or invalid nodes`);
+    errors.push(`Corrective task at ${path46} has missing or invalid nodes`);
   } else if (ct.injected_after !== "phase_review" && Object.keys(ct.nodes).length === 0) {
-    errors.push(`Corrective task at ${path44} has empty or missing nodes`);
+    errors.push(`Corrective task at ${path46} has empty or missing nodes`);
   }
   return errors;
 }
@@ -20089,9 +20089,9 @@ function checkNodeKindMatchesTemplate(state, template) {
   const errors = [];
   const templateKindMap = /* @__PURE__ */ new Map();
   collectNodeDefKinds(template.nodes, templateKindMap);
-  function walkStateNodes(nodes, path44) {
+  function walkStateNodes(nodes, path46) {
     for (const [id, node] of Object.entries(nodes)) {
-      const nodePath = `${path44}.${id}`;
+      const nodePath = `${path46}.${id}`;
       const templateKind = templateKindMap.get(id);
       if (templateKind !== void 0 && node.kind !== templateKind) {
         errors.push(`Node '${id}' has kind '${node.kind}' but template defines kind '${templateKind}'`);
@@ -20129,7 +20129,7 @@ function checkImmutableCommitHash(previousState, proposedState) {
   function repoHash(entry) {
     return entry?.repos && entry.repos.length > 0 ? entry.repos[0].commit_hash : null;
   }
-  function compare(prev, curr, path44) {
+  function compare(prev, curr, path46) {
     for (const [id, currNode] of Object.entries(curr)) {
       const prevNode = prev[id];
       if (!prevNode) continue;
@@ -20141,7 +20141,7 @@ function checkImmutableCommitHash(previousState, proposedState) {
           const before = repoHash(prevIter);
           const after = repoHash(currIter);
           if (before != null && after != null && before !== after) {
-            errors.push(`Immutable commit_hash violation at ${path44}.${id}.iterations[${currIter.index}]: '${before}' \u2192 '${after}'`);
+            errors.push(`Immutable commit_hash violation at ${path46}.${id}.iterations[${currIter.index}]: '${before}' \u2192 '${after}'`);
           }
           for (const currCt of currIter.corrective_tasks) {
             const prevCt = prevIter.corrective_tasks.find((ct) => ct.index === currCt.index);
@@ -20149,22 +20149,22 @@ function checkImmutableCommitHash(previousState, proposedState) {
             const ctBefore = repoHash(prevCt);
             const ctAfter = repoHash(currCt);
             if (ctBefore != null && ctAfter != null && ctBefore !== ctAfter) {
-              errors.push(`Immutable commit_hash violation at ${path44}.${id}.iterations[${currIter.index}].corrective_tasks[${currCt.index}]: '${ctBefore}' \u2192 '${ctAfter}'`);
+              errors.push(`Immutable commit_hash violation at ${path46}.${id}.iterations[${currIter.index}].corrective_tasks[${currCt.index}]: '${ctBefore}' \u2192 '${ctAfter}'`);
             }
-            compare(prevCt.nodes, currCt.nodes, `${path44}.${id}.iterations[${currIter.index}].corrective_tasks[${currCt.index}].nodes`);
+            compare(prevCt.nodes, currCt.nodes, `${path46}.${id}.iterations[${currIter.index}].corrective_tasks[${currCt.index}].nodes`);
           }
-          compare(prevIter.nodes, currIter.nodes, `${path44}.${id}.iterations[${currIter.index}].nodes`);
+          compare(prevIter.nodes, currIter.nodes, `${path46}.${id}.iterations[${currIter.index}].nodes`);
         }
       }
       if (currNode.kind === "parallel" && prevNode.kind === "parallel") {
-        compare(prevNode.nodes, currNode.nodes, `${path44}.${id}.nodes`);
+        compare(prevNode.nodes, currNode.nodes, `${path46}.${id}.nodes`);
       }
     }
   }
   compare(previousState.graph.nodes, proposedState.graph.nodes, "graph.nodes");
   return errors;
 }
-function compareNodes(prevNodes, currNodes, path44, errors) {
+function compareNodes(prevNodes, currNodes, path46, errors) {
   for (const [id, currNode] of Object.entries(currNodes)) {
     const prevNode = prevNodes[id];
     if (!prevNode) continue;
@@ -20172,7 +20172,7 @@ function compareNodes(prevNodes, currNodes, path44, errors) {
       const allowed = ALLOWED_NODE_TRANSITIONS.get(prevNode.status);
       if (allowed && allowed.size === 0) {
         errors.push(
-          `Illegal status transition at ${path44}.${id}: '${prevNode.status}' \u2192 '${currNode.status}'`
+          `Illegal status transition at ${path46}.${id}: '${prevNode.status}' \u2192 '${currNode.status}'`
         );
       }
     }
@@ -20180,21 +20180,21 @@ function compareNodes(prevNodes, currNodes, path44, errors) {
       for (const currIter of currNode.iterations) {
         const prevIter = prevNode.iterations[currIter.index];
         if (!prevIter) continue;
-        compareNodes(prevIter.nodes, currIter.nodes, `${path44}.${id}.iterations[${currIter.index}].nodes`, errors);
+        compareNodes(prevIter.nodes, currIter.nodes, `${path46}.${id}.iterations[${currIter.index}].nodes`, errors);
         for (const currCt of currIter.corrective_tasks) {
           const prevCt = prevIter.corrective_tasks.find((ct) => ct.index === currCt.index);
           if (!prevCt) continue;
           compareNodes(
             prevCt.nodes,
             currCt.nodes,
-            `${path44}.${id}.iterations[${currIter.index}].corrective_tasks[${currCt.index}].nodes`,
+            `${path46}.${id}.iterations[${currIter.index}].corrective_tasks[${currCt.index}].nodes`,
             errors
           );
         }
       }
     }
     if (currNode.kind === "parallel" && prevNode.kind === "parallel") {
-      compareNodes(prevNode.nodes, currNode.nodes, `${path44}.${id}.nodes`, errors);
+      compareNodes(prevNode.nodes, currNode.nodes, `${path46}.${id}.nodes`, errors);
     }
   }
 }
@@ -20221,9 +20221,9 @@ var init_validator = __esm({
 });
 
 // cli/src/lib/pipeline-engine/engine.ts
-import * as fs24 from "node:fs";
+import * as fs26 from "node:fs";
 import * as os5 from "node:os";
-import * as path30 from "node:path";
+import * as path32 from "node:path";
 function resolveActionEventsRoot() {
   if (__actionEventsRootOverride !== null) return __actionEventsRootOverride;
   const envOverride = process.env["RADORCH_ACTION_EVENTS_DIR"];
@@ -20233,9 +20233,9 @@ function resolveActionEventsRoot() {
 function resolveCompletionEvent(actionName, _template) {
   const root = resolveActionEventsRoot();
   const filename = `action.${actionName}.md`;
-  const filePath = path30.join(root, filename);
-  if (!fs24.existsSync(filePath)) return void 0;
-  const text = fs24.readFileSync(filePath, "utf8");
+  const filePath = path32.join(root, filename);
+  if (!fs26.existsSync(filePath)) return void 0;
+  const text = fs26.readFileSync(filePath, "utf8");
   const parsed = parseActionEventFile(text, filename);
   if (parsed.kind !== "action") {
     throw new Error(`Catalog file '${filePath}' parsed kind '${parsed.kind}' but action expected.`);
@@ -20245,11 +20245,11 @@ function resolveCompletionEvent(actionName, _template) {
 }
 function isOrphanEvent(eventName) {
   const root = resolveActionEventsRoot();
-  if (!fs24.existsSync(root)) return true;
-  const actionFiles = fs24.readdirSync(root).filter((f) => /^action\..+\.md$/.test(f));
+  if (!fs26.existsSync(root)) return true;
+  const actionFiles = fs26.readdirSync(root).filter((f) => /^action\..+\.md$/.test(f));
   for (const filename of actionFiles) {
     try {
-      const parsed = parseActionEventFile(fs24.readFileSync(path30.join(root, filename), "utf8"), filename);
+      const parsed = parseActionEventFile(fs26.readFileSync(path32.join(root, filename), "utf8"), filename);
       if (parsed.kind !== "action") continue;
       const fm = parsed.frontmatter;
       if (fm.completion_event === eventName) return false;
@@ -20260,7 +20260,7 @@ function isOrphanEvent(eventName) {
 }
 function attachPromptIfActionResolved(next, template, firingEvent, projectDir) {
   if (!next) return { action: null, context: {} };
-  next.context = resolveDocPaths(next.context, path30.resolve(projectDir));
+  next.context = resolveDocPaths(next.context, path32.resolve(projectDir));
   const completion_event = resolveCompletionEvent(next.action, template);
   if (completion_event === void 0) {
     return { action: next.action, context: next.context };
@@ -20362,28 +20362,28 @@ function processEvent(event, projectDir, context, io, pathContext, configPath) {
     const config = io.readConfig(configPath);
     const state = io.readState(projectDir);
     const resolution = resolveTemplateName(state, context.template, config, projectDir, templatesDir);
-    const effectiveLoadPath = state !== null ? resolution.templatePath : path30.join(templatesDir, resolution.templateName + ".yml");
+    const effectiveLoadPath = state !== null ? resolution.templatePath : path32.join(templatesDir, resolution.templateName + ".yml");
     const loadedTemplate = loadTemplate(effectiveLoadPath);
     const { template, eventIndex } = loadedTemplate;
     const wrappedReadDocument = (docPath) => {
-      if (path30.isAbsolute(docPath)) {
+      if (path32.isAbsolute(docPath)) {
         return io.readDocument(docPath);
       }
-      const resolvedProjectDir = path30.resolve(projectDir);
-      const resolved = path30.resolve(resolvedProjectDir, docPath);
-      const relativeToProject = path30.relative(resolvedProjectDir, resolved);
-      if (relativeToProject === ".." || relativeToProject.startsWith(`..${path30.sep}`) || path30.isAbsolute(relativeToProject)) {
+      const resolvedProjectDir = path32.resolve(projectDir);
+      const resolved = path32.resolve(resolvedProjectDir, docPath);
+      const relativeToProject = path32.relative(resolvedProjectDir, resolved);
+      if (relativeToProject === ".." || relativeToProject.startsWith(`..${path32.sep}`) || path32.isAbsolute(relativeToProject)) {
         throw new Error(`Document path escapes project directory: ${docPath}`);
       }
       return io.readDocument(resolved);
     };
     if (event === "start") {
       if (state === null) {
-        const projectName = path30.basename(projectDir);
+        const projectName = path32.basename(projectDir);
         io.ensureDirectories(projectDir);
         try {
           snapshotTemplate(
-            path30.join(templatesDir, resolution.templateName + ".yml"),
+            path32.join(templatesDir, resolution.templateName + ".yml"),
             projectDir
           );
         } catch (err) {
@@ -20468,7 +20468,7 @@ function processEvent(event, projectDir, context, io, pathContext, configPath) {
         normalizedContext2.doc_path = normalizeDocPath(
           normalizedContext2.doc_path,
           PROJECTS_BASE_PATH,
-          path30.basename(projectDir)
+          path32.basename(projectDir)
         );
       }
       const mutationResult2 = mutation2(state, normalizedContext2, config, template);
@@ -20557,7 +20557,7 @@ function processEvent(event, projectDir, context, io, pathContext, configPath) {
       normalizedContext.doc_path = normalizeDocPath(
         normalizedContext.doc_path,
         PROJECTS_BASE_PATH,
-        path30.basename(projectDir)
+        path32.basename(projectDir)
       );
     }
     const mutationResult = mutation(state, normalizedContext, config, template);
@@ -20636,14 +20636,14 @@ var init_engine = __esm({
     init_scaffold();
     init_validator();
     init_version();
-    PROJECTS_BASE_PATH = path30.join(os5.homedir(), ".radorc", "projects");
+    PROJECTS_BASE_PATH = path32.join(os5.homedir(), ".radorc", "projects");
     __actionEventsRootOverride = null;
   }
 });
 
 // cli/src/lib/pipeline-engine/state-io.ts
-import * as fs25 from "node:fs";
-import * as path31 from "node:path";
+import * as fs27 from "node:fs";
+import * as path33 from "node:path";
 function deepMerge2(target, source) {
   const result = { ...target };
   for (const key of Object.keys(source)) {
@@ -20664,9 +20664,9 @@ function isEnoent2(err) {
   return err !== null && typeof err === "object" && err.code === "ENOENT";
 }
 function readState3(projectDir) {
-  const statePath = path31.join(projectDir, "state.json");
+  const statePath = path33.join(projectDir, "state.json");
   try {
-    const raw = fs25.readFileSync(statePath, "utf-8");
+    const raw = fs27.readFileSync(statePath, "utf-8");
     return JSON.parse(raw);
   } catch (err) {
     if (isEnoent2(err)) return null;
@@ -20674,14 +20674,14 @@ function readState3(projectDir) {
   }
 }
 function writeState2(projectDir, state) {
-  fs25.mkdirSync(projectDir, { recursive: true });
-  const statePath = path31.join(projectDir, "state.json");
-  const tmpPath = path31.join(projectDir, "state.json.tmp");
+  fs27.mkdirSync(projectDir, { recursive: true });
+  const statePath = path33.join(projectDir, "state.json");
+  const tmpPath = path33.join(projectDir, "state.json.tmp");
   try {
-    fs25.writeFileSync(tmpPath, JSON.stringify(state, null, 2), "utf-8");
-    fs25.renameSync(tmpPath, statePath);
+    fs27.writeFileSync(tmpPath, JSON.stringify(state, null, 2), "utf-8");
+    fs27.renameSync(tmpPath, statePath);
   } catch (err) {
-    fs25.rmSync(tmpPath, { force: true });
+    fs27.rmSync(tmpPath, { force: true });
     throw err;
   }
 }
@@ -20700,7 +20700,7 @@ function readConfig(configPath) {
     return base;
   }
   try {
-    const raw = fs25.readFileSync(configPath, "utf-8");
+    const raw = fs27.readFileSync(configPath, "utf-8");
     const parsed = index_vite_proxy_tmp_default.load(raw);
     if (parsed === null || typeof parsed !== "object" || Array.isArray(parsed)) {
       return base;
@@ -20715,7 +20715,7 @@ function readConfig(configPath) {
 function readDocument2(docPath) {
   let raw;
   try {
-    raw = fs25.readFileSync(docPath, "utf-8");
+    raw = fs27.readFileSync(docPath, "utf-8");
   } catch (err) {
     if (isEnoent2(err)) return null;
     throw err;
@@ -20734,9 +20734,9 @@ function readDocument2(docPath) {
   };
 }
 function ensureDirectories(projectDir) {
-  fs25.mkdirSync(projectDir, { recursive: true });
+  fs27.mkdirSync(projectDir, { recursive: true });
   for (const subdir of ["phases", "tasks", "reports", "reviews"]) {
-    fs25.mkdirSync(path31.join(projectDir, subdir), { recursive: true });
+    fs27.mkdirSync(path33.join(projectDir, subdir), { recursive: true });
   }
 }
 var DEFAULT_CONFIG;
@@ -20764,15 +20764,15 @@ var init_state_io = __esm({
 
 // cli/src/lib/pipeline-engine/path-context.ts
 import os6 from "node:os";
-import path32 from "node:path";
+import path34 from "node:path";
 import { fileURLToPath } from "node:url";
 function resolvePathContext() {
-  const scriptsDir = path32.dirname(fileURLToPath(import.meta.url));
-  const templatesDir = process.env["RADORCH_TEMPLATES_DIR"] ?? path32.join(os6.homedir(), ".radorc", "templates");
+  const scriptsDir = path34.dirname(fileURLToPath(import.meta.url));
+  const templatesDir = process.env["RADORCH_TEMPLATES_DIR"] ?? path34.join(os6.homedir(), ".radorc", "templates");
   return { scriptsDir, templatesDir };
 }
 function resolveDiscoveredConfigPath() {
-  return path32.join(os6.homedir(), ".radorc", "orchestration.yml");
+  return path34.join(os6.homedir(), ".radorc", "orchestration.yml");
 }
 var init_path_context = __esm({
   "cli/src/lib/pipeline-engine/path-context.ts"() {
@@ -20917,7 +20917,7 @@ __export(compose_exports, {
   composeCommand: () => composeCommand,
   runCompose: () => runCompose
 });
-import fs37 from "node:fs";
+import fs39 from "node:fs";
 function validateMode(raw) {
   if (raw === void 0 || raw === "") return "standalone";
   if (raw !== "standalone" && raw !== "runtime-orphan") {
@@ -20955,7 +20955,7 @@ function readOptionalStdinJson() {
   if (process.stdin.isTTY) return {};
   let raw = "";
   try {
-    raw = fs37.readFileSync(0, "utf8");
+    raw = fs39.readFileSync(0, "utf8");
   } catch {
     return {};
   }
@@ -23446,17 +23446,144 @@ var planExplodeCommand = defineCommand({
   }
 });
 
+// cli/src/commands/plan/resolve.ts
+init_command();
+init_errors2();
+init_paths();
+import fs19 from "node:fs";
+import path23 from "node:path";
+var SHIPPED_TIERS = ["low", "medium", "high", "extra-high"];
+function validateTemplate(t) {
+  if (t === void 0 || t === "") return { ok: true };
+  if (!SHIPPED_TIERS.includes(t)) {
+    return { ok: false, error: `--template "${t}" is not a valid tier. Valid values: ${SHIPPED_TIERS.join(", ")}` };
+  }
+  return { ok: true, template: t };
+}
+function halt(project, reason) {
+  return { project, projectDir: null, requirementsPath: null, reason, ask: {}, next: [] };
+}
+function planResolve(deps) {
+  if (deps.project.includes("/") || deps.project.includes("\\") || deps.project === ".." || path23.isAbsolute(deps.project)) {
+    throw new UserError(`--project must be a plain project name, not a path (got "${deps.project}")`);
+  }
+  const projectDir = path23.join(deps.projectsDir, deps.project);
+  const requirementsPath = path23.join(projectDir, `${deps.project}-REQUIREMENTS.md`);
+  if (!deps.fileExists(requirementsPath)) {
+    return halt(
+      deps.project,
+      `No requirements document at ${requirementsPath}. Run /rad-brainstorm ${deps.project} first to collaborate on goals and scribe the Requirements doc, then re-run /rad-plan ${deps.project}.`
+    );
+  }
+  const ask = { taskSize: true, audit: true };
+  if (!deps.template) ask.template = true;
+  const template = deps.template || "{template}";
+  const next = [
+    `plan prepare --project ${deps.project} --template ${template} --task-size "{size}"`,
+    `pipeline signal --event start --project-dir "${projectDir}" --template ${template}`
+  ];
+  return { project: deps.project, projectDir, requirementsPath, ask, next };
+}
+var planResolveCommand = defineCommand({
+  name: "plan-resolve",
+  description: "Classify planning readiness for a project and advise the next steps",
+  args: {
+    project: { description: "Project to plan", required: true },
+    template: { description: "Template tier to pre-select: low, medium, high, or extra-high; omit to let the operator choose" }
+  },
+  flags: {},
+  handler: async ({ args }) => {
+    if (!args.project) throw new UserError("--project is required");
+    const validated = validateTemplate(args.template);
+    if (!validated.ok) throw new UserError(validated.error);
+    const paths = userDataPaths();
+    return planResolve({
+      project: args.project,
+      template: validated.template,
+      projectsDir: paths.projects,
+      fileExists: (p) => fs19.existsSync(p)
+    });
+  },
+  mapResult: (r) => ({ ok: true, data: r })
+});
+
+// cli/src/commands/plan/prepare.ts
+init_command();
+init_errors2();
+init_paths();
+import fs20 from "node:fs";
+import path24 from "node:path";
+function planPrepare(opts) {
+  if (!opts.fileExists(opts.requirementsPath)) {
+    throw new UserError(`No requirements document at ${opts.requirementsPath}. Run \`plan resolve --project ${opts.project}\` first.`);
+  }
+  const raw = opts.readDoc(opts.requirementsPath);
+  const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
+  if (!match) {
+    throw new UserError(`${opts.requirementsPath} has no YAML frontmatter`);
+  }
+  const fm = parseYaml(match[1] ?? "") ?? {};
+  const body = raw.slice(match[0].length);
+  const alreadySet = fm["status"] === "approved" && fm["template"] === opts.template && fm["task-size"] === opts.taskSize;
+  const result = {
+    requirementsPath: opts.requirementsPath,
+    status: "approved",
+    template: opts.template,
+    taskSize: opts.taskSize,
+    changed: !alreadySet
+  };
+  if (alreadySet) return result;
+  fm["status"] = "approved";
+  fm["template"] = opts.template;
+  fm["task-size"] = opts.taskSize;
+  const newFrontmatter = `---
+${stringifyYaml(fm)}---
+`;
+  opts.writeDoc(opts.requirementsPath, newFrontmatter + body);
+  return result;
+}
+var planPrepareCommand = defineCommand({
+  name: "plan-prepare",
+  description: "Stamp planning approval and freeze the template tier and task size in the Requirements frontmatter",
+  args: {
+    project: { description: "Project whose Requirements doc is being approved", required: true },
+    template: { description: "Template tier the plan was built under (e.g. medium)" },
+    "task-size": { description: "Verbatim task-size answer \u2014 a shipped size name, or free-form custom-criterion prose" }
+  },
+  flags: {},
+  handler: async ({ args }) => {
+    if (!args.project) throw new UserError("--project is required");
+    if (args.project.includes("/") || args.project.includes("\\") || args.project === ".." || path24.isAbsolute(args.project)) {
+      throw new UserError(`--project must be a plain project name, not a path (got "${args.project}")`);
+    }
+    if (!args.template) throw new UserError("--template is required");
+    if (!args["task-size"]) throw new UserError("--task-size is required");
+    const projectDir = path24.join(userDataPaths().projects, args.project);
+    const requirementsPath = path24.join(projectDir, `${args.project}-REQUIREMENTS.md`);
+    return planPrepare({
+      project: args.project,
+      template: args.template,
+      taskSize: args["task-size"],
+      requirementsPath,
+      fileExists: (p) => fs20.existsSync(p),
+      readDoc: (p) => fs20.readFileSync(p, "utf-8"),
+      writeDoc: (p, content) => fs20.writeFileSync(p, content, "utf-8")
+    });
+  },
+  mapResult: (r) => ({ ok: true, data: r })
+});
+
 // cli/src/commands/migrate/index.ts
 init_command();
 init_errors2();
 init_paths();
-import * as fs20 from "node:fs";
-import * as path24 from "node:path";
+import * as fs22 from "node:fs";
+import * as path26 from "node:path";
 
 // cli/src/commands/migrate/migrate.ts
 init_version();
-import * as fs19 from "node:fs";
-import * as path23 from "node:path";
+import * as fs21 from "node:fs";
+import * as path25 from "node:path";
 
 // cli/src/lib/pipeline-engine/migrations/steps.ts
 var import_ajv = __toESM(require_ajv(), 1);
@@ -24109,8 +24236,8 @@ var MIGRATION_LADDER = [
 init_schema_validator();
 function migrateProject(opts) {
   const { projectDir, dryRun } = opts;
-  const statePath = path23.join(projectDir, "state.json");
-  const raw = fs19.readFileSync(statePath, "utf8");
+  const statePath = path25.join(projectDir, "state.json");
+  const raw = fs21.readFileSync(statePath, "utf8");
   const state = JSON.parse(raw);
   const currentSchema = state["$schema"] ?? "";
   if (currentSchema === CURRENT_SCHEMA_VERSION) {
@@ -24140,8 +24267,8 @@ ${errors.join("\n")}`);
   }
   const iso = (/* @__PURE__ */ new Date()).toISOString().replace(/[:.]/g, "-");
   const backupPath = `${statePath}.bak-${iso}`;
-  fs19.writeFileSync(backupPath, raw, "utf8");
-  fs19.writeFileSync(statePath, JSON.stringify(value, null, 2), "utf8");
+  fs21.writeFileSync(backupPath, raw, "utf8");
+  fs21.writeFileSync(statePath, JSON.stringify(value, null, 2), "utf8");
   return { migrated: true, from: fromVersion, to: toVersion, backupPath };
 }
 
@@ -24164,15 +24291,15 @@ var migrateCommand = defineCommand({
       throw new UserError("<project> argument is required unless --all is specified");
     }
     if (all) {
-      if (!fs20.existsSync(projectsRoot)) {
+      if (!fs22.existsSync(projectsRoot)) {
         throw new UserError(`Projects root does not exist: ${projectsRoot}`);
       }
-      const entries = fs20.readdirSync(projectsRoot, { withFileTypes: true }).filter((d) => d.isDirectory() && !d.name.startsWith("_"));
+      const entries = fs22.readdirSync(projectsRoot, { withFileTypes: true }).filter((d) => d.isDirectory() && !d.name.startsWith("_"));
       const results = [];
       for (const entry of entries) {
-        const projectDir2 = path24.join(projectsRoot, entry.name);
-        const statePath = path24.join(projectDir2, "state.json");
-        if (!fs20.existsSync(statePath)) continue;
+        const projectDir2 = path26.join(projectsRoot, entry.name);
+        const statePath = path26.join(projectDir2, "state.json");
+        if (!fs22.existsSync(statePath)) continue;
         try {
           const result2 = migrateProject({ projectDir: projectDir2, dryRun });
           results.push({ project: entry.name, result: result2 });
@@ -24183,8 +24310,8 @@ var migrateCommand = defineCommand({
       return { results };
     }
     const projectName = args["project"];
-    const projectDir = path24.join(projectsRoot, projectName);
-    if (!fs20.existsSync(path24.join(projectDir, "state.json"))) {
+    const projectDir = path26.join(projectsRoot, projectName);
+    if (!fs22.existsSync(path26.join(projectDir, "state.json"))) {
       throw new UserError(`No state.json found for project '${projectName}' at ${projectDir}`);
     }
     const result = migrateProject({ projectDir, dryRun });
@@ -24202,7 +24329,7 @@ init_command();
 
 // cli/src/lib/skill-manifest.ts
 import { readdirSync as readdirSync3, readFileSync as readFileSync3 } from "node:fs";
-import path25 from "node:path";
+import path27 from "node:path";
 var EXCLUDED_DIRS = /* @__PURE__ */ new Set([
   "node_modules",
   ".git",
@@ -24225,9 +24352,9 @@ function* walkSkillFiles(root) {
     for (const e of entries) {
       if (e.isDirectory()) {
         if (EXCLUDED_DIRS.has(e.name)) continue;
-        stack.push(path25.join(dir, e.name));
+        stack.push(path27.join(dir, e.name));
       } else if (e.isFile() && e.name === "SKILL.md") {
-        yield path25.join(dir, e.name);
+        yield path27.join(dir, e.name);
       }
     }
   }
@@ -24283,7 +24410,7 @@ function buildSkillManifest(opts) {
     }
     if (name.startsWith("rad-")) continue;
     if (fm["disable-model-invocation"] === true) continue;
-    out.push({ name, description, path: path25.resolve(file) });
+    out.push({ name, description, path: path27.resolve(file) });
   }
   out.sort((a, b) => a.name.localeCompare(b.name));
   return out;
@@ -24839,18 +24966,18 @@ init_dist11();
 // cli/src/commands/config/index.ts
 init_command();
 init_paths();
-import fs26 from "node:fs";
-import path33 from "node:path";
+import fs28 from "node:fs";
+import path35 from "node:path";
 function scalar(value, fallback) {
   return value === void 0 || value === null ? fallback : String(value);
 }
 function readConfig2({ root }) {
   const defaults = { autoCommit: "ask", autoPr: "ask", telemetryEnabled: false };
-  const configPath = path33.join(root, "orchestration.yml");
-  if (!fs26.existsSync(configPath)) return defaults;
+  const configPath = path35.join(root, "orchestration.yml");
+  if (!fs28.existsSync(configPath)) return defaults;
   let parsed;
   try {
-    parsed = parseYaml(fs26.readFileSync(configPath, "utf8"));
+    parsed = parseYaml(fs28.readFileSync(configPath, "utf8"));
   } catch {
     return defaults;
   }
@@ -25084,8 +25211,8 @@ function buildSourceControlState(opts) {
 
 // cli/src/commands/source-control/init.ts
 init_paths();
-import fs27 from "node:fs";
-import path34 from "node:path";
+import fs29 from "node:fs";
+import path36 from "node:path";
 import { execFileSync as execFileSync9 } from "node:child_process";
 init_state_io();
 init_dist10();
@@ -25132,7 +25259,7 @@ function sourceControlInit(opts) {
   } else {
     repoEntries = [];
     for (const repo of repos) {
-      const wtPath = worktreesDir ? path34.join(worktreesDir, worktreeName, repo) : path34.join(worktreeName, repo);
+      const wtPath = worktreesDir ? path36.join(worktreesDir, worktreeName, repo) : path36.join(worktreeName, repo);
       const facts = opts.readWorktreeFacts(wtPath);
       if (!facts.exists) {
         return {
@@ -25168,7 +25295,7 @@ function sourceControlInit(opts) {
   return { ok: true, projectDir };
 }
 function readWorktreeFactsDefault(worktreePath) {
-  if (!fs27.existsSync(worktreePath)) {
+  if (!fs29.existsSync(worktreePath)) {
     return { exists: false };
   }
   let branch = "";
@@ -25208,7 +25335,7 @@ function resolveAutoPr(flag) {
   return flag === "always" ? "always" : flag === "never" ? "never" : "never";
 }
 function sourceControlInitWithDefaults(args) {
-  const projectDir = path34.join(userDataPaths().projects, args.project);
+  const projectDir = path36.join(userDataPaths().projects, args.project);
   return sourceControlInit({
     project: args.project,
     worktreeName: args.worktreeName,
@@ -25264,8 +25391,8 @@ var sourceControlInitCommand = defineCommand({
 // cli/src/commands/execute/resolve.ts
 init_command();
 init_paths();
-import fs28 from "node:fs";
-import path35 from "node:path";
+import fs30 from "node:fs";
+import path37 from "node:path";
 import { execFileSync as execFileSync10 } from "node:child_process";
 init_dist11();
 init_dist10();
@@ -25317,7 +25444,7 @@ function executeResolve(deps) {
   const ask = {};
   if (node.status === "done") ask.confirmDone = true;
   if (projectType === "side-project") {
-    const launchDir = path35.join(deps.sideProjectsDir, projectName);
+    const launchDir = path37.join(deps.sideProjectsDir, projectName);
     const derived2 = {
       branch: "main",
       launchDir,
@@ -25396,10 +25523,10 @@ var executeResolveCommand = defineCommand({
       // RAW config strings — preserves 'ask' so the skill knows to ask.
       readConfig: () => readConfig2({ root: paths.root }),
       defaultBranch: (repo) => registry.repos[repo]?.default_branch ?? "main",
-      worktreeExists: (worktreeName, repo) => fs28.existsSync(path35.join(paths.worktrees, worktreeName, repo)),
+      worktreeExists: (worktreeName, repo) => fs30.existsSync(path37.join(paths.worktrees, worktreeName, repo)),
       planApproved: (projectDir) => {
         try {
-          const s = JSON.parse(fs28.readFileSync(path35.join(projectDir, "state.json"), "utf8"));
+          const s = JSON.parse(fs30.readFileSync(path37.join(projectDir, "state.json"), "utf8"));
           return s.graph?.nodes?.plan_approval_gate?.status === "completed";
         } catch {
           return false;
@@ -25416,8 +25543,8 @@ var executeResolveCommand = defineCommand({
 init_command();
 init_errors2();
 init_paths();
-import fs29 from "node:fs";
-import path36 from "node:path";
+import fs31 from "node:fs";
+import path38 from "node:path";
 init_approve_plan();
 async function executePrepare(opts) {
   const { projectType } = opts.readProjectRepos(opts.project);
@@ -25462,7 +25589,7 @@ var executePrepareCommand = defineCommand({
   },
   handler: async ({ args, flags }) => {
     if (!args.project) throw new UserError("--project is required");
-    const projectDir = path36.join(userDataPaths().projects, args.project);
+    const projectDir = path38.join(userDataPaths().projects, args.project);
     return executePrepare({
       project: args.project,
       worktreeName: args["worktree-name"],
@@ -25471,7 +25598,7 @@ var executePrepareCommand = defineCommand({
       autoPr: resolveAutoPr(flags["auto-pr"]),
       readProjectRepos: readProjectReposDefault,
       provision: provisionWorktreesWithDefaults,
-      sideProjectExists: (project) => fs29.existsSync(path36.join(userDataPaths().sideProjects, project, ".git")),
+      sideProjectExists: (project) => fs31.existsSync(path38.join(userDataPaths().sideProjects, project, ".git")),
       sideProjectInit: (project) => sideProjectInit({ project, root: userDataPaths().root }),
       seal: sourceControlInitWithDefaults,
       approvePlan: () => runApprovePlan({ projectDir })
@@ -25511,13 +25638,13 @@ init_paths();
 import { spawn as defaultSpawn2 } from "node:child_process";
 
 // cli/src/commands/telemetry/config.ts
-import fs30 from "node:fs";
-import path37 from "node:path";
+import fs32 from "node:fs";
+import path39 from "node:path";
 function readTelemetryEnabled({ root }) {
-  const configPath = path37.join(root, "orchestration.yml");
-  if (!fs30.existsSync(configPath)) return false;
+  const configPath = path39.join(root, "orchestration.yml");
+  if (!fs32.existsSync(configPath)) return false;
   try {
-    const parsed = parseYaml(fs30.readFileSync(configPath, "utf8"));
+    const parsed = parseYaml(fs32.readFileSync(configPath, "utf8"));
     return parsed?.telemetry?.enabled === true;
   } catch {
     return false;
@@ -25528,8 +25655,8 @@ function readTelemetryEnabled({ root }) {
 var SCHEMA_VERSION = 3;
 
 // lib/telemetry/dist/sink/ndjson-sink.js
-import fs31 from "node:fs";
-import path38 from "node:path";
+import fs33 from "node:fs";
+import path40 from "node:path";
 var NdjsonSink = class {
   opts;
   constructor(opts) {
@@ -25538,41 +25665,41 @@ var NdjsonSink = class {
   write(records) {
     if (records.length === 0)
       return;
-    const dir = path38.join(this.opts.root, "usage");
-    fs31.mkdirSync(dir, { recursive: true });
+    const dir = path40.join(this.opts.root, "usage");
+    fs33.mkdirSync(dir, { recursive: true });
     const byPartition = /* @__PURE__ */ new Map();
     for (const r of records) {
       const day = r.timestamp.slice(0, 10);
-      const file = path38.join(dir, `usage-${day}-${r.sessionId}.ndjson`);
+      const file = path40.join(dir, `usage-${day}-${r.sessionId}.ndjson`);
       (byPartition.get(file) ?? byPartition.set(file, []).get(file)).push(JSON.stringify(r));
     }
     for (const [file, lines] of byPartition)
-      fs31.appendFileSync(file, lines.join("\n") + "\n", "utf8");
+      fs33.appendFileSync(file, lines.join("\n") + "\n", "utf8");
   }
 };
 
 // lib/telemetry/dist/checkpoint/file-checkpoint-store.js
-import fs32 from "node:fs";
-import path39 from "node:path";
+import fs34 from "node:fs";
+import path41 from "node:path";
 var FileCheckpointStore = class {
   opts;
   constructor(opts) {
     this.opts = opts;
   }
   dir() {
-    const d = path39.join(this.opts.root, "checkpoints");
-    fs32.mkdirSync(d, { recursive: true });
+    const d = path41.join(this.opts.root, "checkpoints");
+    fs34.mkdirSync(d, { recursive: true });
     return d;
   }
   file(s) {
-    return path39.join(this.dir(), `${s}.json`);
+    return path41.join(this.dir(), `${s}.json`);
   }
   lockPath(s) {
-    return path39.join(this.dir(), `${s}.lock`);
+    return path41.join(this.dir(), `${s}.lock`);
   }
   seen(sessionId) {
     try {
-      const raw = JSON.parse(fs32.readFileSync(this.file(sessionId), "utf8"));
+      const raw = JSON.parse(fs34.readFileSync(this.file(sessionId), "utf8"));
       return new Set(raw.seen ?? []);
     } catch {
       return /* @__PURE__ */ new Set();
@@ -25582,8 +25709,8 @@ var FileCheckpointStore = class {
     const payload = { sessionId, schemaVersion: SCHEMA_VERSION, updatedAt: (/* @__PURE__ */ new Date()).toISOString(), seen: [...ids] };
     const file = this.file(sessionId);
     const tmp = `${file}.${process.pid}.tmp`;
-    fs32.writeFileSync(tmp, JSON.stringify(payload), "utf8");
-    fs32.renameSync(tmp, file);
+    fs34.writeFileSync(tmp, JSON.stringify(payload), "utf8");
+    fs34.renameSync(tmp, file);
   }
   // The age backstop for a lock whose holder still appears alive — i.e. a wedged
   // worker or a reused PID. It MUST comfortably exceed the worst-case time a real
@@ -25618,9 +25745,9 @@ var FileCheckpointStore = class {
   tryLock(sessionId) {
     const p = this.lockPath(sessionId);
     const acquire = () => {
-      const fd = fs32.openSync(p, "wx");
-      fs32.writeSync(fd, JSON.stringify({ pid: process.pid, acquiredAt: (/* @__PURE__ */ new Date()).toISOString() }));
-      fs32.closeSync(fd);
+      const fd = fs34.openSync(p, "wx");
+      fs34.writeSync(fd, JSON.stringify({ pid: process.pid, acquiredAt: (/* @__PURE__ */ new Date()).toISOString() }));
+      fs34.closeSync(fd);
       return true;
     };
     try {
@@ -25630,12 +25757,12 @@ var FileCheckpointStore = class {
         throw e;
       let raw = "";
       try {
-        raw = fs32.readFileSync(p, "utf8");
+        raw = fs34.readFileSync(p, "utf8");
       } catch {
       }
       if (raw === "" || this.isStaleLock(raw)) {
         try {
-          fs32.unlinkSync(p);
+          fs34.unlinkSync(p);
         } catch {
         }
         try {
@@ -25649,19 +25776,19 @@ var FileCheckpointStore = class {
   }
   unlock(sessionId) {
     try {
-      fs32.unlinkSync(this.lockPath(sessionId));
+      fs34.unlinkSync(this.lockPath(sessionId));
     } catch {
     }
   }
 };
 
 // lib/telemetry/dist/retention.js
-import fs34 from "node:fs";
-import path41 from "node:path";
+import fs36 from "node:fs";
+import path43 from "node:path";
 
 // lib/telemetry/dist/saved-sessions.js
-import fs33 from "node:fs";
-import path40 from "node:path";
+import fs35 from "node:fs";
+import path42 from "node:path";
 
 // lib/telemetry/dist/transcript-tree.js
 function toSummary(t, file) {
@@ -25713,11 +25840,11 @@ function buildTree(items) {
 // lib/telemetry/dist/saved-sessions.js
 var INDEX_FILE = ".saved-sessions.json";
 function savedIndexPath(root) {
-  return path40.join(root, INDEX_FILE);
+  return path42.join(root, INDEX_FILE);
 }
 function readSavedIndex(root) {
   try {
-    const raw = JSON.parse(fs33.readFileSync(savedIndexPath(root), "utf8"));
+    const raw = JSON.parse(fs35.readFileSync(savedIndexPath(root), "utf8"));
     return {
       version: 1,
       sessions: Array.isArray(raw.sessions) ? raw.sessions : [],
@@ -25730,15 +25857,15 @@ function readSavedIndex(root) {
 
 // lib/telemetry/dist/retention.js
 function pruneAgedPartitions(opts) {
-  const usageDir = path41.join(opts.root, "usage");
-  if (!fs34.existsSync(usageDir))
+  const usageDir = path43.join(opts.root, "usage");
+  if (!fs36.existsSync(usageDir))
     return 0;
   const todayUtc = Date.UTC(opts.now.getUTCFullYear(), opts.now.getUTCMonth(), opts.now.getUTCDate());
   const cutoff = todayUtc - opts.maxAgeDays * 864e5;
   let pruned = 0;
   const liveSessions = /* @__PURE__ */ new Set();
   const saved = new Set(readSavedIndex(opts.root).sessions.map((s) => s.sessionId));
-  for (const file of fs34.readdirSync(usageDir)) {
+  for (const file of fs36.readdirSync(usageDir)) {
     const m = /^usage-(\d{4}-\d{2}-\d{2})-(.+)\.ndjson$/.exec(file);
     if (!m)
       continue;
@@ -25747,28 +25874,28 @@ function pruneAgedPartitions(opts) {
       continue;
     }
     if (Date.parse(`${m[1]}T00:00:00Z`) < cutoff) {
-      fs34.unlinkSync(path41.join(usageDir, file));
+      fs36.unlinkSync(path43.join(usageDir, file));
       pruned++;
     } else
       liveSessions.add(m[2]);
   }
   for (const id of saved)
     liveSessions.add(id);
-  const ckptDir = path41.join(opts.root, "checkpoints");
-  if (fs34.existsSync(ckptDir)) {
-    for (const file of fs34.readdirSync(ckptDir)) {
+  const ckptDir = path43.join(opts.root, "checkpoints");
+  if (fs36.existsSync(ckptDir)) {
+    for (const file of fs36.readdirSync(ckptDir)) {
       const m = /^(.+)\.json$/.exec(file);
       if (m && !liveSessions.has(m[1])) {
-        fs34.unlinkSync(path41.join(ckptDir, file));
+        fs36.unlinkSync(path43.join(ckptDir, file));
         pruned++;
       }
     }
   }
-  const txDir = path41.join(opts.root, "transcripts");
-  if (fs34.existsSync(txDir)) {
-    for (const entry of fs34.readdirSync(txDir)) {
+  const txDir = path43.join(opts.root, "transcripts");
+  if (fs36.existsSync(txDir)) {
+    for (const entry of fs36.readdirSync(txDir)) {
       if (!liveSessions.has(entry)) {
-        fs34.rmSync(path41.join(txDir, entry), { recursive: true, force: true });
+        fs36.rmSync(path43.join(txDir, entry), { recursive: true, force: true });
         pruned++;
       }
     }
@@ -25777,12 +25904,12 @@ function pruneAgedPartitions(opts) {
 }
 
 // lib/telemetry/dist/adapter/transcript.js
-import fs35 from "node:fs";
-import path42 from "node:path";
+import fs37 from "node:fs";
+import path44 from "node:path";
 function readJsonl(file) {
   let text;
   try {
-    text = fs35.readFileSync(file, "utf8");
+    text = fs37.readFileSync(file, "utf8");
   } catch {
     return [];
   }
@@ -25799,26 +25926,26 @@ function readJsonl(file) {
   return out;
 }
 function subagentPathFor(transcriptPath, agentId) {
-  const dir = path42.dirname(transcriptPath);
-  const base = path42.basename(transcriptPath, ".jsonl");
-  return path42.join(dir, base, "subagents", `agent-${agentId}.jsonl`);
+  const dir = path44.dirname(transcriptPath);
+  const base = path44.basename(transcriptPath, ".jsonl");
+  return path44.join(dir, base, "subagents", `agent-${agentId}.jsonl`);
 }
 function listSubagentTranscripts(transcriptPath) {
-  const dir = path42.join(path42.dirname(transcriptPath), path42.basename(transcriptPath, ".jsonl"), "subagents");
+  const dir = path44.join(path44.dirname(transcriptPath), path44.basename(transcriptPath, ".jsonl"), "subagents");
   try {
-    return fs35.readdirSync(dir).filter((f) => f.endsWith(".jsonl")).map((f) => path42.join(dir, f));
+    return fs37.readdirSync(dir).filter((f) => f.endsWith(".jsonl")).map((f) => path44.join(dir, f));
   } catch {
     return [];
   }
 }
 function metaPathFor(subagentTranscript) {
-  const dir = path42.dirname(subagentTranscript);
-  const base = path42.basename(subagentTranscript, ".jsonl");
-  return path42.join(dir, `${base}.meta.json`);
+  const dir = path44.dirname(subagentTranscript);
+  const base = path44.basename(subagentTranscript, ".jsonl");
+  return path44.join(dir, `${base}.meta.json`);
 }
 function readSubagentMeta(subagentTranscript) {
   try {
-    const raw = JSON.parse(fs35.readFileSync(metaPathFor(subagentTranscript), "utf8"));
+    const raw = JSON.parse(fs37.readFileSync(metaPathFor(subagentTranscript), "utf8"));
     return {
       agentType: typeof raw.agentType === "string" ? raw.agentType : void 0,
       description: typeof raw.description === "string" ? raw.description : void 0,
@@ -25829,7 +25956,7 @@ function readSubagentMeta(subagentTranscript) {
   }
 }
 function agentIdFromTranscript(subagentTranscript) {
-  const base = path42.basename(subagentTranscript, ".jsonl");
+  const base = path44.basename(subagentTranscript, ".jsonl");
   return base.startsWith("agent-") ? base.slice("agent-".length) : "";
 }
 
@@ -26056,16 +26183,16 @@ function parseTranscript(file, ctx) {
 }
 
 // lib/telemetry/dist/transcript-ingestor.js
-import fs36 from "node:fs";
-import path43 from "node:path";
+import fs38 from "node:fs";
+import path45 from "node:path";
 var HARNESS = "claude-code";
 function sessionDir(root, sessionId) {
-  return path43.join(root, "transcripts", sessionId);
+  return path45.join(root, "transcripts", sessionId);
 }
 function writeAgent(root, sessionId, file, t) {
   const dir = sessionDir(root, sessionId);
-  fs36.mkdirSync(dir, { recursive: true });
-  fs36.writeFileSync(path43.join(dir, file), JSON.stringify(t));
+  fs38.mkdirSync(dir, { recursive: true });
+  fs38.writeFileSync(path45.join(dir, file), JSON.stringify(t));
 }
 function ingestTranscripts(deps) {
   const { root, signal } = deps;
@@ -26094,7 +26221,7 @@ function ingestTranscripts(deps) {
       items.push({ transcript: t, file: `agent-${id}.json` });
     }
     const index = { sessionId: signal.sessionId, harness: HARNESS, createdAt: deps.now.toISOString(), tree: buildTree(items) };
-    fs36.writeFileSync(path43.join(sessionDir(root, signal.sessionId), "index.json"), JSON.stringify(index));
+    fs38.writeFileSync(path45.join(sessionDir(root, signal.sessionId), "index.json"), JSON.stringify(index));
   } catch (e) {
     deps.log?.("transcript_ingest_failed", { event: signal.event, sessionId: signal.sessionId, error: e instanceof Error ? e.message : String(e) });
   }
@@ -26391,6 +26518,14 @@ function buildProgram(version) {
   plan.command("explode").description(planExplodeCommand.description).helpOption(false).allowUnknownOption().allowExcessArguments(true).action(async () => {
     const argv = process.argv.slice(4);
     await runCommand(planExplodeCommand, { argv, env: process.env, isTTY: Boolean(process.stdin.isTTY), stderr: process.stderr });
+  });
+  plan.command("resolve").description(planResolveCommand.description).helpOption(false).allowUnknownOption().allowExcessArguments(true).action(async () => {
+    const argv = process.argv.slice(4);
+    await runCommand(planResolveCommand, { argv, env: process.env, isTTY: Boolean(process.stdin.isTTY), stderr: process.stderr });
+  });
+  plan.command("prepare").description(planPrepareCommand.description).helpOption(false).allowUnknownOption().allowExcessArguments(true).action(async () => {
+    const argv = process.argv.slice(4);
+    await runCommand(planPrepareCommand, { argv, env: process.env, isTTY: Boolean(process.stdin.isTTY), stderr: process.stderr });
   });
   program3.command("migrate").description(migrateCommand.description).helpOption(false).allowUnknownOption().allowExcessArguments(true).action(async () => {
     const argv = process.argv.slice(3);
