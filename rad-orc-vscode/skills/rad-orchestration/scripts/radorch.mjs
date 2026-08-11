@@ -1204,7 +1204,7 @@ var require_command = __commonJS({
     var EventEmitter = __require("node:events").EventEmitter;
     var childProcess = __require("node:child_process");
     var path46 = __require("node:path");
-    var fs40 = __require("node:fs");
+    var fs41 = __require("node:fs");
     var process5 = __require("node:process");
     var { Argument: Argument2, humanReadableArgName } = require_argument();
     var { CommanderError: CommanderError2 } = require_error();
@@ -2198,7 +2198,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * @param {string} subcommandName
        */
       _checkForMissingExecutable(executableFile, executableDir, subcommandName) {
-        if (fs40.existsSync(executableFile)) return;
+        if (fs41.existsSync(executableFile)) return;
         const executableDirMessage = executableDir ? `searched for local subcommand relative to directory '${executableDir}'` : "no directory for search for local subcommand, use .executableDir() to supply a custom directory";
         const executableMissing = `'${executableFile}' does not exist
  - if '${subcommandName}' is not meant to be an executable command, remove description parameter from '.command()' and use '.description()' instead
@@ -2217,10 +2217,10 @@ Expecting one of '${allowedValues.join("', '")}'`);
         const sourceExt = [".js", ".ts", ".tsx", ".mjs", ".cjs"];
         function findFile(baseDir, baseName) {
           const localBin = path46.resolve(baseDir, baseName);
-          if (fs40.existsSync(localBin)) return localBin;
+          if (fs41.existsSync(localBin)) return localBin;
           if (sourceExt.includes(path46.extname(baseName))) return void 0;
           const foundExt = sourceExt.find(
-            (ext) => fs40.existsSync(`${localBin}${ext}`)
+            (ext) => fs41.existsSync(`${localBin}${ext}`)
           );
           if (foundExt) return `${localBin}${foundExt}`;
           return void 0;
@@ -2232,7 +2232,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
         if (this._scriptPath) {
           let resolvedScriptPath;
           try {
-            resolvedScriptPath = fs40.realpathSync(this._scriptPath);
+            resolvedScriptPath = fs41.realpathSync(this._scriptPath);
           } catch {
             resolvedScriptPath = this._scriptPath;
           }
@@ -6606,7 +6606,7 @@ var init_install_json = __esm({
 
 // cli/src/lib/package-version.ts
 function getCliVersion() {
-  return "1.0.0-alpha.12";
+  return "1.0.0-alpha.13";
 }
 var init_package_version = __esm({
   "cli/src/lib/package-version.ts"() {
@@ -9537,10 +9537,17 @@ function resolveWorktrees(projectName, deps) {
   const repoResolvedVia = sharedName !== null && sharedName !== projectName ? "shared-worktree-name" : "convention";
   if (Array.isArray(sc.repos) && sc.repos.length > 0) {
     return sc.repos.map((r) => {
-      const wtPath2 = path12.join(deps.worktreesDir, worktreeName, r.name);
+      const clonePath = r.in_place === true ? deps.registryLocalPaths?.[r.name] : void 0;
+      const wtPath2 = clonePath ?? path12.join(deps.worktreesDir, worktreeName, r.name);
       const live2 = listWorktrees(exec2, wtPath2);
       const key2 = path12.resolve(wtPath2);
-      return { repo: r.name, path: wtPath2, branch: live2.get(key2) ?? null, exists: live2.has(key2), resolvedVia: repoResolvedVia };
+      return {
+        repo: r.name,
+        path: wtPath2,
+        branch: live2.get(key2) ?? null,
+        exists: live2.has(key2),
+        resolvedVia: clonePath ? "registry-clone" : repoResolvedVia
+      };
     });
   }
   const wtPath = typeof sc.worktree_path === "string" ? sc.worktree_path : null;
@@ -9707,7 +9714,8 @@ function locate(cwd, deps) {
   }
   for (const [repoName, localPath] of Object.entries(deps.registryLocalPaths)) {
     if (localPath && within(localPath, cwd)) {
-      return { kind: "main-clone", repo: repoName };
+      const live = listWorktrees2(exec2, localPath);
+      return { kind: "main-clone", repo: repoName, branch: live.get(path14.resolve(localPath)) ?? null };
     }
   }
   return { kind: "none" };
@@ -9837,9 +9845,12 @@ var init_service = __esm({
       sideProjectsDir() {
         return this.opts.sideProjectsDir ?? path15.join(this.opts.root, "side-projects");
       }
+      registryLocalPaths() {
+        return readRegistry({ root: this.opts.root }).localPaths;
+      }
       compose() {
         const stored = this.index.read();
-        const deps = { projectsDir: this.projectsDir(), worktreesDir: this.worktreesDir(), sideProjectsDir: this.sideProjectsDir(), exec: this.opts.exec };
+        const deps = { projectsDir: this.projectsDir(), worktreesDir: this.worktreesDir(), sideProjectsDir: this.sideProjectsDir(), registryLocalPaths: this.registryLocalPaths(), exec: this.opts.exec };
         const projects = listProjectNames(this.projectsDir()).map((n) => deriveProject(n, deps)).filter((p) => !!p);
         const groups = Object.entries(stored.groups).map(([id, g]) => ({ id, kind: "group", name: g.name, description: g.description, status: "unknown" }));
         return { graph: new WorkGraph([...groups, ...projects], stored.edges) };
@@ -9886,7 +9897,7 @@ var init_service = __esm({
         return this.compose().graph.allNodes().filter((n) => n.kind === "group");
       }
       resolveWorktrees(projectId) {
-        return resolveWorktrees(projectId, { projectsDir: this.projectsDir(), worktreesDir: this.worktreesDir(), sideProjectsDir: this.sideProjectsDir(), exec: this.opts.exec });
+        return resolveWorktrees(projectId, { projectsDir: this.projectsDir(), worktreesDir: this.worktreesDir(), sideProjectsDir: this.sideProjectsDir(), registryLocalPaths: this.registryLocalPaths(), exec: this.opts.exec });
       }
       locate(cwd) {
         const registry = readRegistry({ root: this.opts.root });
@@ -16767,6 +16778,18 @@ var init_orchestration_state_v6_schema = __esm({
                 { type: "integer", minimum: 0 },
                 { type: "null" }
               ]
+            },
+            corrective_tasks: {
+              title: "Corrective Tasks",
+              description: "Ordered list of corrective task entries hosted by this step node. Absent on step nodes that host none.",
+              type: "array",
+              items: { $ref: "#/definitions/CorrectiveTaskEntry" }
+            },
+            corrective_budget_origin: {
+              title: "Corrective Budget Window Origin",
+              description: "Number of corrective entries that precede the current retry-budget window. Absent reads as 0. Advanced when a human rejects at the final approval gate so a fresh round starts at attempt one.",
+              type: "integer",
+              minimum: 0
             }
           }
         },
@@ -17351,7 +17374,10 @@ var init_constants = __esm({
     VALID_VERDICTS = new Set(Object.values(REVIEW_VERDICTS));
     ALLOWED_NODE_TRANSITIONS = /* @__PURE__ */ new Map([
       ["not_started", /* @__PURE__ */ new Set(["in_progress", "skipped", "completed"])],
-      ["in_progress", /* @__PURE__ */ new Set(["completed", "failed", "halted"])],
+      // 'not_started' here: a rejection mutation (plan_rejected, final_rejected)
+      // resets a blocking human approval gate that is currently in_progress back
+      // to not_started.
+      ["in_progress", /* @__PURE__ */ new Set(["completed", "failed", "halted", "not_started"])],
       ["completed", /* @__PURE__ */ new Set(["not_started", "in_progress"])],
       ["failed", /* @__PURE__ */ new Set(["in_progress"])],
       ["halted", /* @__PURE__ */ new Set([])],
@@ -17935,6 +17961,18 @@ function scaffoldNodeState(nodeDef) {
     }
   }
 }
+function findTaskLoopBodyDefs(template) {
+  for (const nodeDef of template.nodes) {
+    if (nodeDef.kind === "for_each_phase") {
+      for (const bodyNode of nodeDef.body) {
+        if (bodyNode.kind === "for_each_task") {
+          return bodyNode.body;
+        }
+      }
+    }
+  }
+  return [];
+}
 var init_scaffold = __esm({
   "cli/src/lib/pipeline-engine/scaffold.ts"() {
     "use strict";
@@ -18019,8 +18057,24 @@ function resolveActiveTaskIndex(state, phaseIndex) {
     `Cannot resolve active task in phase ${phaseIndex}: no task is in_progress, no task carries an active corrective, and no task is not_started. State is unresolved \u2014 refusing to default to task 1. Pass --task <N> to specify explicitly.`
   );
 }
-function correctiveReportFields(entry) {
-  const fields = { corrective_index: entry.index };
+function resolveActiveFinalCorrective(state) {
+  for (const [hostId, node] of Object.entries(state.graph.nodes)) {
+    if (node.kind !== "step") continue;
+    const host = node;
+    const correctiveTasks = host.corrective_tasks;
+    if (!correctiveTasks || correctiveTasks.length === 0) continue;
+    const budgetOrigin = host.corrective_budget_origin ?? 0;
+    const windowed = correctiveTasks.slice(budgetOrigin);
+    if (windowed.length === 0) continue;
+    const last = windowed[windowed.length - 1];
+    if (last.status === "not_started" || last.status === "in_progress") {
+      return { hostId, host, entry: last, budgetOrigin };
+    }
+  }
+  return null;
+}
+function correctiveReportFields(entry, budgetOrigin = 0) {
+  const fields = { corrective_index: entry.index - budgetOrigin };
   const reportPath = entry.review_report_path;
   if (typeof reportPath === "string" && reportPath.trim().length > 0) {
     fields.review_report_path = reportPath;
@@ -18083,23 +18137,82 @@ function enrichActionContext(input) {
       const phaseIter = phaseLoop?.iterations[phaseNumber - 1];
       const taskLoop = phaseIter?.nodes["task_loop"];
       const taskIters = taskLoop?.iterations ?? [];
-      const firstTask = taskIters[0];
-      const lastTask = taskIters[taskIters.length - 1];
-      const firstTaskRepos = firstTask?.repos ?? [];
-      const lastTaskFinalCorrective = lastTask?.corrective_tasks.slice().reverse().find((ct) => ct.repos.some((r) => r.commit_hash != null));
-      const lastTaskRepos = lastTaskFinalCorrective?.repos ?? lastTask?.repos ?? [];
+      const commitsByRepo = /* @__PURE__ */ new Map();
+      const pushCommit = (repoName, commitHash) => {
+        if (commitHash == null) return;
+        const bucket = commitsByRepo.get(repoName) ?? [];
+        bucket.push(commitHash);
+        commitsByRepo.set(repoName, bucket);
+      };
+      for (const taskIter of taskIters) {
+        for (const r of taskIter.repos ?? []) {
+          pushCommit(r.name, r.commit_hash);
+        }
+        for (const ct of taskIter.corrective_tasks ?? []) {
+          for (const r of ct.repos ?? []) {
+            pushCommit(r.name, r.commit_hash);
+          }
+        }
+      }
+      for (const ct of phaseIter?.corrective_tasks ?? []) {
+        for (const r of ct.repos ?? []) {
+          pushCommit(r.name, r.commit_hash);
+        }
+      }
       const lastPhaseCorrective = phaseIter && phaseIter.corrective_tasks.length > 0 ? phaseIter.corrective_tasks[phaseIter.corrective_tasks.length - 1] : void 0;
       const correctiveFields = lastPhaseCorrective ? { is_correction: true, corrective_index: lastPhaseCorrective.index } : {};
-      const repos = buildReposArray(state).map((entry) => ({
-        ...entry,
-        phase_first_sha: firstTaskRepos.find((fr) => fr.name === entry.name)?.commit_hash ?? null,
-        phase_head_sha: lastTaskRepos.slice().reverse().find((lr) => lr.name === entry.name && lr.commit_hash != null)?.commit_hash ?? null
-      }));
+      const repos = buildReposArray(state).map((entry) => {
+        const commits = commitsByRepo.get(entry.name) ?? [];
+        return {
+          ...entry,
+          phase_first_sha: commits.length > 0 ? commits[0] : null,
+          phase_head_sha: commits.length > 0 ? commits[commits.length - 1] : null
+        };
+      });
       return { ...base, repos, phase_plan_doc: phaseIter?.doc_path ?? null, ...correctiveFields };
     }
     return base;
   }
   if (TASK_LEVEL_ACTIONS.has(action)) {
+    const activeFinal = resolveActiveFinalCorrective(state);
+    if (activeFinal) {
+      const { entry, budgetOrigin } = activeFinal;
+      const base2 = {
+        ...walkerContext,
+        phase_number: null,
+        phase_id: null,
+        task_number: null,
+        task_id: "FINAL"
+      };
+      if (action === "execute_task") {
+        const repos = buildReposArray(state);
+        if (repos.length === 0) {
+          throw new Error(
+            `Cannot enrich execute_task for the active final corrective: no repos resolved (pipeline.source_control is not initialized). Run source-control init (rad-execute Step 3 \u2014 'radorch source-control init --project <name>') before executing tasks.`
+          );
+        }
+        const scForCommit = state.pipeline.source_control;
+        const should_commit = scForCommit != null && scForCommit.auto_commit !== "never";
+        return {
+          ...base2,
+          repos,
+          complexity: "standard",
+          should_commit,
+          ...correctiveReportFields(entry, budgetOrigin)
+        };
+      }
+      if (action === "spawn_code_reviewer") {
+        const sourceRepos = entry.repos;
+        return {
+          ...base2,
+          repos: buildReposArray(state, (r) => sourceRepos.find((sr) => sr.name === r.name)?.commit_hash ?? null),
+          complexity: "standard",
+          is_correction: true,
+          ...correctiveReportFields(entry, budgetOrigin)
+        };
+      }
+      return base2;
+    }
     const phaseNumber = resolveActivePhaseIndex(state);
     const taskNumber = resolveActiveTaskIndex(state, phaseNumber);
     const phase_id = formatPhaseId(phaseNumber);
@@ -18234,6 +18347,18 @@ function enrichActionContext(input) {
         }
       }
       for (const ct of phaseIter.corrective_tasks ?? []) {
+        for (const r of ct.repos ?? []) {
+          if (r.commit_hash != null) {
+            const bucket = commitsByRepo.get(r.name) ?? [];
+            bucket.push(r.commit_hash);
+            commitsByRepo.set(r.name, bucket);
+          }
+        }
+      }
+    }
+    for (const node of Object.values(state.graph.nodes)) {
+      if (node.kind !== "step") continue;
+      for (const ct of node.corrective_tasks ?? []) {
         for (const r of ct.repos ?? []) {
           if (r.commit_hash != null) {
             const bucket = commitsByRepo.get(r.name) ?? [];
@@ -18378,6 +18503,15 @@ function resolveNodeState(state, nodeId, scope, phase, task) {
   if (scope === "top") {
     return state.graph.nodes[nodeId];
   }
+  if (scope === "final") {
+    const active = resolveActiveFinalCorrective(state);
+    if (!active) {
+      throw new Error(
+        `resolveNodeState: scope is 'final' but no active final corrective exists on state.`
+      );
+    }
+    return active.entry.nodes[nodeId];
+  }
   if (phase === void 0) {
     throw new Error(`resolveNodeState: scope is '${scope}' but phase is undefined`);
   }
@@ -18427,30 +18561,35 @@ function resolveTaskIteration(state, phase, task) {
   }
   return taskLoopNode.iterations[task - 1];
 }
-function findTaskLoopBodyDefs(template) {
-  for (const nodeDef of template.nodes) {
-    if (nodeDef.kind === "for_each_phase") {
-      for (const bodyNode of nodeDef.body) {
-        if (bodyNode.kind === "for_each_task") {
-          return bodyNode.body;
-        }
-      }
-    }
-  }
-  return [];
-}
 function buildCorrectiveBirth(params) {
-  const { correctiveTasks, maxRetries, scopeDocPath, reviewReportPath, injectedAfter, reason, template } = params;
+  const {
+    correctiveTasks,
+    maxRetries,
+    scopeDocPath,
+    reviewReportPath,
+    injectedAfter,
+    reason,
+    template,
+    budgetOrigin = 0,
+    scopeDocRequired = true
+  } = params;
+  let resolvedScopeDocPath;
   if (typeof scopeDocPath !== "string" || scopeDocPath.trim().length === 0) {
-    throw new Error(
-      `buildCorrectiveBirth: scopeDocPath is empty \u2014 every iteration is seeded with a doc_path at explosion, so an empty scope doc is an engine bug (not operator-recoverable). injected_after=${injectedAfter}.`
-    );
+    if (scopeDocRequired) {
+      throw new Error(
+        `buildCorrectiveBirth: scopeDocPath is empty \u2014 every iteration is seeded with a doc_path at explosion, so an empty scope doc is an engine bug (not operator-recoverable). injected_after=${injectedAfter}.`
+      );
+    }
+    resolvedScopeDocPath = null;
+  } else {
+    resolvedScopeDocPath = scopeDocPath;
   }
   const correctiveCount = correctiveTasks.length;
-  if (correctiveCount >= maxRetries) {
+  const windowedCount = correctiveCount - budgetOrigin;
+  if (windowedCount >= maxRetries) {
     return {
       ok: false,
-      haltReason: `Corrective retry budget exhausted (corrective_tasks.length=${correctiveCount}, max_retries_per_task=${maxRetries}). No further corrective task will be injected \u2014 the pipeline halts for manual intervention.`
+      haltReason: `Corrective retry budget exhausted (windowed_corrective_count=${windowedCount}, max_retries_per_task=${maxRetries}). No further corrective task will be injected \u2014 the pipeline halts for manual intervention.`
     };
   }
   const bodyDefs = findTaskLoopBodyDefs(template);
@@ -18467,7 +18606,7 @@ function buildCorrectiveBirth(params) {
     injected_after: injectedAfter,
     status: "not_started",
     nodes,
-    doc_path: scopeDocPath,
+    doc_path: resolvedScopeDocPath,
     review_report_path: typeof reviewReportPath === "string" && reviewReportPath.trim().length > 0 ? reviewReportPath : null,
     repos: []
   };
@@ -18483,6 +18622,26 @@ function resolveHostingIteration(state, phase, task) {
     }
   }
   return { iteration: resolveTaskIteration(state, phase, task), scope: "task" };
+}
+function findStepNodeDef(nodes, id) {
+  for (const nodeDef of nodes) {
+    if (nodeDef.id === id) {
+      return nodeDef.kind === "step" ? nodeDef : void 0;
+    }
+    if (nodeDef.kind === "for_each_phase" || nodeDef.kind === "for_each_task") {
+      const found = findStepNodeDef(nodeDef.body, id);
+      if (found) return found;
+    }
+    if (nodeDef.kind === "conditional") {
+      const found = findStepNodeDef(nodeDef.branches.true, id) ?? findStepNodeDef(nodeDef.branches.false, id);
+      if (found) return found;
+    }
+    if (nodeDef.kind === "parallel") {
+      const found = findStepNodeDef(nodeDef.children, id);
+      if (found) return found;
+    }
+  }
+  return void 0;
 }
 function getMutation(event) {
   return mutationRegistry.get(event);
@@ -18702,6 +18861,36 @@ Pass --phase <N> to specify an existing phase explicitly.`
     mutationRegistry.set(EVENTS.TASK_COMPLETED, (state, context, _config, _template) => {
       const cloned = structuredClone(state);
       const mutations_applied = [];
+      const activeFinal = resolveActiveFinalCorrective(cloned);
+      if (activeFinal) {
+        const { entry } = activeFinal;
+        const node = resolveNodeState(cloned, "task_executor", "final");
+        node.status = "completed";
+        mutations_applied.push("set task_executor.status = completed (scope=final)");
+        const signalRepos = context.repos ?? [];
+        const sc = cloned.pipeline.source_control;
+        const commitExpected = sc != null && sc.auto_commit !== "never";
+        if (commitExpected && signalRepos.length === 0) {
+          throw new Error(
+            `task_completed refused: commit is enabled (auto_commit != never) but no per-repo result payload was relayed (repos[] is missing or empty). The signal must carry the coder's commit result array via --repos '<json>'; advancing without it would record zero commit hashes.`
+          );
+        }
+        if (!commitExpected && signalRepos.length > 0) {
+          throw new Error(
+            `task_completed refused: commit is disabled (source_control is unset or auto_commit=never) but a per-repo result payload was relayed (repos[] is non-empty). In no-commit mode the signal must carry no --repos payload; refusing to record commit hashes for a task that was not directed to commit.`
+          );
+        }
+        if (signalRepos.length > 0) {
+          assertReposOnBranch(cloned, signalRepos, context.branch);
+          applyPerRepoCommitHashes(
+            entry.repos,
+            signalRepos,
+            mutations_applied,
+            `final_corrective_task[${entry.index}].repos`
+          );
+        }
+        return { state: cloned, mutations_applied };
+      }
       let phase = context.phase;
       if (phase === void 0) {
         try {
@@ -18809,6 +18998,83 @@ Pass --task <N> to specify the task explicitly.`
     mutationRegistry.set(EVENTS.CODE_REVIEW_COMPLETED, (state, context, config, template) => {
       const cloned = structuredClone(state);
       const mutations_applied = [];
+      const activeFinal = resolveActiveFinalCorrective(cloned);
+      if (activeFinal) {
+        const { host, entry, budgetOrigin } = activeFinal;
+        const node2 = resolveNodeState(cloned, "code_review", "final");
+        node2.status = "completed";
+        mutations_applied.push("set code_review.status = completed (scope=final)");
+        const docPath2 = context.doc_path ?? null;
+        node2.doc_path = docPath2;
+        mutations_applied.push(`set code_review.doc_path = ${docPath2 ?? "null"} (scope=final)`);
+        const rawVerdict2 = context.verdict ?? null;
+        node2.verdict = rawVerdict2;
+        mutations_applied.push(`set code_review.verdict = ${rawVerdict2 ?? "null"} (scope=final)`);
+        if (rawVerdict2 !== null && !VALID_VERDICTS.has(rawVerdict2)) {
+          cloned.graph.status = "halted";
+          cloned.pipeline.halt_reason = `Unrecognized verdict '${rawVerdict2}' in code_review_completed`;
+          return {
+            state: cloned,
+            mutations_applied: [
+              ...mutations_applied,
+              `set graph.status = halted (unrecognized verdict '${rawVerdict2}')`
+            ]
+          };
+        }
+        if (rawVerdict2 === REVIEW_VERDICTS.APPROVED) {
+          host.verdict = "approved";
+          mutations_applied.push("set final_review.verdict = approved");
+          cloned.pipeline.current_tier = "review";
+          mutations_applied.push("set pipeline.current_tier = review");
+          return { state: cloned, mutations_applied };
+        }
+        if (rawVerdict2 === REVIEW_VERDICTS.CHANGES_REQUESTED) {
+          if (entry.status !== "completed" && entry.nodes["code_review"]?.status === "completed") {
+            entry.status = "completed";
+            mutations_applied.push(
+              `finalized superseded corrective_task[${entry.index}].status = completed (corrective-of-corrective, scope=final)`
+            );
+          }
+          host.corrective_tasks ??= [];
+          const birth = buildCorrectiveBirth({
+            correctiveTasks: host.corrective_tasks,
+            maxRetries: config.limits.max_retries_per_task,
+            budgetOrigin,
+            scopeDocPath: null,
+            scopeDocRequired: false,
+            reviewReportPath: context.doc_path ?? null,
+            injectedAfter: "code_review",
+            reason: context.reason ?? "Code review requested changes",
+            template
+          });
+          if (!birth.ok) {
+            host.status = "halted";
+            cloned.graph.status = "halted";
+            cloned.pipeline.halt_reason = birth.haltReason;
+            mutations_applied.push("set final_review.status = halted (corrective budget exhausted, scope=final)");
+            mutations_applied.push("set graph.status = halted");
+            mutations_applied.push("set pipeline.halt_reason (corrective budget exhausted)");
+            return { state: cloned, mutations_applied };
+          }
+          const newEntry = birth.entry;
+          host.corrective_tasks.push(newEntry);
+          mutations_applied.push(`injected corrective task ${newEntry.index} (changes_requested, scope=final)`);
+          mutations_applied.push(`set corrective_task[${newEntry.index}].doc_path = ${newEntry.doc_path ?? "null"}`);
+          mutations_applied.push(`set corrective_task[${newEntry.index}].review_report_path = ${newEntry.review_report_path ?? "null"}`);
+          mutations_applied.push(`corrective_tasks.length = ${host.corrective_tasks.length} (scope=final)`);
+          return { state: cloned, mutations_applied };
+        }
+        if (rawVerdict2 === REVIEW_VERDICTS.REJECTED) {
+          host.status = "halted";
+          cloned.graph.status = "halted";
+          cloned.pipeline.halt_reason = `Code review rejected (scope=final): reviewer issued a 'rejected' verdict. Rejected verdicts halt the pipeline with no corrective cycle \u2014 no retry is attempted.`;
+          mutations_applied.push("set final_review.status = halted (rejected verdict, scope=final)");
+          mutations_applied.push("set graph.status = halted");
+          mutations_applied.push("set pipeline.halt_reason (reviewer rejected verdict)");
+          return { state: cloned, mutations_applied };
+        }
+        return { state: cloned, mutations_applied };
+      }
       let phase = context.phase;
       if (phase === void 0) {
         try {
@@ -18909,32 +19175,87 @@ Pass --phase <N> and/or --task <N> to specify explicitly.`
       }
       return { state: cloned, mutations_applied };
     });
-    mutationRegistry.set(EVENTS.FINAL_REVIEW_COMPLETED, (state, context, _config, _template) => {
+    mutationRegistry.set(EVENTS.FINAL_REVIEW_COMPLETED, (state, context, config, template) => {
       const cloned = structuredClone(state);
       const mutations_applied = [];
       const node = resolveNodeState(cloned, "final_review", "top");
-      node.status = "completed";
-      mutations_applied.push("set final_review.status = completed");
       const docPath = context.doc_path ?? null;
       node.doc_path = docPath;
       mutations_applied.push(`set final_review.doc_path = ${docPath ?? "null"}`);
-      const verdict = context.verdict ?? null;
-      node.verdict = verdict;
-      mutations_applied.push(`set final_review.verdict = ${verdict ?? "null"}`);
-      if (verdict !== null && !VALID_VERDICTS.has(verdict)) {
+      const rawVerdict = context.verdict ?? null;
+      node.verdict = rawVerdict;
+      mutations_applied.push(`set final_review.verdict = ${rawVerdict ?? "null"}`);
+      if (rawVerdict !== null && !VALID_VERDICTS.has(rawVerdict)) {
         cloned.graph.status = "halted";
-        cloned.pipeline.halt_reason = `Unrecognized verdict '${verdict}' in final_review_completed`;
+        cloned.pipeline.halt_reason = `Unrecognized verdict '${rawVerdict}' in final_review_completed`;
         return {
           state: cloned,
           mutations_applied: [
             ...mutations_applied,
-            `set graph.status = halted (unrecognized verdict '${verdict}')`
+            `set graph.status = halted (unrecognized verdict '${rawVerdict}')`
           ]
         };
       }
-      if (verdict === REVIEW_VERDICTS.APPROVED) {
+      if (rawVerdict === REVIEW_VERDICTS.APPROVED) {
+        node.status = "completed";
+        mutations_applied.push("set final_review.status = completed");
         cloned.pipeline.current_tier = "review";
         mutations_applied.push("set pipeline.current_tier = review");
+        return { state: cloned, mutations_applied };
+      }
+      if (rawVerdict === REVIEW_VERDICTS.CHANGES_REQUESTED) {
+        node.status = "in_progress";
+        mutations_applied.push("set final_review.status = in_progress");
+        const stepDef = findStepNodeDef(template.nodes, "final_review");
+        if (stepDef?.hosts_correctives !== true) {
+          node.status = "halted";
+          cloned.graph.status = "halted";
+          cloned.pipeline.halt_reason = `Final review requested changes but the running template's 'final_review' node declares no corrective host (hosts_correctives is not true). This project is running a per-project template snapshot that predates final-scope corrective support; the snapshot does not self-heal. Add 'hosts_correctives: true' to that project's own template snapshot, or accept that this project has no final-scope corrective path.`;
+          mutations_applied.push("set final_review.status = halted (stale template snapshot: no hosts_correctives)");
+          mutations_applied.push("set graph.status = halted");
+          mutations_applied.push("set pipeline.halt_reason (stale template snapshot)");
+          return { state: cloned, mutations_applied };
+        }
+        node.corrective_tasks ??= [];
+        const budgetOrigin = node.corrective_budget_origin ?? 0;
+        const birth = buildCorrectiveBirth({
+          correctiveTasks: node.corrective_tasks,
+          maxRetries: config.limits.max_retries_per_task,
+          budgetOrigin,
+          scopeDocPath: null,
+          scopeDocRequired: false,
+          reviewReportPath: context.doc_path ?? null,
+          injectedAfter: "final_review",
+          reason: context.reason ?? "Final review requested changes",
+          template
+        });
+        if (!birth.ok) {
+          node.status = "halted";
+          cloned.graph.status = "halted";
+          cloned.pipeline.halt_reason = birth.haltReason;
+          mutations_applied.push("set final_review.status = halted (corrective budget exhausted)");
+          mutations_applied.push("set graph.status = halted");
+          mutations_applied.push("set pipeline.halt_reason (corrective budget exhausted)");
+          return { state: cloned, mutations_applied };
+        }
+        const entry = birth.entry;
+        node.corrective_tasks.push(entry);
+        mutations_applied.push(`injected final corrective task ${entry.index} (changes_requested)`);
+        mutations_applied.push(`set final_corrective_task[${entry.index}].doc_path = ${entry.doc_path ?? "null"}`);
+        mutations_applied.push(`set final_corrective_task[${entry.index}].review_report_path = ${entry.review_report_path ?? "null"}`);
+        mutations_applied.push(`final corrective_tasks.length = ${node.corrective_tasks.length}`);
+        cloned.pipeline.current_tier = "review";
+        mutations_applied.push("set pipeline.current_tier = review");
+        return { state: cloned, mutations_applied };
+      }
+      if (rawVerdict === REVIEW_VERDICTS.REJECTED) {
+        node.status = "halted";
+        cloned.graph.status = "halted";
+        cloned.pipeline.halt_reason = `Final review rejected: reviewer issued a 'rejected' verdict. Rejected verdicts halt the pipeline with no corrective cycle \u2014 no retry is attempted.`;
+        mutations_applied.push("set final_review.status = halted (rejected verdict)");
+        mutations_applied.push("set graph.status = halted");
+        mutations_applied.push("set pipeline.halt_reason (reviewer rejected verdict)");
+        return { state: cloned, mutations_applied };
       }
       return { state: cloned, mutations_applied };
     });
@@ -19032,6 +19353,11 @@ Pass --phase <N> and/or --task <N> to specify explicitly.`
       mutations_applied.push("set final_review.status = not_started");
       finalReviewNode.doc_path = null;
       mutations_applied.push("set final_review.doc_path = null");
+      finalReviewNode.verdict = null;
+      mutations_applied.push("set final_review.verdict = null");
+      const origin = (finalReviewNode.corrective_tasks ?? []).length;
+      finalReviewNode.corrective_budget_origin = origin;
+      mutations_applied.push(`set final_review.corrective_budget_origin = ${origin}`);
       const finalGateNode = resolveNodeState(cloned, "final_approval_gate", "top");
       finalGateNode.status = "not_started";
       mutations_applied.push("set final_approval_gate.status = not_started");
@@ -19184,7 +19510,7 @@ function skipUnreachedIterationBodyNodes(iteration) {
     }
   }
 }
-function walkForEachIterations(fepDef, fepState, config, state, readDocument3) {
+function walkForEachIterations(fepDef, fepState, config, state, correctiveBodyDefs, readDocument3) {
   for (const iteration of fepState.iterations) {
     if (iteration.status === NODE_STATUSES.COMPLETED || iteration.status === NODE_STATUSES.SKIPPED) {
       continue;
@@ -19218,18 +19544,18 @@ function walkForEachIterations(fepDef, fepState, config, state, readDocument3) {
       if (latestCorrective.status === NODE_STATUSES.NOT_STARTED) {
         latestCorrective.status = NODE_STATUSES.IN_PROGRESS;
       }
-      let correctiveBodyDefs;
+      let iterationCorrectiveBodyDefs;
       if (fepDef.kind === "for_each_phase") {
         const fetDef = fepDef.body.find((n) => n.kind === "for_each_task");
-        correctiveBodyDefs = fetDef ? fetDef.body : fepDef.body;
+        iterationCorrectiveBodyDefs = fetDef ? fetDef.body : fepDef.body;
       } else {
-        correctiveBodyDefs = fepDef.body;
+        iterationCorrectiveBodyDefs = fepDef.body;
       }
-      const correctiveResult = walkNodes(correctiveBodyDefs, latestCorrective.nodes, config, state, readDocument3, iteration);
+      const correctiveResult = walkNodes(iterationCorrectiveBodyDefs, latestCorrective.nodes, config, state, correctiveBodyDefs, readDocument3, iteration);
       if (correctiveResult !== null) {
         return correctiveResult;
       }
-      const allCorrectiveDone = correctiveBodyDefs.every((bn) => {
+      const allCorrectiveDone = iterationCorrectiveBodyDefs.every((bn) => {
         const bnState = latestCorrective.nodes[bn.id];
         return bnState !== void 0 && (bnState.status === NODE_STATUSES.COMPLETED || bnState.status === NODE_STATUSES.SKIPPED);
       });
@@ -19241,7 +19567,7 @@ function walkForEachIterations(fepDef, fepState, config, state, readDocument3) {
       }
       return null;
     }
-    const bodyResult = walkNodes(fepDef.body, iteration.nodes, config, state, readDocument3, iteration);
+    const bodyResult = walkNodes(fepDef.body, iteration.nodes, config, state, correctiveBodyDefs, readDocument3, iteration);
     if (bodyResult !== null) {
       return bodyResult;
     }
@@ -19257,7 +19583,42 @@ function walkForEachIterations(fepDef, fepState, config, state, readDocument3) {
   }
   return "all_completed";
 }
-function walkNodes(nodeDefs, nodes, config, state, readDocument3, currentIteration) {
+function walkStepHostedCorrectives(stepDef, stepState, correctiveBodyDefs, config, state, readDocument3) {
+  if (stepDef.hosts_correctives !== true || correctiveBodyDefs.length === 0) {
+    return { kind: "none" };
+  }
+  const windowed = (stepState.corrective_tasks ?? []).slice(stepState.corrective_budget_origin ?? 0);
+  if (windowed.length === 0) {
+    return { kind: "none" };
+  }
+  const entry = windowed[windowed.length - 1];
+  if (entry.status === NODE_STATUSES.HALTED) {
+    return {
+      kind: "result",
+      result: { action: NEXT_ACTIONS.DISPLAY_HALTED, context: { details: state.pipeline.halt_reason ?? "Pipeline is halted" } }
+    };
+  }
+  if (entry.status === NODE_STATUSES.COMPLETED) {
+    return { kind: "closed" };
+  }
+  if (entry.status === NODE_STATUSES.NOT_STARTED) {
+    entry.status = NODE_STATUSES.IN_PROGRESS;
+  }
+  const correctiveResult = walkNodes(correctiveBodyDefs, entry.nodes, config, state, correctiveBodyDefs, readDocument3);
+  if (correctiveResult !== null) {
+    return { kind: "result", result: correctiveResult };
+  }
+  const allBodyDone = correctiveBodyDefs.every((bn) => {
+    const bnState = entry.nodes[bn.id];
+    return bnState !== void 0 && (bnState.status === NODE_STATUSES.COMPLETED || bnState.status === NODE_STATUSES.SKIPPED);
+  });
+  if (allBodyDone) {
+    entry.status = NODE_STATUSES.COMPLETED;
+    return { kind: "closed" };
+  }
+  return { kind: "pending" };
+}
+function walkNodes(nodeDefs, nodes, config, state, correctiveBodyDefs, readDocument3, currentIteration) {
   for (const nodeDef of nodeDefs) {
     const nodeState = nodes[nodeDef.id];
     if (!nodeState) {
@@ -19289,7 +19650,7 @@ function walkNodes(nodeDefs, nodes, config, state, readDocument3, currentIterati
           condState.status = NODE_STATUSES.COMPLETED;
           continue;
         }
-        return walkNodes(branchNodes, nodes, config, state, readDocument3, currentIteration);
+        return walkNodes(branchNodes, nodes, config, state, correctiveBodyDefs, readDocument3, currentIteration);
       }
       if (nodeDef.kind === "parallel") {
         const parallelDef = nodeDef;
@@ -19302,12 +19663,12 @@ function walkNodes(nodeDefs, nodes, config, state, readDocument3, currentIterati
           parallelState.status = NODE_STATUSES.COMPLETED;
           continue;
         }
-        return walkNodes(parallelDef.children, parallelState.nodes, config, state, readDocument3, currentIteration);
+        return walkNodes(parallelDef.children, parallelState.nodes, config, state, correctiveBodyDefs, readDocument3, currentIteration);
       }
       if (nodeDef.kind === "for_each_phase") {
         const fepDef = nodeDef;
         const fepState = nodeState;
-        const iterResult = walkForEachIterations(fepDef, fepState, config, state, readDocument3);
+        const iterResult = walkForEachIterations(fepDef, fepState, config, state, correctiveBodyDefs, readDocument3);
         if (iterResult === "all_completed") {
           fepState.status = NODE_STATUSES.COMPLETED;
           continue;
@@ -19317,7 +19678,7 @@ function walkNodes(nodeDefs, nodes, config, state, readDocument3, currentIterati
       if (nodeDef.kind === "for_each_task") {
         const fetDef = nodeDef;
         const fetState = nodeState;
-        const iterResult = walkForEachIterations(fetDef, fetState, config, state, readDocument3);
+        const iterResult = walkForEachIterations(fetDef, fetState, config, state, correctiveBodyDefs, readDocument3);
         if (iterResult === "all_completed") {
           fetState.status = NODE_STATUSES.COMPLETED;
           continue;
@@ -19326,6 +19687,18 @@ function walkNodes(nodeDefs, nodes, config, state, readDocument3, currentIterati
       }
       if (nodeDef.kind === "step") {
         const stepDef = nodeDef;
+        const stepState = nodeState;
+        const hostOutcome = walkStepHostedCorrectives(stepDef, stepState, correctiveBodyDefs, config, state, readDocument3);
+        if (hostOutcome.kind === "result") {
+          return hostOutcome.result;
+        }
+        if (hostOutcome.kind === "closed") {
+          stepState.status = NODE_STATUSES.COMPLETED;
+          continue;
+        }
+        if (hostOutcome.kind === "pending") {
+          return null;
+        }
         nodeState.status = NODE_STATUSES.IN_PROGRESS;
         return {
           action: stepDef.action,
@@ -19344,6 +19717,18 @@ function walkNodes(nodeDefs, nodes, config, state, readDocument3, currentIterati
     if (nodeState.status === NODE_STATUSES.NOT_STARTED) {
       if (nodeDef.kind === "step") {
         const stepDef = nodeDef;
+        const stepState = nodeState;
+        const hostOutcome = walkStepHostedCorrectives(stepDef, stepState, correctiveBodyDefs, config, state, readDocument3);
+        if (hostOutcome.kind === "result") {
+          return hostOutcome.result;
+        }
+        if (hostOutcome.kind === "closed") {
+          stepState.status = NODE_STATUSES.COMPLETED;
+          continue;
+        }
+        if (hostOutcome.kind === "pending") {
+          return null;
+        }
         nodeState.status = NODE_STATUSES.IN_PROGRESS;
         return {
           action: stepDef.action,
@@ -19360,6 +19745,7 @@ function walkNodes(nodeDefs, nodes, config, state, readDocument3, currentIterati
             gateState.gate_active = false;
             continue;
           }
+          gateState.status = NODE_STATUSES.IN_PROGRESS;
           gateState.gate_active = true;
           return {
             action: gateDef.action_if_needed,
@@ -19416,7 +19802,7 @@ function walkNodes(nodeDefs, nodes, config, state, readDocument3, currentIterati
             nodes[branchNode.id] = scaffoldNodeState(branchNode);
           }
         }
-        return walkNodes(branchNodes, nodes, config, state, readDocument3, currentIteration);
+        return walkNodes(branchNodes, nodes, config, state, correctiveBodyDefs, readDocument3, currentIteration);
       }
       if (nodeDef.kind === "parallel") {
         const parallelDef = nodeDef;
@@ -19427,7 +19813,7 @@ function walkNodes(nodeDefs, nodes, config, state, readDocument3, currentIterati
             parallelState.nodes[child.id] = scaffoldNodeState(child);
           }
         }
-        return walkNodes(parallelDef.children, parallelState.nodes, config, state, readDocument3, currentIteration);
+        return walkNodes(parallelDef.children, parallelState.nodes, config, state, correctiveBodyDefs, readDocument3, currentIteration);
       }
       if (nodeDef.kind === "for_each_phase") {
         const fepDef = nodeDef;
@@ -19463,7 +19849,7 @@ function walkNodes(nodeDefs, nodes, config, state, readDocument3, currentIterati
           }
         }
         fepState.status = NODE_STATUSES.IN_PROGRESS;
-        const iterResult = walkForEachIterations(fepDef, fepState, config, state, readDocument3);
+        const iterResult = walkForEachIterations(fepDef, fepState, config, state, correctiveBodyDefs, readDocument3);
         if (iterResult === "all_completed") {
           fepState.status = NODE_STATUSES.COMPLETED;
           continue;
@@ -19508,7 +19894,7 @@ function walkNodes(nodeDefs, nodes, config, state, readDocument3, currentIterati
           }
         }
         fetState.status = NODE_STATUSES.IN_PROGRESS;
-        const iterResult = walkForEachIterations(fetDef, fetState, config, state, readDocument3);
+        const iterResult = walkForEachIterations(fetDef, fetState, config, state, correctiveBodyDefs, readDocument3);
         if (iterResult === "all_completed") {
           fetState.status = NODE_STATUSES.COMPLETED;
           continue;
@@ -19521,8 +19907,32 @@ function walkNodes(nodeDefs, nodes, config, state, readDocument3, currentIterati
   return null;
 }
 function deriveCurrentNodePathFromMarkers(state) {
+  function hasActiveStepHostedCorrective(nodes) {
+    for (const node of Object.values(nodes)) {
+      if (node.kind === "step") {
+        const windowed = (node.corrective_tasks ?? []).slice(node.corrective_budget_origin ?? 0);
+        if (windowed.some((ct) => ct.status === NODE_STATUSES.IN_PROGRESS)) {
+          return true;
+        }
+      } else if (node.kind === "parallel") {
+        if (hasActiveStepHostedCorrective(node.nodes)) return true;
+      } else if (node.kind === "for_each_phase" || node.kind === "for_each_task") {
+        for (const iter of node.iterations) {
+          if (hasActiveStepHostedCorrective(iter.nodes)) return true;
+        }
+      }
+    }
+    return false;
+  }
+  function hasBlockingHumanGate(nodes) {
+    return Object.values(nodes).some(
+      (n) => n.kind === "gate" && n.status === NODE_STATUSES.IN_PROGRESS
+    );
+  }
   const phaseLoop = state.graph.nodes["phase_loop"];
-  if (!phaseLoop?.iterations?.length) return null;
+  if (!phaseLoop?.iterations?.length && !hasActiveStepHostedCorrective(state.graph.nodes) && !hasBlockingHumanGate(state.graph.nodes)) {
+    return null;
+  }
   function findLeaf(nodes, prefix) {
     for (const [id, node] of Object.entries(nodes)) {
       const here = `${prefix}${id}`;
@@ -19549,6 +19959,16 @@ function deriveCurrentNodePathFromMarkers(state) {
           if (deeper) return deeper;
           continue;
         }
+        if (node.kind === "step") {
+          const windowed = (node.corrective_tasks ?? []).slice(node.corrective_budget_origin ?? 0);
+          const activeEntry = windowed.find((ct) => ct.status === "in_progress");
+          if (activeEntry) {
+            const entryPath = `${here}.corrective_tasks[${activeEntry.index}]`;
+            const deeper = findLeaf(activeEntry.nodes, `${entryPath}.`);
+            if (deeper) return deeper;
+            return entryPath;
+          }
+        }
         return here;
       }
     }
@@ -19563,7 +19983,8 @@ function walkDAG(state, template, config, readDocument3) {
       context: { details: state.pipeline.halt_reason ?? "Pipeline is halted" }
     };
   }
-  const result = walkNodes(template.nodes, state.graph.nodes, config, state, readDocument3);
+  const correctiveBodyDefs = findTaskLoopBodyDefs(template);
+  const result = walkNodes(template.nodes, state.graph.nodes, config, state, correctiveBodyDefs, readDocument3);
   if (result !== null) {
     return result;
   }
@@ -19886,6 +20307,9 @@ var init_composer = __esm({
 });
 
 // cli/src/lib/pipeline-engine/validator.ts
+function stepCorrectives(node) {
+  return node.kind === "step" ? node.corrective_tasks ?? [] : [];
+}
 function validateState(_previousState, proposedState, _config, template, opts = {}) {
   const { checkCursorHonesty = true } = opts;
   return [
@@ -19930,6 +20354,12 @@ function checkNodeStatuses(nodes, path46) {
     if (node.kind === "parallel") {
       errors.push(...checkNodeStatuses(node.nodes, `${nodePath}.nodes`));
     }
+    for (const ct of stepCorrectives(node)) {
+      if (!validNodeStatuses.has(ct.status)) {
+        errors.push(`Invalid corrective status '${ct.status}' at ${nodePath}.corrective_tasks[${ct.index}]`);
+      }
+      errors.push(...checkNodeStatuses(ct.nodes, `${nodePath}.corrective_tasks[${ct.index}].nodes`));
+    }
   }
   return errors;
 }
@@ -19954,6 +20384,14 @@ function checkIterationIndices(nodes, path46) {
     }
     if (node.kind === "parallel") {
       errors.push(...checkIterationIndices(node.nodes, `${nodePath}.nodes`));
+    }
+    const cts = stepCorrectives(node);
+    for (let j = 0; j < cts.length; j++) {
+      const ct = cts[j];
+      if (ct.index !== j + 1) {
+        errors.push(`Corrective task index mismatch at ${nodePath}.corrective_tasks[${j}]: expected ${j + 1}, got ${ct.index}`);
+      }
+      errors.push(...checkIterationIndices(ct.nodes, `${nodePath}.corrective_tasks[${ct.index}].nodes`));
     }
   }
   return errors;
@@ -19984,6 +20422,14 @@ function checkCompletedParentChildren(nodes, path46) {
       }
       errors.push(...checkCompletedParentChildren(node.nodes, `${nodePath}.nodes`));
     }
+    if (node.status === "completed") {
+      for (const ct of stepCorrectives(node)) {
+        errors.push(...findInProgressNodes(ct.nodes, `${nodePath}.corrective_tasks[${ct.index}].nodes`, nodePath));
+      }
+    }
+    for (const ct of stepCorrectives(node)) {
+      errors.push(...checkCompletedParentChildren(ct.nodes, `${nodePath}.corrective_tasks[${ct.index}].nodes`));
+    }
   }
   return errors;
 }
@@ -20003,6 +20449,9 @@ function findInProgressNodes(nodes, path46, parentPath) {
     }
     if (node.kind === "parallel") {
       errors.push(...findInProgressNodes(node.nodes, `${path46}.${id}.nodes`, parentPath));
+    }
+    for (const ct of stepCorrectives(node)) {
+      errors.push(...findInProgressNodes(ct.nodes, `${path46}.${id}.corrective_tasks[${ct.index}].nodes`, parentPath));
     }
   }
   return errors;
@@ -20028,6 +20477,18 @@ function checkCorrectiveEntriesTerminal(nodes, path46) {
     if (node.kind === "parallel") {
       errors.push(...checkCorrectiveEntriesTerminal(node.nodes, `${nodePath}.nodes`));
     }
+    if (node.status === "completed") {
+      for (const ct of stepCorrectives(node)) {
+        if (ct.status !== "completed" && ct.status !== "skipped") {
+          errors.push(
+            `Corrective entry '${nodePath}.corrective_tasks[${ct.index}]' has status '${ct.status}' but the step host is completed (all corrective entries under a completed step host must be terminal: completed or skipped)`
+          );
+        }
+      }
+    }
+    for (const ct of stepCorrectives(node)) {
+      errors.push(...checkCorrectiveEntriesTerminal(ct.nodes, `${nodePath}.corrective_tasks[${ct.index}].nodes`));
+    }
   }
   return errors;
 }
@@ -20045,6 +20506,19 @@ function checkCorrectiveTaskStructure(nodes, path46) {
     }
     if (node.kind === "parallel") {
       errors.push(...checkCorrectiveTaskStructure(node.nodes, `${nodePath}.nodes`));
+    }
+    if (node.kind === "step") {
+      const cts = stepCorrectives(node);
+      const origin = node.corrective_budget_origin ?? 0;
+      if (origin > cts.length) {
+        errors.push(
+          `corrective_budget_origin at ${nodePath} (${origin}) exceeds corrective_tasks.length (${cts.length})`
+        );
+      }
+    }
+    for (const ct of stepCorrectives(node)) {
+      errors.push(...validateCorrectiveEntry(ct, `${nodePath}.corrective_tasks[${ct.index}]`));
+      errors.push(...checkCorrectiveTaskStructure(ct.nodes, `${nodePath}.corrective_tasks[${ct.index}].nodes`));
     }
   }
   return errors;
@@ -20107,6 +20581,9 @@ function checkNodeKindMatchesTemplate(state, template) {
       if (node.kind === "parallel") {
         walkStateNodes(node.nodes, `${nodePath}.nodes`);
       }
+      for (const ct of stepCorrectives(node)) {
+        walkStateNodes(ct.nodes, `${nodePath}.corrective_tasks[${ct.index}].nodes`);
+      }
     }
   }
   walkStateNodes(state.graph.nodes, "graph.nodes");
@@ -20126,8 +20603,18 @@ function checkStatusTransitions(previousState, proposedState) {
 function checkImmutableCommitHash(previousState, proposedState) {
   if (!previousState) return [];
   const errors = [];
-  function repoHash(entry) {
-    return entry?.repos && entry.repos.length > 0 ? entry.repos[0].commit_hash : null;
+  function compareRepoHashes(prevEntry, currEntry, label) {
+    const prevRepos = prevEntry?.repos ?? [];
+    const currRepos = currEntry?.repos ?? [];
+    for (const currRepo of currRepos) {
+      const prevRepo = prevRepos.find((r) => r.name === currRepo.name);
+      if (!prevRepo) continue;
+      const before = prevRepo.commit_hash;
+      const after = currRepo.commit_hash;
+      if (before != null && after != null && before !== after) {
+        errors.push(`Immutable commit_hash violation at ${label} (repo '${currRepo.name}'): '${before}' \u2192 '${after}'`);
+      }
+    }
   }
   function compare(prev, curr, path46) {
     for (const [id, currNode] of Object.entries(curr)) {
@@ -20138,19 +20625,19 @@ function checkImmutableCommitHash(previousState, proposedState) {
         for (const currIter of currNode.iterations) {
           const prevIter = prevIters[currIter.index];
           if (!prevIter) continue;
-          const before = repoHash(prevIter);
-          const after = repoHash(currIter);
-          if (before != null && after != null && before !== after) {
-            errors.push(`Immutable commit_hash violation at ${path46}.${id}.iterations[${currIter.index}]: '${before}' \u2192 '${after}'`);
-          }
+          compareRepoHashes(
+            prevIter,
+            currIter,
+            `${path46}.${id}.iterations[${currIter.index}]`
+          );
           for (const currCt of currIter.corrective_tasks) {
             const prevCt = prevIter.corrective_tasks.find((ct) => ct.index === currCt.index);
             if (!prevCt) continue;
-            const ctBefore = repoHash(prevCt);
-            const ctAfter = repoHash(currCt);
-            if (ctBefore != null && ctAfter != null && ctBefore !== ctAfter) {
-              errors.push(`Immutable commit_hash violation at ${path46}.${id}.iterations[${currIter.index}].corrective_tasks[${currCt.index}]: '${ctBefore}' \u2192 '${ctAfter}'`);
-            }
+            compareRepoHashes(
+              prevCt,
+              currCt,
+              `${path46}.${id}.iterations[${currIter.index}].corrective_tasks[${currCt.index}]`
+            );
             compare(prevCt.nodes, currCt.nodes, `${path46}.${id}.iterations[${currIter.index}].corrective_tasks[${currCt.index}].nodes`);
           }
           compare(prevIter.nodes, currIter.nodes, `${path46}.${id}.iterations[${currIter.index}].nodes`);
@@ -20158,6 +20645,19 @@ function checkImmutableCommitHash(previousState, proposedState) {
       }
       if (currNode.kind === "parallel" && prevNode.kind === "parallel") {
         compare(prevNode.nodes, currNode.nodes, `${path46}.${id}.nodes`);
+      }
+      if (currNode.kind === "step" && prevNode.kind === "step") {
+        const prevCts = stepCorrectives(prevNode);
+        for (const currCt of stepCorrectives(currNode)) {
+          const prevCt = prevCts.find((ct) => ct.index === currCt.index);
+          if (!prevCt) continue;
+          compareRepoHashes(
+            prevCt,
+            currCt,
+            `${path46}.${id}.corrective_tasks[${currCt.index}]`
+          );
+          compare(prevCt.nodes, currCt.nodes, `${path46}.${id}.corrective_tasks[${currCt.index}].nodes`);
+        }
       }
     }
   }
@@ -20195,6 +20695,27 @@ function compareNodes(prevNodes, currNodes, path46, errors) {
     }
     if (currNode.kind === "parallel" && prevNode.kind === "parallel") {
       compareNodes(prevNode.nodes, currNode.nodes, `${path46}.${id}.nodes`, errors);
+    }
+    if (currNode.kind === "step" && prevNode.kind === "step") {
+      const prevCts = stepCorrectives(prevNode);
+      const currCts = stepCorrectives(currNode);
+      for (const currCt of currCts) {
+        const prevCt = prevCts.find((ct) => ct.index === currCt.index);
+        if (!prevCt) continue;
+        compareNodes(prevCt.nodes, currCt.nodes, `${path46}.${id}.corrective_tasks[${currCt.index}].nodes`, errors);
+      }
+      const prevOrigin = prevNode.corrective_budget_origin ?? 0;
+      const currOrigin = currNode.corrective_budget_origin ?? 0;
+      if (currOrigin < prevOrigin) {
+        errors.push(
+          `corrective_budget_origin decreased at ${path46}.${id}: ${prevOrigin} \u2192 ${currOrigin} (would silently re-open a spent budget window)`
+        );
+      }
+      if (currOrigin > currCts.length) {
+        errors.push(
+          `corrective_budget_origin at ${path46}.${id} (${currOrigin}) exceeds corrective_tasks.length (${currCts.length})`
+        );
+      }
     }
   }
 }
@@ -20917,7 +21438,7 @@ __export(compose_exports, {
   composeCommand: () => composeCommand,
   runCompose: () => runCompose
 });
-import fs39 from "node:fs";
+import fs40 from "node:fs";
 function validateMode(raw) {
   if (raw === void 0 || raw === "") return "standalone";
   if (raw !== "standalone" && raw !== "runtime-orphan") {
@@ -20955,7 +21476,7 @@ function readOptionalStdinJson() {
   if (process.stdin.isTTY) return {};
   let raw = "";
   try {
-    raw = fs39.readFileSync(0, "utf8");
+    raw = fs40.readFileSync(0, "utf8");
   } catch {
     return {};
   }
@@ -21876,7 +22397,7 @@ function getDefaultBranch(exec2, remoteName) {
     if (m) return m[1];
   } catch {
   }
-  return "main";
+  return null;
 }
 function samePath(a, b) {
   if (!a || !b) return false;
@@ -21901,7 +22422,6 @@ function repoAdd(opts) {
     throw new UserError(`path is not a git repository: ${msg}`);
   }
   const remote = selectRemote(getRemotes(exec2));
-  const defaultBranch = getDefaultBranch(exec2, remote.name);
   const currentToplevel = getToplevel(exec2);
   const mainWorktreePath = getMainWorktreePath(exec2);
   const canonicalPath = mainWorktreePath ?? currentToplevel ?? repoPath;
@@ -21909,6 +22429,10 @@ function repoAdd(opts) {
   const isSubdir = Boolean(currentToplevel && !samePath(currentToplevel, repoPath));
   let proposedName = nameOverride?.trim() || deriveSlugFromRemote(remote.url);
   if (!proposedName) proposedName = slugify(path10.basename(canonicalPath));
+  const defaultBranch = getDefaultBranch(exec2, remote.name);
+  if (defaultBranch == null) {
+    throw new UserError(`could not determine the default branch for repo "${proposedName}" from remote "${remote.name}" (${remote.url})`);
+  }
   const reg = readRegistry({ root });
   let remoteAlreadyRegisteredAs = null;
   for (const [slug, identity2] of Object.entries(reg.repos)) {
@@ -22391,14 +22915,63 @@ function classify(stderr) {
   if (m.includes("invalid reference") || m.includes("not a valid")) return "invalid_reference";
   return "unknown";
 }
+function branchExistsLocally(exec2, repoRoot, branch) {
+  try {
+    exec2("git", ["show-ref", "--verify", "--quiet", `refs/heads/${branch}`], { cwd: repoRoot, encoding: "utf8" });
+    return true;
+  } catch {
+    return false;
+  }
+}
+function probeBranchOnRemote(exec2, repoRoot, branch) {
+  let out;
+  try {
+    out = exec2("git", ["ls-remote", "--heads", "origin", branch], { cwd: repoRoot, encoding: "utf8" });
+  } catch {
+    return "unknown";
+  }
+  return String(out || "").trim().length > 0 ? "present" : "absent";
+}
 function worktreeCreate(opts) {
   const exec2 = opts.exec ?? ((f, a, o) => execFileSync5(f, a, { ...o, stdio: ["ignore", "pipe", "pipe"] }));
+  let branchMode;
+  if (branchExistsLocally(exec2, opts.repoRoot, opts.branch)) {
+    branchMode = "attached-local";
+  } else {
+    const remoteState = probeBranchOnRemote(exec2, opts.repoRoot, opts.branch);
+    if (remoteState === "unknown") {
+      return {
+        created: false,
+        worktreePath: opts.worktreePath,
+        branch: opts.branch,
+        baseBranch: opts.baseBranch,
+        pushed: false,
+        remoteUrl: "",
+        compareUrl: "",
+        error: `could not verify whether "${opts.branch}" exists on origin; not proceeding to avoid overwriting it`,
+        errorType: "remote_probe_failed",
+        branchMode: null
+      };
+    }
+    branchMode = remoteState === "present" ? "attached-remote" : "created";
+  }
   try {
-    exec2(
-      "git",
-      ["worktree", "add", "-b", opts.branch, opts.worktreePath, opts.baseBranch],
-      { cwd: opts.repoRoot, encoding: "utf8" }
-    );
+    if (branchMode === "attached-remote") {
+      exec2("git", ["fetch", "origin", `${opts.branch}:refs/heads/${opts.branch}`], { cwd: opts.repoRoot, encoding: "utf8" });
+    }
+    if (branchMode === "created") {
+      exec2(
+        "git",
+        ["worktree", "add", "-b", opts.branch, opts.worktreePath, opts.baseBranch],
+        { cwd: opts.repoRoot, encoding: "utf8" }
+      );
+    } else {
+      exec2(
+        "git",
+        ["worktree", "add", opts.worktreePath, opts.branch],
+        { cwd: opts.repoRoot, encoding: "utf8" }
+      );
+    }
   } catch (e) {
     const err = e;
     const stderr = (err.stderr || err.message || "").trim();
@@ -22411,7 +22984,8 @@ function worktreeCreate(opts) {
       remoteUrl: "",
       compareUrl: "",
       error: stderr,
-      errorType: classify(stderr)
+      errorType: classify(stderr),
+      branchMode: null
     };
   }
   let pushed = false;
@@ -22437,7 +23011,8 @@ function worktreeCreate(opts) {
     remoteUrl,
     compareUrl,
     error: null,
-    errorType: null
+    errorType: null,
+    branchMode
   };
 }
 function aggregateExitCode(repos) {
@@ -22464,7 +23039,9 @@ function resolveClonePathDefault(repo) {
 }
 function defaultBranchDefault(repo) {
   const reg = readRegistry({ root: userDataPaths().root });
-  return reg.repos[repo]?.default_branch ?? "main";
+  const b = reg.repos[repo]?.default_branch;
+  if (!b) throw new UserError(`Repo "${repo}" has no registered default branch. Run \`radorch repo add\` or \`radorch repo edit\`.`);
+  return b;
 }
 function provisionWorktrees(opts) {
   const { project, worktreesDir, readProjectRepos, resolveClonePath, defaultBranch, exists, create } = opts;
@@ -22482,7 +23059,7 @@ function provisionWorktrees(opts) {
   for (const { repo, base, worktreePath } of convention.repos) {
     try {
       if (exists(worktreePath)) {
-        results.push({ name: repo, created: false, pushed: true, path: worktreePath, branch, error: null, errorType: null });
+        results.push({ name: repo, created: false, pushed: true, path: worktreePath, branch, error: null, errorType: null, branchMode: null });
         continue;
       }
       const r = create({
@@ -22498,11 +23075,12 @@ function provisionWorktrees(opts) {
         path: r.worktreePath,
         branch: r.branch,
         error: r.error,
-        errorType: r.errorType
+        errorType: r.errorType,
+        branchMode: r.branchMode
       });
     } catch (e) {
       const msg = e instanceof Error ? e.message : String(e);
-      results.push({ name: repo, created: false, pushed: false, path: worktreePath, branch, error: msg, errorType: "unknown" });
+      results.push({ name: repo, created: false, pushed: false, path: worktreePath, branch, error: msg, errorType: "unknown", branchMode: null });
     }
   }
   return { repos: results };
@@ -22607,10 +23185,47 @@ function quoteSinglePwsh(s) {
   return `'${s.replace(/'/g, "''")}'`;
 }
 function buildClaudeArgs(prompt, permissionMode, addDir) {
-  return ["claude", "--permission-mode", permissionMode, prompt, "--add-dir", addDir];
+  return ["claude", "--permission-mode", permissionMode, "--model", "sonnet", prompt, "--add-dir", addDir];
 }
 function buildCopilotArgs(prompt, addDir) {
   return ["copilot", "--add-dir", addDir, "--allow-tool=shell", "-i", prompt];
+}
+function buildSpawnAttempts(platform, payload) {
+  if (platform === "win32") {
+    const windowArgs2 = ["--startingDirectory", payload.worktreePath, "powershell", "-NoExit", "-EncodedCommand", payload.encoded];
+    return [
+      { file: "wt", args: ["-w", "0", "new-tab", ...windowArgs2] },
+      { file: "wt", args: windowArgs2 }
+    ];
+  }
+  if (platform === "darwin") {
+    return [{ file: "osascript", args: ["-e", payload.script] }];
+  }
+  const windowArgs = ["--", "bash", "-c", payload.shell];
+  return [
+    { file: "gnome-terminal", args: ["--tab", ...windowArgs] },
+    { file: "gnome-terminal", args: windowArgs }
+  ];
+}
+function fireSpawnAttempts(spawn2, attempts, env2) {
+  const fire = (index) => {
+    const attempt = attempts[index];
+    const isLast = index === attempts.length - 1;
+    try {
+      const child = spawn2(attempt.file, attempt.args, { detached: true, stdio: "ignore", env: env2 });
+      let advanced = false;
+      child.on?.("error", () => {
+        if (advanced) return;
+        advanced = true;
+        if (!isLast) fire(index + 1);
+      });
+      child.unref();
+    } catch (e) {
+      if (isLast) throw e;
+      fire(index + 1);
+    }
+  };
+  fire(0);
 }
 function worktreeLaunch(opts) {
   const platform = opts.platform ?? process.platform;
@@ -22628,37 +23243,25 @@ function worktreeLaunch(opts) {
   }
   try {
     const shellQuotedAgent = agentArgs.length > 0 ? `${agentArgs[0]} ${agentArgs.slice(1).map(quoteSingle).join(" ")}` : "";
+    let encoded = "";
+    let shell = "";
+    let script = "";
     if (platform === "win32") {
       const cdPartPwsh = `Set-Location ${quoteSinglePwsh(opts.worktreePath)}`;
       const shellQuotedAgentPwsh = agentArgs.length > 0 ? `${agentArgs[0]} ${agentArgs.slice(1).map(quoteSinglePwsh).join(" ")}` : "";
       const psCmd = shellQuotedAgentPwsh ? `${CLEAR_ENV_PWSH} ${cdPartPwsh}; ${shellQuotedAgentPwsh}` : `${CLEAR_ENV_PWSH} ${cdPartPwsh}`;
-      const encoded = Buffer.from(psCmd, "utf16le").toString("base64");
-      const child = spawn2(
-        "wt",
-        ["--startingDirectory", opts.worktreePath, "powershell", "-NoExit", "-EncodedCommand", encoded],
-        { detached: true, stdio: "ignore", env: launchEnv }
-      );
-      child.unref();
+      encoded = Buffer.from(psCmd, "utf16le").toString("base64");
     } else if (platform === "darwin") {
       const bashCd = `cd ${quoteSingle(opts.worktreePath)}`;
-      const shell = shellQuotedAgent ? `${bashCd} && ${shellQuotedAgent}` : bashCd;
-      const escaped = shell.replace(/"/g, '\\"');
-      const child = spawn2(
-        "osascript",
-        ["-e", `tell application "Terminal" to do script "${escaped}"`],
-        { detached: true, stdio: "ignore", env: launchEnv }
-      );
-      child.unref();
+      const shellCmd = shellQuotedAgent ? `${bashCd} && ${shellQuotedAgent}` : bashCd;
+      const appleScriptEscaped = shellCmd.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+      script = `tell application "Terminal" to do script "${appleScriptEscaped}"`;
     } else {
       const bashCd = `cd ${quoteSingle(opts.worktreePath)}`;
-      const shell = shellQuotedAgent ? `${bashCd} && ${shellQuotedAgent}; exec bash` : `${bashCd}; exec bash`;
-      const child = spawn2(
-        "gnome-terminal",
-        ["--", "bash", "-c", shell],
-        { detached: true, stdio: "ignore", env: launchEnv }
-      );
-      child.unref();
+      shell = shellQuotedAgent ? `${bashCd} && ${shellQuotedAgent}; exec bash` : `${bashCd}; exec bash`;
     }
+    const attempts = buildSpawnAttempts(platform, { worktreePath: opts.worktreePath, encoded, shell, script });
+    fireSpawnAttempts(spawn2, attempts, launchEnv);
   } catch (e) {
     return { ok: false, platform, agent: opts.agent, error: e.message };
   }
@@ -22928,6 +23531,14 @@ function computeFrontmatterOffset(raw) {
   const withoutTrailingNewline = block.replace(/\r?\n$/, "");
   return withoutTrailingNewline.split(/\r?\n/).length;
 }
+function findFrontmatterFieldLine(raw, field) {
+  const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
+  if (match === null) return null;
+  const escapedField = field.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const fieldRe = new RegExp(`^\\s*${escapedField}\\s*:`);
+  const idx = (match[1] ?? "").split(/\r?\n/).findIndex((l) => fieldRe.test(l));
+  return idx === -1 ? null : idx + 2;
+}
 function parseMasterPlan(masterPlanPath) {
   let raw;
   try {
@@ -23072,6 +23683,14 @@ function parseMasterPlan(masterPlanPath) {
     currentBodyLines.push(line);
   }
   flushPhase();
+  if (phases.length === 0) {
+    throw new ParseError({
+      line: frontmatterOffset + 1,
+      expected: 'at least one "## P{NN}:" phase heading',
+      found: "no phase headings",
+      message: "Master Plan contains no parseable phase headings"
+    });
+  }
   const sealRaw = Array.isArray(frontmatter.repos) ? frontmatter.repos : [];
   const seal = new Set(sealRaw.map(String));
   if (seal.size > 0) {
@@ -23106,14 +23725,21 @@ function parseMasterPlan(masterPlanPath) {
         }
       }
     }
-  }
-  if (phases.length === 0) {
-    throw new ParseError({
-      line: frontmatterOffset + 1,
-      expected: 'at least one "## P{NN}:" phase heading',
-      found: "no phase headings",
-      message: "Master Plan contains no parseable phase headings"
-    });
+    const targeted = /* @__PURE__ */ new Set();
+    for (const phase of phases) {
+      for (const task of phase.tasks) {
+        for (const r of task.targetRepos) targeted.add(r);
+      }
+    }
+    const untargeted = [...seal].filter((r) => !targeted.has(r));
+    if (untargeted.length > 0) {
+      throw new ParseError({
+        line: findFrontmatterFieldLine(raw, "repos") ?? 1,
+        expected: "every repo in the sealed repos: to be named by at least one task",
+        found: `sealed but untargeted: ${untargeted.join(", ")}`,
+        message: `Sealed repo(s) ${untargeted.join(", ")} are not targeted by any task \u2014 remove them from the frontmatter "repos:" seal if they are reference-only, or add the task that should target them.`
+      });
+    }
   }
   return {
     phases,
@@ -23251,37 +23877,17 @@ function renderTaskBody(task) {
   sections.push("", "## Execution Notes", "", "_(none yet \u2014 appended at runtime)_");
   return sections.join("\n");
 }
-function hasContents(dir) {
+function clearContents(dir) {
+  let entries;
   try {
-    const entries = fs18.readdirSync(dir);
-    return entries.length > 0;
-  } catch {
-    return false;
+    entries = fs18.readdirSync(dir);
+  } catch (err) {
+    if (err.code === "ENOENT") return;
+    throw err;
   }
-}
-function moveContentsTo(srcDir, destDir) {
-  if (!fs18.existsSync(srcDir)) return;
-  fs18.mkdirSync(destDir, { recursive: true });
-  for (const entry of fs18.readdirSync(srcDir)) {
-    const srcPath = path22.join(srcDir, entry);
-    const destPath = path22.join(destDir, entry);
-    try {
-      fs18.renameSync(srcPath, destPath);
-    } catch (err) {
-      const code2 = err?.code;
-      if (code2 === "EXDEV" || code2 === "EPERM" || code2 === "ENOTEMPTY") {
-        fs18.cpSync(srcPath, destPath, { recursive: true });
-        fs18.rmSync(srcPath, { recursive: true, force: true });
-      } else {
-        throw err;
-      }
-    }
+  for (const entry of entries) {
+    fs18.rmSync(path22.join(dir, entry), { recursive: true, force: true });
   }
-}
-function makeBackupDir(projectDir, nowIso) {
-  const iso = nowIso ?? (/* @__PURE__ */ new Date()).toISOString();
-  const stamp = iso.replace(/[:.]/g, "-");
-  return path22.join(projectDir, "backups", stamp);
 }
 function explodeMasterPlan(opts) {
   const { projectDir, masterPlanPath, projectName } = opts;
@@ -23289,14 +23895,8 @@ function explodeMasterPlan(opts) {
   const parsed = parseMasterPlan(masterPlanPath);
   const phasesDir = path22.join(projectDir, "phases");
   const tasksDir = path22.join(projectDir, "tasks");
-  let backupDir = null;
-  const phasesHas = hasContents(phasesDir);
-  const tasksHas = hasContents(tasksDir);
-  if (phasesHas || tasksHas) {
-    backupDir = makeBackupDir(projectDir, nowIso);
-    if (phasesHas) moveContentsTo(phasesDir, path22.join(backupDir, "phases"));
-    if (tasksHas) moveContentsTo(tasksDir, path22.join(backupDir, "tasks"));
-  }
+  clearContents(phasesDir);
+  clearContents(tasksDir);
   fs18.mkdirSync(phasesDir, { recursive: true });
   fs18.mkdirSync(tasksDir, { recursive: true });
   const emittedPhaseFiles = [];
@@ -23333,8 +23933,7 @@ function explodeMasterPlan(opts) {
   }
   return {
     emittedPhaseFiles,
-    emittedTaskFiles,
-    backupDir
+    emittedTaskFiles
   };
 }
 function toRelativeDocPath(absPath, projectDir) {
@@ -23405,8 +24004,7 @@ function planExplode(opts) {
     return {
       type: "success",
       emittedPhases: r.emittedPhaseFiles.length,
-      emittedTasks: r.emittedTaskFiles.length,
-      backupDir: r.backupDir
+      emittedTasks: r.emittedTaskFiles.length
     };
   } catch (err) {
     if (err instanceof ParseError) {
@@ -23435,7 +24033,7 @@ var planExplodeCommand = defineCommand({
     if (r.type === "success") {
       return {
         ok: true,
-        data: { emittedPhases: r.emittedPhases, emittedTasks: r.emittedTasks, backupDir: r.backupDir },
+        data: { emittedPhases: r.emittedPhases, emittedTasks: r.emittedTasks },
         exit_code: 0
       };
     }
@@ -25246,13 +25844,46 @@ function sourceControlInit(opts) {
   } else if (inPlace) {
     const repo = repos[0];
     const clonePath = opts.resolveClonePath(repo);
-    const facts = opts.readWorktreeFacts(clonePath);
+    const registeredDefault = opts.defaultBranch(repo);
+    const facts = opts.readWorktreeFacts(clonePath, registeredDefault);
+    if (!facts.exists || !facts.branch) {
+      return {
+        ok: false,
+        error: `Repo "${repo}" has no readable clone at ${clonePath}; run \`radorch repo bind\` or check out a branch there first.`
+      };
+    }
+    if (opts.branch !== void 0 && facts.branch !== opts.branch) {
+      return {
+        ok: false,
+        error: `Repo "${repo}" was confirmed on branch "${opts.branch}", but its clone now has "${facts.branch}" checked out; check out "${opts.branch}" there, or run \`/rad-execute ${project}\` again to re-confirm.`
+      };
+    }
+    let baseBranch = registeredDefault;
+    if (opts.baseBranch !== void 0 && opts.baseBranch !== registeredDefault) {
+      const probe = opts.remoteBranchExists(repo, opts.baseBranch);
+      if (probe === "absent") {
+        return {
+          ok: false,
+          error: `Base branch "${opts.baseBranch}" was not found on origin for repo "${repo}"; nothing was recorded`
+        };
+      }
+      if (probe === "unknown") {
+        return {
+          ok: false,
+          error: `Could not verify whether base branch "${opts.baseBranch}" exists on origin for repo "${repo}"; nothing was recorded`
+        };
+      }
+      baseBranch = opts.baseBranch;
+    } else if (opts.baseBranch !== void 0) {
+      baseBranch = opts.baseBranch;
+    }
+    const compareUrl = facts.remoteUrl ? `${facts.remoteUrl}/compare/${baseBranch}...${facts.branch}` : null;
     repoEntries = [{
       name: repo,
-      branch: facts.branch ?? "main",
-      base_branch: facts.baseBranch ?? "main",
+      branch: facts.branch,
+      base_branch: baseBranch,
       remote_url: facts.remoteUrl ?? null,
-      compare_url: facts.compareUrl ?? null,
+      compare_url: compareUrl,
       pr_url: null,
       in_place: true
     }];
@@ -25260,7 +25891,8 @@ function sourceControlInit(opts) {
     repoEntries = [];
     for (const repo of repos) {
       const wtPath = worktreesDir ? path36.join(worktreesDir, worktreeName, repo) : path36.join(worktreeName, repo);
-      const facts = opts.readWorktreeFacts(wtPath);
+      const baseBranch = opts.defaultBranch(repo);
+      const facts = opts.readWorktreeFacts(wtPath, baseBranch);
       if (!facts.exists) {
         return {
           ok: false,
@@ -25270,7 +25902,7 @@ function sourceControlInit(opts) {
       repoEntries.push({
         name: repo,
         branch: facts.branch ?? "",
-        base_branch: facts.baseBranch ?? "main",
+        base_branch: facts.baseBranch ?? baseBranch,
         remote_url: facts.remoteUrl ?? null,
         compare_url: facts.compareUrl ?? null,
         pr_url: null
@@ -25294,12 +25926,11 @@ function sourceControlInit(opts) {
   opts.writeState(projectDir, newState);
   return { ok: true, projectDir };
 }
-function readWorktreeFactsDefault(worktreePath) {
+function readWorktreeFactsDefault(worktreePath, baseBranch) {
   if (!fs29.existsSync(worktreePath)) {
     return { exists: false };
   }
   let branch = "";
-  const baseBranch = "main";
   let remoteUrl = null;
   let compareUrl = null;
   const exec2 = (file, args, cwd) => {
@@ -25309,7 +25940,7 @@ function readWorktreeFactsDefault(worktreePath) {
       return "";
     }
   };
-  branch = exec2("git", ["rev-parse", "--abbrev-ref", "HEAD"], worktreePath);
+  branch = exec2("git", ["symbolic-ref", "--short", "HEAD"], worktreePath);
   const raw = exec2("git", ["remote", "get-url", "origin"], worktreePath);
   if (raw) {
     const ssh = raw.match(/^git@github\.com:(.+?)(?:\.git)?$/);
@@ -25328,6 +25959,23 @@ function resolveClonePathDefault2(repo) {
   }
   return resolved.path;
 }
+function defaultBranchDefault2(repo) {
+  const reg = readRegistry({ root: userDataPaths().root });
+  const b = reg.repos[repo]?.default_branch;
+  if (!b) throw new UserError(`Repo "${repo}" has no registered default branch. Run \`radorch repo add\` or \`radorch repo edit\`.`);
+  return b;
+}
+function remoteBranchExistsDefault(repo, branch) {
+  try {
+    const clonePath = resolveClonePathDefault2(repo);
+    const exec2 = (file, args) => execFileSync9(file, args, { cwd: clonePath, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] });
+    const remoteName = selectRemote(getRemotes(exec2)).name;
+    const out = execFileSync9("git", ["ls-remote", "--heads", remoteName, branch], { cwd: clonePath, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] });
+    return String(out || "").trim().length > 0 ? "present" : "absent";
+  } catch {
+    return "unknown";
+  }
+}
 function resolveAutoCommit(flag) {
   return flag === "never" ? "never" : flag === "always" ? "always" : "always";
 }
@@ -25340,6 +25988,8 @@ function sourceControlInitWithDefaults(args) {
     project: args.project,
     worktreeName: args.worktreeName,
     inPlace: args.inPlace ?? false,
+    baseBranch: args.baseBranch,
+    branch: args.branch,
     worktreesDir: userDataPaths().worktrees,
     sideProjectsDir: userDataPaths().sideProjects,
     projectDir,
@@ -25348,6 +25998,8 @@ function sourceControlInitWithDefaults(args) {
     autoCommit: () => args.autoCommit,
     autoPr: () => args.autoPr,
     resolveClonePath: resolveClonePathDefault2,
+    defaultBranch: defaultBranchDefault2,
+    remoteBranchExists: remoteBranchExistsDefault,
     readState: (dir) => {
       const s = readState3(dir);
       if (!s) throw new UserError(`No state.json found at ${dir}`);
@@ -25367,6 +26019,8 @@ var sourceControlInitCommand = defineCommand({
   },
   flags: {
     "in-place": { description: "Record a single in-place (main clone) binding for a single-repo project" },
+    "base-branch": { description: "Branch the project's pull request targets; defaults to the repo's registered default", type: "string" },
+    branch: { description: "The branch confirmed at offer time (in-place mode); the clone's live branch must still match, or nothing is recorded", type: "string" },
     "auto-commit": { description: "Resolved auto-commit preference (always|never)", type: "string" },
     "auto-pr": { description: "Resolved auto-PR preference (always|never)", type: "string" }
   },
@@ -25376,6 +26030,8 @@ var sourceControlInitCommand = defineCommand({
       project: args.project,
       worktreeName: args["worktree-name"],
       inPlace: flags["in-place"] ?? false,
+      baseBranch: flags["base-branch"],
+      branch: flags.branch,
       autoCommit: resolveAutoCommit(flags["auto-commit"]),
       autoPr: resolveAutoPr(flags["auto-pr"])
     });
@@ -25390,14 +26046,63 @@ var sourceControlInitCommand = defineCommand({
 
 // cli/src/commands/execute/resolve.ts
 init_command();
+init_errors2();
 init_paths();
-import fs30 from "node:fs";
+import fs31 from "node:fs";
 import path37 from "node:path";
+import { execFileSync as execFileSync11 } from "node:child_process";
+
+// cli/src/lib/clone-facts.ts
+import fs30 from "node:fs";
 import { execFileSync as execFileSync10 } from "node:child_process";
+var defaultExec3 = (file, args, opts) => execFileSync10(file, args, { cwd: opts.cwd, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] });
+function isDirectory(target) {
+  try {
+    return fs30.statSync(target).isDirectory();
+  } catch {
+    return false;
+  }
+}
+function readCloneFacts(repo, deps) {
+  const clonePath = deps.registryLocalPaths[repo];
+  if (!clonePath) return null;
+  if (!isDirectory(clonePath)) return { path: clonePath, exists: false, branch: null, dirty: [] };
+  const exec2 = deps.exec ?? defaultExec3;
+  let branch = null;
+  try {
+    branch = exec2("git", ["symbolic-ref", "--short", "HEAD"], { cwd: clonePath }).trim() || null;
+  } catch {
+    branch = null;
+  }
+  let dirty = [];
+  try {
+    dirty = exec2("git", ["status", "--porcelain"], { cwd: clonePath }).split(/\r?\n/).filter((line) => line.trim() !== "");
+  } catch {
+    dirty = [];
+  }
+  return { path: clonePath, exists: true, branch, dirty };
+}
+
+// cli/src/commands/execute/resolve.ts
 init_dist11();
 init_dist10();
+function isClaudeCodeHarness(env2) {
+  if (typeof env2.CLAUDECODE === "string" && env2.CLAUDECODE !== "") return true;
+  return Object.keys(env2).some((key) => /^CLAUDE_CODE_/.test(key));
+}
 function unknown(project, reason) {
   return { runMode: "unknown", project, projectDir: null, reason, ask: {}, derived: null, next: [] };
+}
+function rebuildIfMissing(deps, projectName, worktreeName, repos) {
+  const missingRepos = repos.filter((r) => !deps.worktreeExists(worktreeName, r));
+  if (missingRepos.length === 0) return { rebuild: null, missingRepos };
+  return {
+    rebuild: {
+      command: `worktree create --project ${projectName} --worktree-name ${worktreeName}`,
+      notice: `The repo worktree(s) for ${missingRepos.join(", ")} are missing from the workspace folder and will be recreated rather than resumed. Any uncommitted work that lived only there is unrecoverable; committed work on the branch will remain intact.`
+    },
+    missingRepos
+  };
 }
 function executeResolve(deps) {
   const locate2 = deps.locate(deps.cwd);
@@ -25416,8 +26121,8 @@ function executeResolve(deps) {
     if (inWorktree && cwdProjects.length === 0) {
       return unknown(null, "This worktree directory does not correspond to any known project under ~/.radorc/projects.");
     }
-    const runMode2 = locate2.kind === "main-clone" || locate2.kind === "none" ? "launch" : "in-place";
-    return { runMode: runMode2, project: null, projectDir: null, needsProject: true, candidates, ask: {}, derived: null, next: [] };
+    const runMode = locate2.kind === "main-clone" || locate2.kind === "none" ? "launch" : "in-place";
+    return { runMode, project: null, projectDir: null, needsProject: true, candidates, ask: {}, derived: null, next: [] };
   }
   const node = allProjects.find((p) => p.name === projectName) ?? null;
   if (!node) {
@@ -25438,6 +26143,23 @@ function executeResolve(deps) {
   } catch (e) {
     return unknown(projectName, e instanceof Error ? e.message : String(e));
   }
+  if (projectType === "standard") {
+    for (const repo of repos) {
+      const standing = deps.repoStanding(repo);
+      if (standing === "unknown") {
+        return unknown(
+          projectName,
+          `Project "${projectName}" targets repo "${repo}", which is not in the repo registry. Run /rad-repo to register "${repo}", then run this again.`
+        );
+      }
+      if (standing === "unbound") {
+        return unknown(
+          projectName,
+          `Project "${projectName}" targets repo "${repo}", which is registered but has no local clone bound on this machine. Run /rad-repo to bind "${repo}" to a local path, then run this again.`
+        );
+      }
+    }
+  }
   const config = deps.readConfig();
   const isSettled = node.sourceControlInitialized;
   const projectDir = node.dir;
@@ -25450,57 +26172,181 @@ function executeResolve(deps) {
       launchDir,
       repos: [{ repo: repos[0] ?? projectName, base: "main", worktreePath: launchDir }]
     };
-    const runMode2 = isSettled ? "resume" : "in-place";
     const next2 = [];
-    if (runMode2 === "in-place") next2.push(`execute prepare --project ${projectName}`);
-    else if (!deps.planApproved(projectDir)) next2.push(`gate approve plan --project-dir "${projectDir}"`);
-    next2.push(`pipeline signal --event start --project-dir "${projectDir}"`);
-    return { runMode: runMode2, project: projectName, projectDir, ask, derived: derived2, next: next2 };
+    if (locate2.kind === "side-project" && locate2.worktree_name === projectName) {
+      const runMode = isSettled ? "resume" : "in-place";
+      if (runMode === "in-place") {
+        ask.confirmHere = true;
+        next2.push(`execute prepare --project ${projectName}`);
+      } else if (!deps.planApproved(projectDir)) {
+        next2.push(`gate approve plan --project-dir "${projectDir}"`);
+      }
+      next2.push(`pipeline signal --event start --project-dir "${projectDir}"`);
+      return { runMode, project: projectName, projectDir, ask, derived: derived2, next: next2 };
+    }
+    if (!isSettled) next2.push(`execute prepare --project ${projectName}`);
+    if (!deps.isClaudeHarness()) ask.launchFlavor = true;
+    const agent = deps.isClaudeHarness() ? "claude" : "{flavor}";
+    next2.push(`worktree launch --agent ${agent} --worktree-path "${launchDir}" --prompt "/rad-execute ${projectName}"`);
+    return { runMode: "launch", project: projectName, projectDir, ask, derived: derived2, next: next2 };
   }
-  if (config.autoCommit === "ask") ask.autoCommit = true;
-  if (config.autoPr === "ask") ask.autoPr = true;
   const ac = config.autoCommit === "ask" ? "{ac}" : resolveAutoCommit(config.autoCommit);
   const ap = config.autoPr === "ask" ? "{ap}" : resolveAutoPr(config.autoPr);
+  const sameProject = inWorktree && (locate2.projects ?? []).includes(projectName);
+  const boundRepo = isSettled ? deps.recordedSourceControl(projectDir)?.repos.find((r) => r.inPlace) ?? null : null;
+  if (boundRepo) {
+    const facts = deps.cloneFacts(boundRepo.name);
+    const repoDefault = deps.defaultBranch(boundRepo.name);
+    if (!facts || !facts.exists) {
+      return unknown(
+        projectName,
+        `Project "${projectName}" runs in repo "${boundRepo.name}"'s local clone, but that clone is no longer there${facts ? ` (${facts.path})` : ""}. Re-bind the repo with /rad-repo, then run this again.`
+      );
+    }
+    if (facts.branch !== boundRepo.branch) {
+      return unknown(
+        projectName,
+        `Project "${projectName}" is recorded on branch "${boundRepo.branch}" in repo "${boundRepo.name}"'s clone, but that clone now has "${facts.branch ?? "(unknown)"}" checked out. Check out "${boundRepo.branch}" there, then run this again.`
+      );
+    }
+    if (facts.branch === repoDefault) {
+      return unknown(
+        projectName,
+        `Project "${projectName}" is recorded on branch "${boundRepo.branch}" in repo "${boundRepo.name}"'s clone, which is now the repo's default branch. A project cannot run on "${repoDefault}".`
+      );
+    }
+    const derived2 = {
+      branch: boundRepo.branch,
+      launchDir: facts.path,
+      repos: [{ repo: boundRepo.name, base: repoDefault, worktreePath: facts.path }]
+    };
+    if (locate2.kind === "main-clone" && locate2.repo === boundRepo.name) {
+      const next2 = [];
+      if (!deps.planApproved(projectDir)) next2.push(`gate approve plan --project-dir "${projectDir}"`);
+      next2.push(`pipeline signal --event start --project-dir "${projectDir}"`);
+      return { runMode: "resume", project: projectName, projectDir, ask, derived: derived2, next: next2 };
+    }
+    if (!deps.isClaudeHarness()) ask.launchFlavor = true;
+    const agent = deps.isClaudeHarness() ? "claude" : "{flavor}";
+    return {
+      runMode: "launch",
+      project: projectName,
+      projectDir,
+      ask,
+      derived: derived2,
+      next: [`worktree launch --agent ${agent} --worktree-path "${facts.path}" --prompt "/rad-execute ${projectName}"`]
+    };
+  }
+  if (sameProject) {
+    const runMode = isSettled ? "resume" : "in-place";
+    const next2 = [];
+    let derived2;
+    let notices;
+    if (runMode === "resume") {
+      const rec = deps.recordedSourceControl(projectDir);
+      const wtName = rec?.worktreeName ?? projectName;
+      const base2 = deriveWorktreeConvention({ worktreeName: wtName, repos, worktreesDir: deps.worktreesDir, defaultBranch: deps.defaultBranch });
+      const { rebuild, missingRepos: missingRepos2 } = rebuildIfMissing(deps, projectName, wtName, repos);
+      derived2 = { ...base2, branch: rec?.repos[0]?.branch ?? base2.branch, worktreeName: wtName, missingRepos: missingRepos2 };
+      if (rebuild) {
+        next2.push(rebuild.command);
+        notices = [rebuild.notice];
+      }
+      if (!deps.planApproved(projectDir)) next2.push(`gate approve plan --project-dir "${projectDir}"`);
+    } else {
+      const wtName = locate2.worktree_name ?? projectName;
+      const base2 = deriveWorktreeConvention({ worktreeName: wtName, repos, worktreesDir: deps.worktreesDir, defaultBranch: deps.defaultBranch });
+      derived2 = { ...base2, branch: locate2.branch ?? base2.branch };
+      ask.confirmHere = true;
+      if (config.autoCommit === "ask") ask.autoCommit = true;
+      if (config.autoPr === "ask") ask.autoPr = true;
+      next2.push(`execute prepare --project ${projectName} --auto-commit ${ac} --auto-pr ${ap}`);
+    }
+    next2.push(`pipeline signal --event start --project-dir "${projectDir}"`);
+    return { runMode, project: projectName, projectDir, ask, derived: derived2, next: next2, ...notices ? { notices } : {} };
+  }
+  if (isSettled) {
+    const rec = deps.recordedSourceControl(projectDir);
+    const wtName = rec?.worktreeName ?? projectName;
+    const base2 = deriveWorktreeConvention({ worktreeName: wtName, repos, worktreesDir: deps.worktreesDir, defaultBranch: deps.defaultBranch });
+    const { rebuild, missingRepos: missingRepos2 } = rebuildIfMissing(deps, projectName, wtName, repos);
+    const derived2 = { ...base2, branch: rec?.repos[0]?.branch ?? base2.branch, worktreeName: wtName, missingRepos: missingRepos2 };
+    const next2 = [];
+    let notices;
+    if (rebuild) {
+      next2.push(rebuild.command);
+      notices = [rebuild.notice];
+    }
+    if (!deps.isClaudeHarness()) ask.launchFlavor = true;
+    const agent = deps.isClaudeHarness() ? "claude" : "{flavor}";
+    next2.push(`worktree launch --agent ${agent} --worktree-path "${derived2.launchDir}" --prompt "/rad-execute ${projectName}"`);
+    return { runMode: "launch", project: projectName, projectDir, ask, derived: derived2, next: next2, ...notices ? { notices } : {} };
+  }
+  const cloneRepo = locate2.kind === "main-clone" ? locate2.repo ?? null : null;
+  const standingFacts = cloneRepo != null ? deps.cloneFacts(cloneRepo) : null;
+  const cloneBranch = standingFacts?.branch ?? null;
+  const onNonDefault = cloneRepo != null && cloneBranch != null && cloneBranch !== deps.defaultBranch(cloneRepo);
+  if (cloneRepo != null && standingFacts != null && cloneBranch != null && onNonDefault) {
+    if (repos.length === 1 && repos[0] === cloneRepo) {
+      const proposedBase = deps.defaultBranch(cloneRepo);
+      ask.bindClone = true;
+      if (config.autoCommit === "ask") ask.autoCommit = true;
+      if (config.autoPr === "ask") ask.autoPr = true;
+      const derived2 = {
+        branch: cloneBranch,
+        launchDir: standingFacts.path,
+        repos: [{ repo: cloneRepo, base: proposedBase, worktreePath: standingFacts.path }]
+      };
+      const cloneBinding = {
+        repo: cloneRepo,
+        clonePath: standingFacts.path,
+        branch: cloneBranch,
+        proposedBase,
+        dirtyPaths: standingFacts.dirty.slice(0, 10),
+        dirtyCount: standingFacts.dirty.length
+      };
+      const next2 = [
+        `execute prepare --project ${projectName} --in-place --base-branch "{base}" --branch "${cloneBranch}" --auto-commit ${ac} --auto-pr ${ap}`,
+        `pipeline signal --event start --project-dir "${projectDir}"`
+      ];
+      return { runMode: "in-place", project: projectName, projectDir, ask, derived: derived2, cloneBinding, next: next2 };
+    }
+    if (repos.length > 1 && repos.includes(cloneRepo)) {
+      return unknown(
+        projectName,
+        `Project "${projectName}" spans ${repos.join(", ")}, and you are standing in "${cloneRepo}"'s clone on "${cloneBranch}" \u2014 not its default branch, which is what triggered this stop instead of an ordinary launch. A project that spans more than one repo cannot be bound to a single clone \u2014 it runs in a workspace that holds a worktree per repo. See the multi-repo explanation in /rad-repo, then run this again on "${cloneRepo}"'s default branch, from outside "${cloneRepo}", or name a single-repo project.`
+      );
+    }
+  }
   if (!inWorktree) {
-    ask.launchFlavor = true;
+    if (!deps.isClaudeHarness()) ask.launchFlavor = true;
+    if (config.autoCommit === "ask") ask.autoCommit = true;
+    if (config.autoPr === "ask") ask.autoPr = true;
     const derived2 = deriveWorktreeConvention({ worktreeName: projectName, repos, worktreesDir: deps.worktreesDir, defaultBranch: deps.defaultBranch });
+    const agent = deps.isClaudeHarness() ? "claude" : "{flavor}";
     const next2 = [
       `execute prepare --project ${projectName} --auto-commit ${ac} --auto-pr ${ap}`,
-      `worktree launch --agent {flavor} --worktree-path "${derived2.launchDir}" --prompt "/rad-execute ${projectName}" --permission-mode {pm}`
+      `worktree launch --agent ${agent} --worktree-path "${derived2.launchDir}" --prompt "/rad-execute ${projectName}"`
     ];
     return { runMode: "launch", project: projectName, projectDir, ask, derived: derived2, next: next2 };
   }
-  const sameProject = (locate2.projects ?? []).includes(projectName);
-  if (!sameProject) {
-    const reusedName = locate2.worktree_name ?? projectName;
-    const base2 = deriveWorktreeConvention({ worktreeName: reusedName, repos, worktreesDir: deps.worktreesDir, defaultBranch: deps.defaultBranch });
-    const missingRepos = repos.filter((r) => !deps.worktreeExists(reusedName, r));
-    const derived2 = {
-      ...base2,
-      branch: locate2.branch ?? base2.branch,
-      worktreeName: reusedName,
-      missingRepos
-    };
-    ask.reuseWorktree = true;
-    const next2 = [
-      `execute prepare --project ${projectName} --worktree-name ${reusedName} --auto-commit ${ac} --auto-pr ${ap}`,
-      `pipeline signal --event start --project-dir "${projectDir}"`
-    ];
-    return { runMode: "in-place", project: projectName, projectDir, ask, derived: derived2, next: next2 };
-  }
-  const wtName = locate2.worktree_name ?? projectName;
-  const base = deriveWorktreeConvention({ worktreeName: wtName, repos, worktreesDir: deps.worktreesDir, defaultBranch: deps.defaultBranch });
-  const derived = { ...base, branch: locate2.branch ?? base.branch };
-  const runMode = isSettled ? "resume" : "in-place";
-  const next = [];
-  if (runMode === "in-place") {
-    ask.confirmHere = true;
-    next.push(`execute prepare --project ${projectName} --auto-commit ${ac} --auto-pr ${ap}`);
-  } else if (!deps.planApproved(projectDir)) {
-    next.push(`gate approve plan --project-dir "${projectDir}"`);
-  }
-  next.push(`pipeline signal --event start --project-dir "${projectDir}"`);
-  return { runMode, project: projectName, projectDir, ask, derived, next };
+  const reusedName = locate2.worktree_name ?? projectName;
+  const base = deriveWorktreeConvention({ worktreeName: reusedName, repos, worktreesDir: deps.worktreesDir, defaultBranch: deps.defaultBranch });
+  const missingRepos = repos.filter((r) => !deps.worktreeExists(reusedName, r));
+  const derived = {
+    ...base,
+    branch: locate2.branch ?? base.branch,
+    worktreeName: reusedName,
+    missingRepos
+  };
+  ask.reuseWorktree = true;
+  if (config.autoCommit === "ask") ask.autoCommit = true;
+  if (config.autoPr === "ask") ask.autoPr = true;
+  const next = [
+    `execute prepare --project ${projectName} --worktree-name ${reusedName} --auto-commit ${ac} --auto-pr ${ap}`,
+    `pipeline signal --event start --project-dir "${projectDir}"`
+  ];
+  return { runMode: "in-place", project: projectName, projectDir, ask, derived, next };
 }
 var executeResolveCommand = defineCommand({
   name: "execute-resolve",
@@ -25511,7 +26357,7 @@ var executeResolveCommand = defineCommand({
   flags: {},
   handler: async ({ args }) => {
     const paths = userDataPaths();
-    const exec2 = (file, execArgs, opts) => execFileSync10(file, execArgs, { cwd: opts.cwd, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] });
+    const exec2 = (file, execArgs, opts) => execFileSync11(file, execArgs, { cwd: opts.cwd, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] });
     const svc = new WorkGraphService({ root: paths.root, worktreesDir: paths.worktrees, sideProjectsDir: paths.sideProjects, exec: exec2 });
     const registry = readRegistry({ root: paths.root });
     return executeResolve({
@@ -25522,18 +26368,39 @@ var executeResolveCommand = defineCommand({
       readProjectRepos: readProjectReposDefault,
       // RAW config strings — preserves 'ask' so the skill knows to ask.
       readConfig: () => readConfig2({ root: paths.root }),
-      defaultBranch: (repo) => registry.repos[repo]?.default_branch ?? "main",
-      worktreeExists: (worktreeName, repo) => fs30.existsSync(path37.join(paths.worktrees, worktreeName, repo)),
+      defaultBranch: (repo) => {
+        const b = registry.repos[repo]?.default_branch;
+        if (!b) throw new UserError(`Repo "${repo}" has no registered default branch. Run \`radorch repo add\` or \`radorch repo edit\`.`);
+        return b;
+      },
+      worktreeExists: (worktreeName, repo) => fs31.existsSync(path37.join(paths.worktrees, worktreeName, repo)),
       planApproved: (projectDir) => {
         try {
-          const s = JSON.parse(fs30.readFileSync(path37.join(projectDir, "state.json"), "utf8"));
+          const s = JSON.parse(fs31.readFileSync(path37.join(projectDir, "state.json"), "utf8"));
           return s.graph?.nodes?.plan_approval_gate?.status === "completed";
         } catch {
           return false;
         }
       },
       worktreesDir: paths.worktrees,
-      sideProjectsDir: paths.sideProjects
+      sideProjectsDir: paths.sideProjects,
+      isClaudeHarness: () => isClaudeCodeHarness(process.env),
+      recordedSourceControl: (projectDir) => {
+        try {
+          const s = JSON.parse(fs31.readFileSync(path37.join(projectDir, "state.json"), "utf8"));
+          const sc = s.pipeline?.source_control;
+          if (!sc) return null;
+          const worktreeName = typeof sc.worktree_name === "string" && sc.worktree_name !== "" ? sc.worktree_name : path37.basename(projectDir);
+          return {
+            worktreeName,
+            repos: sc.repos.map((r) => ({ name: r.name, branch: r.branch, inPlace: r.in_place === true }))
+          };
+        } catch {
+          return null;
+        }
+      },
+      cloneFacts: (repo) => readCloneFacts(repo, { registryLocalPaths: registry.localPaths }),
+      repoStanding: (repo) => !registry.repos[repo] ? "unknown" : registry.localPaths[repo] ? "bound" : "unbound"
     });
   },
   mapResult: (r) => ({ ok: true, data: r })
@@ -25543,7 +26410,7 @@ var executeResolveCommand = defineCommand({
 init_command();
 init_errors2();
 init_paths();
-import fs31 from "node:fs";
+import fs32 from "node:fs";
 import path38 from "node:path";
 init_approve_plan();
 async function executePrepare(opts) {
@@ -25557,6 +26424,7 @@ async function executePrepare(opts) {
         return { provisioned: null, sideProjectInit: sideInit, sealed: null };
       }
     }
+  } else if (opts.inPlace) {
   } else {
     provisioned = opts.provision({ project: opts.project, worktreeName: opts.worktreeName, repo: opts.repo });
     if (provisioned.repos.some((r) => r.error != null)) {
@@ -25566,6 +26434,9 @@ async function executePrepare(opts) {
   const sealed = opts.seal({
     project: opts.project,
     worktreeName: opts.worktreeName,
+    inPlace: opts.inPlace,
+    baseBranch: opts.baseBranch,
+    branch: opts.branch,
     autoCommit: opts.autoCommit,
     autoPr: opts.autoPr
   });
@@ -25585,7 +26456,10 @@ var executePrepareCommand = defineCommand({
   },
   flags: {
     "auto-commit": { description: "Resolved auto-commit preference (always|never)", type: "string" },
-    "auto-pr": { description: "Resolved auto-PR preference (always|never)", type: "string" }
+    "auto-pr": { description: "Resolved auto-PR preference (always|never)", type: "string" },
+    "in-place": { description: "Bind the project to the operator's existing clone instead of provisioning a workspace" },
+    "base-branch": { description: "Branch the project's pull request targets; defaults to the repo's registered default", type: "string" },
+    branch: { description: "The branch confirmed at offer time (in-place mode); the clone's live branch must still match, or nothing is sealed", type: "string" }
   },
   handler: async ({ args, flags }) => {
     if (!args.project) throw new UserError("--project is required");
@@ -25594,11 +26468,14 @@ var executePrepareCommand = defineCommand({
       project: args.project,
       worktreeName: args["worktree-name"],
       repo: args.repo,
+      inPlace: flags["in-place"],
+      baseBranch: flags["base-branch"],
+      branch: flags.branch,
       autoCommit: resolveAutoCommit(flags["auto-commit"]),
       autoPr: resolveAutoPr(flags["auto-pr"]),
       readProjectRepos: readProjectReposDefault,
       provision: provisionWorktreesWithDefaults,
-      sideProjectExists: (project) => fs31.existsSync(path38.join(userDataPaths().sideProjects, project, ".git")),
+      sideProjectExists: (project) => fs32.existsSync(path38.join(userDataPaths().sideProjects, project, ".git")),
       sideProjectInit: (project) => sideProjectInit({ project, root: userDataPaths().root }),
       seal: sourceControlInitWithDefaults,
       approvePlan: () => runApprovePlan({ projectDir })
@@ -25609,15 +26486,15 @@ var executePrepareCommand = defineCommand({
   // could not push).
   mapResult: (r) => {
     if (r.sideProjectInit && !r.sideProjectInit.created) {
-      return { ok: false, data: r, error: { type: "system_error", message: `Side-project init failed: ${r.sideProjectInit.error ?? "unknown error"}` } };
+      return { ok: false, error: { type: "system_error", message: `Side-project init failed: ${r.sideProjectInit.error ?? "unknown error"}` } };
     }
     if (r.provisioned && r.provisioned.repos.some((x) => x.error != null)) {
       const firstErr = r.provisioned.repos.find((x) => x.error != null)?.error ?? "worktree provisioning failed";
-      return { ok: false, data: r, error: { type: "system_error", message: `Worktree provisioning failed: ${firstErr}` } };
+      return { ok: false, error: { type: "system_error", message: `Worktree provisioning failed: ${firstErr}` } };
     }
     if (!r.sealed || !r.sealed.ok) {
       const message = r.sealed && !r.sealed.ok ? r.sealed.error : "source-control seal did not run";
-      return { ok: false, data: r, error: { type: "user_error", message } };
+      return { ok: false, error: { type: "user_error", message } };
     }
     const warnings = [];
     const notPushed = r.provisioned ? r.provisioned.repos.some((x) => x.created && !x.pushed) : false;
@@ -25638,13 +26515,13 @@ init_paths();
 import { spawn as defaultSpawn2 } from "node:child_process";
 
 // cli/src/commands/telemetry/config.ts
-import fs32 from "node:fs";
+import fs33 from "node:fs";
 import path39 from "node:path";
 function readTelemetryEnabled({ root }) {
   const configPath = path39.join(root, "orchestration.yml");
-  if (!fs32.existsSync(configPath)) return false;
+  if (!fs33.existsSync(configPath)) return false;
   try {
-    const parsed = parseYaml(fs32.readFileSync(configPath, "utf8"));
+    const parsed = parseYaml(fs33.readFileSync(configPath, "utf8"));
     return parsed?.telemetry?.enabled === true;
   } catch {
     return false;
@@ -25655,7 +26532,7 @@ function readTelemetryEnabled({ root }) {
 var SCHEMA_VERSION = 3;
 
 // lib/telemetry/dist/sink/ndjson-sink.js
-import fs33 from "node:fs";
+import fs34 from "node:fs";
 import path40 from "node:path";
 var NdjsonSink = class {
   opts;
@@ -25666,7 +26543,7 @@ var NdjsonSink = class {
     if (records.length === 0)
       return;
     const dir = path40.join(this.opts.root, "usage");
-    fs33.mkdirSync(dir, { recursive: true });
+    fs34.mkdirSync(dir, { recursive: true });
     const byPartition = /* @__PURE__ */ new Map();
     for (const r of records) {
       const day = r.timestamp.slice(0, 10);
@@ -25674,12 +26551,12 @@ var NdjsonSink = class {
       (byPartition.get(file) ?? byPartition.set(file, []).get(file)).push(JSON.stringify(r));
     }
     for (const [file, lines] of byPartition)
-      fs33.appendFileSync(file, lines.join("\n") + "\n", "utf8");
+      fs34.appendFileSync(file, lines.join("\n") + "\n", "utf8");
   }
 };
 
 // lib/telemetry/dist/checkpoint/file-checkpoint-store.js
-import fs34 from "node:fs";
+import fs35 from "node:fs";
 import path41 from "node:path";
 var FileCheckpointStore = class {
   opts;
@@ -25688,7 +26565,7 @@ var FileCheckpointStore = class {
   }
   dir() {
     const d = path41.join(this.opts.root, "checkpoints");
-    fs34.mkdirSync(d, { recursive: true });
+    fs35.mkdirSync(d, { recursive: true });
     return d;
   }
   file(s) {
@@ -25699,7 +26576,7 @@ var FileCheckpointStore = class {
   }
   seen(sessionId) {
     try {
-      const raw = JSON.parse(fs34.readFileSync(this.file(sessionId), "utf8"));
+      const raw = JSON.parse(fs35.readFileSync(this.file(sessionId), "utf8"));
       return new Set(raw.seen ?? []);
     } catch {
       return /* @__PURE__ */ new Set();
@@ -25709,8 +26586,8 @@ var FileCheckpointStore = class {
     const payload = { sessionId, schemaVersion: SCHEMA_VERSION, updatedAt: (/* @__PURE__ */ new Date()).toISOString(), seen: [...ids] };
     const file = this.file(sessionId);
     const tmp = `${file}.${process.pid}.tmp`;
-    fs34.writeFileSync(tmp, JSON.stringify(payload), "utf8");
-    fs34.renameSync(tmp, file);
+    fs35.writeFileSync(tmp, JSON.stringify(payload), "utf8");
+    fs35.renameSync(tmp, file);
   }
   // The age backstop for a lock whose holder still appears alive — i.e. a wedged
   // worker or a reused PID. It MUST comfortably exceed the worst-case time a real
@@ -25745,9 +26622,9 @@ var FileCheckpointStore = class {
   tryLock(sessionId) {
     const p = this.lockPath(sessionId);
     const acquire = () => {
-      const fd = fs34.openSync(p, "wx");
-      fs34.writeSync(fd, JSON.stringify({ pid: process.pid, acquiredAt: (/* @__PURE__ */ new Date()).toISOString() }));
-      fs34.closeSync(fd);
+      const fd = fs35.openSync(p, "wx");
+      fs35.writeSync(fd, JSON.stringify({ pid: process.pid, acquiredAt: (/* @__PURE__ */ new Date()).toISOString() }));
+      fs35.closeSync(fd);
       return true;
     };
     try {
@@ -25757,12 +26634,12 @@ var FileCheckpointStore = class {
         throw e;
       let raw = "";
       try {
-        raw = fs34.readFileSync(p, "utf8");
+        raw = fs35.readFileSync(p, "utf8");
       } catch {
       }
       if (raw === "" || this.isStaleLock(raw)) {
         try {
-          fs34.unlinkSync(p);
+          fs35.unlinkSync(p);
         } catch {
         }
         try {
@@ -25776,18 +26653,18 @@ var FileCheckpointStore = class {
   }
   unlock(sessionId) {
     try {
-      fs34.unlinkSync(this.lockPath(sessionId));
+      fs35.unlinkSync(this.lockPath(sessionId));
     } catch {
     }
   }
 };
 
 // lib/telemetry/dist/retention.js
-import fs36 from "node:fs";
+import fs37 from "node:fs";
 import path43 from "node:path";
 
 // lib/telemetry/dist/saved-sessions.js
-import fs35 from "node:fs";
+import fs36 from "node:fs";
 import path42 from "node:path";
 
 // lib/telemetry/dist/transcript-tree.js
@@ -25844,7 +26721,7 @@ function savedIndexPath(root) {
 }
 function readSavedIndex(root) {
   try {
-    const raw = JSON.parse(fs35.readFileSync(savedIndexPath(root), "utf8"));
+    const raw = JSON.parse(fs36.readFileSync(savedIndexPath(root), "utf8"));
     return {
       version: 1,
       sessions: Array.isArray(raw.sessions) ? raw.sessions : [],
@@ -25858,14 +26735,14 @@ function readSavedIndex(root) {
 // lib/telemetry/dist/retention.js
 function pruneAgedPartitions(opts) {
   const usageDir = path43.join(opts.root, "usage");
-  if (!fs36.existsSync(usageDir))
+  if (!fs37.existsSync(usageDir))
     return 0;
   const todayUtc = Date.UTC(opts.now.getUTCFullYear(), opts.now.getUTCMonth(), opts.now.getUTCDate());
   const cutoff = todayUtc - opts.maxAgeDays * 864e5;
   let pruned = 0;
   const liveSessions = /* @__PURE__ */ new Set();
   const saved = new Set(readSavedIndex(opts.root).sessions.map((s) => s.sessionId));
-  for (const file of fs36.readdirSync(usageDir)) {
+  for (const file of fs37.readdirSync(usageDir)) {
     const m = /^usage-(\d{4}-\d{2}-\d{2})-(.+)\.ndjson$/.exec(file);
     if (!m)
       continue;
@@ -25874,7 +26751,7 @@ function pruneAgedPartitions(opts) {
       continue;
     }
     if (Date.parse(`${m[1]}T00:00:00Z`) < cutoff) {
-      fs36.unlinkSync(path43.join(usageDir, file));
+      fs37.unlinkSync(path43.join(usageDir, file));
       pruned++;
     } else
       liveSessions.add(m[2]);
@@ -25882,20 +26759,20 @@ function pruneAgedPartitions(opts) {
   for (const id of saved)
     liveSessions.add(id);
   const ckptDir = path43.join(opts.root, "checkpoints");
-  if (fs36.existsSync(ckptDir)) {
-    for (const file of fs36.readdirSync(ckptDir)) {
+  if (fs37.existsSync(ckptDir)) {
+    for (const file of fs37.readdirSync(ckptDir)) {
       const m = /^(.+)\.json$/.exec(file);
       if (m && !liveSessions.has(m[1])) {
-        fs36.unlinkSync(path43.join(ckptDir, file));
+        fs37.unlinkSync(path43.join(ckptDir, file));
         pruned++;
       }
     }
   }
   const txDir = path43.join(opts.root, "transcripts");
-  if (fs36.existsSync(txDir)) {
-    for (const entry of fs36.readdirSync(txDir)) {
+  if (fs37.existsSync(txDir)) {
+    for (const entry of fs37.readdirSync(txDir)) {
       if (!liveSessions.has(entry)) {
-        fs36.rmSync(path43.join(txDir, entry), { recursive: true, force: true });
+        fs37.rmSync(path43.join(txDir, entry), { recursive: true, force: true });
         pruned++;
       }
     }
@@ -25904,12 +26781,12 @@ function pruneAgedPartitions(opts) {
 }
 
 // lib/telemetry/dist/adapter/transcript.js
-import fs37 from "node:fs";
+import fs38 from "node:fs";
 import path44 from "node:path";
 function readJsonl(file) {
   let text;
   try {
-    text = fs37.readFileSync(file, "utf8");
+    text = fs38.readFileSync(file, "utf8");
   } catch {
     return [];
   }
@@ -25933,7 +26810,7 @@ function subagentPathFor(transcriptPath, agentId) {
 function listSubagentTranscripts(transcriptPath) {
   const dir = path44.join(path44.dirname(transcriptPath), path44.basename(transcriptPath, ".jsonl"), "subagents");
   try {
-    return fs37.readdirSync(dir).filter((f) => f.endsWith(".jsonl")).map((f) => path44.join(dir, f));
+    return fs38.readdirSync(dir).filter((f) => f.endsWith(".jsonl")).map((f) => path44.join(dir, f));
   } catch {
     return [];
   }
@@ -25945,7 +26822,7 @@ function metaPathFor(subagentTranscript) {
 }
 function readSubagentMeta(subagentTranscript) {
   try {
-    const raw = JSON.parse(fs37.readFileSync(metaPathFor(subagentTranscript), "utf8"));
+    const raw = JSON.parse(fs38.readFileSync(metaPathFor(subagentTranscript), "utf8"));
     return {
       agentType: typeof raw.agentType === "string" ? raw.agentType : void 0,
       description: typeof raw.description === "string" ? raw.description : void 0,
@@ -26183,7 +27060,7 @@ function parseTranscript(file, ctx) {
 }
 
 // lib/telemetry/dist/transcript-ingestor.js
-import fs38 from "node:fs";
+import fs39 from "node:fs";
 import path45 from "node:path";
 var HARNESS = "claude-code";
 function sessionDir(root, sessionId) {
@@ -26191,8 +27068,8 @@ function sessionDir(root, sessionId) {
 }
 function writeAgent(root, sessionId, file, t) {
   const dir = sessionDir(root, sessionId);
-  fs38.mkdirSync(dir, { recursive: true });
-  fs38.writeFileSync(path45.join(dir, file), JSON.stringify(t));
+  fs39.mkdirSync(dir, { recursive: true });
+  fs39.writeFileSync(path45.join(dir, file), JSON.stringify(t));
 }
 function ingestTranscripts(deps) {
   const { root, signal } = deps;
@@ -26221,7 +27098,7 @@ function ingestTranscripts(deps) {
       items.push({ transcript: t, file: `agent-${id}.json` });
     }
     const index = { sessionId: signal.sessionId, harness: HARNESS, createdAt: deps.now.toISOString(), tree: buildTree(items) };
-    fs38.writeFileSync(path45.join(sessionDir(root, signal.sessionId), "index.json"), JSON.stringify(index));
+    fs39.writeFileSync(path45.join(sessionDir(root, signal.sessionId), "index.json"), JSON.stringify(index));
   } catch (e) {
     deps.log?.("transcript_ingest_failed", { event: signal.event, sessionId: signal.sessionId, error: e instanceof Error ? e.message : String(e) });
   }

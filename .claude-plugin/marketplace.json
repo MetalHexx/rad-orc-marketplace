@@ -10,7 +10,7 @@
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/MetalHexx/rad-orc-marketplace.git",
-        "ref": "v1.0.0-alpha.12",
+        "ref": "v1.0.0-alpha.13",
         "path": "claude-plugin"
       },
       "description": "Rad Orchestration plugin for Claude Code."
